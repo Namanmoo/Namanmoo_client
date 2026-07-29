@@ -48,9 +48,12 @@ public static class TitleSceneBuilder
 
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene, ScenePath);
+        // 게임 시작 → 무기 만들기 → Stage1 순서. 무기 만들기 씬이 빠지면
+        // 시작 버튼이 없는 씬을 부르게 되므로 여기서 함께 등록한다.
         EditorBuildSettings.scenes = new[]
         {
             new EditorBuildSettingsScene(ScenePath, true),
+            new EditorBuildSettingsScene(TitleScreenController.WeaponForgeScenePath, true),
             new EditorBuildSettingsScene(TitleScreenController.Stage1ScenePath, true)
         };
         AssetDatabase.SaveAssets();

@@ -70,12 +70,19 @@ public sealed class PlayerSwordShooter : MonoBehaviour
         return rawDirection.normalized;
     }
 
+    /// <summary>
+    /// 발사체를 쏘는 무기인가. 기본 검과 무기 만들기로 만든 무기가 여기에 해당한다.
+    /// (슬롯 번호가 아니라 장착된 아이템으로 판단한다 — 만든 무기는 3번 칸에 들어간다.)
+    /// </summary>
+    public static bool IsProjectileWeapon(ItemData item)
+    {
+        return item != null && (item.Id == "sword" || item.Id == ForgedWeapon.ItemId);
+    }
+
     public void ProcessInput(Keyboard keyboard, float currentTime)
     {
-        if (inventory == null
-            || inventory.SelectedSlotIndex != 0
-            || inventory.EquippedItem == null
-            || inventory.EquippedItem.Id != "sword")
+        ItemData equipped = inventory?.EquippedItem;
+        if (!IsProjectileWeapon(equipped))
         {
             firingDirectionActive = false;
             return;
@@ -90,21 +97,33 @@ public sealed class PlayerSwordShooter : MonoBehaviour
 
         if (!firingDirectionActive || currentTime >= nextShotTime)
         {
-            SpawnProjectile(direction);
-            nextShotTime = currentTime + (1f / shotsPerSecond);
+            SpawnProjectile(direction, equipped);
+            nextShotTime = currentTime + (1f / ShotsPerSecondFor(equipped));
         }
 
         firingDirectionActive = true;
     }
 
-    private void SpawnProjectile(Vector2 direction)
+    private float ShotsPerSecondFor(ItemData item)
     {
+        return item?.Stats != null ? item.Stats.ShotsPerSecond : shotsPerSecond;
+    }
+
+    private void SpawnProjectile(Vector2 direction, ItemData equipped)
+    {
+        // 만든 무기는 AI가 정한 성능을, 기본 검은 인스펙터 값을 쓴다
+        WeaponStats stats = equipped?.Stats;
+        int shotDamage = stats != null ? stats.Damage : damage;
+        float shotSpeed = stats != null ? stats.ProjectileSpeed : projectileSpeed;
+        float shotLifetime = stats != null ? stats.Lifetime : projectileLifetime;
+        Sprite shotSprite = equipped?.Icon != null ? equipped.Icon : swordSprite;
+
         var projectileObject = new GameObject("Sword Projectile");
         projectileObject.transform.position =
             transform.position + (Vector3)(direction.normalized * spawnOffset);
 
         SpriteRenderer renderer = projectileObject.AddComponent<SpriteRenderer>();
-        renderer.sprite = swordSprite;
+        renderer.sprite = shotSprite;
         renderer.sortingOrder = 5;
 
         CapsuleCollider2D collider = projectileObject.AddComponent<CapsuleCollider2D>();
@@ -117,10 +136,10 @@ public sealed class PlayerSwordShooter : MonoBehaviour
         SwordProjectile projectile = projectileObject.AddComponent<SwordProjectile>();
         projectile.Initialize(
             direction,
-            damage,
-            projectileSpeed,
+            shotDamage,
+            shotSpeed,
             spinSpeed,
-            projectileLifetime,
+            shotLifetime,
             gameObject);
     }
 }
