@@ -53,6 +53,7 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/6000.5.5f1/Unity.app/Contents/Resources/Scripting/BCLExtensions/TargetingPacks/netstandard2.1/analyzers/dotnet/roslyn4.0/cs/System.Text.Json.SourceGeneration.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Tests/Editor/WeaponStatsTests.cs" />
     <Compile Include="Assets/Tests/Editor/AxeSwingTests.cs" />
     <Compile Include="Assets/Tests/Editor/PlayerAxeAttackerTests.cs" />
     <Compile Include="Assets/Tests/Editor/PlayerHealthBarViewTests.cs" />
@@ -63,20 +64,24 @@
     <Compile Include="Assets/Tests/Editor/Stage1BossEncounterIntegrationTests.cs" />
     <Compile Include="Assets/Tests/Editor/TitleScreenControllerTests.cs" />
     <Compile Include="Assets/Tests/Editor/EnemyHealthTests.cs" />
+    <Compile Include="Assets/Tests/Editor/DrawingBrushTests.cs" />
     <Compile Include="Assets/Tests/Editor/Stage1MapDefinitionTests.cs" />
     <Compile Include="Assets/Tests/Editor/PlayerHealthDebugInputTests.cs" />
     <Compile Include="Assets/Tests/Editor/Stage1BossEncounterTests.cs" />
     <Compile Include="Assets/Tests/Editor/AxeInventoryTests.cs" />
     <Compile Include="Assets/Tests/Editor/Stage1PlayerHealthSetupTests.cs" />
+    <Compile Include="Assets/Tests/Editor/ForgedWeaponTests.cs" />
     <Compile Include="Assets/Tests/Editor/Stage1SceneBuilderTests.cs" />
     <Compile Include="Assets/Tests/Editor/SwordProjectileTests.cs" />
     <Compile Include="Assets/Tests/Editor/PlayerMovementTests.cs" />
     <Compile Include="Assets/Tests/Editor/PlayerHealthTests.cs" />
     <Compile Include="Assets/Tests/Editor/ItemHotbarViewTests.cs" />
+    <Compile Include="Assets/Tests/Editor/WhiteBackgroundKeyTests.cs" />
     <Compile Include="Assets/Tests/Editor/TitleSceneBuilderTests.cs" />
     <Compile Include="Assets/Tests/Editor/PlayerSwordShooterTests.cs" />
     <Compile Include="Assets/Tests/Editor/Stage1PlayerHealthSceneTests.cs" />
     <Compile Include="Assets/Tests/Editor/KrabEnemyTests.cs" />
+    <Compile Include="Assets/Tests/Editor/DrawingHistoryTests.cs" />
     <Compile Include="Assets/Tests/Editor/Stage1AxeIntegrationTests.cs" />
     <Compile Include="Assets/Tests/Editor/Stage1KrabEncounterIntegrationTests.cs" />
     <Compile Include="Assets/Tests/Editor/Stage1EncounterGateTests.cs" />

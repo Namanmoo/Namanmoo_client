@@ -53,25 +53,33 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/6000.5.5f1/Unity.app/Contents/Resources/Scripting/BCLExtensions/TargetingPacks/netstandard2.1/analyzers/dotnet/roslyn4.0/cs/System.Text.Json.SourceGeneration.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Scripts/Forge/DrawingBrush.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerHealthDebugInput.cs" />
     <Compile Include="Assets/Scripts/Stage1RuntimeBootstrap.cs" />
     <Compile Include="Assets/Scripts/UI/TitleScreenController.cs" />
+    <Compile Include="Assets/Scripts/Forge/WhiteBackgroundKey.cs" />
+    <Compile Include="Assets/Scripts/Forge/WeaponForgeController.cs" />
     <Compile Include="Assets/Scripts/UI/BossHealthBarView.cs" />
     <Compile Include="Assets/Scripts/Items/ItemData.cs" />
     <Compile Include="Assets/Scripts/Stage1ItemHotbarSetup.cs" />
     <Compile Include="Assets/Scripts/Combat/SwordProjectile.cs" />
+    <Compile Include="Assets/Scripts/Forge/ForgeDto.cs" />
+    <Compile Include="Assets/Scripts/Forge/WeaponSpriteFactory.cs" />
     <Compile Include="Assets/Scripts/Enemies/BossBullet.cs" />
     <Compile Include="Assets/Scripts/UI/PlayerHealthBarUIFactory.cs" />
     <Compile Include="Assets/Scripts/Stage1KrabEncounterSetup.cs" />
+    <Compile Include="Assets/Scripts/Forge/DrawingCanvas.cs" />
     <Compile Include="Assets/Scripts/Enemies/KrabEnemy.cs" />
     <Compile Include="Assets/Scripts/Items/ItemHotbarController.cs" />
     <Compile Include="Assets/Scripts/Stage1PlayerHealthSetup.cs" />
     <Compile Include="Assets/Scripts/UI/BossHealthBarUIFactory.cs" />
     <Compile Include="Assets/Scripts/Combat/AxeSwing.cs" />
+    <Compile Include="Assets/Scripts/Forge/ForgedWeapon.cs" />
     <Compile Include="Assets/Scripts/Items/ItemHotbarView.cs" />
     <Compile Include="Assets/Scripts/Enemies/BossRobotController.cs" />
     <Compile Include="Assets/Scripts/PlayerMovement.cs" />
     <Compile Include="Assets/Scripts/Stage1MapDefinition.cs" />
+    <Compile Include="Assets/Scripts/Forge/ForgeClient.cs" />
     <Compile Include="Assets/Scripts/Stage1BossEncounterSetup.cs" />
     <Compile Include="Assets/Scripts/Items/PlayerInventory.cs" />
     <Compile Include="Assets/Scripts/Enemies/Stage1EncounterGate.cs" />
@@ -79,6 +87,7 @@
     <Compile Include="Assets/Scripts/Combat/PlayerAxeAttacker.cs" />
     <Compile Include="Assets/Scripts/Combat/PlayerSwordShooter.cs" />
     <Compile Include="Assets/Scripts/Items/ItemHotbarUIFactory.cs" />
+    <Compile Include="Assets/Scripts/Forge/DrawingHistory.cs" />
     <Compile Include="Assets/Scripts/Enemies/Stage1BossEncounter.cs" />
     <Compile Include="Assets/Scripts/UI/PlayerHealthBarView.cs" />
     <Compile Include="Assets/Scripts/Combat/EnemyHealth.cs" />

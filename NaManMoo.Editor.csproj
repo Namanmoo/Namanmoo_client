@@ -53,6 +53,7 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/6000.5.5f1/Unity.app/Contents/Resources/Scripting/BCLExtensions/TargetingPacks/netstandard2.1/analyzers/dotnet/roslyn4.0/cs/System.Text.Json.SourceGeneration.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Editor/WeaponForgeSceneBuilder.cs" />
     <Compile Include="Assets/Editor/Stage1SceneBuilder.cs" />
     <Compile Include="Assets/Editor/WebGLBuilder.cs" />
     <Compile Include="Assets/Editor/TitleSceneBuilder.cs" />
