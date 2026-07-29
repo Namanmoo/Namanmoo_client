@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Failed(Child)" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-28 15:34:31Z" end-time="2026-07-28 15:34:33Z" duration="1.343443">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="59" result="Failed" site="Child" start-time="2026-07-28 15:34:31Z" end-time="2026-07-28 15:34:33Z" duration="1.343443" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1072" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="59" result="Failed" site="Child" start-time="2026-07-28 15:34:31Z" end-time="2026-07-28 15:34:33Z" duration="1.336776" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="15508" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1068" name="Stage1SceneBuilderTests" fullname="Stage1SceneBuilderTests" classname="Stage1SceneBuilderTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-07-28 15:34:31Z" end-time="2026-07-28 15:34:33Z" duration="1.335450" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1069" name="Build_CreatesPlayableStageScene" fullname="Stage1SceneBuilderTests.Build_CreatesPlayableStageScene" methodname="Build_CreatesPlayableStageScene" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="1800150593" result="Failed" start-time="2026-07-28 15:34:31Z" end-time="2026-07-28 15:34:32Z" duration="0.736721" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: 221.0f
+  But was:  176.0f
+]]></message>
+            <stack-trace><![CDATA[at Stage1SceneBuilderTests.Build_CreatesPlayableStageScene () [0x00188] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\Stage1SceneBuilderTests.cs:46
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1070" name="Build_CreatesPlayerOwnedBottomCenterItemHotbar" fullname="Stage1SceneBuilderTests.Build_CreatesPlayerOwnedBottomCenterItemHotbar" methodname="Build_CreatesPlayerOwnedBottomCenterItemHotbar" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="641151176" result="Passed" start-time="2026-07-28 15:34:32Z" end-time="2026-07-28 15:34:33Z" duration="0.587999" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1071" name="RuntimeBootstrap_EditorValidationAssignsProjectBackgroundAndRejectsMissingSpriteBeforeBuilding" fullname="Stage1SceneBuilderTests.RuntimeBootstrap_EditorValidationAssignsProjectBackgroundAndRejectsMissingSpriteBeforeBuilding" methodname="RuntimeBootstrap_EditorValidationAssignsProjectBackgroundAndRejectsMissingSpriteBeforeBuilding" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="2077966435" result="Failed" start-time="2026-07-28 15:34:33Z" end-time="2026-07-28 15:34:33Z" duration="0.001321" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at Stage1SceneBuilderTests.RuntimeBootstrap_EditorValidationAssignsProjectBackgroundAndRejectsMissingSpriteBeforeBuilding () [0x00094] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\Stage1SceneBuilderTests.cs:255
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

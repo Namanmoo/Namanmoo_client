@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="9" result="Failed(Child)" total="9" passed="8" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-28 18:45:50Z" end-time="2026-07-28 18:45:51Z" duration="0.1026995">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="82" result="Failed" site="Child" start-time="2026-07-28 18:45:50Z" end-time="2026-07-28 18:45:51Z" duration="0.102700" total="9" passed="8" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1098" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="82" result="Failed" site="Child" start-time="2026-07-28 18:45:50Z" end-time="2026-07-28 18:45:51Z" duration="0.097274" total="9" passed="8" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="21376" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1062" name="PlayerSwordShooterTests" fullname="PlayerSwordShooterTests" classname="PlayerSwordShooterTests" runstate="Runnable" testcasecount="9" result="Failed" site="Child" start-time="2026-07-28 18:45:50Z" end-time="2026-07-28 18:45:51Z" duration="0.095836" total="9" passed="8" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1065" name="CalculateDirection_ArrowKeysProduceExactCardinalDirections" fullname="PlayerSwordShooterTests.CalculateDirection_ArrowKeysProduceExactCardinalDirections" methodname="CalculateDirection_ArrowKeysProduceExactCardinalDirections" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1783960733" result="Passed" start-time="2026-07-28 18:45:50Z" end-time="2026-07-28 18:45:50Z" duration="0.049740" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1066" name="CalculateDirection_DiagonalArrowKeysAreNormalized" fullname="PlayerSwordShooterTests.CalculateDirection_DiagonalArrowKeysAreNormalized" methodname="CalculateDirection_DiagonalArrowKeysAreNormalized" classname="PlayerSwordShooterTests" runstate="Runnable" seed="501775205" result="Passed" start-time="2026-07-28 18:45:50Z" end-time="2026-07-28 18:45:50Z" duration="0.003314" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1067" name="CalculateDirection_WasdDoesNotAffectFiringDirection" fullname="PlayerSwordShooterTests.CalculateDirection_WasdDoesNotAffectFiringDirection" methodname="CalculateDirection_WasdDoesNotAffectFiringDirection" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1693152057" result="Passed" start-time="2026-07-28 18:45:50Z" end-time="2026-07-28 18:45:50Z" duration="0.002557" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1064" name="InspectorDefaults_AreConfiguredAndNegativeNumericValuesAreCorrected" fullname="PlayerSwordShooterTests.InspectorDefaults_AreConfiguredAndNegativeNumericValuesAreCorrected" methodname="InspectorDefaults_AreConfiguredAndNegativeNumericValuesAreCorrected" classname="PlayerSwordShooterTests" runstate="Runnable" seed="348345786" result="Failed" label="Error" start-time="2026-07-28 18:45:50Z" end-time="2026-07-28 18:45:50Z" duration="0.006436" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[System.NullReferenceException : Object reference not set to an instance of an object]]></message>
+            <stack-trace><![CDATA[  at PlayerSwordShooterTests.InspectorDefaults_AreConfiguredAndNegativeNumericValuesAreCorrected () [0x000fa] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:77 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1069" name="ProcessInput_AfterReleaseFiresImmediatelyOnTheNextActivation" fullname="PlayerSwordShooterTests.ProcessInput_AfterReleaseFiresImmediatelyOnTheNextActivation" methodname="ProcessInput_AfterReleaseFiresImmediatelyOnTheNextActivation" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1553131560" result="Passed" start-time="2026-07-28 18:45:50Z" end-time="2026-07-28 18:45:50Z" duration="0.004896" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1068" name="ProcessInput_HeldRightFiresImmediatelyAndAtTheExactCooldownBoundary" fullname="PlayerSwordShooterTests.ProcessInput_HeldRightFiresImmediatelyAndAtTheExactCooldownBoundary" methodname="ProcessInput_HeldRightFiresImmediatelyAndAtTheExactCooldownBoundary" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1943835968" result="Passed" start-time="2026-07-28 18:45:50Z" end-time="2026-07-28 18:45:50Z" duration="0.002099" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1070" name="SpawnedProjectile_HasRequiredComponentsSpritePositionAndConfiguration" fullname="PlayerSwordShooterTests.SpawnedProjectile_HasRequiredComponentsSpritePositionAndConfiguration" methodname="SpawnedProjectile_HasRequiredComponentsSpritePositionAndConfiguration" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1263237297" result="Passed" start-time="2026-07-28 18:45:50Z" end-time="2026-07-28 18:45:51Z" duration="0.007917" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1071" name="SpawnedProjectile_ReceivesConfiguredLifetime" fullname="PlayerSwordShooterTests.SpawnedProjectile_ReceivesConfiguredLifetime" methodname="SpawnedProjectile_ReceivesConfiguredLifetime" classname="PlayerSwordShooterTests" runstate="Runnable" seed="537263186" result="Passed" start-time="2026-07-28 18:45:51Z" end-time="2026-07-28 18:45:51Z" duration="0.001918" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1063" name="SwordAsset_IsAnExactSourceCopyWithRequiredImportSettings" fullname="PlayerSwordShooterTests.SwordAsset_IsAnExactSourceCopyWithRequiredImportSettings" methodname="SwordAsset_IsAnExactSourceCopyWithRequiredImportSettings" classname="PlayerSwordShooterTests" runstate="Runnable" seed="362534559" result="Passed" start-time="2026-07-28 18:45:51Z" end-time="2026-07-28 18:45:51Z" duration="0.006513" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

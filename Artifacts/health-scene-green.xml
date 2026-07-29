@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Passed" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 06:22:56Z" end-time="2026-07-29 06:22:57Z" duration="1.0118523">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="101" result="Passed" start-time="2026-07-29 06:22:56Z" end-time="2026-07-29 06:22:57Z" duration="1.011852" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1122" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="101" result="Passed" start-time="2026-07-29 06:22:56Z" end-time="2026-07-29 06:22:57Z" duration="1.006666" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="6624" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1101" name="Stage1PlayerHealthSceneTests" fullname="Stage1PlayerHealthSceneTests" classname="Stage1PlayerHealthSceneTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-07-29 06:22:56Z" end-time="2026-07-29 06:22:57Z" duration="0.874969" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1102" name="Build_CreatesPlayerHealthBarUsingProjectHeartSprite" fullname="Stage1PlayerHealthSceneTests.Build_CreatesPlayerHealthBarUsingProjectHeartSprite" methodname="Build_CreatesPlayerHealthBarUsingProjectHeartSprite" classname="Stage1PlayerHealthSceneTests" runstate="Runnable" seed="1318745111" result="Passed" start-time="2026-07-29 06:22:56Z" end-time="2026-07-29 06:22:57Z" duration="0.860812" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1103" name="RuntimeBootstrap_AssignsHeartAndBuildsPlayerHealthBar" fullname="Stage1PlayerHealthSceneTests.RuntimeBootstrap_AssignsHeartAndBuildsPlayerHealthBar" methodname="RuntimeBootstrap_AssignsHeartAndBuildsPlayerHealthBar" classname="Stage1PlayerHealthSceneTests" runstate="Runnable" seed="632495890" result="Passed" start-time="2026-07-29 06:22:57Z" end-time="2026-07-29 06:22:57Z" duration="0.005699" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1104" name="Stage1PlayerHealthSetupTests" fullname="Stage1PlayerHealthSetupTests" classname="Stage1PlayerHealthSetupTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 06:22:57Z" end-time="2026-07-29 06:22:57Z" duration="0.130214" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1105" name="Create_AddsPlayerHealthAndTopLeftScaledCanvas" fullname="Stage1PlayerHealthSetupTests.Create_AddsPlayerHealthAndTopLeftScaledCanvas" methodname="Create_AddsPlayerHealthAndTopLeftScaledCanvas" classname="Stage1PlayerHealthSetupTests" runstate="Runnable" seed="2045943934" result="Passed" start-time="2026-07-29 06:22:57Z" end-time="2026-07-29 06:22:57Z" duration="0.004263" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

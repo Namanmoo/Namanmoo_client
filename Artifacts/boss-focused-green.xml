@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="9" result="Passed" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 09:26:20Z" end-time="2026-07-29 09:26:23Z" duration="2.9569028">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="140" result="Passed" start-time="2026-07-29 09:26:20Z" end-time="2026-07-29 09:26:23Z" duration="2.956903" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1175" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="140" result="Passed" start-time="2026-07-29 09:26:20Z" end-time="2026-07-29 09:26:23Z" duration="2.952285" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18764" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1010" name="BossHealthBarViewTests" fullname="BossHealthBarViewTests" classname="BossHealthBarViewTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:26:20Z" end-time="2026-07-29 09:26:20Z" duration="0.600984" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1011" name="BossHealthBar_IsTopCenterTracksHealthAndHidesOnDeath" fullname="BossHealthBarViewTests.BossHealthBar_IsTopCenterTracksHealthAndHidesOnDeath" methodname="BossHealthBar_IsTopCenterTracksHealthAndHidesOnDeath" classname="BossHealthBarViewTests" runstate="Runnable" seed="1094205092" result="Passed" start-time="2026-07-29 09:26:20Z" end-time="2026-07-29 09:26:20Z" duration="0.593097" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1012" name="BossRobotControllerTests" fullname="BossRobotControllerTests" classname="BossRobotControllerTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-07-29 09:26:20Z" end-time="2026-07-29 09:26:21Z" duration="0.514224" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1017" name="BossAndBulletContact_DealFourWithSharedInvulnerability" fullname="BossRobotControllerTests.BossAndBulletContact_DealFourWithSharedInvulnerability" methodname="BossAndBulletContact_DealFourWithSharedInvulnerability" classname="BossRobotControllerTests" runstate="Runnable" seed="1886563045" result="Passed" start-time="2026-07-29 09:26:20Z" end-time="2026-07-29 09:26:21Z" duration="0.508867" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1013" name="CombatConstants_MatchPlayerSpeedRatiosAndPatternCounts" fullname="BossRobotControllerTests.CombatConstants_MatchPlayerSpeedRatiosAndPatternCounts" methodname="CombatConstants_MatchPlayerSpeedRatiosAndPatternCounts" classname="BossRobotControllerTests" runstate="Runnable" seed="220112376" result="Passed" start-time="2026-07-29 09:26:21Z" end-time="2026-07-29 09:26:21Z" duration="0.001401" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1015" name="PatternChoice_IncreasesDashChanceAtHalfHealth" fullname="BossRobotControllerTests.PatternChoice_IncreasesDashChanceAtHalfHealth" methodname="PatternChoice_IncreasesDashChanceAtHalfHealth" classname="BossRobotControllerTests" runstate="Runnable" seed="1982867300" result="Passed" start-time="2026-07-29 09:26:21Z" end-time="2026-07-29 09:26:21Z" duration="0.000174" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1014" name="RadialDirections_ContainEightNormalizedCompassDirections" fullname="BossRobotControllerTests.RadialDirections_ContainEightNormalizedCompassDirections" methodname="RadialDirections_ContainEightNormalizedCompassDirections" classname="BossRobotControllerTests" runstate="Runnable" seed="718421779" result="Passed" start-time="2026-07-29 09:26:21Z" end-time="2026-07-29 09:26:21Z" duration="0.002391" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1016" name="RageTint_BecomesLightRedAtHalfHealth" fullname="BossRobotControllerTests.RageTint_BecomesLightRedAtHalfHealth" methodname="RageTint_BecomesLightRedAtHalfHealth" classname="BossRobotControllerTests" runstate="Runnable" seed="1202769214" result="Passed" start-time="2026-07-29 09:26:21Z" end-time="2026-07-29 09:26:21Z" duration="0.000355" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1127" name="Stage1BossEncounterIntegrationTests" fullname="Stage1BossEncounterIntegrationTests" classname="Stage1BossEncounterIntegrationTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:26:21Z" end-time="2026-07-29 09:26:22Z" duration="0.718609" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1128" name="Build_CreatesUpperEntryTriggerAndSerializedBossReferences" fullname="Stage1BossEncounterIntegrationTests.Build_CreatesUpperEntryTriggerAndSerializedBossReferences" methodname="Build_CreatesUpperEntryTriggerAndSerializedBossReferences" classname="Stage1BossEncounterIntegrationTests" runstate="Runnable" seed="638008579" result="Passed" start-time="2026-07-29 09:26:21Z" end-time="2026-07-29 09:26:22Z" duration="0.718189" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1129" name="Stage1BossEncounterTests" fullname="Stage1BossEncounterTests" classname="Stage1BossEncounterTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:26:22Z" end-time="2026-07-29 09:26:22Z" duration="0.609089" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1130" name="EnteringAfterLowerClear_SpawnsOneBossClosesGateAndDeathReopensIt" fullname="Stage1BossEncounterTests.EnteringAfterLowerClear_SpawnsOneBossClosesGateAndDeathReopensIt" methodname="EnteringAfterLowerClear_SpawnsOneBossClosesGateAndDeathReopensIt" classname="Stage1BossEncounterTests" runstate="Runnable" seed="1686148130" result="Passed" start-time="2026-07-29 09:26:22Z" end-time="2026-07-29 09:26:22Z" duration="0.554831" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1131" name="Stage1EncounterGateTests" fullname="Stage1EncounterGateTests" classname="Stage1EncounterGateTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-29 09:26:22Z" end-time="2026-07-29 09:26:23Z" duration="0.507379" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1134" name="OpenGate_CanBeClosedForBossFightAndReopened" fullname="Stage1EncounterGateTests.OpenGate_CanBeClosedForBossFightAndReopened" methodname="OpenGate_CanBeClosedForBossFightAndReopened" classname="Stage1EncounterGateTests" runstate="Runnable" seed="246118333" result="Passed" start-time="2026-07-29 09:26:22Z" end-time="2026-07-29 09:26:23Z" duration="0.506783" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

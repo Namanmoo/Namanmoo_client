@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="15" result="Passed" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:23:02Z" duration="3.3773121">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="81" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:23:02Z" duration="3.377312" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1097" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="81" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:23:02Z" duration="3.372030" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="32228" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1062" name="PlayerSwordShooterTests" fullname="PlayerSwordShooterTests" classname="PlayerSwordShooterTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:22:59Z" duration="0.094389" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1065" name="CalculateDirection_ArrowKeysProduceExactCardinalDirections" fullname="PlayerSwordShooterTests.CalculateDirection_ArrowKeysProduceExactCardinalDirections" methodname="CalculateDirection_ArrowKeysProduceExactCardinalDirections" classname="PlayerSwordShooterTests" runstate="Runnable" seed="2100604085" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:22:59Z" duration="0.051718" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1066" name="CalculateDirection_DiagonalArrowKeysAreNormalized" fullname="PlayerSwordShooterTests.CalculateDirection_DiagonalArrowKeysAreNormalized" methodname="CalculateDirection_DiagonalArrowKeysAreNormalized" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1282133337" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:22:59Z" duration="0.002824" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1067" name="CalculateDirection_WasdDoesNotAffectFiringDirection" fullname="PlayerSwordShooterTests.CalculateDirection_WasdDoesNotAffectFiringDirection" methodname="CalculateDirection_WasdDoesNotAffectFiringDirection" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1250559749" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:22:59Z" duration="0.001738" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1064" name="InspectorDefaults_AreConfiguredAndInvalidRatesAreClamped" fullname="PlayerSwordShooterTests.InspectorDefaults_AreConfiguredAndInvalidRatesAreClamped" methodname="InspectorDefaults_AreConfiguredAndInvalidRatesAreClamped" classname="PlayerSwordShooterTests" runstate="Runnable" seed="427883373" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:22:59Z" duration="0.006765" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1069" name="ProcessInput_AfterReleaseFiresImmediatelyOnTheNextActivation" fullname="PlayerSwordShooterTests.ProcessInput_AfterReleaseFiresImmediatelyOnTheNextActivation" methodname="ProcessInput_AfterReleaseFiresImmediatelyOnTheNextActivation" classname="PlayerSwordShooterTests" runstate="Runnable" seed="2028458878" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:22:59Z" duration="0.003801" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1068" name="ProcessInput_HeldRightFiresImmediatelyAndAtTheExactCooldownBoundary" fullname="PlayerSwordShooterTests.ProcessInput_HeldRightFiresImmediatelyAndAtTheExactCooldownBoundary" methodname="ProcessInput_HeldRightFiresImmediatelyAndAtTheExactCooldownBoundary" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1273286582" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:22:59Z" duration="0.001965" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1070" name="SpawnedProjectile_HasRequiredComponentsSpritePositionAndConfiguration" fullname="PlayerSwordShooterTests.SpawnedProjectile_HasRequiredComponentsSpritePositionAndConfiguration" methodname="SpawnedProjectile_HasRequiredComponentsSpritePositionAndConfiguration" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1579752049" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:22:59Z" duration="0.007866" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1071" name="SpawnedProjectile_ReceivesConfiguredLifetime" fullname="PlayerSwordShooterTests.SpawnedProjectile_ReceivesConfiguredLifetime" methodname="SpawnedProjectile_ReceivesConfiguredLifetime" classname="PlayerSwordShooterTests" runstate="Runnable" seed="788714499" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:22:59Z" duration="0.002054" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1063" name="SwordAsset_IsAnExactSourceCopyWithRequiredImportSettings" fullname="PlayerSwordShooterTests.SwordAsset_IsAnExactSourceCopyWithRequiredImportSettings" methodname="SwordAsset_IsAnExactSourceCopyWithRequiredImportSettings" classname="PlayerSwordShooterTests" runstate="Runnable" seed="779445636" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:22:59Z" duration="0.005353" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1090" name="SwordProjectileTests" fullname="SwordProjectileTests" classname="SwordProjectileTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:23:02Z" duration="3.275734" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1093" name="Advance_ExpiryDestroysTheProjectile" fullname="SwordProjectileTests.Advance_ExpiryDestroysTheProjectile" methodname="Advance_ExpiryDestroysTheProjectile" classname="SwordProjectileTests" runstate="Runnable" seed="1006745477" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:22:59Z" duration="0.787194" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1091" name="Advance_MovesFourUnitsAndRotatesOneFullTurn" fullname="SwordProjectileTests.Advance_MovesFourUnitsAndRotatesOneFullTurn" methodname="Advance_MovesFourUnitsAndRotatesOneFullTurn" classname="SwordProjectileTests" runstate="Runnable" seed="154007350" result="Passed" start-time="2026-07-28 18:22:59Z" end-time="2026-07-28 18:23:00Z" duration="0.519190" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1092" name="Advance_NormalizedDiagonalTravelsTheSameDistance" fullname="SwordProjectileTests.Advance_NormalizedDiagonalTravelsTheSameDistance" methodname="Advance_NormalizedDiagonalTravelsTheSameDistance" classname="SwordProjectileTests" runstate="Runnable" seed="915969135" result="Passed" start-time="2026-07-28 18:23:00Z" end-time="2026-07-28 18:23:00Z" duration="0.500758" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1094" name="TryHit_EnemyTakesDamageOnlyOnce" fullname="SwordProjectileTests.TryHit_EnemyTakesDamageOnlyOnce" methodname="TryHit_EnemyTakesDamageOnlyOnce" classname="SwordProjectileTests" runstate="Runnable" seed="1845096515" result="Passed" start-time="2026-07-28 18:23:00Z" end-time="2026-07-28 18:23:01Z" duration="0.477283" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1096" name="TryHit_NonEnemyColliderIsIgnored" fullname="SwordProjectileTests.TryHit_NonEnemyColliderIsIgnored" methodname="TryHit_NonEnemyColliderIsIgnored" classname="SwordProjectileTests" runstate="Runnable" seed="379169372" result="Passed" start-time="2026-07-28 18:23:01Z" end-time="2026-07-28 18:23:01Z" duration="0.502989" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1095" name="TryHit_OwnerEnemy_IsIgnoredAndProjectileCanStillHitAnotherEnemy" fullname="SwordProjectileTests.TryHit_OwnerEnemy_IsIgnoredAndProjectileCanStillHitAnotherEnemy" methodname="TryHit_OwnerEnemy_IsIgnoredAndProjectileCanStillHitAnotherEnemy" classname="SwordProjectileTests" runstate="Runnable" seed="375318233" result="Passed" start-time="2026-07-28 18:23:01Z" end-time="2026-07-28 18:23:02Z" duration="0.486206" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

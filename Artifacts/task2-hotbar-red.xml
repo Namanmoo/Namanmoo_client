@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="17" result="Failed(Child)" total="17" passed="13" failed="4" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.1225713">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="87" result="Failed" site="Child" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.122571" total="17" passed="13" failed="4" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1103" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="87" result="Failed" site="Child" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.117094" total="17" passed="13" failed="4" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="19072" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1028" name="ItemHotbarViewTests" fullname="ItemHotbarViewTests" classname="ItemHotbarViewTests" runstate="Runnable" testcasecount="17" result="Failed" site="Child" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.115391" total="17" passed="13" failed="4" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1045" name="AcquiringItemWithoutIcon_LeavesIconDisabled" fullname="ItemHotbarViewTests.AcquiringItemWithoutIcon_LeavesIconDisabled" methodname="AcquiringItemWithoutIcon_LeavesIconDisabled" classname="ItemHotbarViewTests" runstate="Runnable" seed="993114424" result="Passed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.030354" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1043" name="AcquiringItemWithSprite_DisplaysAspectPreservingIconInFirstSlot" fullname="ItemHotbarViewTests.AcquiringItemWithSprite_DisplaysAspectPreservingIconInFirstSlot" methodname="AcquiringItemWithSprite_DisplaysAspectPreservingIconInFirstSlot" classname="ItemHotbarViewTests" runstate="Runnable" seed="1492452619" result="Passed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.004347" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1044" name="AcquiringSwordSprite_KeepsExactAspectPreservingIconInsideCompactFirstSlotSafeArea" fullname="ItemHotbarViewTests.AcquiringSwordSprite_KeepsExactAspectPreservingIconInsideCompactFirstSlotSafeArea" methodname="AcquiringSwordSprite_KeepsExactAspectPreservingIconInsideCompactFirstSlotSafeArea" classname="ItemHotbarViewTests" runstate="Runnable" seed="1252835069" result="Failed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.020901" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: 71.6681976f +/- 9.99999975E-05f
+  But was:  286.672852f
+]]></message>
+            <stack-trace><![CDATA[at ItemHotbarViewTests.AcquiringSwordSprite_KeepsExactAspectPreservingIconInsideCompactFirstSlotSafeArea () [0x00076] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\ItemHotbarViewTests.cs:320
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1042" name="Connect_AfterRuntimeSubscriptionIsLost_ReconnectsOnceAndRefreshesFromController" fullname="ItemHotbarViewTests.Connect_AfterRuntimeSubscriptionIsLost_ReconnectsOnceAndRefreshesFromController" methodname="Connect_AfterRuntimeSubscriptionIsLost_ReconnectsOnceAndRefreshesFromController" classname="ItemHotbarViewTests" runstate="Runnable" seed="1392229795" result="Passed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.003290" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1033" name="Create_BuildsSixNamedTransparentSlotsAtInkSafeInteriorCoordinates" fullname="ItemHotbarViewTests.Create_BuildsSixNamedTransparentSlotsAtInkSafeInteriorCoordinates" methodname="Create_BuildsSixNamedTransparentSlotsAtInkSafeInteriorCoordinates" classname="ItemHotbarViewTests" runstate="Runnable" seed="1667717484" result="Passed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.005487" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1037" name="Create_BuildsThinFourEdgeBlueSelectionOutlines" fullname="ItemHotbarViewTests.Create_BuildsThinFourEdgeBlueSelectionOutlines" methodname="Create_BuildsThinFourEdgeBlueSelectionOutlines" classname="ItemHotbarViewTests" runstate="Runnable" seed="1245462114" result="Failed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.003445" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: (2.00, 2.00)
+  But was:  (5.00, 5.00)
+]]></message>
+            <stack-trace><![CDATA[at ItemHotbarViewTests.Create_BuildsThinFourEdgeBlueSelectionOutlines () [0x00027] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\ItemHotbarViewTests.cs:203
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1034" name="Create_ContainsEverySlotIconAndDynamicOutlineInsideTheBackgroundRect" fullname="ItemHotbarViewTests.Create_ContainsEverySlotIconAndDynamicOutlineInsideTheBackgroundRect" methodname="Create_ContainsEverySlotIconAndDynamicOutlineInsideTheBackgroundRect" classname="ItemHotbarViewTests" runstate="Runnable" seed="1532883264" result="Passed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.005080" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1035" name="Create_DoesNotGenerateStaticArtworkObjects" fullname="ItemHotbarViewTests.Create_DoesNotGenerateStaticArtworkObjects" methodname="Create_DoesNotGenerateStaticArtworkObjects" classname="ItemHotbarViewTests" runstate="Runnable" seed="1515609465" result="Passed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.002418" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1032" name="Create_FitsTheCompleteSourceImageInsideTheReferenceViewportWithoutChangingAspect" fullname="ItemHotbarViewTests.Create_FitsTheCompleteSourceImageInsideTheReferenceViewportWithoutChangingAspect" methodname="Create_FitsTheCompleteSourceImageInsideTheReferenceViewportWithoutChangingAspect" classname="ItemHotbarViewTests" runstate="Runnable" seed="729014949" result="Failed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.003374" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: (432.00, 144.33)
+  But was:  (1728.00, 577.33)
+]]></message>
+            <stack-trace><![CDATA[at ItemHotbarViewTests.Create_FitsTheCompleteSourceImageInsideTheReferenceViewportWithoutChangingAspect () [0x0000c] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\ItemHotbarViewTests.cs:99
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1036" name="Create_LeavesEachSlotInteriorTransparent" fullname="ItemHotbarViewTests.Create_LeavesEachSlotInteriorTransparent" methodname="Create_LeavesEachSlotInteriorTransparent" classname="ItemHotbarViewTests" runstate="Runnable" seed="1352045116" result="Passed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.003434" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1038" name="Create_RefitsEveryIconWithSymmetricPositiveCompactInsetsInsideItsOwnSlot" fullname="ItemHotbarViewTests.Create_RefitsEveryIconWithSymmetricPositiveCompactInsetsInsideItsOwnSlot" methodname="Create_RefitsEveryIconWithSymmetricPositiveCompactInsetsInsideItsOwnSlot" classname="ItemHotbarViewTests" runstate="Runnable" seed="709421124" result="Failed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.002900" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: (4.00, 4.00)
+  But was:  (6.00, 6.00)
+]]></message>
+            <stack-trace><![CDATA[at ItemHotbarViewTests.Create_RefitsEveryIconWithSymmetricPositiveCompactInsetsInsideItsOwnSlot () [0x00022] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\ItemHotbarViewTests.cs:219
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1030" name="Create_RejectsANullBackgroundSprite" fullname="ItemHotbarViewTests.Create_RejectsANullBackgroundSprite" methodname="Create_RejectsANullBackgroundSprite" classname="ItemHotbarViewTests" runstate="Runnable" seed="1778639070" result="Passed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.003018" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1029" name="Create_UsesTheSuppliedBackgroundSpriteExactlyOnceAndPreservesItsAspect" fullname="ItemHotbarViewTests.Create_UsesTheSuppliedBackgroundSpriteExactlyOnceAndPreservesItsAspect" methodname="Create_UsesTheSuppliedBackgroundSpriteExactlyOnceAndPreservesItsAspect" classname="ItemHotbarViewTests" runstate="Runnable" seed="1871739472" result="Passed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.002289" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1031" name="Factory_RequiresABackgroundSpriteForEveryPublicCreateOverload" fullname="ItemHotbarViewTests.Factory_RequiresABackgroundSpriteForEveryPublicCreateOverload" methodname="Factory_RequiresABackgroundSpriteForEveryPublicCreateOverload" classname="ItemHotbarViewTests" runstate="Runnable" seed="1418106571" result="Passed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.003900" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1039" name="Initialize_EnablesOnlyFirstBlueSelectionOutlineWhenInventoryHasNoItems" fullname="ItemHotbarViewTests.Initialize_EnablesOnlyFirstBlueSelectionOutlineWhenInventoryHasNoItems" methodname="Initialize_EnablesOnlyFirstBlueSelectionOutlineWhenInventoryHasNoItems" classname="ItemHotbarViewTests" runstate="Runnable" seed="1625008478" result="Passed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.003797" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1041" name="Initialize_ReplacingInventory_UnsubscribesOldInventoryAndSubscribesNewInventoryOnce" fullname="ItemHotbarViewTests.Initialize_ReplacingInventory_UnsubscribesOldInventoryAndSubscribesNewInventoryOnce" methodname="Initialize_ReplacingInventory_UnsubscribesOldInventoryAndSubscribesNewInventoryOnce" classname="ItemHotbarViewTests" runstate="Runnable" seed="1444558844" result="Passed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.002231" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1040" name="InventorySelectionChange_MovesActiveSelectionOutlineToFourthSlot" fullname="ItemHotbarViewTests.InventorySelectionChange_MovesActiveSelectionOutlineToFourthSlot" methodname="InventorySelectionChange_MovesActiveSelectionOutlineToFourthSlot" classname="ItemHotbarViewTests" runstate="Runnable" seed="1945318027" result="Passed" start-time="2026-07-28 20:33:11Z" end-time="2026-07-28 20:33:11Z" duration="0.002132" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Passed" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-28 18:50:59Z" end-time="2026-07-28 18:51:02Z" duration="3.784982">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="83" result="Passed" start-time="2026-07-28 18:50:59Z" end-time="2026-07-28 18:51:02Z" duration="3.784982" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1099" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="83" result="Passed" start-time="2026-07-28 18:50:59Z" end-time="2026-07-28 18:51:02Z" duration="3.778763" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="36176" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1091" name="SwordProjectileTests" fullname="SwordProjectileTests" classname="SwordProjectileTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-07-28 18:50:59Z" end-time="2026-07-28 18:51:02Z" duration="3.777031" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1094" name="Advance_ExpiryDestroysTheProjectile" fullname="SwordProjectileTests.Advance_ExpiryDestroysTheProjectile" methodname="Advance_ExpiryDestroysTheProjectile" classname="SwordProjectileTests" runstate="Runnable" seed="882740767" result="Passed" start-time="2026-07-28 18:50:59Z" end-time="2026-07-28 18:50:59Z" duration="0.697334" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1095" name="Advance_ExpiryImmediatelyPreventsDamageBeforeDeferredDestroy" fullname="SwordProjectileTests.Advance_ExpiryImmediatelyPreventsDamageBeforeDeferredDestroy" methodname="Advance_ExpiryImmediatelyPreventsDamageBeforeDeferredDestroy" classname="SwordProjectileTests" runstate="Runnable" seed="1080870222" result="Passed" start-time="2026-07-28 18:50:59Z" end-time="2026-07-28 18:51:00Z" duration="0.517473" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1092" name="Advance_MovesFourUnitsAndRotatesOneFullTurn" fullname="SwordProjectileTests.Advance_MovesFourUnitsAndRotatesOneFullTurn" methodname="Advance_MovesFourUnitsAndRotatesOneFullTurn" classname="SwordProjectileTests" runstate="Runnable" seed="1157098032" result="Passed" start-time="2026-07-28 18:51:00Z" end-time="2026-07-28 18:51:00Z" duration="0.534671" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1093" name="Advance_NormalizedDiagonalTravelsTheSameDistance" fullname="SwordProjectileTests.Advance_NormalizedDiagonalTravelsTheSameDistance" methodname="Advance_NormalizedDiagonalTravelsTheSameDistance" classname="SwordProjectileTests" runstate="Runnable" seed="762413260" result="Passed" start-time="2026-07-28 18:51:00Z" end-time="2026-07-28 18:51:01Z" duration="0.509284" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1096" name="TryHit_EnemyTakesDamageOnlyOnce" fullname="SwordProjectileTests.TryHit_EnemyTakesDamageOnlyOnce" methodname="TryHit_EnemyTakesDamageOnlyOnce" classname="SwordProjectileTests" runstate="Runnable" seed="585426148" result="Passed" start-time="2026-07-28 18:51:01Z" end-time="2026-07-28 18:51:01Z" duration="0.508522" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1098" name="TryHit_NonEnemyColliderIsIgnored" fullname="SwordProjectileTests.TryHit_NonEnemyColliderIsIgnored" methodname="TryHit_NonEnemyColliderIsIgnored" classname="SwordProjectileTests" runstate="Runnable" seed="1077537704" result="Passed" start-time="2026-07-28 18:51:01Z" end-time="2026-07-28 18:51:02Z" duration="0.493893" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1097" name="TryHit_OwnerEnemy_IsIgnoredAndProjectileCanStillHitAnotherEnemy" fullname="SwordProjectileTests.TryHit_OwnerEnemy_IsIgnoredAndProjectileCanStillHitAnotherEnemy" methodname="TryHit_OwnerEnemy_IsIgnoredAndProjectileCanStillHitAnotherEnemy" classname="SwordProjectileTests" runstate="Runnable" seed="1614375869" result="Passed" start-time="2026-07-28 18:51:02Z" end-time="2026-07-28 18:51:02Z" duration="0.505543" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

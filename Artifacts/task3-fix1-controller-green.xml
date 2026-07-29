@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="22" result="Passed" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.1170626">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="92" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.117063" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1108" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="92" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.110516" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="30052" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1006" name="ItemHotbarControllerTests" fullname="ItemHotbarControllerTests" classname="ItemHotbarControllerTests" runstate="Runnable" testcasecount="22" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.109000" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1028" name="ConfigureStartingSword_FreshInventoryAcquiresExactEquippedSwordInSlotZero" fullname="ItemHotbarControllerTests.ConfigureStartingSword_FreshInventoryAcquiresExactEquippedSwordInSlotZero" methodname="ConfigureStartingSword_FreshInventoryAcquiresExactEquippedSwordInSlotZero" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1837313173" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.048113" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1031" name="ConfigureStartingSword_InjectedMalformedAndDuplicateSwords_NormalizesSameInventory" fullname="ItemHotbarControllerTests.ConfigureStartingSword_InjectedMalformedAndDuplicateSwords_NormalizesSameInventory" methodname="ConfigureStartingSword_InjectedMalformedAndDuplicateSwords_NormalizesSameInventory" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1135072250" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.003383" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1029" name="ConfigureStartingSword_RepeatedConfigurationAndAccessDoNotDuplicateSword" fullname="ItemHotbarControllerTests.ConfigureStartingSword_RepeatedConfigurationAndAccessDoNotDuplicateSword" methodname="ConfigureStartingSword_RepeatedConfigurationAndAccessDoNotDuplicateSword" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1826445640" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001468" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1027" name="Inventory_AfterRuntimeModelIsLost_RecreatesAUsableInventory" fullname="ItemHotbarControllerTests.Inventory_AfterRuntimeModelIsLost_RecreatesAUsableInventory" methodname="Inventory_AfterRuntimeModelIsLost_RecreatesAUsableInventory" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1978944759" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001300" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1030" name="Inventory_AfterRuntimeModelIsLost_RecreatesConfiguredStartingSword" fullname="ItemHotbarControllerTests.Inventory_AfterRuntimeModelIsLost_RecreatesConfiguredStartingSword" methodname="Inventory_AfterRuntimeModelIsLost_RecreatesConfiguredStartingSword" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1323383760" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001543" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-suite type="ParameterizedMethod" id="1025" name="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" fullname="ItemHotbarControllerTests.ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" classname="ItemHotbarControllerTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.025099" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1019" name="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit1,0)" fullname="ItemHotbarControllerTests.ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit1,0)" methodname="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="51568033" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.009819" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1020" name="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit2,1)" fullname="ItemHotbarControllerTests.ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit2,1)" methodname="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1710833144" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.002398" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1021" name="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit3,2)" fullname="ItemHotbarControllerTests.ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit3,2)" methodname="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1639849053" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001649" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1022" name="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit4,3)" fullname="ItemHotbarControllerTests.ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit4,3)" methodname="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1433772170" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001545" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1023" name="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit5,4)" fullname="ItemHotbarControllerTests.ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit5,4)" methodname="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="687763097" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001498" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1024" name="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit6,5)" fullname="ItemHotbarControllerTests.ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit6,5)" methodname="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="733968349" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001509" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+        </test-suite>
+        <test-case id="1026" name="ProcessKeyboard_WithoutKeyboardOrRuntimeInventory_DoesNotThrow" fullname="ItemHotbarControllerTests.ProcessKeyboard_WithoutKeyboardOrRuntimeInventory_DoesNotThrow" methodname="ProcessKeyboard_WithoutKeyboardOrRuntimeInventory_DoesNotThrow" classname="ItemHotbarControllerTests" runstate="Runnable" seed="75278265" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001788" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-suite type="ParameterizedMethod" id="1013" name="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" classname="ItemHotbarControllerTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.011022" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1007" name="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(1,0)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(1,0)" methodname="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="702784620" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001109" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1008" name="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(2,1)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(2,1)" methodname="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="319172834" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001156" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1009" name="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(3,2)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(3,2)" methodname="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1149742200" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001056" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1010" name="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(4,3)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(4,3)" methodname="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="413582451" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001333" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1011" name="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(5,4)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(5,4)" methodname="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="2068207817" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001164" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1012" name="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(6,5)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(6,5)" methodname="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1198638254" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.004214" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="1018" name="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne" classname="ItemHotbarControllerTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.004982" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1014" name="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(0)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(0)" methodname="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1456462717" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001169" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1015" name="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(7)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(7)" methodname="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne" classname="ItemHotbarControllerTests" runstate="Runnable" seed="170367212" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001015" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1016" name="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(-1)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(-1)" methodname="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne" classname="ItemHotbarControllerTests" runstate="Runnable" seed="347511037" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.000926" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1017" name="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(42)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(42)" methodname="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne" classname="ItemHotbarControllerTests" runstate="Runnable" seed="796452203" result="Passed" start-time="2026-07-28 20:58:26Z" end-time="2026-07-28 20:58:26Z" duration="0.001043" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+          </test-case>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

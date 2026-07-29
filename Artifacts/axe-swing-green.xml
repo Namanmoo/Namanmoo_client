@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Passed" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 07:07:13Z" end-time="2026-07-29 07:07:15Z" duration="1.978904">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="108" result="Passed" start-time="2026-07-29 07:07:13Z" end-time="2026-07-29 07:07:15Z" duration="1.978904" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1131" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="108" result="Passed" start-time="2026-07-29 07:07:13Z" end-time="2026-07-29 07:07:15Z" duration="1.973501" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="15548" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1005" name="AxeSwingTests" fullname="AxeSwingTests" classname="AxeSwingTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-29 07:07:13Z" end-time="2026-07-29 07:07:15Z" duration="1.971866" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1007" name="Advance_FullDurationDestroysCompletedSwing" fullname="AxeSwingTests.Advance_FullDurationDestroysCompletedSwing" methodname="Advance_FullDurationDestroysCompletedSwing" classname="AxeSwingTests" runstate="Runnable" seed="1445892118" result="Passed" start-time="2026-07-29 07:07:13Z" end-time="2026-07-29 07:07:13Z" duration="0.547066" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1006" name="Advance_HalfDurationRotatesClockwiseHalfTurn" fullname="AxeSwingTests.Advance_HalfDurationRotatesClockwiseHalfTurn" methodname="Advance_HalfDurationRotatesClockwiseHalfTurn" classname="AxeSwingTests" runstate="Runnable" seed="1028186711" result="Passed" start-time="2026-07-29 07:07:13Z" end-time="2026-07-29 07:07:14Z" duration="0.498948" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1009" name="TryHit_IgnoresOwnerChildrenAndNonEnemies" fullname="AxeSwingTests.TryHit_IgnoresOwnerChildrenAndNonEnemies" methodname="TryHit_IgnoresOwnerChildrenAndNonEnemies" classname="AxeSwingTests" runstate="Runnable" seed="1940384088" result="Passed" start-time="2026-07-29 07:07:14Z" end-time="2026-07-29 07:07:14Z" duration="0.462063" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1008" name="TryHit_SameEnemyTakesTenDamageOnlyOnce" fullname="AxeSwingTests.TryHit_SameEnemyTakesTenDamageOnlyOnce" methodname="TryHit_SameEnemyTakesTenDamageOnlyOnce" classname="AxeSwingTests" runstate="Runnable" seed="2007431104" result="Passed" start-time="2026-07-29 07:07:14Z" end-time="2026-07-29 07:07:15Z" duration="0.454341" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Passed" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 07:54:54Z" end-time="2026-07-29 07:54:55Z" duration="0.9699828">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="126" result="Passed" start-time="2026-07-29 07:54:54Z" end-time="2026-07-29 07:54:55Z" duration="0.969983" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1154" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="126" result="Passed" start-time="2026-07-29 07:54:54Z" end-time="2026-07-29 07:54:55Z" duration="0.962303" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="27568" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1118" name="Stage1EncounterGateTests" fullname="Stage1EncounterGateTests" classname="Stage1EncounterGateTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-07-29 07:54:54Z" end-time="2026-07-29 07:54:55Z" duration="0.959789" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1119" name="GateOpensOnlyAfterAllFiveRegisteredEnemiesDie" fullname="Stage1EncounterGateTests.GateOpensOnlyAfterAllFiveRegisteredEnemiesDie" methodname="GateOpensOnlyAfterAllFiveRegisteredEnemiesDie" classname="Stage1EncounterGateTests" runstate="Runnable" seed="1721511011" result="Passed" start-time="2026-07-29 07:54:54Z" end-time="2026-07-29 07:54:55Z" duration="0.515087" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1120" name="MissingAndExternallyDestroyedEnemiesDoNotKeepGateClosed" fullname="Stage1EncounterGateTests.MissingAndExternallyDestroyedEnemiesDoNotKeepGateClosed" methodname="MissingAndExternallyDestroyedEnemiesDoNotKeepGateClosed" classname="Stage1EncounterGateTests" runstate="Runnable" seed="2099150762" result="Passed" start-time="2026-07-29 07:54:55Z" end-time="2026-07-29 07:54:55Z" duration="0.433029" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

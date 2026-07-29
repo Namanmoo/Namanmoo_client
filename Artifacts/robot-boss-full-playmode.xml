@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Passed" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:20Z" duration="0.6274742">
+  <test-suite type="TestSuite" id="1017" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:20Z" duration="0.627474" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1013" name="NaManMoo.PlayModeTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.PlayModeTests.dll" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:20Z" duration="0.622232" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="7676" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1001" name="AxeSwingPhysicsPlayModeTests" fullname="AxeSwingPhysicsPlayModeTests" classname="AxeSwingPhysicsPlayModeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:19Z" duration="0.052873" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1002" name="RealBladeTriggerDealsExactlyTenDamageOnce" fullname="AxeSwingPhysicsPlayModeTests.RealBladeTriggerDealsExactlyTenDamageOnce" methodname="RealBladeTriggerDealsExactlyTenDamageOnce" classname="AxeSwingPhysicsPlayModeTests" runstate="Runnable" seed="1071036929" result="Passed" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:19Z" duration="0.045352" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1003" name="ItemHotbarPlayModeTests" fullname="ItemHotbarPlayModeTests" classname="ItemHotbarPlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:19Z" duration="0.090415" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1006" name="ArrowHeld_OnlySelectedFirstSlotFiresAndReselectingFiresImmediately" fullname="ItemHotbarPlayModeTests.ArrowHeld_OnlySelectedFirstSlotFiresAndReselectingFiresImmediately" methodname="ArrowHeld_OnlySelectedFirstSlotFiresAndReselectingFiresImmediately" classname="ItemHotbarPlayModeTests" runstate="Runnable" seed="1539764081" result="Passed" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:19Z" duration="0.076705" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1005" name="EmptyAndOccupiedSelection_UpdatesEquipmentAndMovesOutline" fullname="ItemHotbarPlayModeTests.EmptyAndOccupiedSelection_UpdatesEquipmentAndMovesOutline" methodname="EmptyAndOccupiedSelection_UpdatesEquipmentAndMovesOutline" classname="ItemHotbarPlayModeTests" runstate="Runnable" seed="1068597488" result="Passed" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:19Z" duration="0.005755" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1004" name="RuntimeInitialization_AutoAcquiresSwordAndShowsFirstSlotIcon" fullname="ItemHotbarPlayModeTests.RuntimeInitialization_AutoAcquiresSwordAndShowsFirstSlotIcon" methodname="RuntimeInitialization_AutoAcquiresSwordAndShowsFirstSlotIcon" classname="ItemHotbarPlayModeTests" runstate="Runnable" seed="2122066302" result="Passed" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:19Z" duration="0.007130" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1007" name="KrabContactHealthUIPlayModeTests" fullname="KrabContactHealthUIPlayModeTests" classname="KrabContactHealthUIPlayModeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:19Z" duration="0.058292" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1008" name="TriggerOverlap_DamagesPlayerAndUpdatesHealthNumberAndGauge" fullname="KrabContactHealthUIPlayModeTests.TriggerOverlap_DamagesPlayerAndUpdatesHealthNumberAndGauge" methodname="TriggerOverlap_DamagesPlayerAndUpdatesHealthNumberAndGauge" classname="KrabContactHealthUIPlayModeTests" runstate="Runnable" seed="1891362759" result="Passed" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:19Z" duration="0.057868" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1009" name="SwordProjectilePhysicsPlayModeTests" fullname="SwordProjectilePhysicsPlayModeTests" classname="SwordProjectilePhysicsPlayModeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:19Z" duration="0.003857" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1010" name="OnTriggerEnter2D_RealPhysicsOverlapDealsExactlyFiveDamageAndDestroysSword" fullname="SwordProjectilePhysicsPlayModeTests.OnTriggerEnter2D_RealPhysicsOverlapDealsExactlyFiveDamageAndDestroysSword" methodname="OnTriggerEnter2D_RealPhysicsOverlapDealsExactlyFiveDamageAndDestroysSword" classname="SwordProjectilePhysicsPlayModeTests" runstate="Runnable" seed="568298548" result="Passed" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:19Z" duration="0.003386" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1011" name="TitleScreenPlayModeTests" fullname="TitleScreenPlayModeTests" classname="TitleScreenPlayModeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:20Z" duration="0.415622" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1012" name="GameStartButton_LoadsStage1Scene" fullname="TitleScreenPlayModeTests.GameStartButton_LoadsStage1Scene" methodname="GameStartButton_LoadsStage1Scene" classname="TitleScreenPlayModeTests" runstate="Runnable" seed="1881666377" result="Passed" start-time="2026-07-29 09:30:19Z" end-time="2026-07-29 09:30:20Z" duration="0.415274" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="140" result="Passed" total="140" passed="140" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 09:29:29Z" end-time="2026-07-29 09:29:51Z" duration="21.9980021">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="140" result="Passed" start-time="2026-07-29 09:29:29Z" end-time="2026-07-29 09:29:51Z" duration="21.998002" total="140" passed="140" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1175" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="140" result="Passed" start-time="2026-07-29 09:29:29Z" end-time="2026-07-29 09:29:51Z" duration="21.992168" total="140" passed="140" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="27680" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1001" name="AxeInventoryTests" fullname="AxeInventoryTests" classname="AxeInventoryTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-29 09:29:29Z" end-time="2026-07-29 09:29:29Z" duration="0.039504" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1002" name="ConfigureStartingWeapons_PutsExactSwordInSlotOneAndAxeInSlotTwo" fullname="AxeInventoryTests.ConfigureStartingWeapons_PutsExactSwordInSlotOneAndAxeInSlotTwo" methodname="ConfigureStartingWeapons_PutsExactSwordInSlotOneAndAxeInSlotTwo" classname="AxeInventoryTests" runstate="Runnable" seed="1756087243" result="Passed" start-time="2026-07-29 09:29:29Z" end-time="2026-07-29 09:29:29Z" duration="0.013589" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1004" name="HotbarView_ShowsExactAxeSpriteInSlotTwo" fullname="AxeInventoryTests.HotbarView_ShowsExactAxeSpriteInSlotTwo" methodname="HotbarView_ShowsExactAxeSpriteInSlotTwo" classname="AxeInventoryTests" runstate="Runnable" seed="1319471146" result="Passed" start-time="2026-07-29 09:29:29Z" end-time="2026-07-29 09:29:29Z" duration="0.016210" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1003" name="RepeatedConfiguration_KeepsOneSwordAndOneAxe" fullname="AxeInventoryTests.RepeatedConfiguration_KeepsOneSwordAndOneAxe" methodname="RepeatedConfiguration_KeepsOneSwordAndOneAxe" classname="AxeInventoryTests" runstate="Runnable" seed="1588283538" result="Passed" start-time="2026-07-29 09:29:29Z" end-time="2026-07-29 09:29:29Z" duration="0.000552" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1005" name="AxeSwingTests" fullname="AxeSwingTests" classname="AxeSwingTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-29 09:29:29Z" end-time="2026-07-29 09:29:31Z" duration="2.072933" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1007" name="Advance_FullDurationDestroysCompletedSwing" fullname="AxeSwingTests.Advance_FullDurationDestroysCompletedSwing" methodname="Advance_FullDurationDestroysCompletedSwing" classname="AxeSwingTests" runstate="Runnable" seed="1459980424" result="Passed" start-time="2026-07-29 09:29:29Z" end-time="2026-07-29 09:29:29Z" duration="0.569945" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1006" name="Advance_HalfDurationRotatesClockwiseHalfTurn" fullname="AxeSwingTests.Advance_HalfDurationRotatesClockwiseHalfTurn" methodname="Advance_HalfDurationRotatesClockwiseHalfTurn" classname="AxeSwingTests" runstate="Runnable" seed="1496862663" result="Passed" start-time="2026-07-29 09:29:29Z" end-time="2026-07-29 09:29:30Z" duration="0.477941" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1009" name="TryHit_IgnoresOwnerChildrenAndNonEnemies" fullname="AxeSwingTests.TryHit_IgnoresOwnerChildrenAndNonEnemies" methodname="TryHit_IgnoresOwnerChildrenAndNonEnemies" classname="AxeSwingTests" runstate="Runnable" seed="1876112702" result="Passed" start-time="2026-07-29 09:29:30Z" end-time="2026-07-29 09:29:30Z" duration="0.502676" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1008" name="TryHit_SameEnemyTakesTenDamageOnlyOnce" fullname="AxeSwingTests.TryHit_SameEnemyTakesTenDamageOnlyOnce" methodname="TryHit_SameEnemyTakesTenDamageOnlyOnce" classname="AxeSwingTests" runstate="Runnable" seed="1208758003" result="Passed" start-time="2026-07-29 09:29:30Z" end-time="2026-07-29 09:29:31Z" duration="0.520073" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1010" name="BossHealthBarViewTests" fullname="BossHealthBarViewTests" classname="BossHealthBarViewTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:29:31Z" end-time="2026-07-29 09:29:31Z" duration="0.493729" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1011" name="BossHealthBar_IsTopCenterTracksHealthAndHidesOnDeath" fullname="BossHealthBarViewTests.BossHealthBar_IsTopCenterTracksHealthAndHidesOnDeath" methodname="BossHealthBar_IsTopCenterTracksHealthAndHidesOnDeath" classname="BossHealthBarViewTests" runstate="Runnable" seed="1719071138" result="Passed" start-time="2026-07-29 09:29:31Z" end-time="2026-07-29 09:29:31Z" duration="0.493210" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1012" name="BossRobotControllerTests" fullname="BossRobotControllerTests" classname="BossRobotControllerTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-07-29 09:29:31Z" end-time="2026-07-29 09:29:32Z" duration="0.471841" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1017" name="BossAndBulletContact_DealFourWithSharedInvulnerability" fullname="BossRobotControllerTests.BossAndBulletContact_DealFourWithSharedInvulnerability" methodname="BossAndBulletContact_DealFourWithSharedInvulnerability" classname="BossRobotControllerTests" runstate="Runnable" seed="1873683486" result="Passed" start-time="2026-07-29 09:29:31Z" end-time="2026-07-29 09:29:32Z" duration="0.467545" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1013" name="CombatConstants_MatchPlayerSpeedRatiosAndPatternCounts" fullname="BossRobotControllerTests.CombatConstants_MatchPlayerSpeedRatiosAndPatternCounts" methodname="CombatConstants_MatchPlayerSpeedRatiosAndPatternCounts" classname="BossRobotControllerTests" runstate="Runnable" seed="997598731" result="Passed" start-time="2026-07-29 09:29:32Z" end-time="2026-07-29 09:29:32Z" duration="0.000311" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1015" name="PatternChoice_IncreasesDashChanceAtHalfHealth" fullname="BossRobotControllerTests.PatternChoice_IncreasesDashChanceAtHalfHealth" methodname="PatternChoice_IncreasesDashChanceAtHalfHealth" classname="BossRobotControllerTests" runstate="Runnable" seed="979676890" result="Passed" start-time="2026-07-29 09:29:32Z" end-time="2026-07-29 09:29:32Z" duration="0.000219" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1014" name="RadialDirections_ContainEightNormalizedCompassDirections" fullname="BossRobotControllerTests.RadialDirections_ContainEightNormalizedCompassDirections" methodname="RadialDirections_ContainEightNormalizedCompassDirections" classname="BossRobotControllerTests" runstate="Runnable" seed="195150785" result="Passed" start-time="2026-07-29 09:29:32Z" end-time="2026-07-29 09:29:32Z" duration="0.002555" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1016" name="RageTint_BecomesLightRedAtHalfHealth" fullname="BossRobotControllerTests.RageTint_BecomesLightRedAtHalfHealth" methodname="RageTint_BecomesLightRedAtHalfHealth" classname="BossRobotControllerTests" runstate="Runnable" seed="1922692701" result="Passed" start-time="2026-07-29 09:29:32Z" end-time="2026-07-29 09:29:32Z" duration="0.000364" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1018" name="EnemyHealthTests" fullname="EnemyHealthTests" classname="EnemyHealthTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-07-29 09:29:32Z" end-time="2026-07-29 09:29:34Z" duration="2.498719" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1023" name="LethalDamage_DestroysEnemyAfterAFrame" fullname="EnemyHealthTests.LethalDamage_DestroysEnemyAfterAFrame" methodname="LethalDamage_DestroysEnemyAfterAFrame" classname="EnemyHealthTests" runstate="Runnable" seed="2038250466" result="Passed" start-time="2026-07-29 09:29:32Z" end-time="2026-07-29 09:29:32Z" duration="0.504908" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1019" name="NewEnemy_UsesTheDefaultMaximumHealthForCurrentHealth" fullname="EnemyHealthTests.NewEnemy_UsesTheDefaultMaximumHealthForCurrentHealth" methodname="NewEnemy_UsesTheDefaultMaximumHealthForCurrentHealth" classname="EnemyHealthTests" runstate="Runnable" seed="1438415537" result="Passed" start-time="2026-07-29 09:29:32Z" end-time="2026-07-29 09:29:33Z" duration="0.489135" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1021" name="TakingDamage_NotifiesCurrentAndMaximumHealth" fullname="EnemyHealthTests.TakingDamage_NotifiesCurrentAndMaximumHealth" methodname="TakingDamage_NotifiesCurrentAndMaximumHealth" classname="EnemyHealthTests" runstate="Runnable" seed="1116098975" result="Passed" start-time="2026-07-29 09:29:33Z" end-time="2026-07-29 09:29:33Z" duration="0.486718" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1020" name="TakingFiveDamage_LeavesFifteenHealth" fullname="EnemyHealthTests.TakingFiveDamage_LeavesFifteenHealth" methodname="TakingFiveDamage_LeavesFifteenHealth" classname="EnemyHealthTests" runstate="Runnable" seed="1456136758" result="Passed" start-time="2026-07-29 09:29:33Z" end-time="2026-07-29 09:29:34Z" duration="0.515173" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1022" name="ZeroAndNegativeDamage_AreIgnored" fullname="EnemyHealthTests.ZeroAndNegativeDamage_AreIgnored" methodname="ZeroAndNegativeDamage_AreIgnored" classname="EnemyHealthTests" runstate="Runnable" seed="1782829796" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.501659" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1024" name="ItemHotbarControllerTests" fullname="ItemHotbarControllerTests" classname="ItemHotbarControllerTests" runstate="Runnable" testcasecount="22" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.077616" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1046" name="ConfigureStartingSword_FreshInventoryAcquiresExactEquippedSwordInSlotZero" fullname="ItemHotbarControllerTests.ConfigureStartingSword_FreshInventoryAcquiresExactEquippedSwordInSlotZero" methodname="ConfigureStartingSword_FreshInventoryAcquiresExactEquippedSwordInSlotZero" classname="ItemHotbarControllerTests" runstate="Runnable" seed="323505441" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.035108" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1049" name="ConfigureStartingSword_InjectedMalformedAndDuplicateSwords_NormalizesSameInventory" fullname="ItemHotbarControllerTests.ConfigureStartingSword_InjectedMalformedAndDuplicateSwords_NormalizesSameInventory" methodname="ConfigureStartingSword_InjectedMalformedAndDuplicateSwords_NormalizesSameInventory" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1576779852" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.003004" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1047" name="ConfigureStartingSword_RepeatedConfigurationAndAccessDoNotDuplicateSword" fullname="ItemHotbarControllerTests.ConfigureStartingSword_RepeatedConfigurationAndAccessDoNotDuplicateSword" methodname="ConfigureStartingSword_RepeatedConfigurationAndAccessDoNotDuplicateSword" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1537592697" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.001573" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1045" name="Inventory_AfterRuntimeModelIsLost_RecreatesAUsableInventory" fullname="ItemHotbarControllerTests.Inventory_AfterRuntimeModelIsLost_RecreatesAUsableInventory" methodname="Inventory_AfterRuntimeModelIsLost_RecreatesAUsableInventory" classname="ItemHotbarControllerTests" runstate="Runnable" seed="2076053534" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.001294" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1048" name="Inventory_AfterRuntimeModelIsLost_RecreatesConfiguredStartingSword" fullname="ItemHotbarControllerTests.Inventory_AfterRuntimeModelIsLost_RecreatesConfiguredStartingSword" methodname="Inventory_AfterRuntimeModelIsLost_RecreatesConfiguredStartingSword" classname="ItemHotbarControllerTests" runstate="Runnable" seed="504971102" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.001504" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-suite type="ParameterizedMethod" id="1043" name="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" fullname="ItemHotbarControllerTests.ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" classname="ItemHotbarControllerTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.018962" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1037" name="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit1,0)" fullname="ItemHotbarControllerTests.ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit1,0)" methodname="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="586027309" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.009596" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1038" name="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit2,1)" fullname="ItemHotbarControllerTests.ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit2,1)" methodname="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="583581276" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.002142" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1039" name="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit3,2)" fullname="ItemHotbarControllerTests.ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit3,2)" methodname="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="498420645" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.001506" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1040" name="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit4,3)" fullname="ItemHotbarControllerTests.ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit4,3)" methodname="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="164689846" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.001576" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1041" name="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit5,4)" fullname="ItemHotbarControllerTests.ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit5,4)" methodname="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="100556911" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.001310" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1042" name="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit6,5)" fullname="ItemHotbarControllerTests.ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Digit6,5)" methodname="ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1937096168" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.001249" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+        </test-suite>
+        <test-case id="1044" name="ProcessKeyboard_WithoutKeyboardOrRuntimeInventory_DoesNotThrow" fullname="ItemHotbarControllerTests.ProcessKeyboard_WithoutKeyboardOrRuntimeInventory_DoesNotThrow" methodname="ProcessKeyboard_WithoutKeyboardOrRuntimeInventory_DoesNotThrow" classname="ItemHotbarControllerTests" runstate="Runnable" seed="12139400" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.001697" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-suite type="ParameterizedMethod" id="1031" name="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" classname="ItemHotbarControllerTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.007845" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1025" name="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(1,0)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(1,0)" methodname="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="86473876" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.001191" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1026" name="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(2,1)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(2,1)" methodname="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="506140928" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.000936" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1027" name="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(3,2)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(3,2)" methodname="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1723445537" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.000933" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1028" name="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(4,3)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(4,3)" methodname="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="2026151489" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.001234" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1029" name="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(5,4)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(5,4)" methodname="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="853653174" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.001335" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1030" name="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(6,5)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(6,5)" methodname="SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1287748053" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.001292" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="1036" name="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne" classname="ItemHotbarControllerTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.005036" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1032" name="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(0)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(0)" methodname="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1836259961" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.001236" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1033" name="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(7)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(7)" methodname="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1076667443" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.000950" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1034" name="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(-1)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(-1)" methodname="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1516494892" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.001176" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1035" name="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(42)" fullname="ItemHotbarControllerTests.SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(42)" methodname="SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne" classname="ItemHotbarControllerTests" runstate="Runnable" seed="1022631034" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.000960" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+        </test-suite>
+      </test-suite>
+      <test-suite type="TestFixture" id="1050" name="ItemHotbarViewTests" fullname="ItemHotbarViewTests" classname="ItemHotbarViewTests" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.076843" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1067" name="AcquiringItemWithoutIcon_LeavesIconDisabled" fullname="ItemHotbarViewTests.AcquiringItemWithoutIcon_LeavesIconDisabled" methodname="AcquiringItemWithoutIcon_LeavesIconDisabled" classname="ItemHotbarViewTests" runstate="Runnable" seed="249753684" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.004161" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1065" name="AcquiringItemWithSprite_DisplaysAspectPreservingIconInFirstSlot" fullname="ItemHotbarViewTests.AcquiringItemWithSprite_DisplaysAspectPreservingIconInFirstSlot" methodname="AcquiringItemWithSprite_DisplaysAspectPreservingIconInFirstSlot" classname="ItemHotbarViewTests" runstate="Runnable" seed="2041926885" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.002859" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1066" name="AcquiringSwordSprite_KeepsExactAspectPreservingIconInsideCompactFirstSlotSafeArea" fullname="ItemHotbarViewTests.AcquiringSwordSprite_KeepsExactAspectPreservingIconInsideCompactFirstSlotSafeArea" methodname="AcquiringSwordSprite_KeepsExactAspectPreservingIconInsideCompactFirstSlotSafeArea" classname="ItemHotbarViewTests" runstate="Runnable" seed="958492177" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.020353" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1064" name="Connect_AfterRuntimeSubscriptionIsLost_ReconnectsOnceAndRefreshesFromController" fullname="ItemHotbarViewTests.Connect_AfterRuntimeSubscriptionIsLost_ReconnectsOnceAndRefreshesFromController" methodname="Connect_AfterRuntimeSubscriptionIsLost_ReconnectsOnceAndRefreshesFromController" classname="ItemHotbarViewTests" runstate="Runnable" seed="1138514291" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.003586" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1055" name="Create_BuildsSixNamedTransparentSlotsAtInkSafeInteriorCoordinates" fullname="ItemHotbarViewTests.Create_BuildsSixNamedTransparentSlotsAtInkSafeInteriorCoordinates" methodname="Create_BuildsSixNamedTransparentSlotsAtInkSafeInteriorCoordinates" classname="ItemHotbarViewTests" runstate="Runnable" seed="756056364" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.003052" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1059" name="Create_BuildsThinFourEdgeBlueSelectionOutlines" fullname="ItemHotbarViewTests.Create_BuildsThinFourEdgeBlueSelectionOutlines" methodname="Create_BuildsThinFourEdgeBlueSelectionOutlines" classname="ItemHotbarViewTests" runstate="Runnable" seed="1422397832" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.002866" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1056" name="Create_ContainsEverySlotIconAndDynamicOutlineInsideTheBackgroundRect" fullname="ItemHotbarViewTests.Create_ContainsEverySlotIconAndDynamicOutlineInsideTheBackgroundRect" methodname="Create_ContainsEverySlotIconAndDynamicOutlineInsideTheBackgroundRect" classname="ItemHotbarViewTests" runstate="Runnable" seed="1183870295" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.002738" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1057" name="Create_DoesNotGenerateStaticArtworkObjects" fullname="ItemHotbarViewTests.Create_DoesNotGenerateStaticArtworkObjects" methodname="Create_DoesNotGenerateStaticArtworkObjects" classname="ItemHotbarViewTests" runstate="Runnable" seed="708976293" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.002688" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1054" name="Create_FitsTheCompleteSourceImageInsideTheReferenceViewportWithoutChangingAspect" fullname="ItemHotbarViewTests.Create_FitsTheCompleteSourceImageInsideTheReferenceViewportWithoutChangingAspect" methodname="Create_FitsTheCompleteSourceImageInsideTheReferenceViewportWithoutChangingAspect" classname="ItemHotbarViewTests" runstate="Runnable" seed="1911506750" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.002373" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1058" name="Create_LeavesEachSlotInteriorTransparent" fullname="ItemHotbarViewTests.Create_LeavesEachSlotInteriorTransparent" methodname="Create_LeavesEachSlotInteriorTransparent" classname="ItemHotbarViewTests" runstate="Runnable" seed="1376737875" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.002356" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1060" name="Create_RefitsEveryIconWithSymmetricPositiveCompactInsetsInsideItsOwnSlot" fullname="ItemHotbarViewTests.Create_RefitsEveryIconWithSymmetricPositiveCompactInsetsInsideItsOwnSlot" methodname="Create_RefitsEveryIconWithSymmetricPositiveCompactInsetsInsideItsOwnSlot" classname="ItemHotbarViewTests" runstate="Runnable" seed="299268784" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.004438" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1052" name="Create_RejectsANullBackgroundSprite" fullname="ItemHotbarViewTests.Create_RejectsANullBackgroundSprite" methodname="Create_RejectsANullBackgroundSprite" classname="ItemHotbarViewTests" runstate="Runnable" seed="1931566606" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.003244" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1051" name="Create_UsesTheSuppliedBackgroundSpriteExactlyOnceAndPreservesItsAspect" fullname="ItemHotbarViewTests.Create_UsesTheSuppliedBackgroundSpriteExactlyOnceAndPreservesItsAspect" methodname="Create_UsesTheSuppliedBackgroundSpriteExactlyOnceAndPreservesItsAspect" classname="ItemHotbarViewTests" runstate="Runnable" seed="1514565364" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.004237" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1053" name="Factory_RequiresABackgroundSpriteForEveryPublicCreateOverload" fullname="ItemHotbarViewTests.Factory_RequiresABackgroundSpriteForEveryPublicCreateOverload" methodname="Factory_RequiresABackgroundSpriteForEveryPublicCreateOverload" classname="ItemHotbarViewTests" runstate="Runnable" seed="1767500104" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.004464" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1061" name="Initialize_EnablesOnlyFirstBlueSelectionOutlineWhenInventoryHasNoItems" fullname="ItemHotbarViewTests.Initialize_EnablesOnlyFirstBlueSelectionOutlineWhenInventoryHasNoItems" methodname="Initialize_EnablesOnlyFirstBlueSelectionOutlineWhenInventoryHasNoItems" classname="ItemHotbarViewTests" runstate="Runnable" seed="870715655" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.003050" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1063" name="Initialize_ReplacingInventory_UnsubscribesOldInventoryAndSubscribesNewInventoryOnce" fullname="ItemHotbarViewTests.Initialize_ReplacingInventory_UnsubscribesOldInventoryAndSubscribesNewInventoryOnce" methodname="Initialize_ReplacingInventory_UnsubscribesOldInventoryAndSubscribesNewInventoryOnce" classname="ItemHotbarViewTests" runstate="Runnable" seed="1266900446" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.002900" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1062" name="InventorySelectionChange_MovesActiveSelectionOutlineToFourthSlot" fullname="ItemHotbarViewTests.InventorySelectionChange_MovesActiveSelectionOutlineToFourthSlot" methodname="InventorySelectionChange_MovesActiveSelectionOutlineToFourthSlot" classname="ItemHotbarViewTests" runstate="Runnable" seed="1144137379" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.004123" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1068" name="KrabEnemyTests" fullname="KrabEnemyTests" classname="KrabEnemyTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:36Z" duration="1.366435" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1070" name="CalculateVelocity_MovesTowardTargetAtHalfPlayerSpeed" fullname="KrabEnemyTests.CalculateVelocity_MovesTowardTargetAtHalfPlayerSpeed" methodname="CalculateVelocity_MovesTowardTargetAtHalfPlayerSpeed" classname="KrabEnemyTests" runstate="Runnable" seed="1762315490" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:34Z" duration="0.000704" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1069" name="ConfigureHealth_SetsFiveAndEmitsDeathOnlyOnce" fullname="KrabEnemyTests.ConfigureHealth_SetsFiveAndEmitsDeathOnlyOnce" methodname="ConfigureHealth_SetsFiveAndEmitsDeathOnlyOnce" classname="KrabEnemyTests" runstate="Runnable" seed="657899237" result="Passed" start-time="2026-07-29 09:29:34Z" end-time="2026-07-29 09:29:35Z" duration="0.813022" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1071" name="TryDamagePlayer_DealsTwoAndSharesOneSecondInvulnerability" fullname="KrabEnemyTests.TryDamagePlayer_DealsTwoAndSharesOneSecondInvulnerability" methodname="TryDamagePlayer_DealsTwoAndSharesOneSecondInvulnerability" classname="KrabEnemyTests" runstate="Runnable" seed="50729472" result="Passed" start-time="2026-07-29 09:29:35Z" end-time="2026-07-29 09:29:36Z" duration="0.550105" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1072" name="TryDamagePlayer_IgnoresNonPlayerCollider" fullname="KrabEnemyTests.TryDamagePlayer_IgnoresNonPlayerCollider" methodname="TryDamagePlayer_IgnoresNonPlayerCollider" classname="KrabEnemyTests" runstate="Runnable" seed="1275852835" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.000494" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1073" name="PlayerAxeAttackerTests" fullname="PlayerAxeAttackerTests" classname="PlayerAxeAttackerTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.018036" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="ParameterizedMethod" id="1078" name="CalculateDirection_RecognizesEveryArrow" fullname="PlayerAxeAttackerTests.CalculateDirection_RecognizesEveryArrow" classname="PlayerAxeAttackerTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.007612" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1074" name="CalculateDirection_RecognizesEveryArrow(UpArrow,0.0f,1.0f)" fullname="PlayerAxeAttackerTests.CalculateDirection_RecognizesEveryArrow(UpArrow,0.0f,1.0f)" methodname="CalculateDirection_RecognizesEveryArrow" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="1366258855" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.003149" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1075" name="CalculateDirection_RecognizesEveryArrow(DownArrow,0.0f,-1.0f)" fullname="PlayerAxeAttackerTests.CalculateDirection_RecognizesEveryArrow(DownArrow,0.0f,-1.0f)" methodname="CalculateDirection_RecognizesEveryArrow" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="170606437" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.001431" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1076" name="CalculateDirection_RecognizesEveryArrow(LeftArrow,-1.0f,0.0f)" fullname="PlayerAxeAttackerTests.CalculateDirection_RecognizesEveryArrow(LeftArrow,-1.0f,0.0f)" methodname="CalculateDirection_RecognizesEveryArrow" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="1532262636" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.001316" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1077" name="CalculateDirection_RecognizesEveryArrow(RightArrow,1.0f,0.0f)" fullname="PlayerAxeAttackerTests.CalculateDirection_RecognizesEveryArrow(RightArrow,1.0f,0.0f)" methodname="CalculateDirection_RecognizesEveryArrow" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="848709021" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.001260" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+        </test-suite>
+        <test-case id="1079" name="HeldArrow_AttacksImmediatelyThenOncePerSecond" fullname="PlayerAxeAttackerTests.HeldArrow_AttacksImmediatelyThenOncePerSecond" methodname="HeldArrow_AttacksImmediatelyThenOncePerSecond" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="330642397" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.003074" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1081" name="NonAxeSelection_DoesNotAttack" fullname="PlayerAxeAttackerTests.NonAxeSelection_DoesNotAttack" methodname="NonAxeSelection_DoesNotAttack" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="420832937" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.001365" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1080" name="ReleaseAndRepress_StillRespectsOneSecondCooldown" fullname="PlayerAxeAttackerTests.ReleaseAndRepress_StillRespectsOneSecondCooldown" methodname="ReleaseAndRepress_StillRespectsOneSecondCooldown" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="948310172" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.001590" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1082" name="SpawnedSwing_UsesBottomPivotAtPlayerAndConfiguredVisualLength" fullname="PlayerAxeAttackerTests.SpawnedSwing_UsesBottomPivotAtPlayerAndConfiguredVisualLength" methodname="SpawnedSwing_UsesBottomPivotAtPlayerAndConfiguredVisualLength" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="1029561606" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.003273" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1083" name="PlayerHealthBarViewTests" fullname="PlayerHealthBarViewTests" classname="PlayerHealthBarViewTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.604741" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1084" name="CreatedHealthBar_IsCompactTopLeftAndTracksDamage" fullname="PlayerHealthBarViewTests.CreatedHealthBar_IsCompactTopLeftAndTracksDamage" methodname="CreatedHealthBar_IsCompactTopLeftAndTracksDamage" classname="PlayerHealthBarViewTests" runstate="Runnable" seed="2113903251" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.603958" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1085" name="PlayerHealthDebugInputTests" fullname="PlayerHealthDebugInputTests" classname="PlayerHealthDebugInputTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.003020" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1086" name="PressingH_AppliesOnePointOfDamage" fullname="PlayerHealthDebugInputTests.PressingH_AppliesOnePointOfDamage" methodname="PressingH_AppliesOnePointOfDamage" classname="PlayerHealthDebugInputTests" runstate="Runnable" seed="2065979932" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:36Z" duration="0.002520" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1087" name="PlayerHealthTests" fullname="PlayerHealthTests" classname="PlayerHealthTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:40Z" duration="3.098742" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1091" name="LethalDamage_ClampsAtZeroWithoutDestroyingPlayer" fullname="PlayerHealthTests.LethalDamage_ClampsAtZeroWithoutDestroyingPlayer" methodname="LethalDamage_ClampsAtZeroWithoutDestroyingPlayer" classname="PlayerHealthTests" runstate="Runnable" seed="369794884" result="Passed" start-time="2026-07-29 09:29:36Z" end-time="2026-07-29 09:29:37Z" duration="0.592720" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1088" name="NewPlayer_StartsAtTwentyOfTwentyHealth" fullname="PlayerHealthTests.NewPlayer_StartsAtTwentyOfTwentyHealth" methodname="NewPlayer_StartsAtTwentyOfTwentyHealth" classname="PlayerHealthTests" runstate="Runnable" seed="571953369" result="Passed" start-time="2026-07-29 09:29:37Z" end-time="2026-07-29 09:29:38Z" duration="0.528023" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1090" name="NonPositiveDamage_DoesNotChangeHealthOrNotify" fullname="PlayerHealthTests.NonPositiveDamage_DoesNotChangeHealthOrNotify" methodname="NonPositiveDamage_DoesNotChangeHealthOrNotify" classname="PlayerHealthTests" runstate="Runnable" seed="1108080836" result="Passed" start-time="2026-07-29 09:29:38Z" end-time="2026-07-29 09:29:38Z" duration="0.484033" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1089" name="TakingFiveDamage_ReportsFifteenOfTwentyHealth" fullname="PlayerHealthTests.TakingFiveDamage_ReportsFifteenOfTwentyHealth" methodname="TakingFiveDamage_ReportsFifteenOfTwentyHealth" classname="PlayerHealthTests" runstate="Runnable" seed="2038500400" result="Passed" start-time="2026-07-29 09:29:38Z" end-time="2026-07-29 09:29:39Z" duration="0.478519" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1093" name="TryTakeDamage_NonPositiveAmountDoesNotStartInvulnerability" fullname="PlayerHealthTests.TryTakeDamage_NonPositiveAmountDoesNotStartInvulnerability" methodname="TryTakeDamage_NonPositiveAmountDoesNotStartInvulnerability" classname="PlayerHealthTests" runstate="Runnable" seed="764963231" result="Passed" start-time="2026-07-29 09:29:39Z" end-time="2026-07-29 09:29:39Z" duration="0.530523" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1092" name="TryTakeDamage_RejectsHitsUntilOneSecondInvulnerabilityExpires" fullname="PlayerHealthTests.TryTakeDamage_RejectsHitsUntilOneSecondInvulnerabilityExpires" methodname="TryTakeDamage_RejectsHitsUntilOneSecondInvulnerabilityExpires" classname="PlayerHealthTests" runstate="Runnable" seed="989566390" result="Passed" start-time="2026-07-29 09:29:39Z" end-time="2026-07-29 09:29:40Z" duration="0.483595" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1094" name="PlayerInventoryTests" fullname="PlayerInventoryTests" classname="PlayerInventoryTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.003954" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1096" name="ItemData_WithEmptyId_IsInvalid" fullname="PlayerInventoryTests.ItemData_WithEmptyId_IsInvalid" methodname="ItemData_WithEmptyId_IsInvalid" classname="PlayerInventoryTests" runstate="Runnable" seed="667999752" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000211" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1095" name="ItemData_WithNonEmptyId_ExposesItsImmutableValues" fullname="PlayerInventoryTests.ItemData_WithNonEmptyId_ExposesItsImmutableValues" methodname="ItemData_WithNonEmptyId_ExposesItsImmutableValues" classname="PlayerInventoryTests" runstate="Runnable" seed="519296227" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000174" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1097" name="NewInventory_HasSixEmptySlotsWithFirstSlotSelectedAndNothingEquipped" fullname="PlayerInventoryTests.NewInventory_HasSixEmptySlotsWithFirstSlotSelectedAndNothingEquipped" methodname="NewInventory_HasSixEmptySlotsWithFirstSlotSelectedAndNothingEquipped" classname="PlayerInventoryTests" runstate="Runnable" seed="1032432682" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.001110" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-suite type="ParameterizedMethod" id="1106" name="SelectSlot_OutsideSlotRange_ReturnsFalseWithoutMutation" fullname="PlayerInventoryTests.SelectSlot_OutsideSlotRange_ReturnsFalseWithoutMutation" classname="PlayerInventoryTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000383" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1104" name="SelectSlot_OutsideSlotRange_ReturnsFalseWithoutMutation(-1)" fullname="PlayerInventoryTests.SelectSlot_OutsideSlotRange_ReturnsFalseWithoutMutation(-1)" methodname="SelectSlot_OutsideSlotRange_ReturnsFalseWithoutMutation" classname="PlayerInventoryTests" runstate="Runnable" seed="455926929" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000157" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1105" name="SelectSlot_OutsideSlotRange_ReturnsFalseWithoutMutation(6)" fullname="PlayerInventoryTests.SelectSlot_OutsideSlotRange_ReturnsFalseWithoutMutation(6)" methodname="SelectSlot_OutsideSlotRange_ReturnsFalseWithoutMutation" classname="PlayerInventoryTests" runstate="Runnable" seed="2067524612" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000028" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+        </test-suite>
+        <test-case id="1103" name="SelectSlot_UsesOccupiedAndEmptySlotsToSetEquippedItem" fullname="PlayerInventoryTests.SelectSlot_UsesOccupiedAndEmptySlotsToSetEquippedItem" methodname="SelectSlot_UsesOccupiedAndEmptySlotsToSetEquippedItem" classname="PlayerInventoryTests" runstate="Runnable" seed="972455682" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000131" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1107" name="StateEvents_AreRaisedOnlyForActualStateChanges" fullname="PlayerInventoryTests.StateEvents_AreRaisedOnlyForActualStateChanges" methodname="StateEvents_AreRaisedOnlyForActualStateChanges" classname="PlayerInventoryTests" runstate="Runnable" seed="982742409" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000246" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1099" name="TryAcquire_FirstValidItem_AfterEmptySlotPreselection_StillSelectsAndEquipsSlotZero" fullname="PlayerInventoryTests.TryAcquire_FirstValidItem_AfterEmptySlotPreselection_StillSelectsAndEquipsSlotZero" methodname="TryAcquire_FirstValidItem_AfterEmptySlotPreselection_StillSelectsAndEquipsSlotZero" classname="PlayerInventoryTests" runstate="Runnable" seed="572672238" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000106" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1098" name="TryAcquire_FirstValidItem_PlacesSelectsAndEquipsIt" fullname="PlayerInventoryTests.TryAcquire_FirstValidItem_PlacesSelectsAndEquipsIt" methodname="TryAcquire_FirstValidItem_PlacesSelectsAndEquipsIt" classname="PlayerInventoryTests" runstate="Runnable" seed="763140750" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000090" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1101" name="TryAcquire_IntoSelectedEmptySlot_EquipsAcquiredItemAndRaisesEquipmentEvent" fullname="PlayerInventoryTests.TryAcquire_IntoSelectedEmptySlot_EquipsAcquiredItemAndRaisesEquipmentEvent" methodname="TryAcquire_IntoSelectedEmptySlot_EquipsAcquiredItemAndRaisesEquipmentEvent" classname="PlayerInventoryTests" runstate="Runnable" seed="939871818" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000170" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1100" name="TryAcquire_LaterItem_UsesFirstEmptySlotAndPreservesSelection" fullname="PlayerInventoryTests.TryAcquire_LaterItem_UsesFirstEmptySlotAndPreservesSelection" methodname="TryAcquire_LaterItem_UsesFirstEmptySlotAndPreservesSelection" classname="PlayerInventoryTests" runstate="Runnable" seed="1911442841" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000098" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1102" name="TryAcquire_NullInvalidOrFull_DoesNotMutateInventory" fullname="PlayerInventoryTests.TryAcquire_NullInvalidOrFull_DoesNotMutateInventory" methodname="TryAcquire_NullInvalidOrFull_DoesNotMutateInventory" classname="PlayerInventoryTests" runstate="Runnable" seed="1848350555" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000324" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1108" name="PlayerMovementTests" fullname="PlayerMovementTests" classname="PlayerMovementTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.001189" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1109" name="CalculateDirection_NormalizesDiagonalInput" fullname="PlayerMovementTests.CalculateDirection_NormalizesDiagonalInput" methodname="CalculateDirection_NormalizesDiagonalInput" classname="PlayerMovementTests" runstate="Runnable" seed="1562220692" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000181" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1110" name="CalculateDirection_PreservesCardinalInput" fullname="PlayerMovementTests.CalculateDirection_PreservesCardinalInput" methodname="CalculateDirection_PreservesCardinalInput" classname="PlayerMovementTests" runstate="Runnable" seed="2062120906" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000302" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1111" name="CalculateDirection_PreservesZeroInput" fullname="PlayerMovementTests.CalculateDirection_PreservesZeroInput" methodname="CalculateDirection_PreservesZeroInput" classname="PlayerMovementTests" runstate="Runnable" seed="1714839336" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.000282" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1112" name="PlayerSwordShooterTests" fullname="PlayerSwordShooterTests" classname="PlayerSwordShooterTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.028809" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1115" name="CalculateDirection_ArrowKeysProduceExactCardinalDirections" fullname="PlayerSwordShooterTests.CalculateDirection_ArrowKeysProduceExactCardinalDirections" methodname="CalculateDirection_ArrowKeysProduceExactCardinalDirections" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1281149763" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.002560" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1116" name="CalculateDirection_DiagonalArrowKeysAreNormalized" fullname="PlayerSwordShooterTests.CalculateDirection_DiagonalArrowKeysAreNormalized" methodname="CalculateDirection_DiagonalArrowKeysAreNormalized" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1889280829" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.001645" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1117" name="CalculateDirection_WasdDoesNotAffectFiringDirection" fullname="PlayerSwordShooterTests.CalculateDirection_WasdDoesNotAffectFiringDirection" methodname="CalculateDirection_WasdDoesNotAffectFiringDirection" classname="PlayerSwordShooterTests" runstate="Runnable" seed="64743172" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.001630" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1114" name="InspectorDefaults_AreConfiguredAndNegativeNumericValuesAreCorrected" fullname="PlayerSwordShooterTests.InspectorDefaults_AreConfiguredAndNegativeNumericValuesAreCorrected" methodname="InspectorDefaults_AreConfiguredAndNegativeNumericValuesAreCorrected" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1370298457" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.003424" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1119" name="ProcessInput_AfterReleaseFiresImmediatelyOnTheNextActivation" fullname="PlayerSwordShooterTests.ProcessInput_AfterReleaseFiresImmediatelyOnTheNextActivation" methodname="ProcessInput_AfterReleaseFiresImmediatelyOnTheNextActivation" classname="PlayerSwordShooterTests" runstate="Runnable" seed="759402859" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.002918" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1118" name="ProcessInput_HeldRightFiresImmediatelyAndAtTheExactCooldownBoundary" fullname="PlayerSwordShooterTests.ProcessInput_HeldRightFiresImmediatelyAndAtTheExactCooldownBoundary" methodname="ProcessInput_HeldRightFiresImmediatelyAndAtTheExactCooldownBoundary" classname="PlayerSwordShooterTests" runstate="Runnable" seed="492701011" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.001700" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1121" name="ProcessInput_NullInventoryEmptySlotZeroAndNonSwordItemDoNotFire" fullname="PlayerSwordShooterTests.ProcessInput_NullInventoryEmptySlotZeroAndNonSwordItemDoNotFire" methodname="ProcessInput_NullInventoryEmptySlotZeroAndNonSwordItemDoNotFire" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1079236924" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.001478" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1120" name="ProcessInput_OnlyFiresForTheSwordInSelectedSlotZeroAndResumesImmediatelyAfterReselectingIt" fullname="PlayerSwordShooterTests.ProcessInput_OnlyFiresForTheSwordInSelectedSlotZeroAndResumesImmediatelyAfterReselectingIt" methodname="ProcessInput_OnlyFiresForTheSwordInSelectedSlotZeroAndResumesImmediatelyAfterReselectingIt" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1250477896" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.002137" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1122" name="SpawnedProjectile_HasRequiredComponentsSpritePositionAndConfiguration" fullname="PlayerSwordShooterTests.SpawnedProjectile_HasRequiredComponentsSpritePositionAndConfiguration" methodname="SpawnedProjectile_HasRequiredComponentsSpritePositionAndConfiguration" classname="PlayerSwordShooterTests" runstate="Runnable" seed="258284050" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.003327" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1123" name="SpawnedProjectile_ReceivesConfiguredLifetime" fullname="PlayerSwordShooterTests.SpawnedProjectile_ReceivesConfiguredLifetime" methodname="SpawnedProjectile_ReceivesConfiguredLifetime" classname="PlayerSwordShooterTests" runstate="Runnable" seed="251258730" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.001608" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1113" name="SwordAsset_IsAnExactSourceCopyWithRequiredImportSettings" fullname="PlayerSwordShooterTests.SwordAsset_IsAnExactSourceCopyWithRequiredImportSettings" methodname="SwordAsset_IsAnExactSourceCopyWithRequiredImportSettings" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1998825016" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.005070" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1124" name="Stage1AxeIntegrationTests" fullname="Stage1AxeIntegrationTests" classname="Stage1AxeIntegrationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.650001" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1125" name="Build_ConfiguresBottomPivotAxeAndWiresSlotTwoAttack" fullname="Stage1AxeIntegrationTests.Build_ConfiguresBottomPivotAxeAndWiresSlotTwoAttack" methodname="Build_ConfiguresBottomPivotAxeAndWiresSlotTwoAttack" classname="Stage1AxeIntegrationTests" runstate="Runnable" seed="1132141474" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.641779" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1126" name="RuntimeBootstrap_AssignsAxeAndBuildsSharedInventoryAttacker" fullname="Stage1AxeIntegrationTests.RuntimeBootstrap_AssignsAxeAndBuildsSharedInventoryAttacker" methodname="RuntimeBootstrap_AssignsAxeAndBuildsSharedInventoryAttacker" classname="Stage1AxeIntegrationTests" runstate="Runnable" seed="2078063324" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:40Z" duration="0.007363" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1127" name="Stage1BossEncounterIntegrationTests" fullname="Stage1BossEncounterIntegrationTests" classname="Stage1BossEncounterIntegrationTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:41Z" duration="0.579106" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1128" name="Build_CreatesUpperEntryTriggerAndSerializedBossReferences" fullname="Stage1BossEncounterIntegrationTests.Build_CreatesUpperEntryTriggerAndSerializedBossReferences" methodname="Build_CreatesUpperEntryTriggerAndSerializedBossReferences" classname="Stage1BossEncounterIntegrationTests" runstate="Runnable" seed="708520982" result="Passed" start-time="2026-07-29 09:29:40Z" end-time="2026-07-29 09:29:41Z" duration="0.575619" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1129" name="Stage1BossEncounterTests" fullname="Stage1BossEncounterTests" classname="Stage1BossEncounterTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:29:41Z" end-time="2026-07-29 09:29:41Z" duration="0.587369" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1130" name="EnteringAfterLowerClear_SpawnsOneBossClosesGateAndDeathReopensIt" fullname="Stage1BossEncounterTests.EnteringAfterLowerClear_SpawnsOneBossClosesGateAndDeathReopensIt" methodname="EnteringAfterLowerClear_SpawnsOneBossClosesGateAndDeathReopensIt" classname="Stage1BossEncounterTests" runstate="Runnable" seed="300496840" result="Passed" start-time="2026-07-29 09:29:41Z" end-time="2026-07-29 09:29:41Z" duration="0.585356" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1131" name="Stage1EncounterGateTests" fullname="Stage1EncounterGateTests" classname="Stage1EncounterGateTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-29 09:29:41Z" end-time="2026-07-29 09:29:43Z" duration="1.596337" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1132" name="GateOpensOnlyAfterAllFiveRegisteredEnemiesDie" fullname="Stage1EncounterGateTests.GateOpensOnlyAfterAllFiveRegisteredEnemiesDie" methodname="GateOpensOnlyAfterAllFiveRegisteredEnemiesDie" classname="Stage1EncounterGateTests" runstate="Runnable" seed="1188681936" result="Passed" start-time="2026-07-29 09:29:41Z" end-time="2026-07-29 09:29:42Z" duration="0.498759" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1133" name="MissingAndExternallyDestroyedEnemiesDoNotKeepGateClosed" fullname="Stage1EncounterGateTests.MissingAndExternallyDestroyedEnemiesDoNotKeepGateClosed" methodname="MissingAndExternallyDestroyedEnemiesDoNotKeepGateClosed" classname="Stage1EncounterGateTests" runstate="Runnable" seed="1315160918" result="Passed" start-time="2026-07-29 09:29:42Z" end-time="2026-07-29 09:29:42Z" duration="0.530601" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1134" name="OpenGate_CanBeClosedForBossFightAndReopened" fullname="Stage1EncounterGateTests.OpenGate_CanBeClosedForBossFightAndReopened" methodname="OpenGate_CanBeClosedForBossFightAndReopened" classname="Stage1EncounterGateTests" runstate="Runnable" seed="1510219068" result="Passed" start-time="2026-07-29 09:29:42Z" end-time="2026-07-29 09:29:43Z" duration="0.566128" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1135" name="Stage1KrabEncounterIntegrationTests" fullname="Stage1KrabEncounterIntegrationTests" classname="Stage1KrabEncounterIntegrationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-07-29 09:29:43Z" end-time="2026-07-29 09:29:44Z" duration="0.637362" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1136" name="Build_CreatesFiveLowerKrabsAndClosedMiddleGate" fullname="Stage1KrabEncounterIntegrationTests.Build_CreatesFiveLowerKrabsAndClosedMiddleGate" methodname="Build_CreatesFiveLowerKrabsAndClosedMiddleGate" classname="Stage1KrabEncounterIntegrationTests" runstate="Runnable" seed="1329797167" result="Passed" start-time="2026-07-29 09:29:43Z" end-time="2026-07-29 09:29:44Z" duration="0.631648" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1137" name="RuntimeBootstrap_AssignsKrabSpriteAndCreatesEncounter" fullname="Stage1KrabEncounterIntegrationTests.RuntimeBootstrap_AssignsKrabSpriteAndCreatesEncounter" methodname="RuntimeBootstrap_AssignsKrabSpriteAndCreatesEncounter" classname="Stage1KrabEncounterIntegrationTests" runstate="Runnable" seed="259569924" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.005121" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1138" name="Stage1MapDefinitionTests" fullname="Stage1MapDefinitionTests" classname="Stage1MapDefinitionTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.067941" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="ParameterizedMethod" id="1147" name="Contains_ReturnsFalseBeyondOuterWalls" fullname="Stage1MapDefinitionTests.Contains_ReturnsFalseBeyondOuterWalls" classname="Stage1MapDefinitionTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.000897" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1143" name="Contains_ReturnsFalseBeyondOuterWalls(-25.0f,0.0f)" fullname="Stage1MapDefinitionTests.Contains_ReturnsFalseBeyondOuterWalls(-25.0f,0.0f)" methodname="Contains_ReturnsFalseBeyondOuterWalls" classname="Stage1MapDefinitionTests" runstate="Runnable" seed="109946037" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.000313" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1144" name="Contains_ReturnsFalseBeyondOuterWalls(25.0f,0.0f)" fullname="Stage1MapDefinitionTests.Contains_ReturnsFalseBeyondOuterWalls(25.0f,0.0f)" methodname="Contains_ReturnsFalseBeyondOuterWalls" classname="Stage1MapDefinitionTests" runstate="Runnable" seed="1427005925" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.000041" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1145" name="Contains_ReturnsFalseBeyondOuterWalls(0.0f,22.6f)" fullname="Stage1MapDefinitionTests.Contains_ReturnsFalseBeyondOuterWalls(0.0f,22.6f)" methodname="Contains_ReturnsFalseBeyondOuterWalls" classname="Stage1MapDefinitionTests" runstate="Runnable" seed="500485574" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.000023" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1146" name="Contains_ReturnsFalseBeyondOuterWalls(0.0f,-22.6f)" fullname="Stage1MapDefinitionTests.Contains_ReturnsFalseBeyondOuterWalls(0.0f,-22.6f)" methodname="Contains_ReturnsFalseBeyondOuterWalls" classname="Stage1MapDefinitionTests" runstate="Runnable" seed="1000312064" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.000019" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+        </test-suite>
+        <test-suite type="ParameterizedMethod" id="1142" name="Contains_ReturnsTrueForEachPlayableSection" fullname="Stage1MapDefinitionTests.Contains_ReturnsTrueForEachPlayableSection" classname="Stage1MapDefinitionTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.000499" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1139" name="Contains_ReturnsTrueForEachPlayableSection(0.0f,-5.0f)" fullname="Stage1MapDefinitionTests.Contains_ReturnsTrueForEachPlayableSection(0.0f,-5.0f)" methodname="Contains_ReturnsTrueForEachPlayableSection" classname="Stage1MapDefinitionTests" runstate="Runnable" seed="1312277477" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.000095" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1140" name="Contains_ReturnsTrueForEachPlayableSection(0.0f,0.0f)" fullname="Stage1MapDefinitionTests.Contains_ReturnsTrueForEachPlayableSection(0.0f,0.0f)" methodname="Contains_ReturnsTrueForEachPlayableSection" classname="Stage1MapDefinitionTests" runstate="Runnable" seed="1468651387" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.000031" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1141" name="Contains_ReturnsTrueForEachPlayableSection(0.0f,5.0f)" fullname="Stage1MapDefinitionTests.Contains_ReturnsTrueForEachPlayableSection(0.0f,5.0f)" methodname="Contains_ReturnsTrueForEachPlayableSection" classname="Stage1MapDefinitionTests" runstate="Runnable" seed="1449021540" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.000044" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+        </test-suite>
+        <test-case id="1148" name="OutlineAndContains_UseExactTwoPointFiveScale" fullname="Stage1MapDefinitionTests.OutlineAndContains_UseExactTwoPointFiveScale" methodname="OutlineAndContains_UseExactTwoPointFiveScale" classname="Stage1MapDefinitionTests" runstate="Runnable" seed="2107283965" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.000216" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1149" name="Triangles_OnlyReferenceOutlineVertices" fullname="Stage1MapDefinitionTests.Triangles_OnlyReferenceOutlineVertices" methodname="Triangles_OnlyReferenceOutlineVertices" classname="Stage1MapDefinitionTests" runstate="Runnable" seed="1304553557" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.000581" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1150" name="Stage1PlayerHealthSceneTests" fullname="Stage1PlayerHealthSceneTests" classname="Stage1PlayerHealthSceneTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.634398" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1151" name="Build_CreatesPlayerHealthBarUsingProjectHeartSprite" fullname="Stage1PlayerHealthSceneTests.Build_CreatesPlayerHealthBarUsingProjectHeartSprite" methodname="Build_CreatesPlayerHealthBarUsingProjectHeartSprite" classname="Stage1PlayerHealthSceneTests" runstate="Runnable" seed="48225486" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.628402" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1152" name="RuntimeBootstrap_AssignsHeartAndBuildsPlayerHealthBar" fullname="Stage1PlayerHealthSceneTests.RuntimeBootstrap_AssignsHeartAndBuildsPlayerHealthBar" methodname="RuntimeBootstrap_AssignsHeartAndBuildsPlayerHealthBar" classname="Stage1PlayerHealthSceneTests" runstate="Runnable" seed="300137683" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.005484" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1153" name="Stage1PlayerHealthSetupTests" fullname="Stage1PlayerHealthSetupTests" classname="Stage1PlayerHealthSetupTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.004192" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1154" name="Create_AddsPlayerHealthAndTopLeftScaledCanvas" fullname="Stage1PlayerHealthSetupTests.Create_AddsPlayerHealthAndTopLeftScaledCanvas" methodname="Create_AddsPlayerHealthAndTopLeftScaledCanvas" classname="Stage1PlayerHealthSetupTests" runstate="Runnable" seed="578615993" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:44Z" duration="0.002307" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1155" name="Stage1SceneBuilderTests" fullname="Stage1SceneBuilderTests" classname="Stage1SceneBuilderTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:47Z" duration="2.477628" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1157" name="Build_AssignsSwordShooterSpriteAndDefaultConfigurationToPlayer" fullname="Stage1SceneBuilderTests.Build_AssignsSwordShooterSpriteAndDefaultConfigurationToPlayer" methodname="Build_AssignsSwordShooterSpriteAndDefaultConfigurationToPlayer" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="571566682" result="Passed" start-time="2026-07-29 09:29:44Z" end-time="2026-07-29 09:29:45Z" duration="0.636160" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1156" name="Build_CreatesPlayableStageScene" fullname="Stage1SceneBuilderTests.Build_CreatesPlayableStageScene" methodname="Build_CreatesPlayableStageScene" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="688447661" result="Passed" start-time="2026-07-29 09:29:45Z" end-time="2026-07-29 09:29:46Z" duration="0.665850" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1159" name="Build_CreatesPlayerOwnedBottomCenterItemHotbar" fullname="Stage1SceneBuilderTests.Build_CreatesPlayerOwnedBottomCenterItemHotbar" methodname="Build_CreatesPlayerOwnedBottomCenterItemHotbar" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="1722603712" result="Passed" start-time="2026-07-29 09:29:46Z" end-time="2026-07-29 09:29:46Z" duration="0.600443" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1158" name="Build_WiresExactStartingSwordThroughOneSharedInventoryAndFirstSlotIcon" fullname="Stage1SceneBuilderTests.Build_WiresExactStartingSwordThroughOneSharedInventoryAndFirstSlotIcon" methodname="Build_WiresExactStartingSwordThroughOneSharedInventoryAndFirstSlotIcon" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="1352848018" result="Passed" start-time="2026-07-29 09:29:46Z" end-time="2026-07-29 09:29:47Z" duration="0.565504" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1161" name="RuntimeBootstrap_BuildsPlayerWithConfiguredSwordShooter" fullname="Stage1SceneBuilderTests.RuntimeBootstrap_BuildsPlayerWithConfiguredSwordShooter" methodname="RuntimeBootstrap_BuildsPlayerWithConfiguredSwordShooter" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="90481311" result="Passed" start-time="2026-07-29 09:29:47Z" end-time="2026-07-29 09:29:47Z" duration="0.005893" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1160" name="RuntimeBootstrap_EditorValidationAssignsProjectSprites" fullname="Stage1SceneBuilderTests.RuntimeBootstrap_EditorValidationAssignsProjectSprites" methodname="RuntimeBootstrap_EditorValidationAssignsProjectSprites" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="1993885080" result="Passed" start-time="2026-07-29 09:29:47Z" end-time="2026-07-29 09:29:47Z" duration="0.000922" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1162" name="RuntimeBootstrap_MissingSwordSpriteRejectsBeforeBuilding" fullname="Stage1SceneBuilderTests.RuntimeBootstrap_MissingSwordSpriteRejectsBeforeBuilding" methodname="RuntimeBootstrap_MissingSwordSpriteRejectsBeforeBuilding" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="918674387" result="Passed" start-time="2026-07-29 09:29:47Z" end-time="2026-07-29 09:29:47Z" duration="0.001247" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1163" name="SwordProjectileTests" fullname="SwordProjectileTests" classname="SwordProjectileTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-07-29 09:29:47Z" end-time="2026-07-29 09:29:50Z" duration="3.472080" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1166" name="Advance_ExpiryDestroysTheProjectile" fullname="SwordProjectileTests.Advance_ExpiryDestroysTheProjectile" methodname="Advance_ExpiryDestroysTheProjectile" classname="SwordProjectileTests" runstate="Runnable" seed="1769697395" result="Passed" start-time="2026-07-29 09:29:47Z" end-time="2026-07-29 09:29:47Z" duration="0.499034" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1167" name="Advance_ExpiryImmediatelyPreventsDamageBeforeDeferredDestroy" fullname="SwordProjectileTests.Advance_ExpiryImmediatelyPreventsDamageBeforeDeferredDestroy" methodname="Advance_ExpiryImmediatelyPreventsDamageBeforeDeferredDestroy" classname="SwordProjectileTests" runstate="Runnable" seed="184760680" result="Passed" start-time="2026-07-29 09:29:47Z" end-time="2026-07-29 09:29:48Z" duration="0.485613" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1164" name="Advance_MovesFourUnitsAndRotatesOneFullTurn" fullname="SwordProjectileTests.Advance_MovesFourUnitsAndRotatesOneFullTurn" methodname="Advance_MovesFourUnitsAndRotatesOneFullTurn" classname="SwordProjectileTests" runstate="Runnable" seed="1701618292" result="Passed" start-time="2026-07-29 09:29:48Z" end-time="2026-07-29 09:29:48Z" duration="0.492990" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1165" name="Advance_NormalizedDiagonalTravelsTheSameDistance" fullname="SwordProjectileTests.Advance_NormalizedDiagonalTravelsTheSameDistance" methodname="Advance_NormalizedDiagonalTravelsTheSameDistance" classname="SwordProjectileTests" runstate="Runnable" seed="1776304422" result="Passed" start-time="2026-07-29 09:29:48Z" end-time="2026-07-29 09:29:49Z" duration="0.502697" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1168" name="TryHit_EnemyTakesDamageOnlyOnce" fullname="SwordProjectileTests.TryHit_EnemyTakesDamageOnlyOnce" methodname="TryHit_EnemyTakesDamageOnlyOnce" classname="SwordProjectileTests" runstate="Runnable" seed="1123264762" result="Passed" start-time="2026-07-29 09:29:49Z" end-time="2026-07-29 09:29:49Z" duration="0.517429" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1170" name="TryHit_NonEnemyColliderIsIgnored" fullname="SwordProjectileTests.TryHit_NonEnemyColliderIsIgnored" methodname="TryHit_NonEnemyColliderIsIgnored" classname="SwordProjectileTests" runstate="Runnable" seed="31210536" result="Passed" start-time="2026-07-29 09:29:49Z" end-time="2026-07-29 09:29:50Z" duration="0.493514" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1169" name="TryHit_OwnerEnemy_IsIgnoredAndProjectileCanStillHitAnotherEnemy" fullname="SwordProjectileTests.TryHit_OwnerEnemy_IsIgnoredAndProjectileCanStillHitAnotherEnemy" methodname="TryHit_OwnerEnemy_IsIgnoredAndProjectileCanStillHitAnotherEnemy" classname="SwordProjectileTests" runstate="Runnable" seed="192677754" result="Passed" start-time="2026-07-29 09:29:50Z" end-time="2026-07-29 09:29:50Z" duration="0.478119" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1171" name="TitleSceneBuilderTests" fullname="TitleSceneBuilderTests" classname="TitleSceneBuilderTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:29:50Z" end-time="2026-07-29 09:29:51Z" duration="0.423720" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1172" name="Build_CreatesTitleArtworkButtonsEventSystemAndBuildOrder" fullname="TitleSceneBuilderTests.Build_CreatesTitleArtworkButtonsEventSystemAndBuildOrder" methodname="Build_CreatesTitleArtworkButtonsEventSystemAndBuildOrder" classname="TitleSceneBuilderTests" runstate="Runnable" seed="186987387" result="Passed" start-time="2026-07-29 09:29:50Z" end-time="2026-07-29 09:29:51Z" duration="0.423287" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1173" name="TitleScreenControllerTests" fullname="TitleScreenControllerTests" classname="TitleScreenControllerTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 09:29:51Z" end-time="2026-07-29 09:29:51Z" duration="0.002100" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1174" name="Stage1ScenePath_UsesGeneratedStage1Scene" fullname="TitleScreenControllerTests.Stage1ScenePath_UsesGeneratedStage1Scene" methodname="Stage1ScenePath_UsesGeneratedStage1Scene" classname="TitleScreenControllerTests" runstate="Runnable" seed="424264572" result="Passed" start-time="2026-07-29 09:29:51Z" end-time="2026-07-29 09:29:51Z" duration="0.000191" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

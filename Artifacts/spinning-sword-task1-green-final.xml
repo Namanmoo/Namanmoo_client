@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Passed" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-28 17:17:16Z" end-time="2026-07-28 17:17:18Z" duration="2.0578252">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="64" result="Passed" start-time="2026-07-28 17:17:16Z" end-time="2026-07-28 17:17:18Z" duration="2.057825" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1078" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="64" result="Passed" start-time="2026-07-28 17:17:16Z" end-time="2026-07-28 17:17:18Z" duration="2.048235" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="29888" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1001" name="EnemyHealthTests" fullname="EnemyHealthTests" classname="EnemyHealthTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-28 17:17:16Z" end-time="2026-07-28 17:17:18Z" duration="2.046999" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1005" name="LethalDamage_DestroysEnemyAfterAFrame" fullname="EnemyHealthTests.LethalDamage_DestroysEnemyAfterAFrame" methodname="LethalDamage_DestroysEnemyAfterAFrame" classname="EnemyHealthTests" runstate="Runnable" seed="1856210796" result="Passed" start-time="2026-07-28 17:17:16Z" end-time="2026-07-28 17:17:17Z" duration="0.635492" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1002" name="NewEnemy_UsesTheDefaultMaximumHealthForCurrentHealth" fullname="EnemyHealthTests.NewEnemy_UsesTheDefaultMaximumHealthForCurrentHealth" methodname="NewEnemy_UsesTheDefaultMaximumHealthForCurrentHealth" classname="EnemyHealthTests" runstate="Runnable" seed="320467456" result="Passed" start-time="2026-07-28 17:17:17Z" end-time="2026-07-28 17:17:17Z" duration="0.475212" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1003" name="TakingFiveDamage_LeavesFifteenHealth" fullname="EnemyHealthTests.TakingFiveDamage_LeavesFifteenHealth" methodname="TakingFiveDamage_LeavesFifteenHealth" classname="EnemyHealthTests" runstate="Runnable" seed="332127246" result="Passed" start-time="2026-07-28 17:17:17Z" end-time="2026-07-28 17:17:18Z" duration="0.471121" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1004" name="ZeroAndNegativeDamage_AreIgnored" fullname="EnemyHealthTests.ZeroAndNegativeDamage_AreIgnored" methodname="ZeroAndNegativeDamage_AreIgnored" classname="EnemyHealthTests" runstate="Runnable" seed="1045245493" result="Passed" start-time="2026-07-28 17:17:18Z" end-time="2026-07-28 17:17:18Z" duration="0.455684" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

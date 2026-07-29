@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Failed(Child)" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-28 17:15:49Z" end-time="2026-07-28 17:15:49Z" duration="0.0314622">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="64" result="Failed" site="Child" start-time="2026-07-28 17:15:49Z" end-time="2026-07-28 17:15:49Z" duration="0.031462" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1078" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="64" result="Failed" site="Child" start-time="2026-07-28 17:15:49Z" end-time="2026-07-28 17:15:49Z" duration="0.026964" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="26948" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1001" name="EnemyHealthTests" fullname="EnemyHealthTests" classname="EnemyHealthTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-07-28 17:15:49Z" end-time="2026-07-28 17:15:49Z" duration="0.025557" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1005" name="LethalDamage_DestroysEnemyAfterAFrame" fullname="EnemyHealthTests.LethalDamage_DestroysEnemyAfterAFrame" methodname="LethalDamage_DestroysEnemyAfterAFrame" classname="EnemyHealthTests" runstate="Runnable" seed="482379635" result="Failed" start-time="2026-07-28 17:15:49Z" end-time="2026-07-28 17:15:49Z" duration="0.006591" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[Unhandled log message: '[Error] Enemy: Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+            <stack-trace><![CDATA[UnityEngine.Object:Destroy (UnityEngine.Object)
+EnemyHealth:TakeDamage (int) (at Assets/Scripts/Combat/EnemyHealth.cs:26)
+EnemyHealthTests/<LethalDamage_DestroysEnemyAfterAFrame>d__3:MoveNext () (at Assets/Tests/Editor/EnemyHealthTests.cs:53)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions ()
+
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Enemy: Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently
+]]></output>
+        </test-case>
+        <test-case id="1002" name="NewEnemy_UsesTheDefaultMaximumHealthForCurrentHealth" fullname="EnemyHealthTests.NewEnemy_UsesTheDefaultMaximumHealthForCurrentHealth" methodname="NewEnemy_UsesTheDefaultMaximumHealthForCurrentHealth" classname="EnemyHealthTests" runstate="Runnable" seed="790524259" result="Failed" start-time="2026-07-28 17:15:49Z" end-time="2026-07-28 17:15:49Z" duration="0.008440" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: 20
+  But was:  0
+]]></message>
+            <stack-trace><![CDATA[at EnemyHealthTests.NewEnemy_UsesTheDefaultMaximumHealthForCurrentHealth () [0x00027] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\EnemyHealthTests.cs:15
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1003" name="TakingFiveDamage_LeavesFifteenHealth" fullname="EnemyHealthTests.TakingFiveDamage_LeavesFifteenHealth" methodname="TakingFiveDamage_LeavesFifteenHealth" classname="EnemyHealthTests" runstate="Runnable" seed="1777884785" result="Failed" start-time="2026-07-28 17:15:49Z" end-time="2026-07-28 17:15:49Z" duration="0.000776" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: 15
+  But was:  0
+]]></message>
+            <stack-trace><![CDATA[at EnemyHealthTests.TakingFiveDamage_LeavesFifteenHealth () [0x00017] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\EnemyHealthTests.cs:28
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Enemy: Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently
+]]></output>
+        </test-case>
+        <test-case id="1004" name="ZeroAndNegativeDamage_AreIgnored" fullname="EnemyHealthTests.ZeroAndNegativeDamage_AreIgnored" methodname="ZeroAndNegativeDamage_AreIgnored" classname="EnemyHealthTests" runstate="Runnable" seed="567950517" result="Failed" start-time="2026-07-28 17:15:49Z" end-time="2026-07-28 17:15:49Z" duration="0.000285" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: 20
+  But was:  0
+]]></message>
+            <stack-trace><![CDATA[at EnemyHealthTests.ZeroAndNegativeDamage_AreIgnored () [0x0001f] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\EnemyHealthTests.cs:42
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

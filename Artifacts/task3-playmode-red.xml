@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Failed(Child)" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-28 20:44:04Z" end-time="2026-07-28 20:44:04Z" duration="0.0661442">
+  <test-suite type="TestSuite" id="1011" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-07-28 20:44:04Z" end-time="2026-07-28 20:44:04Z" duration="0.066144" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1007" name="NaManMoo.PlayModeTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.PlayModeTests.dll" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-07-28 20:44:04Z" end-time="2026-07-28 20:44:04Z" duration="0.061845" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="26048" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1001" name="ItemHotbarPlayModeTests" fullname="ItemHotbarPlayModeTests" classname="ItemHotbarPlayModeTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-07-28 20:44:04Z" end-time="2026-07-28 20:44:04Z" duration="0.060106" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1004" name="ArrowHeld_OnlySelectedFirstSlotFiresAndReselectingFiresImmediately" fullname="ItemHotbarPlayModeTests.ArrowHeld_OnlySelectedFirstSlotFiresAndReselectingFiresImmediately" methodname="ArrowHeld_OnlySelectedFirstSlotFiresAndReselectingFiresImmediately" classname="ItemHotbarPlayModeTests" runstate="Runnable" seed="514190256" result="Failed" start-time="2026-07-28 20:44:04Z" end-time="2026-07-28 20:44:04Z" duration="0.048187" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[SetUp :   Stage1ItemHotbarSetup.Create must accept the validated sword Sprite.
+  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at ItemHotbarPlayModeTests.CreateStage1HotbarWithStartingSword () [0x00052] in C:\Users\myong\NaManMoo\Assets\Tests\PlayMode\ItemHotbarPlayModeTests.cs:181
+at ItemHotbarPlayModeTests+<SetUp>d__10.MoveNext () [0x0010a] in C:\Users\myong\NaManMoo\Assets\Tests\PlayMode\ItemHotbarPlayModeTests.cs:43
+at UnityEngine.TestTools.EnumeratorHelper+<ProgressOnEnumerator>d__5.MoveNext () [0x00017] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\EnumeratorHelper.cs:35
+at UnityEngine.TestTools.BeforeAfterTestCommandBase`1+<ExecuteEnumerable>d__16[T].MoveNext () [0x00132] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Commands\BeforeAfterTestCommandBase.cs:155
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1003" name="EmptyAndOccupiedSelection_UpdatesEquipmentAndMovesOutline" fullname="ItemHotbarPlayModeTests.EmptyAndOccupiedSelection_UpdatesEquipmentAndMovesOutline" methodname="EmptyAndOccupiedSelection_UpdatesEquipmentAndMovesOutline" classname="ItemHotbarPlayModeTests" runstate="Runnable" seed="560221038" result="Failed" start-time="2026-07-28 20:44:04Z" end-time="2026-07-28 20:44:04Z" duration="0.001234" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[SetUp :   Stage1ItemHotbarSetup.Create must accept the validated sword Sprite.
+  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at ItemHotbarPlayModeTests.CreateStage1HotbarWithStartingSword () [0x00052] in C:\Users\myong\NaManMoo\Assets\Tests\PlayMode\ItemHotbarPlayModeTests.cs:181
+at ItemHotbarPlayModeTests+<SetUp>d__10.MoveNext () [0x0010a] in C:\Users\myong\NaManMoo\Assets\Tests\PlayMode\ItemHotbarPlayModeTests.cs:43
+at UnityEngine.TestTools.EnumeratorHelper+<ProgressOnEnumerator>d__5.MoveNext () [0x00017] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\EnumeratorHelper.cs:35
+at UnityEngine.TestTools.BeforeAfterTestCommandBase`1+<ExecuteEnumerable>d__16[T].MoveNext () [0x00132] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Commands\BeforeAfterTestCommandBase.cs:155
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1002" name="RuntimeInitialization_AutoAcquiresSwordAndShowsFirstSlotIcon" fullname="ItemHotbarPlayModeTests.RuntimeInitialization_AutoAcquiresSwordAndShowsFirstSlotIcon" methodname="RuntimeInitialization_AutoAcquiresSwordAndShowsFirstSlotIcon" classname="ItemHotbarPlayModeTests" runstate="Runnable" seed="1845787192" result="Failed" start-time="2026-07-28 20:44:04Z" end-time="2026-07-28 20:44:04Z" duration="0.000888" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[SetUp :   Stage1ItemHotbarSetup.Create must accept the validated sword Sprite.
+  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at ItemHotbarPlayModeTests.CreateStage1HotbarWithStartingSword () [0x00052] in C:\Users\myong\NaManMoo\Assets\Tests\PlayMode\ItemHotbarPlayModeTests.cs:181
+at ItemHotbarPlayModeTests+<SetUp>d__10.MoveNext () [0x0010a] in C:\Users\myong\NaManMoo\Assets\Tests\PlayMode\ItemHotbarPlayModeTests.cs:43
+at UnityEngine.TestTools.EnumeratorHelper+<ProgressOnEnumerator>d__5.MoveNext () [0x00017] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\EnumeratorHelper.cs:35
+at UnityEngine.TestTools.BeforeAfterTestCommandBase`1+<ExecuteEnumerable>d__16[T].MoveNext () [0x00132] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Commands\BeforeAfterTestCommandBase.cs:155
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

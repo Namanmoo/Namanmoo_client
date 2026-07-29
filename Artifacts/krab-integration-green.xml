@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Passed" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 08:01:37Z" end-time="2026-07-29 08:01:37Z" duration="0.770252">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="128" result="Passed" start-time="2026-07-29 08:01:37Z" end-time="2026-07-29 08:01:37Z" duration="0.770252" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1157" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="128" result="Passed" start-time="2026-07-29 08:01:37Z" end-time="2026-07-29 08:01:37Z" duration="0.760266" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="7036" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1121" name="Stage1KrabEncounterIntegrationTests" fullname="Stage1KrabEncounterIntegrationTests" classname="Stage1KrabEncounterIntegrationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-07-29 08:01:37Z" end-time="2026-07-29 08:01:37Z" duration="0.758087" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1122" name="Build_CreatesFiveLowerKrabsAndClosedMiddleGate" fullname="Stage1KrabEncounterIntegrationTests.Build_CreatesFiveLowerKrabsAndClosedMiddleGate" methodname="Build_CreatesFiveLowerKrabsAndClosedMiddleGate" classname="Stage1KrabEncounterIntegrationTests" runstate="Runnable" seed="836190681" result="Passed" start-time="2026-07-29 08:01:37Z" end-time="2026-07-29 08:01:37Z" duration="0.742277" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1123" name="RuntimeBootstrap_AssignsKrabSpriteAndCreatesEncounter" fullname="Stage1KrabEncounterIntegrationTests.RuntimeBootstrap_AssignsKrabSpriteAndCreatesEncounter" methodname="RuntimeBootstrap_AssignsKrabSpriteAndCreatesEncounter" classname="Stage1KrabEncounterIntegrationTests" runstate="Runnable" seed="690405340" result="Passed" start-time="2026-07-29 08:01:37Z" end-time="2026-07-29 08:01:37Z" duration="0.007105" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

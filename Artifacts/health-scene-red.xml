@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Failed(Child)" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 06:21:18Z" end-time="2026-07-29 06:21:19Z" duration="0.7502597">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="101" result="Failed" site="Child" start-time="2026-07-29 06:21:18Z" end-time="2026-07-29 06:21:19Z" duration="0.750260" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1122" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="101" result="Failed" site="Child" start-time="2026-07-29 06:21:18Z" end-time="2026-07-29 06:21:19Z" duration="0.744709" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="24084" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1101" name="Stage1PlayerHealthSceneTests" fullname="Stage1PlayerHealthSceneTests" classname="Stage1PlayerHealthSceneTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-07-29 06:21:18Z" end-time="2026-07-29 06:21:19Z" duration="0.720956" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1102" name="Build_CreatesPlayerHealthBarUsingProjectHeartSprite" fullname="Stage1PlayerHealthSceneTests.Build_CreatesPlayerHealthBarUsingProjectHeartSprite" methodname="Build_CreatesPlayerHealthBarUsingProjectHeartSprite" classname="Stage1PlayerHealthSceneTests" runstate="Runnable" seed="770839277" result="Failed" start-time="2026-07-29 06:21:18Z" end-time="2026-07-29 06:21:19Z" duration="0.711936" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at Stage1PlayerHealthSceneTests.Build_CreatesPlayerHealthBarUsingProjectHeartSprite () [0x0004b] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\Stage1PlayerHealthSceneTests.cs:24
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1103" name="RuntimeBootstrap_AssignsHeartAndBuildsPlayerHealthBar" fullname="Stage1PlayerHealthSceneTests.RuntimeBootstrap_AssignsHeartAndBuildsPlayerHealthBar" methodname="RuntimeBootstrap_AssignsHeartAndBuildsPlayerHealthBar" classname="Stage1PlayerHealthSceneTests" runstate="Runnable" seed="1434829794" result="Failed" start-time="2026-07-29 06:21:19Z" end-time="2026-07-29 06:21:19Z" duration="0.000714" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at Stage1PlayerHealthSceneTests.RuntimeBootstrap_AssignsHeartAndBuildsPlayerHealthBar () [0x00056] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\Stage1PlayerHealthSceneTests.cs:62
+]]></stack-trace>
+          </failure>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1104" name="Stage1PlayerHealthSetupTests" fullname="Stage1PlayerHealthSetupTests" classname="Stage1PlayerHealthSetupTests" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2026-07-29 06:21:19Z" end-time="2026-07-29 06:21:19Z" duration="0.022375" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1105" name="Create_AddsPlayerHealthAndTopLeftScaledCanvas" fullname="Stage1PlayerHealthSetupTests.Create_AddsPlayerHealthAndTopLeftScaledCanvas" methodname="Create_AddsPlayerHealthAndTopLeftScaledCanvas" classname="Stage1PlayerHealthSetupTests" runstate="Runnable" seed="1964330869" result="Failed" start-time="2026-07-29 06:21:19Z" end-time="2026-07-29 06:21:19Z" duration="0.007832" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at Stage1PlayerHealthSetupTests.Create_AddsPlayerHealthAndTopLeftScaledCanvas () [0x0007a] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\Stage1PlayerHealthSetupTests.cs:46
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

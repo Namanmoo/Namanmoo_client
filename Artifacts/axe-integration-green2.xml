@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Failed(Child)" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 07:25:39Z" end-time="2026-07-29 07:25:40Z" duration="1.1898393">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="118" result="Failed" site="Child" start-time="2026-07-29 07:25:39Z" end-time="2026-07-29 07:25:40Z" duration="1.189839" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1144" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="118" result="Failed" site="Child" start-time="2026-07-29 07:25:39Z" end-time="2026-07-29 07:25:40Z" duration="1.179966" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="24516" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1108" name="Stage1AxeIntegrationTests" fullname="Stage1AxeIntegrationTests" classname="Stage1AxeIntegrationTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-07-29 07:25:39Z" end-time="2026-07-29 07:25:40Z" duration="1.178143" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1109" name="Build_ConfiguresBottomPivotAxeAndWiresSlotTwoAttack" fullname="Stage1AxeIntegrationTests.Build_ConfiguresBottomPivotAxeAndWiresSlotTwoAttack" methodname="Build_ConfiguresBottomPivotAxeAndWiresSlotTwoAttack" classname="Stage1AxeIntegrationTests" runstate="Runnable" seed="283108081" result="Failed" start-time="2026-07-29 07:25:39Z" end-time="2026-07-29 07:25:40Z" duration="1.005194" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: Single
+  But was:  Multiple
+]]></message>
+            <stack-trace><![CDATA[at Stage1AxeIntegrationTests.Build_ConfiguresBottomPivotAxeAndWiresSlotTwoAttack () [0x00086] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\Stage1AxeIntegrationTests.cs:29
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1110" name="RuntimeBootstrap_AssignsAxeAndBuildsSharedInventoryAttacker" fullname="Stage1AxeIntegrationTests.RuntimeBootstrap_AssignsAxeAndBuildsSharedInventoryAttacker" methodname="RuntimeBootstrap_AssignsAxeAndBuildsSharedInventoryAttacker" classname="Stage1AxeIntegrationTests" runstate="Runnable" seed="2103503445" result="Passed" start-time="2026-07-29 07:25:40Z" end-time="2026-07-29 07:25:40Z" duration="0.164397" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

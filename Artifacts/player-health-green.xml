@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Failed(Child)" total="5" passed="1" failed="4" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 06:00:33Z" end-time="2026-07-29 06:00:33Z" duration="0.0313777">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="97" result="Failed" site="Child" start-time="2026-07-29 06:00:33Z" end-time="2026-07-29 06:00:33Z" duration="0.031378" total="5" passed="1" failed="4" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1115" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="97" result="Failed" site="Child" start-time="2026-07-29 06:00:33Z" end-time="2026-07-29 06:00:33Z" duration="0.026439" total="5" passed="1" failed="4" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="21952" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1050" name="PlayerHealthTests" fullname="PlayerHealthTests" classname="PlayerHealthTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-07-29 06:00:33Z" end-time="2026-07-29 06:00:33Z" duration="0.025320" total="5" passed="1" failed="4" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1056" name="LethalDamage_ClampsAtZeroWithoutDestroyingPlayer" fullname="PlayerHealthTests.LethalDamage_ClampsAtZeroWithoutDestroyingPlayer" methodname="LethalDamage_ClampsAtZeroWithoutDestroyingPlayer" classname="PlayerHealthTests" runstate="Runnable" seed="780018923" result="Passed" start-time="2026-07-29 06:00:33Z" end-time="2026-07-29 06:00:33Z" duration="0.011547" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1051" name="NewPlayer_StartsAtTwentyOfTwentyHealth" fullname="PlayerHealthTests.NewPlayer_StartsAtTwentyOfTwentyHealth" methodname="NewPlayer_StartsAtTwentyOfTwentyHealth" classname="PlayerHealthTests" runstate="Runnable" seed="1098404942" result="Failed" start-time="2026-07-29 06:00:33Z" end-time="2026-07-29 06:00:33Z" duration="0.003233" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: 20
+  But was:  0
+]]></message>
+            <stack-trace><![CDATA[at PlayerHealthTests.NewPlayer_StartsAtTwentyOfTwentyHealth () [0x00000] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerHealthTests.cs:25
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-suite type="ParameterizedMethod" id="1055" name="NonPositiveDamage_DoesNotChangeHealthOrNotify" fullname="PlayerHealthTests.NonPositiveDamage_DoesNotChangeHealthOrNotify" classname="PlayerHealthTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-07-29 06:00:33Z" end-time="2026-07-29 06:00:33Z" duration="0.002169" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-case id="1053" name="NonPositiveDamage_DoesNotChangeHealthOrNotify(0)" fullname="PlayerHealthTests.NonPositiveDamage_DoesNotChangeHealthOrNotify(0)" methodname="NonPositiveDamage_DoesNotChangeHealthOrNotify" classname="PlayerHealthTests" runstate="Runnable" seed="2093689582" result="Failed" start-time="2026-07-29 06:00:33Z" end-time="2026-07-29 06:00:33Z" duration="0.000464" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <failure>
+              <message><![CDATA[  Expected: 20
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at PlayerHealthTests.NonPositiveDamage_DoesNotChangeHealthOrNotify (System.Int32 amount) [0x00030] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerHealthTests.cs:56
+]]></stack-trace>
+            </failure>
+          </test-case>
+          <test-case id="1054" name="NonPositiveDamage_DoesNotChangeHealthOrNotify(-3)" fullname="PlayerHealthTests.NonPositiveDamage_DoesNotChangeHealthOrNotify(-3)" methodname="NonPositiveDamage_DoesNotChangeHealthOrNotify" classname="PlayerHealthTests" runstate="Runnable" seed="1756420708" result="Failed" start-time="2026-07-29 06:00:33Z" end-time="2026-07-29 06:00:33Z" duration="0.000213" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+            <failure>
+              <message><![CDATA[  Expected: 20
+  But was:  0
+]]></message>
+              <stack-trace><![CDATA[at PlayerHealthTests.NonPositiveDamage_DoesNotChangeHealthOrNotify (System.Int32 amount) [0x00030] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerHealthTests.cs:56
+]]></stack-trace>
+            </failure>
+          </test-case>
+        </test-suite>
+        <test-case id="1052" name="TakingFiveDamage_ReportsFifteenOfTwentyHealth" fullname="PlayerHealthTests.TakingFiveDamage_ReportsFifteenOfTwentyHealth" methodname="TakingFiveDamage_ReportsFifteenOfTwentyHealth" classname="PlayerHealthTests" runstate="Runnable" seed="511386803" result="Failed" start-time="2026-07-29 06:00:33Z" end-time="2026-07-29 06:00:33Z" duration="0.000303" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: 15
+  But was:  0
+]]></message>
+            <stack-trace><![CDATA[at PlayerHealthTests.TakingFiveDamage_ReportsFifteenOfTwentyHealth () [0x00037] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerHealthTests.cs:42
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

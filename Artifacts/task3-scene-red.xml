@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Failed(Child)" total="7" passed="5" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-28 20:42:20Z" end-time="2026-07-28 20:42:23Z" duration="2.5434818">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="91" result="Failed" site="Child" start-time="2026-07-28 20:42:20Z" end-time="2026-07-28 20:42:23Z" duration="2.543482" total="7" passed="5" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1107" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="91" result="Failed" site="Child" start-time="2026-07-28 20:42:20Z" end-time="2026-07-28 20:42:23Z" duration="2.536178" total="7" passed="5" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="37520" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1091" name="Stage1SceneBuilderTests" fullname="Stage1SceneBuilderTests" classname="Stage1SceneBuilderTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-07-28 20:42:20Z" end-time="2026-07-28 20:42:23Z" duration="2.534696" total="7" passed="5" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1093" name="Build_AssignsSwordShooterSpriteAndDefaultConfigurationToPlayer" fullname="Stage1SceneBuilderTests.Build_AssignsSwordShooterSpriteAndDefaultConfigurationToPlayer" methodname="Build_AssignsSwordShooterSpriteAndDefaultConfigurationToPlayer" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="961031870" result="Passed" start-time="2026-07-28 20:42:20Z" end-time="2026-07-28 20:42:21Z" duration="0.789005" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1092" name="Build_CreatesPlayableStageScene" fullname="Stage1SceneBuilderTests.Build_CreatesPlayableStageScene" methodname="Build_CreatesPlayableStageScene" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="2028563367" result="Passed" start-time="2026-07-28 20:42:21Z" end-time="2026-07-28 20:42:22Z" duration="0.622289" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1095" name="Build_CreatesPlayerOwnedBottomCenterItemHotbar" fullname="Stage1SceneBuilderTests.Build_CreatesPlayerOwnedBottomCenterItemHotbar" methodname="Build_CreatesPlayerOwnedBottomCenterItemHotbar" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="1740278046" result="Passed" start-time="2026-07-28 20:42:22Z" end-time="2026-07-28 20:42:22Z" duration="0.556346" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1094" name="Build_WiresExactStartingSwordThroughOneSharedInventoryAndFirstSlotIcon" fullname="Stage1SceneBuilderTests.Build_WiresExactStartingSwordThroughOneSharedInventoryAndFirstSlotIcon" methodname="Build_WiresExactStartingSwordThroughOneSharedInventoryAndFirstSlotIcon" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="1860558065" result="Failed" start-time="2026-07-28 20:42:22Z" end-time="2026-07-28 20:42:23Z" duration="0.550291" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: same as <sword (UnityEngine.Sprite)>
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at Stage1SceneBuilderTests.Build_WiresExactStartingSwordThroughOneSharedInventoryAndFirstSlotIcon () [0x000ac] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\Stage1SceneBuilderTests.cs:123
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1097" name="RuntimeBootstrap_BuildsPlayerWithConfiguredSwordShooter" fullname="Stage1SceneBuilderTests.RuntimeBootstrap_BuildsPlayerWithConfiguredSwordShooter" methodname="RuntimeBootstrap_BuildsPlayerWithConfiguredSwordShooter" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="1097859615" result="Failed" start-time="2026-07-28 20:42:23Z" end-time="2026-07-28 20:42:23Z" duration="0.005442" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at Stage1SceneBuilderTests.RuntimeBootstrap_BuildsPlayerWithConfiguredSwordShooter () [0x00101] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\Stage1SceneBuilderTests.cs:392
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1096" name="RuntimeBootstrap_EditorValidationAssignsProjectSprites" fullname="Stage1SceneBuilderTests.RuntimeBootstrap_EditorValidationAssignsProjectSprites" methodname="RuntimeBootstrap_EditorValidationAssignsProjectSprites" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="1969438438" result="Passed" start-time="2026-07-28 20:42:23Z" end-time="2026-07-28 20:42:23Z" duration="0.000426" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1098" name="RuntimeBootstrap_MissingSwordSpriteRejectsBeforeBuilding" fullname="Stage1SceneBuilderTests.RuntimeBootstrap_MissingSwordSpriteRejectsBeforeBuilding" methodname="RuntimeBootstrap_MissingSwordSpriteRejectsBeforeBuilding" classname="Stage1SceneBuilderTests" runstate="Runnable" seed="1872995010" result="Passed" start-time="2026-07-28 20:42:23Z" end-time="2026-07-28 20:42:23Z" duration="0.001199" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Passed" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 07:52:13Z" end-time="2026-07-29 07:52:14Z" duration="0.947983">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="124" result="Passed" start-time="2026-07-29 07:52:13Z" end-time="2026-07-29 07:52:14Z" duration="0.947983" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1151" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="124" result="Passed" start-time="2026-07-29 07:52:13Z" end-time="2026-07-29 07:52:14Z" duration="0.941551" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="37976" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1059" name="KrabEnemyTests" fullname="KrabEnemyTests" classname="KrabEnemyTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-29 07:52:13Z" end-time="2026-07-29 07:52:14Z" duration="0.939495" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1061" name="CalculateVelocity_MovesTowardTargetAtThreeUnitsPerSecond" fullname="KrabEnemyTests.CalculateVelocity_MovesTowardTargetAtThreeUnitsPerSecond" methodname="CalculateVelocity_MovesTowardTargetAtThreeUnitsPerSecond" classname="KrabEnemyTests" runstate="Runnable" seed="510397261" result="Passed" start-time="2026-07-29 07:52:13Z" end-time="2026-07-29 07:52:13Z" duration="0.013165" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1060" name="ConfigureHealth_SetsFiveAndEmitsDeathOnlyOnce" fullname="KrabEnemyTests.ConfigureHealth_SetsFiveAndEmitsDeathOnlyOnce" methodname="ConfigureHealth_SetsFiveAndEmitsDeathOnlyOnce" classname="KrabEnemyTests" runstate="Runnable" seed="1238615303" result="Passed" start-time="2026-07-29 07:52:13Z" end-time="2026-07-29 07:52:14Z" duration="0.505451" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1062" name="TryDamagePlayer_DealsTwoAndSharesOneSecondInvulnerability" fullname="KrabEnemyTests.TryDamagePlayer_DealsTwoAndSharesOneSecondInvulnerability" methodname="TryDamagePlayer_DealsTwoAndSharesOneSecondInvulnerability" classname="KrabEnemyTests" runstate="Runnable" seed="1099973372" result="Passed" start-time="2026-07-29 07:52:14Z" end-time="2026-07-29 07:52:14Z" duration="0.409546" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1063" name="TryDamagePlayer_IgnoresNonPlayerCollider" fullname="KrabEnemyTests.TryDamagePlayer_IgnoresNonPlayerCollider" methodname="TryDamagePlayer_IgnoresNonPlayerCollider" classname="KrabEnemyTests" runstate="Runnable" seed="1760400498" result="Passed" start-time="2026-07-29 07:52:14Z" end-time="2026-07-29 07:52:14Z" duration="0.000447" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 06:33:15Z" end-time="2026-07-29 06:33:16Z" duration="0.6014825">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="101" result="Failed" site="Child" start-time="2026-07-29 06:33:15Z" end-time="2026-07-29 06:33:16Z" duration="0.601483" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1122" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="101" result="Failed" site="Child" start-time="2026-07-29 06:33:15Z" end-time="2026-07-29 06:33:16Z" duration="0.596707" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="13072" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1050" name="PlayerHealthBarViewTests" fullname="PlayerHealthBarViewTests" classname="PlayerHealthBarViewTests" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2026-07-29 06:33:15Z" end-time="2026-07-29 06:33:16Z" duration="0.595326" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1051" name="CreatedHealthBar_IsCompactTopLeftAndTracksDamage" fullname="PlayerHealthBarViewTests.CreatedHealthBar_IsCompactTopLeftAndTracksDamage" methodname="CreatedHealthBar_IsCompactTopLeftAndTracksDamage" classname="PlayerHealthBarViewTests" runstate="Runnable" seed="1309373218" result="Failed" start-time="2026-07-29 06:33:15Z" end-time="2026-07-29 06:33:16Z" duration="0.585941" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: 3.0f
+  But was:  -3.0f
+]]></message>
+            <stack-trace><![CDATA[at PlayerHealthBarViewTests+<CreatedHealthBar_IsCompactTopLeftAndTracksDamage>d__0.MoveNext () [0x0022a] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerHealthBarViewTests.cs:42
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

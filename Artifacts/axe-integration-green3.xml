@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Passed" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 07:27:04Z" end-time="2026-07-29 07:27:05Z" duration="0.8678869">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="118" result="Passed" start-time="2026-07-29 07:27:04Z" end-time="2026-07-29 07:27:05Z" duration="0.867887" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1144" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="118" result="Passed" start-time="2026-07-29 07:27:04Z" end-time="2026-07-29 07:27:05Z" duration="0.862571" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="37028" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1108" name="Stage1AxeIntegrationTests" fullname="Stage1AxeIntegrationTests" classname="Stage1AxeIntegrationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-07-29 07:27:04Z" end-time="2026-07-29 07:27:05Z" duration="0.860844" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1109" name="Build_ConfiguresBottomPivotAxeAndWiresSlotTwoAttack" fullname="Stage1AxeIntegrationTests.Build_ConfiguresBottomPivotAxeAndWiresSlotTwoAttack" methodname="Build_ConfiguresBottomPivotAxeAndWiresSlotTwoAttack" classname="Stage1AxeIntegrationTests" runstate="Runnable" seed="122374611" result="Passed" start-time="2026-07-29 07:27:04Z" end-time="2026-07-29 07:27:05Z" duration="0.846951" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1110" name="RuntimeBootstrap_AssignsAxeAndBuildsSharedInventoryAttacker" fullname="Stage1AxeIntegrationTests.RuntimeBootstrap_AssignsAxeAndBuildsSharedInventoryAttacker" methodname="RuntimeBootstrap_AssignsAxeAndBuildsSharedInventoryAttacker" classname="Stage1AxeIntegrationTests" runstate="Runnable" seed="1102729203" result="Passed" start-time="2026-07-29 07:27:05Z" end-time="2026-07-29 07:27:05Z" duration="0.005422" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

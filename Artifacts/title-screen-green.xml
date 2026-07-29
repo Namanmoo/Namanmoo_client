@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Passed" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 08:56:35Z" end-time="2026-07-29 08:56:36Z" duration="0.6448123">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="130" result="Passed" start-time="2026-07-29 08:56:35Z" end-time="2026-07-29 08:56:36Z" duration="0.644812" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1161" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="130" result="Passed" start-time="2026-07-29 08:56:35Z" end-time="2026-07-29 08:56:36Z" duration="0.638895" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="14620" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1157" name="TitleSceneBuilderTests" fullname="TitleSceneBuilderTests" classname="TitleSceneBuilderTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 08:56:35Z" end-time="2026-07-29 08:56:36Z" duration="0.618486" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1158" name="Build_CreatesTitleArtworkButtonsEventSystemAndBuildOrder" fullname="TitleSceneBuilderTests.Build_CreatesTitleArtworkButtonsEventSystemAndBuildOrder" methodname="Build_CreatesTitleArtworkButtonsEventSystemAndBuildOrder" classname="TitleSceneBuilderTests" runstate="Runnable" seed="713087393" result="Passed" start-time="2026-07-29 08:56:35Z" end-time="2026-07-29 08:56:36Z" duration="0.609203" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1159" name="TitleScreenControllerTests" fullname="TitleScreenControllerTests" classname="TitleScreenControllerTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 08:56:36Z" end-time="2026-07-29 08:56:36Z" duration="0.018411" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1160" name="Stage1ScenePath_UsesGeneratedStage1Scene" fullname="TitleScreenControllerTests.Stage1ScenePath_UsesGeneratedStage1Scene" methodname="Stage1ScenePath_UsesGeneratedStage1Scene" classname="TitleScreenControllerTests" runstate="Runnable" seed="1511618039" result="Passed" start-time="2026-07-29 08:56:36Z" end-time="2026-07-29 08:56:36Z" duration="0.000188" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

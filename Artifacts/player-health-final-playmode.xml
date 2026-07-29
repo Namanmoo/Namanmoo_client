@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Passed" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 06:37:30Z" end-time="2026-07-29 06:37:31Z" duration="0.151195">
+  <test-suite type="TestSuite" id="1011" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-29 06:37:30Z" end-time="2026-07-29 06:37:31Z" duration="0.151195" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1007" name="NaManMoo.PlayModeTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.PlayModeTests.dll" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-29 06:37:30Z" end-time="2026-07-29 06:37:31Z" duration="0.146424" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="15472" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1001" name="ItemHotbarPlayModeTests" fullname="ItemHotbarPlayModeTests" classname="ItemHotbarPlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-07-29 06:37:30Z" end-time="2026-07-29 06:37:31Z" duration="0.136839" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1004" name="ArrowHeld_OnlySelectedFirstSlotFiresAndReselectingFiresImmediately" fullname="ItemHotbarPlayModeTests.ArrowHeld_OnlySelectedFirstSlotFiresAndReselectingFiresImmediately" methodname="ArrowHeld_OnlySelectedFirstSlotFiresAndReselectingFiresImmediately" classname="ItemHotbarPlayModeTests" runstate="Runnable" seed="1938003748" result="Passed" start-time="2026-07-29 06:37:30Z" end-time="2026-07-29 06:37:31Z" duration="0.106101" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1003" name="EmptyAndOccupiedSelection_UpdatesEquipmentAndMovesOutline" fullname="ItemHotbarPlayModeTests.EmptyAndOccupiedSelection_UpdatesEquipmentAndMovesOutline" methodname="EmptyAndOccupiedSelection_UpdatesEquipmentAndMovesOutline" classname="ItemHotbarPlayModeTests" runstate="Runnable" seed="794819177" result="Passed" start-time="2026-07-29 06:37:31Z" end-time="2026-07-29 06:37:31Z" duration="0.008530" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1002" name="RuntimeInitialization_AutoAcquiresSwordAndShowsFirstSlotIcon" fullname="ItemHotbarPlayModeTests.RuntimeInitialization_AutoAcquiresSwordAndShowsFirstSlotIcon" methodname="RuntimeInitialization_AutoAcquiresSwordAndShowsFirstSlotIcon" classname="ItemHotbarPlayModeTests" runstate="Runnable" seed="1228556347" result="Passed" start-time="2026-07-29 06:37:31Z" end-time="2026-07-29 06:37:31Z" duration="0.012593" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1005" name="SwordProjectilePhysicsPlayModeTests" fullname="SwordProjectilePhysicsPlayModeTests" classname="SwordProjectilePhysicsPlayModeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-07-29 06:37:31Z" end-time="2026-07-29 06:37:31Z" duration="0.008262" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1006" name="OnTriggerEnter2D_RealPhysicsOverlapDealsExactlyFiveDamageAndDestroysSword" fullname="SwordProjectilePhysicsPlayModeTests.OnTriggerEnter2D_RealPhysicsOverlapDealsExactlyFiveDamageAndDestroysSword" methodname="OnTriggerEnter2D_RealPhysicsOverlapDealsExactlyFiveDamageAndDestroysSword" classname="SwordProjectilePhysicsPlayModeTests" runstate="Runnable" seed="263124892" result="Passed" start-time="2026-07-29 06:37:31Z" end-time="2026-07-29 06:37:31Z" duration="0.007639" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="8" result="Passed" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-29 07:15:04Z" end-time="2026-07-29 07:15:04Z" duration="0.0918408">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="116" result="Passed" start-time="2026-07-29 07:15:04Z" end-time="2026-07-29 07:15:04Z" duration="0.091841" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1141" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="116" result="Passed" start-time="2026-07-29 07:15:04Z" end-time="2026-07-29 07:15:04Z" duration="0.086474" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="16608" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1059" name="PlayerAxeAttackerTests" fullname="PlayerAxeAttackerTests" classname="PlayerAxeAttackerTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-07-29 07:15:04Z" end-time="2026-07-29 07:15:04Z" duration="0.085145" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="ParameterizedMethod" id="1064" name="CalculateDirection_RecognizesEveryArrow" fullname="PlayerAxeAttackerTests.CalculateDirection_RecognizesEveryArrow" classname="PlayerAxeAttackerTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-07-29 07:15:04Z" end-time="2026-07-29 07:15:04Z" duration="0.065623" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1060" name="CalculateDirection_RecognizesEveryArrow(UpArrow,0.0f,1.0f)" fullname="PlayerAxeAttackerTests.CalculateDirection_RecognizesEveryArrow(UpArrow,0.0f,1.0f)" methodname="CalculateDirection_RecognizesEveryArrow" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="1833377722" result="Passed" start-time="2026-07-29 07:15:04Z" end-time="2026-07-29 07:15:04Z" duration="0.052059" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1061" name="CalculateDirection_RecognizesEveryArrow(DownArrow,0.0f,-1.0f)" fullname="PlayerAxeAttackerTests.CalculateDirection_RecognizesEveryArrow(DownArrow,0.0f,-1.0f)" methodname="CalculateDirection_RecognizesEveryArrow" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="312506023" result="Passed" start-time="2026-07-29 07:15:04Z" end-time="2026-07-29 07:15:04Z" duration="0.002229" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1062" name="CalculateDirection_RecognizesEveryArrow(LeftArrow,-1.0f,0.0f)" fullname="PlayerAxeAttackerTests.CalculateDirection_RecognizesEveryArrow(LeftArrow,-1.0f,0.0f)" methodname="CalculateDirection_RecognizesEveryArrow" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="273904231" result="Passed" start-time="2026-07-29 07:15:04Z" end-time="2026-07-29 07:15:04Z" duration="0.001486" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1063" name="CalculateDirection_RecognizesEveryArrow(RightArrow,1.0f,0.0f)" fullname="PlayerAxeAttackerTests.CalculateDirection_RecognizesEveryArrow(RightArrow,1.0f,0.0f)" methodname="CalculateDirection_RecognizesEveryArrow" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="709851935" result="Passed" start-time="2026-07-29 07:15:04Z" end-time="2026-07-29 07:15:04Z" duration="0.001361" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+        </test-suite>
+        <test-case id="1065" name="HeldArrow_AttacksImmediatelyThenOncePerSecond" fullname="PlayerAxeAttackerTests.HeldArrow_AttacksImmediatelyThenOncePerSecond" methodname="HeldArrow_AttacksImmediatelyThenOncePerSecond" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="1378252745" result="Passed" start-time="2026-07-29 07:15:04Z" end-time="2026-07-29 07:15:04Z" duration="0.005582" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1067" name="NonAxeSelection_DoesNotAttack" fullname="PlayerAxeAttackerTests.NonAxeSelection_DoesNotAttack" methodname="NonAxeSelection_DoesNotAttack" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="445927878" result="Passed" start-time="2026-07-29 07:15:04Z" end-time="2026-07-29 07:15:04Z" duration="0.001750" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1066" name="ReleaseAndRepress_StillRespectsOneSecondCooldown" fullname="PlayerAxeAttackerTests.ReleaseAndRepress_StillRespectsOneSecondCooldown" methodname="ReleaseAndRepress_StillRespectsOneSecondCooldown" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="1474377026" result="Passed" start-time="2026-07-29 07:15:04Z" end-time="2026-07-29 07:15:04Z" duration="0.001612" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1068" name="SpawnedSwing_UsesBottomPivotAtPlayerAndConfiguredVisualLength" fullname="PlayerAxeAttackerTests.SpawnedSwing_UsesBottomPivotAtPlayerAndConfiguredVisualLength" methodname="SpawnedSwing_UsesBottomPivotAtPlayerAndConfiguredVisualLength" classname="PlayerAxeAttackerTests" runstate="Runnable" seed="2044227421" result="Passed" start-time="2026-07-29 07:15:04Z" end-time="2026-07-29 07:15:04Z" duration="0.005039" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

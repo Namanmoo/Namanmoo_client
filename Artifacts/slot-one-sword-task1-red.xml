@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="11" result="Failed(Child)" total="11" passed="4" failed="7" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-07-28 20:24:19Z" end-time="2026-07-28 20:24:20Z" duration="0.1128234">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="85" result="Failed" site="Child" start-time="2026-07-28 20:24:19Z" end-time="2026-07-28 20:24:20Z" duration="0.112823" total="11" passed="4" failed="7" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1101" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="85" result="Failed" site="Child" start-time="2026-07-28 20:24:19Z" end-time="2026-07-28 20:24:20Z" duration="0.104837" total="11" passed="4" failed="7" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="8368" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1062" name="PlayerSwordShooterTests" fullname="PlayerSwordShooterTests" classname="PlayerSwordShooterTests" runstate="Runnable" testcasecount="11" result="Failed" site="Child" start-time="2026-07-28 20:24:19Z" end-time="2026-07-28 20:24:20Z" duration="0.103045" total="11" passed="4" failed="7" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1065" name="CalculateDirection_ArrowKeysProduceExactCardinalDirections" fullname="PlayerSwordShooterTests.CalculateDirection_ArrowKeysProduceExactCardinalDirections" methodname="CalculateDirection_ArrowKeysProduceExactCardinalDirections" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1906475343" result="Passed" start-time="2026-07-28 20:24:19Z" end-time="2026-07-28 20:24:19Z" duration="0.057152" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1066" name="CalculateDirection_DiagonalArrowKeysAreNormalized" fullname="PlayerSwordShooterTests.CalculateDirection_DiagonalArrowKeysAreNormalized" methodname="CalculateDirection_DiagonalArrowKeysAreNormalized" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1312685175" result="Passed" start-time="2026-07-28 20:24:19Z" end-time="2026-07-28 20:24:19Z" duration="0.003172" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1067" name="CalculateDirection_WasdDoesNotAffectFiringDirection" fullname="PlayerSwordShooterTests.CalculateDirection_WasdDoesNotAffectFiringDirection" methodname="CalculateDirection_WasdDoesNotAffectFiringDirection" classname="PlayerSwordShooterTests" runstate="Runnable" seed="779608878" result="Passed" start-time="2026-07-28 20:24:19Z" end-time="2026-07-28 20:24:19Z" duration="0.001833" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1064" name="InspectorDefaults_AreConfiguredAndNegativeNumericValuesAreCorrected" fullname="PlayerSwordShooterTests.InspectorDefaults_AreConfiguredAndNegativeNumericValuesAreCorrected" methodname="InspectorDefaults_AreConfiguredAndNegativeNumericValuesAreCorrected" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1297439125" result="Failed" start-time="2026-07-28 20:24:19Z" end-time="2026-07-28 20:24:20Z" duration="0.007434" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at PlayerSwordShooterTests.InitializeInventory (PlayerSwordShooter shooter, PlayerInventory inventory) [0x00016] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:302
+at PlayerSwordShooterTests.CreateShooter () [0x00036] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:288
+at PlayerSwordShooterTests.InspectorDefaults_AreConfiguredAndNegativeNumericValuesAreCorrected () [0x00000] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:67
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1069" name="ProcessInput_AfterReleaseFiresImmediatelyOnTheNextActivation" fullname="PlayerSwordShooterTests.ProcessInput_AfterReleaseFiresImmediatelyOnTheNextActivation" methodname="ProcessInput_AfterReleaseFiresImmediatelyOnTheNextActivation" classname="PlayerSwordShooterTests" runstate="Runnable" seed="945128342" result="Failed" start-time="2026-07-28 20:24:20Z" end-time="2026-07-28 20:24:20Z" duration="0.002060" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at PlayerSwordShooterTests.InitializeInventory (PlayerSwordShooter shooter, PlayerInventory inventory) [0x00016] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:302
+at PlayerSwordShooterTests.CreateShooter () [0x00036] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:288
+at PlayerSwordShooterTests.ProcessInput_AfterReleaseFiresImmediatelyOnTheNextActivation () [0x00000] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:152
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1068" name="ProcessInput_HeldRightFiresImmediatelyAndAtTheExactCooldownBoundary" fullname="PlayerSwordShooterTests.ProcessInput_HeldRightFiresImmediatelyAndAtTheExactCooldownBoundary" methodname="ProcessInput_HeldRightFiresImmediatelyAndAtTheExactCooldownBoundary" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1679356309" result="Failed" start-time="2026-07-28 20:24:20Z" end-time="2026-07-28 20:24:20Z" duration="0.001680" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at PlayerSwordShooterTests.InitializeInventory (PlayerSwordShooter shooter, PlayerInventory inventory) [0x00016] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:302
+at PlayerSwordShooterTests.CreateShooter () [0x00036] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:288
+at PlayerSwordShooterTests.ProcessInput_HeldRightFiresImmediatelyAndAtTheExactCooldownBoundary () [0x00000] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:135
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1071" name="ProcessInput_NullInventoryEmptySlotZeroAndNonSwordItemDoNotFire" fullname="PlayerSwordShooterTests.ProcessInput_NullInventoryEmptySlotZeroAndNonSwordItemDoNotFire" methodname="ProcessInput_NullInventoryEmptySlotZeroAndNonSwordItemDoNotFire" classname="PlayerSwordShooterTests" runstate="Runnable" seed="258119443" result="Failed" start-time="2026-07-28 20:24:20Z" end-time="2026-07-28 20:24:20Z" duration="0.003548" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at PlayerSwordShooterTests.InitializeInventory (PlayerSwordShooter shooter, PlayerInventory inventory) [0x00016] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:302
+at PlayerSwordShooterTests.ProcessInput_NullInventoryEmptySlotZeroAndNonSwordItemDoNotFire () [0x00052] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:197
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1070" name="ProcessInput_OnlyFiresForTheSwordInSelectedSlotZeroAndResumesImmediatelyAfterReselectingIt" fullname="PlayerSwordShooterTests.ProcessInput_OnlyFiresForTheSwordInSelectedSlotZeroAndResumesImmediatelyAfterReselectingIt" methodname="ProcessInput_OnlyFiresForTheSwordInSelectedSlotZeroAndResumesImmediatelyAfterReselectingIt" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1108798387" result="Failed" start-time="2026-07-28 20:24:20Z" end-time="2026-07-28 20:24:20Z" duration="0.001475" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at PlayerSwordShooterTests.InitializeInventory (PlayerSwordShooter shooter, PlayerInventory inventory) [0x00016] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:302
+at PlayerSwordShooterTests.CreateShooter () [0x00036] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:288
+at PlayerSwordShooterTests.ProcessInput_OnlyFiresForTheSwordInSelectedSlotZeroAndResumesImmediatelyAfterReselectingIt () [0x00000] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:168
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1072" name="SpawnedProjectile_HasRequiredComponentsSpritePositionAndConfiguration" fullname="PlayerSwordShooterTests.SpawnedProjectile_HasRequiredComponentsSpritePositionAndConfiguration" methodname="SpawnedProjectile_HasRequiredComponentsSpritePositionAndConfiguration" classname="PlayerSwordShooterTests" runstate="Runnable" seed="42448764" result="Failed" start-time="2026-07-28 20:24:20Z" end-time="2026-07-28 20:24:20Z" duration="0.001811" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at PlayerSwordShooterTests.InitializeInventory (PlayerSwordShooter shooter, PlayerInventory inventory) [0x00016] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:302
+at PlayerSwordShooterTests.CreateShooter () [0x00036] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:288
+at PlayerSwordShooterTests.SpawnedProjectile_HasRequiredComponentsSpritePositionAndConfiguration () [0x00000] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:213
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1073" name="SpawnedProjectile_ReceivesConfiguredLifetime" fullname="PlayerSwordShooterTests.SpawnedProjectile_ReceivesConfiguredLifetime" methodname="SpawnedProjectile_ReceivesConfiguredLifetime" classname="PlayerSwordShooterTests" runstate="Runnable" seed="974918825" result="Failed" start-time="2026-07-28 20:24:20Z" end-time="2026-07-28 20:24:20Z" duration="0.001326" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at PlayerSwordShooterTests.InitializeInventory (PlayerSwordShooter shooter, PlayerInventory inventory) [0x00016] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:302
+at PlayerSwordShooterTests.CreateShooter () [0x00036] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:288
+at PlayerSwordShooterTests.SpawnedProjectile_ReceivesConfiguredLifetime () [0x00000] in C:\Users\myong\NaManMoo\Assets\Tests\Editor\PlayerSwordShooterTests.cs:267
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1063" name="SwordAsset_IsAnExactSourceCopyWithRequiredImportSettings" fullname="PlayerSwordShooterTests.SwordAsset_IsAnExactSourceCopyWithRequiredImportSettings" methodname="SwordAsset_IsAnExactSourceCopyWithRequiredImportSettings" classname="PlayerSwordShooterTests" runstate="Runnable" seed="1011679150" result="Passed" start-time="2026-07-28 20:24:20Z" end-time="2026-07-28 20:24:20Z" duration="0.009260" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
