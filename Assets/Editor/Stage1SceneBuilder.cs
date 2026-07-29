@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public static class Stage1SceneBuilder
 {
-    public const string ScenePath = "Assets/Scenes/Stage1.unity";
+    public const string ScenePath = "Assets/Scenes/SampleStage.unity";
 
     private const string AssetFolder = "Assets/Stage1";
     private const string FloorMeshPath = AssetFolder + "/Stage1Floor.asset";
@@ -45,11 +45,11 @@ public static class Stage1SceneBuilder
             NewSceneSetup.EmptyScene,
             NewSceneMode.Single);
 
-        CreateCamera();
         CreateGlobalLight();
         CreateStageMap();
         CreateBoundary();
         GameObject player = CreatePlayer(swordSprite, axeSprite, playerHealthHeart);
+        CreateCamera(player.transform);
         Stage1EncounterGate gate = Stage1KrabEncounterSetup.Create(
             null,
             player.transform,
@@ -68,11 +68,12 @@ public static class Stage1SceneBuilder
         AssetDatabase.Refresh();
     }
 
-    private static void CreateCamera()
+    private static void CreateCamera(Transform player)
     {
         var cameraObject = new GameObject("Main Camera");
         cameraObject.tag = "MainCamera";
-        cameraObject.transform.position = new Vector3(0f, 0f, -10f);
+        cameraObject.transform.SetParent(player, false);
+        cameraObject.transform.localPosition = new Vector3(0f, 0f, -9.8f);
 
         Camera camera = cameraObject.AddComponent<Camera>();
         camera.orthographic = true;
@@ -195,10 +196,7 @@ public static class Stage1SceneBuilder
         collider.radius = 0.5f;
 
         playerObject.AddComponent<PlayerMovement>();
-        PlayerSwordShooter shooter = playerObject.AddComponent<PlayerSwordShooter>();
-        shooter.SwordSprite = swordSprite;
-        PlayerAxeAttacker axeAttacker = playerObject.AddComponent<PlayerAxeAttacker>();
-        axeAttacker.AxeSprite = axeSprite;
+        playerObject.AddComponent<PlayerWeaponController>();
         Sprite backgroundSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ItemHotbarBackgroundPath);
         if (backgroundSprite == null)
         {

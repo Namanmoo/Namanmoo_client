@@ -9,7 +9,18 @@ public sealed class ItemHotbarController : MonoBehaviour
     [SerializeField]
     private Sprite startingAxeSprite;
 
+    [SerializeField]
+    private bool useSampleLoadout;
+
+    [SerializeField]
+    private Sprite sampleProjectileSprite;
+
+    [SerializeField]
+    private Sprite sampleAxeSprite;
+
     private PlayerInventory inventory;
+    private WeaponDefinition[] sampleWeapons;
+    private bool sampleLoadoutApplied;
 
     public PlayerInventory Inventory
     {
@@ -41,6 +52,35 @@ public sealed class ItemHotbarController : MonoBehaviour
     {
         startingSwordSprite = swordSprite;
         startingAxeSprite = axeSprite;
+        EnsureInventory();
+    }
+
+    public void ConfigureSampleWeapons(WeaponDefinition[] weapons)
+    {
+        EnsureInventory();
+        if (weapons == null)
+        {
+            return;
+        }
+
+        for (int index = 0; index < weapons.Length && index < 6; index++)
+        {
+            WeaponDefinition weapon = weapons[index];
+            if (weapon != null && weapon.IsValid)
+            {
+                inventory.EnsureUniqueItemInSlot(index, new ItemData(weapon));
+            }
+        }
+        inventory.SelectSlot(0);
+    }
+
+    public void ConfigureSampleLoadout(Sprite projectileSprite, Sprite axeSprite)
+    {
+        useSampleLoadout = true;
+        sampleProjectileSprite = projectileSprite;
+        sampleAxeSprite = axeSprite;
+        sampleWeapons = null;
+        sampleLoadoutApplied = false;
         EnsureInventory();
     }
 
@@ -77,9 +117,11 @@ public sealed class ItemHotbarController : MonoBehaviour
         if (inventory == null)
         {
             inventory = new PlayerInventory();
+            sampleLoadoutApplied = false;
         }
 
         EnsureStartingWeapons();
+        EnsureSampleLoadout();
 
         PlayerSwordShooter shooter = GetComponent<PlayerSwordShooter>();
         if (shooter != null)
@@ -91,6 +133,12 @@ public sealed class ItemHotbarController : MonoBehaviour
         if (axeAttacker != null)
         {
             axeAttacker.InitializeInventory(inventory);
+        }
+
+        PlayerWeaponController weaponController = GetComponent<PlayerWeaponController>();
+        if (weaponController != null)
+        {
+            weaponController.InitializeInventory(inventory);
         }
     }
 
@@ -108,5 +156,27 @@ public sealed class ItemHotbarController : MonoBehaviour
                 1,
                 new ItemData("axe", "Axe", ItemKind.Weapon, startingAxeSprite));
         }
+    }
+
+    private void EnsureSampleLoadout()
+    {
+        if (!useSampleLoadout || sampleLoadoutApplied)
+        {
+            return;
+        }
+
+        if (sampleWeapons == null)
+        {
+            sampleWeapons = SampleWeaponFactory.Create(
+                sampleProjectileSprite,
+                sampleAxeSprite ?? sampleProjectileSprite);
+        }
+
+        for (int index = 0; index < sampleWeapons.Length; index++)
+        {
+            inventory.EnsureUniqueItemInSlot(index, new ItemData(sampleWeapons[index]));
+        }
+        inventory.SelectSlot(0);
+        sampleLoadoutApplied = true;
     }
 }

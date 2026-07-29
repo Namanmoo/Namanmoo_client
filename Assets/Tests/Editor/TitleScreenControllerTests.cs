@@ -7,6 +7,6 @@ public sealed class TitleScreenControllerTests
     {
         Assert.That(
             TitleScreenController.Stage1ScenePath,
-            Is.EqualTo("Assets/Scenes/Stage1.unity"));
+            Is.EqualTo("Assets/Scenes/SampleStage.unity"));
     }
 }

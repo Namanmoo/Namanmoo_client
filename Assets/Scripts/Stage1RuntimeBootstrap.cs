@@ -289,10 +289,7 @@ public class Stage1RuntimeBootstrap : MonoBehaviour
         CircleCollider2D circle = player.AddComponent<CircleCollider2D>();
         circle.radius = 0.5f;
         player.AddComponent<PlayerMovement>();
-        PlayerSwordShooter shooter = player.AddComponent<PlayerSwordShooter>();
-        shooter.SwordSprite = swordSprite;
-        PlayerAxeAttacker axeAttacker = player.AddComponent<PlayerAxeAttacker>();
-        axeAttacker.AxeSprite = axeSprite;
+        player.AddComponent<PlayerWeaponController>();
         Stage1ItemHotbarSetup.Create(
             player,
             parent,

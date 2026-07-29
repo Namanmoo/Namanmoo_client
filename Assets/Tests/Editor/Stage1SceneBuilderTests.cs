@@ -71,68 +71,47 @@ public class Stage1SceneBuilderTests
     }
 
     [Test]
-    public void Build_AssignsSwordShooterSpriteAndDefaultConfigurationToPlayer()
+    public void Build_AssignsGenericWeaponControllerToPlayer()
     {
-        Sprite swordAssetBeforeBuild = AssetDatabase.LoadAssetAtPath<Sprite>(SwordSpritePath);
-        Assert.That(swordAssetBeforeBuild, Is.Not.Null);
-
         Stage1SceneBuilder.Build();
         EditorSceneManager.OpenScene(Stage1SceneBuilder.ScenePath);
 
-        Sprite expectedSwordSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SwordSpritePath);
         GameObject player = GameObject.Find("Player");
-        Assert.That(expectedSwordSprite, Is.Not.Null);
         Assert.That(player, Is.Not.Null);
-
-        PlayerSwordShooter shooter = player.GetComponent<PlayerSwordShooter>();
-        Assert.That(shooter, Is.Not.Null);
-        Assert.That(shooter.SwordSprite, Is.SameAs(expectedSwordSprite));
-        Assert.That(AssetDatabase.GetAssetPath(shooter.SwordSprite), Is.EqualTo(SwordSpritePath));
-
-        var serializedShooter = new SerializedObject(shooter);
-        SerializedProperty damage = serializedShooter.FindProperty("damage");
-        SerializedProperty shotsPerSecond = serializedShooter.FindProperty("shotsPerSecond");
-        Assert.That(damage, Is.Not.Null);
-        Assert.That(shotsPerSecond, Is.Not.Null);
-        Assert.That(damage.intValue, Is.EqualTo(5));
-        Assert.That(shotsPerSecond.floatValue, Is.GreaterThan(0f));
+        Assert.That(player.GetComponent<PlayerWeaponController>(), Is.Not.Null);
+        Assert.That(player.GetComponent<PlayerSwordShooter>(), Is.Null);
+        Assert.That(player.GetComponent<PlayerAxeAttacker>(), Is.Null);
     }
 
     [Test]
-    public void Build_WiresExactStartingSwordThroughOneSharedInventoryAndFirstSlotIcon()
+    public void Build_WiresFiveSampleWeaponsThroughOneSharedInventory()
     {
         Stage1SceneBuilder.Build();
         EditorSceneManager.OpenScene(Stage1SceneBuilder.ScenePath);
 
-        Sprite expectedSwordSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SwordSpritePath);
         GameObject player = GameObject.Find("Player");
         GameObject hotbarObject = GameObject.Find("Item Hotbar");
-        Assert.That(expectedSwordSprite, Is.Not.Null);
         Assert.That(player, Is.Not.Null);
         Assert.That(hotbarObject, Is.Not.Null);
 
         ItemHotbarController controller = player.GetComponent<ItemHotbarController>();
-        PlayerSwordShooter shooter = player.GetComponent<PlayerSwordShooter>();
+        PlayerWeaponController weaponController =
+            player.GetComponent<PlayerWeaponController>();
         Assert.That(controller, Is.Not.Null);
-        Assert.That(shooter, Is.Not.Null);
-
-        var serializedController = new SerializedObject(controller);
-        SerializedProperty startingSword =
-            serializedController.FindProperty("startingSwordSprite");
-        Assert.That(startingSword, Is.Not.Null);
-        Assert.That(startingSword.objectReferenceValue, Is.SameAs(expectedSwordSprite));
+        Assert.That(weaponController, Is.Not.Null);
 
         PlayerInventory inventory = controller.Inventory;
-        ItemData sword = inventory.Slots[0];
-        Assert.That(sword, Is.Not.Null);
-        Assert.That(sword.Id, Is.EqualTo("sword"));
-        Assert.That(sword.DisplayName, Is.EqualTo("Sword"));
-        Assert.That(sword.Kind, Is.EqualTo(ItemKind.Weapon));
-        Assert.That(sword.Icon, Is.SameAs(expectedSwordSprite));
+        Assert.That(inventory.Slots[0].Weapon.Type, Is.EqualTo(WeaponType.Axe));
+        Assert.That(inventory.Slots[1].Weapon.Type, Is.EqualTo(WeaponType.Projectile));
+        Assert.That(inventory.Slots[2].Weapon.Type, Is.EqualTo(WeaponType.Spear));
+        Assert.That(inventory.Slots[3].Weapon.Type, Is.EqualTo(WeaponType.Sword));
+        Assert.That(inventory.Slots[4].Weapon.Type, Is.EqualTo(WeaponType.Gun));
+        Assert.That(inventory.Slots[5], Is.Null);
         Assert.That(inventory.SelectedSlotIndex, Is.EqualTo(0));
-        Assert.That(inventory.EquippedItem, Is.SameAs(sword));
-        Assert.That(CountSwordItems(inventory), Is.EqualTo(1));
-        Assert.That(GetPrivateField<PlayerInventory>(shooter, "inventory"), Is.SameAs(inventory));
+        Assert.That(inventory.EquippedItem, Is.SameAs(inventory.Slots[0]));
+        Assert.That(
+            GetPrivateField<PlayerInventory>(weaponController, "inventory"),
+            Is.SameAs(inventory));
 
         RectTransform hotbarRect = hotbarObject.GetComponent<RectTransform>();
         Assert.That(
@@ -141,7 +120,7 @@ public class Stage1SceneBuilderTests
         Image icon = hotbarObject.transform.Find("Slot 1/Icon").GetComponent<Image>();
         Assert.That(icon.enabled, Is.True);
         Assert.That(icon.preserveAspect, Is.True);
-        Assert.That(icon.sprite, Is.SameAs(expectedSwordSprite));
+        Assert.That(icon.sprite, Is.SameAs(inventory.Slots[0].Icon));
         AssertContainedBy(
             hotbarRect.rect,
             RectTransformUtility.CalculateRelativeRectTransformBounds(
@@ -358,7 +337,7 @@ public class Stage1SceneBuilderTests
     }
 
     [Test]
-    public void RuntimeBootstrap_BuildsPlayerWithConfiguredSwordShooter()
+    public void RuntimeBootstrap_BuildsPlayerWithConfiguredGenericWeaponController()
     {
         GameObject bootstrapObject = new GameObject("Stage1RuntimeBootstrapTests");
         bootstrapObject.SetActive(false);
@@ -379,26 +358,21 @@ public class Stage1SceneBuilderTests
             Transform player = generatedStage.Find("Player");
             Assert.That(player, Is.Not.Null);
 
-            PlayerSwordShooter shooter = player.GetComponent<PlayerSwordShooter>();
+            PlayerWeaponController weaponController =
+                player.GetComponent<PlayerWeaponController>();
             ItemHotbarController controller = player.GetComponent<ItemHotbarController>();
-            Sprite expectedSwordSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SwordSpritePath);
-            Assert.That(shooter, Is.Not.Null);
+            Assert.That(weaponController, Is.Not.Null);
             Assert.That(controller, Is.Not.Null);
-            Assert.That(shooter.SwordSprite, Is.SameAs(expectedSwordSprite));
-            Assert.That(AssetDatabase.GetAssetPath(shooter.SwordSprite), Is.EqualTo(SwordSpritePath));
 
             PlayerInventory inventory = controller.Inventory;
-            ItemData sword = inventory.Slots[0];
-            Assert.That(sword, Is.Not.Null);
-            Assert.That(sword.Id, Is.EqualTo("sword"));
-            Assert.That(sword.DisplayName, Is.EqualTo("Sword"));
-            Assert.That(sword.Kind, Is.EqualTo(ItemKind.Weapon));
-            Assert.That(sword.Icon, Is.SameAs(expectedSwordSprite));
+            Assert.That(inventory.Slots[0].Weapon.Type, Is.EqualTo(WeaponType.Axe));
+            Assert.That(inventory.Slots[1].Weapon.Type, Is.EqualTo(WeaponType.Projectile));
+            Assert.That(inventory.Slots[2].Weapon.Type, Is.EqualTo(WeaponType.Spear));
+            Assert.That(inventory.Slots[3].Weapon.Type, Is.EqualTo(WeaponType.Sword));
+            Assert.That(inventory.Slots[4].Weapon.Type, Is.EqualTo(WeaponType.Gun));
             Assert.That(inventory.SelectedSlotIndex, Is.EqualTo(0));
-            Assert.That(inventory.EquippedItem, Is.SameAs(sword));
-            Assert.That(CountSwordItems(inventory), Is.EqualTo(1));
             Assert.That(
-                GetPrivateField<PlayerInventory>(shooter, "inventory"),
+                GetPrivateField<PlayerInventory>(weaponController, "inventory"),
                 Is.SameAs(inventory));
 
             ItemHotbarView view =
@@ -414,7 +388,7 @@ public class Stage1SceneBuilderTests
             Image icon = view.transform.Find("Slot 1/Icon").GetComponent<Image>();
             Assert.That(icon.enabled, Is.True);
             Assert.That(icon.preserveAspect, Is.True);
-            Assert.That(icon.sprite, Is.SameAs(expectedSwordSprite));
+            Assert.That(icon.sprite, Is.SameAs(inventory.Slots[0].Icon));
             AssertContainedBy(
                 hotbarRect.rect,
                 RectTransformUtility.CalculateRelativeRectTransformBounds(

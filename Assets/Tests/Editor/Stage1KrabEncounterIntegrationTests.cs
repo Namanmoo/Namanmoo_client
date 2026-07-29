@@ -6,7 +6,7 @@ using UnityEngine;
 
 public sealed class Stage1KrabEncounterIntegrationTests
 {
-    private const string ScenePath = "Assets/Scenes/Stage1.unity";
+    private const string ScenePath = "Assets/Scenes/SampleStage.unity";
     private const string KrabSpritePath = "Assets/Enemies/enemy_krab.png";
 
     [Test]

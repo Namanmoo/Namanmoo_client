@@ -15,7 +15,7 @@ public class ItemHotbarPlayModeTests
     private GameObject player;
     private ItemHotbarController controller;
     private ItemHotbarView view;
-    private PlayerSwordShooter shooter;
+    private PlayerWeaponController weaponController;
     private Keyboard keyboard;
     private Texture2D backgroundTexture;
     private Sprite backgroundSprite;
@@ -38,7 +38,6 @@ public class ItemHotbarPlayModeTests
             swordTexture,
             new Rect(0f, 0f, 8f, 4f),
             Vector2.one * 0.5f);
-        shooter = player.AddComponent<PlayerSwordShooter>();
         keyboard = InputSystem.AddDevice<Keyboard>();
         Stage1ItemHotbarSetup.Create(
             player,
@@ -48,14 +47,15 @@ public class ItemHotbarPlayModeTests
         yield return null;
 
         controller = player.GetComponent<ItemHotbarController>();
+        weaponController = player.GetComponent<PlayerWeaponController>();
         view = root.GetComponentInChildren<ItemHotbarView>(true);
     }
 
     [UnityTearDown]
     public IEnumerator TearDown()
     {
-        foreach (SwordProjectile projectile in
-                 Object.FindObjectsByType<SwordProjectile>(FindObjectsInactive.Include))
+        foreach (WeaponProjectile projectile in
+                 Object.FindObjectsByType<WeaponProjectile>(FindObjectsInactive.Include))
         {
             Object.Destroy(projectile.gameObject);
         }
@@ -74,7 +74,7 @@ public class ItemHotbarPlayModeTests
     }
 
     [UnityTest]
-    public IEnumerator RuntimeInitialization_AutoAcquiresSwordAndShowsFirstSlotIcon()
+    public IEnumerator RuntimeInitialization_LoadsFiveSampleWeaponsAndShowsAxeFirst()
     {
         Assert.That(controller, Is.Not.Null);
         Assert.That(controller.Inventory, Is.Not.Null);
@@ -99,19 +99,20 @@ public class ItemHotbarPlayModeTests
         Assert.That(eventSystems[0].GetComponent<InputSystemUIInputModule>(), Is.Not.Null);
 
         PlayerInventory inventory = controller.Inventory;
-        ItemData sword = inventory.Slots[0];
-        Assert.That(sword, Is.Not.Null);
-        Assert.That(sword.Id, Is.EqualTo("sword"));
-        Assert.That(sword.DisplayName, Is.EqualTo("Sword"));
-        Assert.That(sword.Kind, Is.EqualTo(ItemKind.Weapon));
-        Assert.That(sword.Icon, Is.SameAs(swordSprite));
+        ItemData axe = inventory.Slots[0];
+        Assert.That(axe.Weapon.Type, Is.EqualTo(WeaponType.Axe));
+        Assert.That(inventory.Slots[1].Weapon.Type, Is.EqualTo(WeaponType.Projectile));
+        Assert.That(inventory.Slots[2].Weapon.Type, Is.EqualTo(WeaponType.Spear));
+        Assert.That(inventory.Slots[3].Weapon.Type, Is.EqualTo(WeaponType.Sword));
+        Assert.That(inventory.Slots[4].Weapon.Type, Is.EqualTo(WeaponType.Gun));
+        Assert.That(inventory.Slots[5], Is.Null);
         Assert.That(inventory.SelectedSlotIndex, Is.EqualTo(0));
-        Assert.That(inventory.EquippedItem, Is.SameAs(sword));
-        Assert.That(GetPrivateField<PlayerInventory>(shooter, "inventory"), Is.SameAs(inventory));
+        Assert.That(inventory.EquippedItem, Is.SameAs(axe));
+        Assert.That(GetPrivateField<PlayerInventory>(weaponController, "inventory"), Is.SameAs(inventory));
         Image icon = Slot(0).Find("Icon").GetComponent<Image>();
         Assert.That(icon.enabled, Is.True);
         Assert.That(icon.preserveAspect, Is.True);
-        Assert.That(icon.sprite, Is.SameAs(swordSprite));
+        Assert.That(icon.sprite, Is.SameAs(axe.Icon));
         Assert.That(
             view.GetComponent<RectTransform>().sizeDelta,
             Is.EqualTo(new Vector2(432f, 144.3318f)));
@@ -124,43 +125,44 @@ public class ItemHotbarPlayModeTests
         ItemData potion = new ItemData("potion", "Potion", ItemKind.Item);
         PlayerInventory inventory = controller.Inventory;
 
-        inventory.SelectSlot(1);
+        inventory.SelectSlot(5);
         yield return null;
 
         Assert.That(inventory.EquippedItem, Is.Null);
-        Assert.That(SelectionOutline(1).activeSelf, Is.True);
+        Assert.That(SelectionOutline(5).activeSelf, Is.True);
 
         inventory.TryAcquire(potion);
         yield return null;
 
         Assert.That(inventory.EquippedItem, Is.SameAs(potion));
-        Assert.That(SelectionOutline(1).activeSelf, Is.True);
+        Assert.That(SelectionOutline(5).activeSelf, Is.True);
 
         inventory.SelectSlot(0);
         yield return null;
 
         Assert.That(inventory.EquippedItem, Is.SameAs(inventory.Slots[0]));
         Assert.That(SelectionOutline(0).activeSelf, Is.True);
-        Assert.That(SelectionOutline(1).activeSelf, Is.False);
+        Assert.That(SelectionOutline(5).activeSelf, Is.False);
     }
 
     [UnityTest]
-    public IEnumerator ArrowHeld_OnlySelectedFirstSlotFiresAndReselectionKeepsCooldown()
+    public IEnumerator ArrowHeld_ProjectileSlotFiresAndReselectionKeepsCooldown()
     {
         SetKeyboardState(Key.RightArrow);
+        controller.Inventory.SelectSlot(1);
 
-        shooter.ProcessInput(keyboard, 0f);
+        weaponController.ProcessInput(keyboard, 0f);
+        Assert.That(ProjectileCount(), Is.EqualTo(1));
+
+        controller.Inventory.SelectSlot(5);
+        weaponController.ProcessInput(keyboard, 0.1f);
         Assert.That(ProjectileCount(), Is.EqualTo(1));
 
         controller.Inventory.SelectSlot(1);
-        shooter.ProcessInput(keyboard, 0.1f);
+        weaponController.ProcessInput(keyboard, 0.2f);
         Assert.That(ProjectileCount(), Is.EqualTo(1));
 
-        controller.Inventory.SelectSlot(0);
-        shooter.ProcessInput(keyboard, 0.2f);
-        Assert.That(ProjectileCount(), Is.EqualTo(1));
-
-        shooter.ProcessInput(keyboard, 0.5f);
+        weaponController.ProcessInput(keyboard, 0.8f);
         Assert.That(ProjectileCount(), Is.EqualTo(2));
 
         SetKeyboardState();
@@ -185,7 +187,7 @@ public class ItemHotbarPlayModeTests
 
     private static int ProjectileCount()
     {
-        return Object.FindObjectsByType<SwordProjectile>(
+        return Object.FindObjectsByType<WeaponProjectile>(
             FindObjectsInactive.Include).Length;
     }
 

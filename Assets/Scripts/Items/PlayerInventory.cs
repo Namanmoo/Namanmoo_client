@@ -159,7 +159,8 @@ public sealed class PlayerInventory
         return item.Id == requiredItem.Id
             && item.DisplayName == requiredItem.DisplayName
             && item.Kind == requiredItem.Kind
-            && ReferenceEquals(item.Icon, requiredItem.Icon);
+            && ReferenceEquals(item.Icon, requiredItem.Icon)
+            && ReferenceEquals(item.Weapon, requiredItem.Weapon);
     }
 
     private void SetEquippedItem(ItemData item)

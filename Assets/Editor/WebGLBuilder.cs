@@ -61,7 +61,7 @@ public static class WebGLBuilder
         {
             Debug.LogError(
                 "[WebGLBuilder] Build Settings에 활성화된 씬이 없습니다. " +
-                "File → Build Profiles 에서 Title/Stage1 씬을 추가하세요.");
+                "File → Build Profiles 에서 Title/SampleStage 씬을 추가하세요.");
             return false;
         }
 

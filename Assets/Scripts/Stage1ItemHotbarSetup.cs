@@ -35,14 +35,9 @@ public static class Stage1ItemHotbarSetup
         }
 
         ItemHotbarController controller = player.AddComponent<ItemHotbarController>();
-        if (axeSprite == null)
-        {
-            controller.ConfigureStartingSword(swordSprite);
-        }
-        else
-        {
-            controller.ConfigureStartingWeapons(swordSprite, axeSprite);
-        }
+        controller.ConfigureSampleLoadout(
+            swordSprite,
+            axeSprite ?? swordSprite);
         PlayerInventory inventory = controller.Inventory;
         EnsureEventSystem(canvasParent);
 
@@ -63,26 +58,13 @@ public static class Stage1ItemHotbarSetup
 
         ItemHotbarUIFactory.Create(canvasObject.transform, controller, backgroundSprite);
 
-        PlayerSwordShooter shooter = player.GetComponent<PlayerSwordShooter>();
-        if (shooter == null)
+        PlayerWeaponController weaponController =
+            player.GetComponent<PlayerWeaponController>();
+        if (weaponController == null)
         {
-            throw new System.InvalidOperationException(
-                "Stage1ItemHotbarSetup requires PlayerSwordShooter on the player.");
+            weaponController = player.AddComponent<PlayerWeaponController>();
         }
-
-        shooter.InitializeInventory(inventory);
-
-        PlayerAxeAttacker axeAttacker = player.GetComponent<PlayerAxeAttacker>();
-        if (axeSprite != null && axeAttacker == null)
-        {
-            throw new System.InvalidOperationException(
-                "Stage1ItemHotbarSetup requires PlayerAxeAttacker when an axe Sprite is provided.");
-        }
-
-        if (axeAttacker != null)
-        {
-            axeAttacker.InitializeInventory(inventory);
-        }
+        weaponController.InitializeInventory(inventory);
     }
 
     private static void EnsureEventSystem(Transform parent)
