@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes"
+    />
+    <title>{{{ PRODUCT_NAME }}}</title>
+    <style>
+      /* 1920x1080 기준 게임 화면을 창 크기에 맞춰 레터박스로 채운다. */
+      :root {
+        --ink: #f2f2f2;
+        --backdrop: #101014;
+        --accent: #ffb340;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: var(--backdrop);
+        color: var(--ink);
+        font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      }
+      #unity-container {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #unity-canvas {
+        display: block;
+        background: #000;
+        width: 100%;
+        height: 100%;
+        max-width: calc(100vh * 16 / 9);
+        max-height: calc(100vw * 9 / 16);
+        outline: none;
+      }
+      /* 로딩 화면 */
+      #unity-loading {
+        position: fixed;
+        inset: 0;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        background: var(--backdrop);
+      }
+      #unity-loading h1 {
+        margin: 0;
+        font-size: 1.6rem;
+        letter-spacing: 0.08em;
+      }
+      #unity-progress-bar {
+        width: 280px;
+        height: 12px;
+        border: 2px solid var(--ink);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      #unity-progress-fill {
+        width: 0%;
+        height: 100%;
+        background: var(--accent);
+        transition: width 0.15s ease-out;
+      }
+      #unity-loading small {
+        opacity: 0.65;
+      }
+      /* 경고·오류 배너 */
+      #unity-warning {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        width: min(720px, 96vw);
+      }
+      #unity-warning div {
+        margin: 6px 0;
+        padding: 10px 14px;
+        border-radius: 8px;
+        color: #101014;
+        font-size: 0.92rem;
+        white-space: pre-wrap;
+      }
+      /* 전체화면 버튼 */
+      #unity-fullscreen-button {
+        position: fixed;
+        right: 12px;
+        bottom: 12px;
+        z-index: 6;
+        padding: 6px 14px;
+        border: 2px solid var(--ink);
+        border-radius: 8px;
+        background: transparent;
+        color: var(--ink);
+        font: inherit;
+        font-size: 0.85rem;
+        cursor: pointer;
+        opacity: 0.5;
+      }
+      #unity-fullscreen-button:hover {
+        opacity: 1;
+      }
+      /* 모바일: 레터박스 없이 화면을 꽉 채운다 */
+      .unity-mobile #unity-canvas {
+        max-width: none;
+        max-height: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="unity-container">
+      <canvas
+        id="unity-canvas"
+        width="{{{ WIDTH }}}"
+        height="{{{ HEIGHT }}}"
+        tabindex="-1"
+      ></canvas>
+    </div>
+
+    <div id="unity-loading">
+      <h1>{{{ PRODUCT_NAME }}}</h1>
+      <div id="unity-progress-bar"><div id="unity-progress-fill"></div></div>
+      <small id="unity-loading-text">불러오는 중…</small>
+    </div>
+
+    <button id="unity-fullscreen-button" type="button">전체화면</button>
+    <div id="unity-warning"></div>
+
+    <script>
+      var canvas = document.querySelector("#unity-canvas");
+      var loading = document.querySelector("#unity-loading");
+      var progressFill = document.querySelector("#unity-progress-fill");
+      var loadingText = document.querySelector("#unity-loading-text");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+
+      // 치명적이지 않은 경고는 몇 초 뒤 사라지고, 오류는 화면에 남는다.
+      function unityShowBanner(msg, type) {
+        var banner = document.querySelector("#unity-warning");
+        var div = document.createElement("div");
+        div.innerHTML = msg;
+        div.style.background = type === "error" ? "#ff6b6b" : "#ffd166";
+        banner.appendChild(div);
+        if (type !== "error") {
+          setTimeout(function () {
+            banner.removeChild(div);
+          }, 5000);
+        }
+      }
+
+      var buildUrl = "Build";
+      var config = {
+        arguments: [],
+        dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
+        frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
+        codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+#if MEMORY_FILENAME
+        memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
+#endif
+#if SYMBOLS_FILENAME
+        symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
+#endif
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
+        productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
+        productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
+        showBanner: unityShowBanner,
+      };
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        document.body.classList.add("unity-mobile");
+      }
+
+      var script = document.createElement("script");
+      script.src = buildUrl + "/{{{ LOADER_FILENAME }}}";
+      script.onload = function () {
+        createUnityInstance(canvas, config, function (progress) {
+          var percent = Math.round(progress * 100);
+          progressFill.style.width = percent + "%";
+          loadingText.textContent = "불러오는 중… " + percent + "%";
+        })
+          .then(function (unityInstance) {
+            loading.style.display = "none";
+            fullscreenButton.onclick = function () {
+              unityInstance.SetFullscreen(1);
+            };
+            canvas.focus();
+          })
+          .catch(function (message) {
+            loadingText.textContent = "실행에 실패했습니다.";
+            unityShowBanner(message, "error");
+          });
+      };
+      document.body.appendChild(script);
+    </script>
+  </body>
+</html>

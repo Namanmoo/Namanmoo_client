@@ -5,3 +5,5 @@
 UserSettings/
 [Bb]uild/
 [Bb]uilds/
+*.DS_Store
+__pycache__/
