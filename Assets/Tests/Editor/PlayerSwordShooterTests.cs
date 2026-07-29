@@ -68,7 +68,7 @@ public class PlayerSwordShooterTests : InputTestFixture
         var serializedShooter = new SerializedObject(shooter);
 
         Assert.That(serializedShooter.FindProperty("damage").intValue, Is.EqualTo(5));
-        Assert.That(serializedShooter.FindProperty("shotsPerSecond").floatValue, Is.EqualTo(3f));
+        Assert.That(serializedShooter.FindProperty("shotsPerSecond").floatValue, Is.EqualTo(2f));
         Assert.That(serializedShooter.FindProperty("projectileSpeed").floatValue, Is.EqualTo(8f));
         Assert.That(serializedShooter.FindProperty("spinSpeed").floatValue, Is.EqualTo(720f));
         Assert.That(serializedShooter.FindProperty("projectileLifetime").floatValue, Is.EqualTo(4f));
@@ -147,7 +147,7 @@ public class PlayerSwordShooterTests : InputTestFixture
     }
 
     [Test]
-    public void ProcessInput_AfterReleaseFiresImmediatelyOnTheNextActivation()
+    public void ProcessInput_AfterReleaseAndRepressWaitsForTheOriginalCooldown()
     {
         PlayerSwordShooter shooter = CreateShooter();
         SetNumericConfiguration(shooter, shotsPerSecond: 2f);
@@ -159,11 +159,15 @@ public class PlayerSwordShooterTests : InputTestFixture
         Press(keyboard.rightArrowKey);
         shooter.ProcessInput(keyboard, 0.2f);
 
+        Assert.That(ProjectileCount(), Is.EqualTo(1));
+
+        shooter.ProcessInput(keyboard, 0.5f);
+
         Assert.That(ProjectileCount(), Is.EqualTo(2));
     }
 
     [Test]
-    public void ProcessInput_OnlyFiresForTheSwordInSelectedSlotZeroAndResumesImmediatelyAfterReselectingIt()
+    public void ProcessInput_OnlyFiresForSelectedSwordAndReselectionKeepsTheOriginalCooldown()
     {
         PlayerSwordShooter shooter = CreateShooter();
         PlayerInventory inventory = GetInventory(shooter);
@@ -186,6 +190,9 @@ public class PlayerSwordShooterTests : InputTestFixture
         hotbar.ProcessKeyboard(keyboard);
         Assert.That(inventory.SelectedSlotIndex, Is.EqualTo(0));
         shooter.ProcessInput(keyboard, 0.2f);
+        Assert.That(ProjectileCount(), Is.EqualTo(1));
+
+        shooter.ProcessInput(keyboard, 0.5f);
         Assert.That(ProjectileCount(), Is.EqualTo(2));
     }
 

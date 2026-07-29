@@ -145,7 +145,7 @@ public class ItemHotbarPlayModeTests
     }
 
     [UnityTest]
-    public IEnumerator ArrowHeld_OnlySelectedFirstSlotFiresAndReselectingFiresImmediately()
+    public IEnumerator ArrowHeld_OnlySelectedFirstSlotFiresAndReselectionKeepsCooldown()
     {
         SetKeyboardState(Key.RightArrow);
 
@@ -158,6 +158,9 @@ public class ItemHotbarPlayModeTests
 
         controller.Inventory.SelectSlot(0);
         shooter.ProcessInput(keyboard, 0.2f);
+        Assert.That(ProjectileCount(), Is.EqualTo(1));
+
+        shooter.ProcessInput(keyboard, 0.5f);
         Assert.That(ProjectileCount(), Is.EqualTo(2));
 
         SetKeyboardState();

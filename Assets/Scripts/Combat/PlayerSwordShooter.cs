@@ -7,7 +7,7 @@ public sealed class PlayerSwordShooter : MonoBehaviour
     private int damage = 5;
 
     [SerializeField, Min(0.01f)]
-    private float shotsPerSecond = 3f;
+    private float shotsPerSecond = 2f;
 
     [SerializeField, Min(0f)]
     private float projectileSpeed = 8f;
@@ -25,7 +25,6 @@ public sealed class PlayerSwordShooter : MonoBehaviour
     private Sprite swordSprite;
 
     private PlayerInventory inventory;
-    private bool firingDirectionActive;
     private float nextShotTime;
 
     public Sprite SwordSprite
@@ -77,24 +76,20 @@ public sealed class PlayerSwordShooter : MonoBehaviour
             || inventory.EquippedItem == null
             || inventory.EquippedItem.Id != "sword")
         {
-            firingDirectionActive = false;
             return;
         }
 
         Vector2 direction = CalculateDirection(keyboard);
         if (direction == Vector2.zero)
         {
-            firingDirectionActive = false;
             return;
         }
 
-        if (!firingDirectionActive || currentTime >= nextShotTime)
+        if (currentTime >= nextShotTime)
         {
             SpawnProjectile(direction);
             nextShotTime = currentTime + (1f / shotsPerSecond);
         }
-
-        firingDirectionActive = true;
     }
 
     private void SpawnProjectile(Vector2 direction)
