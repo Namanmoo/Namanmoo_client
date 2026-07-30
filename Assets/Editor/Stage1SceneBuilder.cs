@@ -45,11 +45,12 @@ public static class Stage1SceneBuilder
             NewSceneSetup.EmptyScene,
             NewSceneMode.Single);
 
-        CreateCamera();
+        Camera camera = CreateCamera();
         CreateGlobalLight();
         CreateStageMap();
         CreateBoundary();
         GameObject player = CreatePlayer(swordSprite, axeSprite, playerHealthHeart);
+        camera.GetComponent<CameraFollow>().Target = player.transform;
         Stage1EncounterGate gate = Stage1KrabEncounterSetup.Create(
             null,
             player.transform,
@@ -68,7 +69,7 @@ public static class Stage1SceneBuilder
         AssetDatabase.Refresh();
     }
 
-    private static void CreateCamera()
+    private static Camera CreateCamera()
     {
         var cameraObject = new GameObject("Main Camera");
         cameraObject.tag = "MainCamera";
@@ -81,6 +82,11 @@ public static class Stage1SceneBuilder
         camera.backgroundColor = new Color(0.93f, 0.93f, 0.93f, 1f);
         cameraObject.AddComponent<AudioListener>();
         cameraObject.AddComponent<UniversalAdditionalCameraData>();
+
+        // 맵이 뷰보다 커서 고정 카메라로는 플레이어가 화면 밖으로 나간다
+        CameraFollow follow = cameraObject.AddComponent<CameraFollow>();
+        follow.Bounds = Stage1MapDefinition.Bounds;
+        return camera;
     }
 
     private static void CreateGlobalLight()

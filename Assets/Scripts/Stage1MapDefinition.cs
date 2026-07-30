@@ -36,6 +36,30 @@ public static class Stage1MapDefinition
     private static readonly int[] TriangleIndices = Triangulate(ScaledOutlinePoints);
 
     public static IReadOnlyList<Vector2> Outline => ScaledOutlinePoints;
+
+    /// <summary>
+    /// 맵 외곽을 감싸는 사각형. 카메라가 맵 밖 여백을 보여주지 않도록 자를 때 쓴다.
+    /// 맵은 사각형이 아니므로 모서리 쪽에서 약간의 빈 공간은 보일 수 있다.
+    /// </summary>
+    public static Rect Bounds => BoundsOf(ScaledOutlinePoints);
+
+    private static Rect BoundsOf(Vector2[] points)
+    {
+        float minX = points[0].x;
+        float maxX = points[0].x;
+        float minY = points[0].y;
+        float maxY = points[0].y;
+
+        foreach (Vector2 point in points)
+        {
+            minX = Mathf.Min(minX, point.x);
+            maxX = Mathf.Max(maxX, point.x);
+            minY = Mathf.Min(minY, point.y);
+            maxY = Mathf.Max(maxY, point.y);
+        }
+
+        return Rect.MinMaxRect(minX, minY, maxX, maxY);
+    }
     public static IReadOnlyList<int> Triangles => TriangleIndices;
 
     public static bool Contains(Vector2 point)

@@ -206,6 +206,7 @@ public class Stage1RuntimeBootstrap : MonoBehaviour
         CreateFloor(root.transform);
         CreateBoundary(root.transform);
         Transform player = CreatePlayer(root.transform);
+        AttachCameraFollow(player);
         Stage1EncounterGate gate =
             Stage1KrabEncounterSetup.Create(root.transform, player, krabSprite);
         Stage1BossEncounterSetup.Create(
@@ -213,6 +214,29 @@ public class Stage1RuntimeBootstrap : MonoBehaviour
             player,
             gate,
             bossRobotSprite);
+    }
+
+    /// <summary>
+    /// 씬에 있는 카메라에 추적을 붙인다. 이 경로는 카메라를 만들지 않고
+    /// 씬에 이미 있는 것을 쓴다.
+    /// </summary>
+    private static void AttachCameraFollow(Transform player)
+    {
+        Camera main = Camera.main;
+        if (main == null)
+        {
+            return;
+        }
+
+        CameraFollow follow = main.GetComponent<CameraFollow>();
+        if (follow == null)
+        {
+            follow = main.gameObject.AddComponent<CameraFollow>();
+        }
+
+        follow.Bounds = Stage1MapDefinition.Bounds;
+        follow.Target = player;
+        follow.SnapToTarget();
     }
 
     private static void CreateFloor(Transform parent)
