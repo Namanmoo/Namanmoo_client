@@ -48,10 +48,16 @@ public static class TitleSceneBuilder
 
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene, ScenePath);
+        // 게임 시작 → 무기 만들기 → 던전 순서. 목록을 통째로 덮어쓰므로 게임이 부르는
+        // 씬이 하나도 빠져서는 안 된다 — 빠진 씬은 실행 중에 "빌드 목록에 없다"며
+        // 로드가 실패하고, WebGL 빌더도 이 목록을 그대로 쓴다.
         EditorBuildSettings.scenes = new[]
         {
-            new EditorBuildSettingsScene(ScenePath, true),
-            new EditorBuildSettingsScene(TitleScreenController.Stage1ScenePath, true)
+            new EditorBuildSettingsScene(GameScenes.Title, true),
+            new EditorBuildSettingsScene(GameScenes.WeaponForge, true),
+            new EditorBuildSettingsScene(GameScenes.WeaponVault, true),
+            new EditorBuildSettingsScene(GameScenes.Dungeon, true),
+            new EditorBuildSettingsScene(GameScenes.Stage1, true)
         };
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();

@@ -16,6 +16,11 @@ public sealed class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         CurrentHealth = maxHealth;
+
+        // 체력 바가 이 Awake보다 먼저 켜지면 아직 0인 값을 읽고 그대로 굳는다.
+        // 실제로 던전 씬을 다시 만들었더니 컴포넌트 순서가 바뀌어 0/20으로
+        // 시작했다. 여기서 한 번 알려 주면 어느 순서로 돌아도 맞는다.
+        HealthChanged?.Invoke(CurrentHealth, MaxHealth);
     }
 
     public void TakeDamage(int amount)

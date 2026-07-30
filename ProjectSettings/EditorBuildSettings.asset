@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: 6587a79308afdd94c9aa4d8188106a51
   - enabled: 1
+    path: Assets/Scenes/WeaponForge.unity
+    guid: d845ac4a38ddd4241864832cf0d581fa
+  - enabled: 1
+    path: Assets/Scenes/WeaponVault.unity
+    guid: 75fcc4715a36d4526b888f37db8c5526
+  - enabled: 1
+    path: Assets/Scenes/Dungeon.unity
+    guid: 33155c1d785724e0cbd47d0d4f99f5e8
+  - enabled: 1
     path: Assets/Scenes/Stage1.unity
     guid: 8fd1271bf7d54e1cbe77401b096aca02
   m_configObjects:
