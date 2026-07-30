@@ -83,6 +83,7 @@
     <Compile Include="Assets/Tests/Editor/WhiteBackgroundKeyTests.cs" />
     <Compile Include="Assets/Tests/Editor/TitleSceneBuilderTests.cs" />
     <Compile Include="Assets/Tests/Editor/PlayerSwordShooterTests.cs" />
+    <Compile Include="Assets/Tests/Editor/DungeonLayoutTests.cs" />
     <Compile Include="Assets/Tests/Editor/Stage1PlayerHealthSceneTests.cs" />
     <Compile Include="Assets/Tests/Editor/KrabEnemyTests.cs" />
     <Compile Include="Assets/Tests/Editor/DrawingHistoryTests.cs" />

@@ -57,6 +57,7 @@
     <Compile Include="Assets/Scripts/Player/PlayerHealthDebugInput.cs" />
     <Compile Include="Assets/Scripts/Stage1RuntimeBootstrap.cs" />
     <Compile Include="Assets/Scripts/UI/TitleScreenController.cs" />
+    <Compile Include="Assets/Scripts/Dungeon/DungeonLayout.cs" />
     <Compile Include="Assets/Scripts/Forge/WhiteBackgroundKey.cs" />
     <Compile Include="Assets/Scripts/Forge/WeaponForgeController.cs" />
     <Compile Include="Assets/Scripts/UI/BossHealthBarView.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Assets/Scripts/Combat/PlayerAxeAttacker.cs" />
     <Compile Include="Assets/Scripts/CameraFollow.cs" />
     <Compile Include="Assets/Scripts/Combat/PlayerSwordShooter.cs" />
+    <Compile Include="Assets/Scripts/Dungeon/DeterministicRandom.cs" />
     <Compile Include="Assets/Scripts/Forge/DrawingFill.cs" />
     <Compile Include="Assets/Scripts/Items/ItemHotbarUIFactory.cs" />
     <Compile Include="Assets/Scripts/Forge/DrawingHistory.cs" />
