@@ -50,15 +50,17 @@ public sealed class TitleSceneBuilderTests
         Assert.That(eventSystem, Is.Not.Null);
         Assert.That(eventSystem.GetComponent<InputSystemUIInputModule>(), Is.Not.Null);
 
-        // 게임 시작 → 무기 만들기(↔ 무기고) → Stage1 순서 그대로 등록된다
+        // 게임 시작 → 무기 만들기(↔ 무기고) → 던전 순서 그대로 등록된다.
+        // Stage1은 손으로 그린 단일 맵으로 흐름에서 빠졌지만 목록에는 남긴다.
         EditorBuildSettingsScene[] scenes = EditorBuildSettings.scenes;
-        Assert.That(scenes, Has.Length.EqualTo(4));
+        Assert.That(scenes, Has.Length.EqualTo(5));
         Assert.That(scenes.Select(scene => scene.path), Is.EqualTo(new[]
         {
-            TitleScenePath,
-            TitleScreenController.WeaponForgeScenePath,
-            WeaponVaultSceneBuilder.ScenePath,
-            TitleScreenController.Stage1ScenePath
+            GameScenes.Title,
+            GameScenes.WeaponForge,
+            GameScenes.WeaponVault,
+            GameScenes.Dungeon,
+            GameScenes.Stage1
         }));
         Assert.That(scenes.Select(scene => scene.enabled), Is.All.True);
     }

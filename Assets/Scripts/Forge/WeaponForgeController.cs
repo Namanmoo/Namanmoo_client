@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// <summary>
 /// 무기 만들기 화면의 상태 기계.
 ///
-/// 그리기 → 단계 선택(슬라이더 0/1/2) → (무기 만들기) → 생성 중 → 결과 확인 → Stage1.
+/// 그리기 → 단계 선택(슬라이더 0/1/2) → (무기 만들기) → 생성 중 → 결과 확인 → 던전.
 /// 고른 단계 하나만 생성하므로 이미지 API 호출은 최대 1회다(0단계는 0회).
 ///
 /// 서버가 죽어 있거나 생성이 실패해도 흐름은 끊기지 않는다 — 그린 그림 그대로
@@ -15,9 +15,12 @@ using UnityEngine.UI;
 /// </summary>
 public sealed class WeaponForgeController : MonoBehaviour
 {
-    public const string TitleScenePath = "Assets/Scenes/Title.unity";
-    public const string Stage1ScenePath = "Assets/Scenes/Stage1.unity";
-    public const string VaultScenePath = "Assets/Scenes/WeaponVault.unity";
+    public const string TitleScenePath = GameScenes.Title;
+
+    /// <summary>무기를 확정하면 들어가는 곳.</summary>
+    public const string PlayScenePath = GameScenes.Dungeon;
+
+    public const string VaultScenePath = GameScenes.WeaponVault;
 
     /// <summary>AI 개입 단계의 최댓값. 백엔드 MAX_STAGE와 같아야 한다.</summary>
     public const int MaxStage = 2;
@@ -354,7 +357,7 @@ public sealed class WeaponForgeController : MonoBehaviour
             Debug.LogWarning($"[WeaponForge] 무기고 저장 실패, 이번 판은 그대로 진행 — {failure}");
         }
 
-        SceneManager.LoadScene(Stage1ScenePath);
+        SceneManager.LoadScene(PlayScenePath);
     }
 
     /// <summary>"무기고" 버튼 — 저장된 무기를 꺼내 쓰는 화면으로.</summary>

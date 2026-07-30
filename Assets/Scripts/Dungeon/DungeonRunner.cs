@@ -19,7 +19,16 @@ namespace NaManMoo.Dungeon
 
         [SerializeField] private int seed = 1;
         [SerializeField] private int floor = 1;
+
+        // 시드를 씬에 구워 두면 매번 같은 층이 나온다. 실행할 때 뽑는다.
+        // Configure 로 시드를 직접 받으면(테스트·이어하기) 끈다.
+        [SerializeField] private bool randomiseSeed = true;
         [SerializeField] private Transform player;
+
+        // 유니티는 인터페이스 필드를 직렬화하지 못한다. MonoBehaviour 로 담아 두고
+        // 실행할 때 캐스트한다 — 이걸 놓치면 씬을 저장한 뒤 인카운터가 사라져
+        // 모든 방이 즉시 클리어된다.
+        [SerializeField] private MonoBehaviour encounterBehaviour;
 
         private readonly HashSet<Vector2Int> cleared = new HashSet<Vector2Int>();
         private readonly List<DungeonDoor> doors = new List<DungeonDoor>();
@@ -50,11 +59,30 @@ namespace NaManMoo.Dungeon
             seed = dungeonSeed;
             floor = dungeonFloor;
             player = playerTransform;
+            randomiseSeed = false;
         }
+
+        /// <summary>플레이어만 이어 주고 시드는 실행할 때 뽑게 둔다. 씬 빌더가 쓴다.</summary>
+        public void ConfigurePlayer(Transform playerTransform, int dungeonFloor)
+        {
+            player = playerTransform;
+            floor = dungeonFloor;
+            randomiseSeed = true;
+        }
+
+        /// <summary>이 층을 만든 시드. 같은 층을 다시 보려면 이 값을 Configure 에 넣는다.</summary>
+        public int Seed => seed;
 
         public void SetEncounter(IRoomEncounter roomEncounter)
         {
             encounter = roomEncounter;
+            encounterBehaviour = roomEncounter as MonoBehaviour;
+        }
+
+        /// <summary>씬에서 불려 온 참조를 인터페이스로 되살린다.</summary>
+        private void Awake()
+        {
+            encounter ??= encounterBehaviour as IRoomEncounter;
         }
 
         private void Start()
@@ -65,6 +93,11 @@ namespace NaManMoo.Dungeon
         /// <summary>층을 새로 만들고 시작 방에 들어선다.</summary>
         public void Begin()
         {
+            if (randomiseSeed)
+            {
+                seed = Random.Range(1, int.MaxValue);
+            }
+
             Layout = DungeonLayout.Generate(seed, floor);
             cleared.Clear();
             Enter(Layout.StartCell, Doors.None);

@@ -12,7 +12,6 @@ public class Stage1RuntimeBootstrap : MonoBehaviour
     private const string AxeSpritePath = "Assets/Weapons/weapon_axe.png";
     private const string KrabSpritePath = "Assets/Enemies/enemy_krab.png";
     private const string BossRobotSpritePath = "Assets/boss_robot.png";
-    private const float PlayerVisualHeight = 2f;
 
     [SerializeField] private Sprite itemHotbarBackground;
     [SerializeField] private Sprite playerHealthHeart;
@@ -289,43 +288,14 @@ public class Stage1RuntimeBootstrap : MonoBehaviour
 
     private Transform CreatePlayer(Transform parent)
     {
-        var player = new GameObject("Player");
-        player.tag = "Player";
-        player.transform.SetParent(parent, false);
-        player.transform.position = new Vector3(0f, -5f, -0.2f);
-
-        var visual = new GameObject("Player Visual");
-        visual.transform.SetParent(player.transform, false);
-        float visualScale = PlayerVisualHeight / playerSprite.bounds.size.y;
-        visual.transform.localScale = new Vector3(visualScale, visualScale, 1f);
-
-        SpriteRenderer renderer = visual.AddComponent<SpriteRenderer>();
-        renderer.sprite = playerSprite;
-        renderer.color = Color.white;
-        renderer.sortingOrder = 4;
-
-        Rigidbody2D body = player.AddComponent<Rigidbody2D>();
-        body.gravityScale = 0f;
-        body.interpolation = RigidbodyInterpolation2D.Interpolate;
-        body.constraints = RigidbodyConstraints2D.FreezeRotation;
-        body.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-
-        CircleCollider2D circle = player.AddComponent<CircleCollider2D>();
-        circle.radius = 0.5f;
-        player.AddComponent<PlayerMovement>();
-        PlayerSwordShooter shooter = player.AddComponent<PlayerSwordShooter>();
-        shooter.SwordSprite = swordSprite;
-        PlayerAxeAttacker axeAttacker = player.AddComponent<PlayerAxeAttacker>();
-        axeAttacker.AxeSprite = axeSprite;
-        Stage1ItemHotbarSetup.Create(
-            player,
+        GameObject player = PlayerFactory.Create(
             parent,
-            itemHotbarBackground,
+            parent,
+            new Vector3(0f, -5f, -0.2f),
+            playerSprite,
             swordSprite,
-            axeSprite);
-        Stage1PlayerHealthSetup.Create(
-            player,
-            parent,
+            axeSprite,
+            itemHotbarBackground,
             playerHealthHeart);
         return player.transform;
     }

@@ -12,8 +12,10 @@ using UnityEngine.UI;
 /// </summary>
 public sealed class WeaponVaultController : MonoBehaviour
 {
-    public const string ForgeScenePath = "Assets/Scenes/WeaponForge.unity";
-    public const string Stage1ScenePath = "Assets/Scenes/Stage1.unity";
+    public const string ForgeScenePath = GameScenes.WeaponForge;
+
+    /// <summary>장착하면 들어가는 곳. 무기 만들기 화면과 같은 곳으로 간다.</summary>
+    public const string PlayScenePath = GameScenes.Dungeon;
 
     /// <summary>한 화면에 보여 줄 카드 수. 넘치는 건 최신순으로 잘린다.</summary>
     public const int CardCount = 8;
@@ -105,7 +107,7 @@ public sealed class WeaponVaultController : MonoBehaviour
         textures.Remove(weapon.id);
 
         ForgedWeapon.Set(sprite, WeaponStats.FromDto(weapon.stats), weapon.name, weapon.stage);
-        SceneManager.LoadScene(Stage1ScenePath);
+        SceneManager.LoadScene(PlayScenePath);
     }
 
     /// <summary>카드의 "삭제".</summary>

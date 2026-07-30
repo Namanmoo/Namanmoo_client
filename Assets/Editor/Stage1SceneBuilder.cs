@@ -22,7 +22,6 @@ public static class Stage1SceneBuilder
     private const string AxeSpritePath = "Assets/Weapons/weapon_axe.png";
     private const string KrabSpritePath = "Assets/Enemies/enemy_krab.png";
     private const string BossRobotSpritePath = "Assets/boss_robot.png";
-    private const float PlayerVisualHeight = 2f;
 
     [MenuItem("Tools/NaManMoo/Build Stage 1")]
     public static void Build()
@@ -170,10 +169,6 @@ public static class Stage1SceneBuilder
         Sprite axeSprite,
         Sprite playerHealthHeart)
     {
-        var playerObject = new GameObject("Player");
-        playerObject.tag = "Player";
-        playerObject.transform.position = new Vector3(0f, -5f, -0.2f);
-
         Sprite playerSprite = AssetDatabase.LoadAssetAtPath<Sprite>(PlayerSpritePath);
         if (playerSprite == null)
         {
@@ -181,30 +176,6 @@ public static class Stage1SceneBuilder
                 "Stage 1 requires the player Sprite at " + PlayerSpritePath + ".");
         }
 
-        var visualObject = new GameObject("Player Visual");
-        visualObject.transform.SetParent(playerObject.transform, false);
-        float visualScale = PlayerVisualHeight / playerSprite.bounds.size.y;
-        visualObject.transform.localScale = new Vector3(visualScale, visualScale, 1f);
-
-        SpriteRenderer renderer = visualObject.AddComponent<SpriteRenderer>();
-        renderer.sprite = playerSprite;
-        renderer.color = Color.white;
-        renderer.sortingOrder = 4;
-
-        Rigidbody2D body = playerObject.AddComponent<Rigidbody2D>();
-        body.gravityScale = 0f;
-        body.interpolation = RigidbodyInterpolation2D.Interpolate;
-        body.constraints = RigidbodyConstraints2D.FreezeRotation;
-        body.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-
-        CircleCollider2D collider = playerObject.AddComponent<CircleCollider2D>();
-        collider.radius = 0.5f;
-
-        playerObject.AddComponent<PlayerMovement>();
-        PlayerSwordShooter shooter = playerObject.AddComponent<PlayerSwordShooter>();
-        shooter.SwordSprite = swordSprite;
-        PlayerAxeAttacker axeAttacker = playerObject.AddComponent<PlayerAxeAttacker>();
-        axeAttacker.AxeSprite = axeSprite;
         Sprite backgroundSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ItemHotbarBackgroundPath);
         if (backgroundSprite == null)
         {
@@ -212,17 +183,15 @@ public static class Stage1SceneBuilder
                 "Stage 1 requires the ItemUIBackground Sprite at " + ItemHotbarBackgroundPath + ".");
         }
 
-        Stage1ItemHotbarSetup.Create(
-            playerObject,
+        return PlayerFactory.Create(
             null,
-            backgroundSprite,
+            null,
+            new Vector3(0f, -5f, -0.2f),
+            playerSprite,
             swordSprite,
-            axeSprite);
-        Stage1PlayerHealthSetup.Create(
-            playerObject,
-            null,
+            axeSprite,
+            backgroundSprite,
             playerHealthHeart);
-        return playerObject;
     }
 
     private static Sprite LoadRequiredSingleSprite(string path)
