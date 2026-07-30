@@ -256,6 +256,11 @@ public static class WeaponForgeSceneBuilder
         input.placeholder = placeholder;
         input.characterLimit = 200;
         input.lineType = InputField.LineType.SingleLine;
+
+        // WebGL에서는 이 칸을 눌렀을 때 브라우저 입력창이 대신 뜬다. 유니티는 캔버스에서
+        // 키 코드를 읽는데 한글은 키 코드로 오지 않아, 이게 없으면 한글이 안 찍힌다.
+        // 다른 플랫폼에서는 아무 일도 하지 않는다.
+        inputObject.AddComponent<WebTextInput>();
         return input;
     }
 
