@@ -71,6 +71,7 @@
     <Compile Include="Assets/Tests/Editor/DrawingBrushTests.cs" />
     <Compile Include="Assets/Tests/Editor/Stage1MapDefinitionTests.cs" />
     <Compile Include="Assets/Tests/Editor/PlayerHealthDebugInputTests.cs" />
+    <Compile Include="Assets/Tests/Editor/RoomShapeTests.cs" />
     <Compile Include="Assets/Tests/Editor/Stage1BossEncounterTests.cs" />
     <Compile Include="Assets/Tests/Editor/AxeInventoryTests.cs" />
     <Compile Include="Assets/Tests/Editor/Stage1PlayerHealthSetupTests.cs" />

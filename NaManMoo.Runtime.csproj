@@ -59,6 +59,7 @@
     <Compile Include="Assets/Scripts/UI/TitleScreenController.cs" />
     <Compile Include="Assets/Scripts/Dungeon/DungeonLayout.cs" />
     <Compile Include="Assets/Scripts/Forge/WhiteBackgroundKey.cs" />
+    <Compile Include="Assets/Scripts/Dungeon/RoomShape.cs" />
     <Compile Include="Assets/Scripts/Forge/WeaponForgeController.cs" />
     <Compile Include="Assets/Scripts/UI/BossHealthBarView.cs" />
     <Compile Include="Assets/Scripts/Items/ItemData.cs" />
