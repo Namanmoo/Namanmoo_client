@@ -84,22 +84,35 @@ public sealed class DungeonScenePlayModeTests
         yield return LoadScene();
 
         var runner = Object.FindFirstObjectByType<DungeonRunner>();
-        var encounter = Object.FindFirstObjectByType<KrabRoomEncounter>();
-        Assert.That(encounter, Is.Not.Null, "씬에 KrabRoomEncounter 가 없다");
+        var encounter = Object.FindFirstObjectByType<DungeonEncounter>();
+        Assert.That(encounter, Is.Not.Null, "씬에 DungeonEncounter 가 없다");
 
-        // 시작 방은 적이 없어 바로 클리어다. 적이 나오는 방까지 걸어가 확인한다.
-        DungeonRoom start = runner.Layout.RoomAt(runner.CurrentCell);
-        Doors side = FirstSide(start.Doors);
-        Assert.That(side, Is.Not.EqualTo(Doors.None));
-
-        Pass(side);
-        yield return null;
-
-        DungeonRoom next = runner.Layout.RoomAt(runner.CurrentCell);
-        if (RoomSpawnPoints.EnemyCount(next.Kind, next.DistanceFromStart) == 0)
+        // 시작 방은 적이 없어 바로 클리어다. 싸울 것이 있는 방을 만날 때까지 걸어간다.
+        // 씬은 실행마다 시드를 새로 뽑으므로 옆 방 하나만 보면 시드에 따라 결과가 갈린다.
+        bool foundFight = false;
+        for (int step = 0; step < 12 && !foundFight; step++)
         {
-            Assert.Ignore("옆 방이 안전한 방이라 이 시드로는 확인할 수 없다");
+            DungeonRoom here = runner.Layout.RoomAt(runner.CurrentCell);
+            Doors side = FirstSide(here.Doors);
+            if (side == Doors.None)
+            {
+                break;
+            }
+
+            Pass(side);
+            yield return null;
+
+            DungeonRoom arrived = runner.Layout.RoomAt(runner.CurrentCell);
+            foundFight = arrived.Kind == RoomKind.Boss
+                || RoomSpawnPoints.EnemyCount(arrived.Kind, arrived.DistanceFromStart) > 0;
+
+            if (!foundFight)
+            {
+                continue;
+            }
         }
+
+        Assert.That(foundFight, Is.True, "싸울 방을 하나도 만나지 못했다");
 
         Assert.That(
             Object.FindObjectsByType<EnemyHealth>(FindObjectsSortMode.None),

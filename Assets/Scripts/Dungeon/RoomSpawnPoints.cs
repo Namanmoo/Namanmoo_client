@@ -105,8 +105,11 @@ namespace NaManMoo.Dungeon
         }
 
         /// <summary>
-        /// 방 종류와 난이도로 정해지는 적 수. 난이도로는 시작 방에서의 거리를 넘긴다 —
-        /// 안쪽으로 들어갈수록 어려워진다. 방 크기가 정해져 있어 상한을 둔다.
+        /// 방에 놓을 <b>크랩</b> 수. 난이도로는 시작 방에서의 거리를 넘긴다 — 안쪽으로
+        /// 들어갈수록 어려워진다. 방 크기가 정해져 있어 상한을 둔다.
+        ///
+        /// 보스방은 0이다. 보스 하나가 나오고 크랩은 붙이지 않는다 — 보스전에 잡몹을
+        /// 섞으면 보스 패턴을 읽을 수 없다.
         /// </summary>
         public static int EnemyCount(RoomKind kind, int difficulty)
         {
@@ -115,7 +118,7 @@ namespace NaManMoo.Dungeon
                 RoomKind.Start => 0,
                 RoomKind.Treasure => 0,
                 RoomKind.Shop => 0,
-                RoomKind.Boss => Mathf.Clamp(4 + difficulty, 4, 8),
+                RoomKind.Boss => 0,
                 _ => Mathf.Clamp(2 + Mathf.FloorToInt(difficulty * 0.5f), 2, 6)
             };
         }

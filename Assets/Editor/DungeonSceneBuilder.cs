@@ -24,6 +24,7 @@ public static class DungeonSceneBuilder
     private const string SwordSpritePath = "Assets/Weapons/sword.png";
     private const string AxeSpritePath = "Assets/Weapons/weapon_axe.png";
     private const string KrabSpritePath = "Assets/Enemies/enemy_krab.png";
+    private const string BossRobotSpritePath = "Assets/boss_robot.png";
 
     /// <summary>미니맵을 화면 우상단에서 띄우는 여백.</summary>
     private const float MinimapMargin = 16f;
@@ -40,6 +41,7 @@ public static class DungeonSceneBuilder
         Sprite hotbarBackground = Require(ItemHotbarBackgroundPath);
         Sprite healthHeart = Require(PlayerHealthHeartPath);
         Sprite krabSprite = Require(KrabSpritePath);
+        Sprite bossSprite = Require(BossRobotSpritePath);
 
         Scene scene = EditorSceneManager.NewScene(
             NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -57,7 +59,7 @@ public static class DungeonSceneBuilder
             hotbarBackground,
             healthHeart);
 
-        DungeonRunner runner = CreateRunner(player.transform, krabSprite);
+        DungeonRunner runner = CreateRunner(player.transform, krabSprite, bossSprite);
         CreateMinimap(runner);
 
         EditorSceneManager.MarkSceneDirty(scene);
@@ -97,13 +99,14 @@ public static class DungeonSceneBuilder
         light.intensity = 1f;
     }
 
-    private static DungeonRunner CreateRunner(Transform player, Sprite krabSprite)
+    private static DungeonRunner CreateRunner(
+        Transform player, Sprite krabSprite, Sprite bossSprite)
     {
         var runnerObject = new GameObject("Dungeon");
         DungeonRunner runner = runnerObject.AddComponent<DungeonRunner>();
 
-        KrabRoomEncounter encounter = runnerObject.AddComponent<KrabRoomEncounter>();
-        encounter.Configure(krabSprite);
+        DungeonEncounter encounter = runnerObject.AddComponent<DungeonEncounter>();
+        encounter.Configure(krabSprite, bossSprite);
 
         // 시드는 런너가 실행할 때 뽑는다. 여기서 뽑으면 씬에 구워져 매번 같은 층이 된다.
         runner.ConfigurePlayer(player, dungeonFloor: 1);
