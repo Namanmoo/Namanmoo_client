@@ -53,18 +53,23 @@ mergeInto(LibraryManager.library, {
       var self = NaManMooInput;
       if (!self.element) return;
 
-      var value = self.element.value;
+      var element = self.element;
+      var value = element.value;
       var owner = self.owner;
+
+      // remove() 는 그 자리에서 blur 를 일으키고, blur 핸들러가 close 를 다시 부른다.
+      // 지우기 전에 먼저 비워 두지 않으면 전체가 두 번 실행되어 SendMessage 도 두 번
+      // 간다. 상태를 먼저 지워 두면 재진입은 위 guard 에서 그냥 돌아간다.
+      self.element = null;
+      self.owner = null;
+      self.place = null;
 
       if (self.onResize) {
         window.removeEventListener('resize', self.onResize);
         self.onResize = null;
       }
 
-      self.element.remove();
-      self.element = null;
-      self.owner = null;
-      self.place = null;
+      element.remove();
 
       if (owner) {
         if (commit) {
