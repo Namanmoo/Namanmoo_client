@@ -9,7 +9,13 @@ public enum BrushKind
     Crayon,
 
     /// <summary>지우개 — 알파를 지운다</summary>
-    Eraser
+    Eraser,
+
+    /// <summary>
+    /// 색 채우기 — 획을 긋는 도구가 아니라 누른 지점의 영역을 한 번에 칠한다.
+    /// 실제 칠하기는 DrawingFill이 하고, 브러시로는 쓰이지 않는다.
+    /// </summary>
+    Fill
 }
 
 public struct BrushSettings

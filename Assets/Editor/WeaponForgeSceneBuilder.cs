@@ -102,8 +102,14 @@ public static class WeaponForgeSceneBuilder
             new Color(0.33f, 0.33f, 0.38f, 1f), fontSize: 24);
 
         (Slider stageSlider, Text stageLabel) = CreateStageSlider(frame, font);
-        Image[] toolHighlights = CreateToolButtons(frame, controller);
-        Image[] colorHighlights = CreateColorButtons(frame, controller);
+        Image[] strokeHighlights = CreateToolButtons(frame, controller);
+        (Image[] colorHighlights, Image fillHighlight) =
+            CreateColorButtons(frame, font, controller);
+        // 연필·크레용·지우개 + 채우기 — SelectTool의 인덱스 순서와 같아야 한다
+        var toolHighlights = new[]
+        {
+            strokeHighlights[0], strokeHighlights[1], strokeHighlights[2], fillHighlight
+        };
         // 결과 화면은 그림에 얹는 게 아니라 화면 전체를 덮으므로 캔버스 바로 아래에 둔다
         ResultPanelParts result = CreateResultPanel(canvas.transform, font, controller);
 
@@ -339,10 +345,14 @@ public static class WeaponForgeSceneBuilder
     }
 
     /// <summary>
-    /// 색 버튼. 앞 4개는 목업 도구바에 그려진 점 위에 투명 버튼을 얹고,
-    /// 나머지는 도구바 아래 여백에 색 조각을 직접 그린다.
+    /// 색 버튼과 색 채우기 버튼. 앞 4색은 목업 도구바에 그려진 점 위에 투명 버튼을
+    /// 얹고, 나머지는 도구바 아래 여백에 조각을 직접 그린다.
+    ///
+    /// 채우기 버튼도 여기서 만든다 — 목업 도구바에 빈 자리가 없어 팔레트 줄의
+    /// 맨 앞 칸을 쓴다. 색 조각과 구분되게 회색 라벨 버튼으로 둔다.
     /// </summary>
-    private static Image[] CreateColorButtons(Transform parent, WeaponForgeController controller)
+    private static (Image[] colorHighlights, Image fillHighlight) CreateColorButtons(
+        Transform parent, Font font, WeaponForgeController controller)
     {
         Color32[] colors = WeaponForgeController.PaletteColors;
         int extendedStart = WeaponForgeController.ExtendedPaletteStart;
@@ -359,15 +369,25 @@ public static class WeaponForgeSceneBuilder
             highlights[index] = CreateUnderline(parent, $"Color {index} Selected", iconSlot);
         }
 
-        // 확장 팔레트 — 목업에 없으므로 조각과 밑줄을 전부 그린다
+        // 확장 팔레트 — 목업에 없으므로 조각과 밑줄을 전부 그린다.
+        // 맨 앞 한 칸은 색 채우기 버튼이 쓴다.
         int extendedCount = colors.Length - extendedStart;
-        float slotWidth = (PaletteRight - PaletteLeft) / extendedCount;
+        int slots = extendedCount + 1;
+        float slotWidth = (PaletteRight - PaletteLeft) / slots;
         float gap = slotWidth * 0.18f;
+
+        Image fillHighlight = CreateFillButton(
+            parent,
+            font,
+            controller,
+            Rect.MinMaxRect(
+                PaletteLeft + gap * 0.5f, PaletteTop,
+                PaletteLeft + slotWidth - gap * 0.5f, PaletteBottom));
 
         for (int offset = 0; offset < extendedCount; offset++)
         {
             int index = extendedStart + offset;
-            float left = PaletteLeft + offset * slotWidth;
+            float left = PaletteLeft + (offset + 1) * slotWidth;
             Rect swatchArea = Rect.MinMaxRect(
                 left + gap * 0.5f, PaletteTop, left + slotWidth - gap * 0.5f, PaletteBottom);
 
@@ -403,7 +423,24 @@ public static class WeaponForgeSceneBuilder
             highlights[index] = underline;
         }
 
-        return highlights;
+        return (highlights, fillHighlight);
+    }
+
+    /// <summary>색 채우기 버튼과 그 선택 표시.</summary>
+    private static Image CreateFillButton(
+        Transform parent, Font font, WeaponForgeController controller, Rect area)
+    {
+        Button button = CreateLabeledButton(
+            parent, font, "Fill Button", "채움", area,
+            new Color(0.38f, 0.38f, 0.42f, 1f), fontSize: 20);
+        UnityEditor.Events.UnityEventTools.AddIntPersistentListener(
+            button.onClick, controller.SelectTool, 3);
+
+        Rect underlineArea = Rect.MinMaxRect(
+            area.xMin, PaletteBottom + 0.005f, area.xMax, PaletteBottom + 0.016f);
+        Image underline = CreateSolid(parent, "Fill Selected", underlineArea, HighlightColor);
+        underline.enabled = false;
+        return underline;
     }
 
     private static Rect ToolIconArea(int slot)

@@ -74,7 +74,7 @@ public sealed class WeaponForgeController : MonoBehaviour
     [SerializeField] private Text stageLabel;
 
     [Header("선택 상태 표시")]
-    [SerializeField] private Image[] toolHighlights = new Image[3];
+    [SerializeField] private Image[] toolHighlights = new Image[4];
     [SerializeField] private Image[] colorHighlights;
 
     [Header("결과 확인")]
@@ -136,13 +136,14 @@ public sealed class WeaponForgeController : MonoBehaviour
 
     // ── 도구바·팔레트 버튼이 부르는 것들 ─────────────────────────────
 
-    /// <summary>0=연필, 1=크레용, 2=지우개</summary>
+    /// <summary>0=연필, 1=크레용, 2=지우개, 3=색 채우기</summary>
     public void SelectTool(int index)
     {
         BrushKind kind = index switch
         {
             1 => BrushKind.Crayon,
             2 => BrushKind.Eraser,
+            3 => BrushKind.Fill,
             _ => BrushKind.Pen
         };
 

@@ -88,7 +88,8 @@ public sealed class DrawingCanvas : MonoBehaviour,
     {
         EnsureInitialized();
         color = newColor;
-        // 색을 고르면 지우개에서 자동으로 빠져나온다 — 안 그러면 색을 눌러도 계속 지워진다
+        // 색을 고르면 지우개에서 자동으로 빠져나온다 — 안 그러면 색을 눌러도 계속 지워진다.
+        // 채우기는 그대로 둔다 — 색을 바꿔 다시 채우는 흐름이 자연스럽다.
         if (tool == BrushKind.Eraser)
         {
             tool = BrushKind.Pen;
@@ -164,6 +165,16 @@ public sealed class DrawingCanvas : MonoBehaviour,
         // 획 하나가 undo 한 단계 — 획을 <em>긋기 전</em> 상태를 쌓는다
         history.Push(ToBytes(pixels));
 
+        if (tool == BrushKind.Fill)
+        {
+            // 채우기는 획이 아니라 한 번의 동작이다 — 드래그로 이어지지 않는다
+            DrawingFill.Fill(pixels, texture.width, texture.height, x, y, color);
+            hasLastPoint = false;
+            Apply();
+            Changed?.Invoke();
+            return;
+        }
+
         DrawingBrush.Stamp(pixels, texture.width, texture.height, x, y, CurrentBrush());
         lastX = x;
         lastY = y;
@@ -175,6 +186,11 @@ public sealed class DrawingCanvas : MonoBehaviour,
     public void OnDrag(PointerEventData eventData)
     {
         EnsureInitialized();
+        if (tool == BrushKind.Fill)
+        {
+            return;  // 채우기는 끌어서 이어 칠하지 않는다
+        }
+
         if (!TryGetPixel(eventData, out int x, out int y))
         {
             // 캔버스 밖으로 나갔다 들어오면 그 사이를 잇지 않는다

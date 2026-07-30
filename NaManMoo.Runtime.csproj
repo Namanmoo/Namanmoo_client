@@ -89,6 +89,7 @@
     <Compile Include="Assets/Scripts/Combat/PlayerAxeAttacker.cs" />
     <Compile Include="Assets/Scripts/CameraFollow.cs" />
     <Compile Include="Assets/Scripts/Combat/PlayerSwordShooter.cs" />
+    <Compile Include="Assets/Scripts/Forge/DrawingFill.cs" />
     <Compile Include="Assets/Scripts/Items/ItemHotbarUIFactory.cs" />
     <Compile Include="Assets/Scripts/Forge/DrawingHistory.cs" />
     <Compile Include="Assets/Scripts/Enemies/Stage1BossEncounter.cs" />
