@@ -1,3 +1,4 @@
+using System.Linq;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -49,14 +50,16 @@ public sealed class TitleSceneBuilderTests
         Assert.That(eventSystem, Is.Not.Null);
         Assert.That(eventSystem.GetComponent<InputSystemUIInputModule>(), Is.Not.Null);
 
-        // 게임 시작 → 무기 만들기 → Stage1 순서 그대로 등록된다
+        // 게임 시작 → 무기 만들기(↔ 무기고) → Stage1 순서 그대로 등록된다
         EditorBuildSettingsScene[] scenes = EditorBuildSettings.scenes;
-        Assert.That(scenes, Has.Length.EqualTo(3));
-        Assert.That(scenes[0].enabled, Is.True);
-        Assert.That(scenes[0].path, Is.EqualTo(TitleScenePath));
-        Assert.That(scenes[1].enabled, Is.True);
-        Assert.That(scenes[1].path, Is.EqualTo(TitleScreenController.WeaponForgeScenePath));
-        Assert.That(scenes[2].enabled, Is.True);
-        Assert.That(scenes[2].path, Is.EqualTo(TitleScreenController.Stage1ScenePath));
+        Assert.That(scenes, Has.Length.EqualTo(4));
+        Assert.That(scenes.Select(scene => scene.path), Is.EqualTo(new[]
+        {
+            TitleScenePath,
+            TitleScreenController.WeaponForgeScenePath,
+            WeaponVaultSceneBuilder.ScenePath,
+            TitleScreenController.Stage1ScenePath
+        }));
+        Assert.That(scenes.Select(scene => scene.enabled), Is.All.True);
     }
 }

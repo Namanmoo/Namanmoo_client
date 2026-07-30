@@ -72,6 +72,7 @@
     <Compile Include="Assets/Scripts/Enemies/KrabEnemy.cs" />
     <Compile Include="Assets/Scripts/Items/ItemHotbarController.cs" />
     <Compile Include="Assets/Scripts/Stage1PlayerHealthSetup.cs" />
+    <Compile Include="Assets/Scripts/Forge/WeaponVaultController.cs" />
     <Compile Include="Assets/Scripts/UI/BossHealthBarUIFactory.cs" />
     <Compile Include="Assets/Scripts/Combat/AxeSwing.cs" />
     <Compile Include="Assets/Scripts/Forge/ForgedWeapon.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets/Scripts/Enemies/BossRobotController.cs" />
     <Compile Include="Assets/Scripts/PlayerMovement.cs" />
     <Compile Include="Assets/Scripts/Stage1MapDefinition.cs" />
+    <Compile Include="Assets/Scripts/Forge/WeaponVaultClient.cs" />
     <Compile Include="Assets/Scripts/Forge/ForgeClient.cs" />
     <Compile Include="Assets/Scripts/Stage1BossEncounterSetup.cs" />
     <Compile Include="Assets/Scripts/Items/PlayerInventory.cs" />

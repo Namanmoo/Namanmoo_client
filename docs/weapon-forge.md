@@ -16,6 +16,26 @@ AI 개입 단계를 골라** 만든다.
 확정한 무기는 인벤토리 **3번 칸**에 들어간다(검·도끼는 그대로). 숫자 3을 눌러 장착하면
 그 그림이 발사체가 되고, AI가 정한 공격력·연사·탄속·사거리가 적용된다.
 
+## 무기고
+
+확정한 무기는 **서버 무기고에 함께 저장된다**. 무기 만들기 화면 오른쪽 아래
+"무기고" 버튼으로 들어가면 저장된 무기를 카드로 보고 **장착**하거나 **삭제**할 수 있다.
+
+저장은 서버(`Namanmoo_Backend`의 `data/weapons/`)에 하므로 게임을 끄거나 브라우저 캐시를
+지워도 남는다. 계정 개념이 없어 무기고는 하나뿐이다.
+
+**저장이 실패해도 그 판은 그대로 진행한다** — 무기고 때문에 게임을 막지 않는다.
+경고만 콘솔에 남기고 Stage1으로 넘어간다.
+
+화면은 목업이 없어 UI를 코드로 그린다
+([WeaponVaultSceneBuilder.cs](../Assets/Editor/WeaponVaultSceneBuilder.cs), 4열 2행 8칸).
+카드 칸은 씬에 미리 만들어 두고 내용만 채운다 — 런타임에 UI를 새로 만들면 WebGL에서
+첫 표시가 눈에 띄게 늦다. 9개 이상이면 최신 8개만 보이고 그 사실을 화면에 적는다.
+
+```
+Tools → NaManMoo → Build Weapon Vault
+```
+
 ## 그리기 도구
 
 목업 도구바의 연필·크레용·지우개·되돌리기·다시하기와 4색(검·빨·파·초), 그리고 도구바
@@ -67,6 +87,8 @@ Tools → NaManMoo → Build Weapon Forge
 | [DrawingCanvas.cs](../Assets/Scripts/Forge/DrawingCanvas.cs) | Texture2D 페인팅 + 포인터 입력 |
 | [WhiteBackgroundKey.cs](../Assets/Scripts/Forge/WhiteBackgroundKey.cs) | 생성 이미지의 흰 배경 제거. 순수 로직 |
 | [ForgeClient.cs](../Assets/Scripts/Forge/ForgeClient.cs) | `POST /forge` 업로드 (그림 + 메모 + stage) |
+| [WeaponVaultClient.cs](../Assets/Scripts/Forge/WeaponVaultClient.cs) | 무기고 API (목록·저장·이미지·삭제) |
+| [WeaponVaultController.cs](../Assets/Scripts/Forge/WeaponVaultController.cs) | 무기고 화면 — 카드 채우기, 장착, 삭제 |
 | [ForgeDto.cs](../Assets/Scripts/Forge/ForgeDto.cs) | 응답 DTO + `WeaponStats` 클램프 |
 | [ForgedWeapon.cs](../Assets/Scripts/Forge/ForgedWeapon.cs) | 씬을 넘어 무기를 들고 가는 static 자리 |
 | [WeaponForgeController.cs](../Assets/Scripts/Forge/WeaponForgeController.cs) | 그리기 → 생성 → 결과 확인 상태 기계, 팔레트 정의 |

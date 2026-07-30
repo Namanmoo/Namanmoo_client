@@ -46,8 +46,9 @@ public static class WeaponForgeSceneBuilder
     private const float PaletteLeft = 0.1400f;
     private const float PaletteRight = 0.6041f;
 
-    // 오른쪽 아래 빈 여백 — 상태 문구
-    private static readonly Rect StatusArea = Rect.MinMaxRect(0.6200f, 0.9380f, 0.9960f, 0.9960f);
+    // 오른쪽 아래 빈 여백 — 무기고 버튼과 상태 문구가 나눠 쓴다
+    private static readonly Rect VaultButtonArea = Rect.MinMaxRect(0.6200f, 0.9380f, 0.7350f, 0.9930f);
+    private static readonly Rect StatusArea = Rect.MinMaxRect(0.7450f, 0.9380f, 0.9960f, 0.9960f);
 
     /// <summary>도구바 아이콘 9개의 가로 중심 (연필·크레용·지우개·undo·redo·검·빨·파·초)</summary>
     private static readonly float[] ToolCenters =
@@ -95,6 +96,10 @@ public static class WeaponForgeSceneBuilder
         Text status = CreateStatusText(frame, font);
         Button forgeButton = CreateInvisibleButton(frame, "Forge Button", ForgeButtonArea);
         Button backButton = CreateInvisibleButton(frame, "Back Button", BackButtonArea);
+        // 목업에 없는 버튼이라 라벨을 직접 그린다
+        Button vaultButton = CreateLabeledButton(
+            frame, font, "Vault Button", "무기고", VaultButtonArea,
+            new Color(0.33f, 0.33f, 0.38f, 1f), fontSize: 24);
 
         (Slider stageSlider, Text stageLabel) = CreateStageSlider(frame, font);
         Image[] toolHighlights = CreateToolButtons(frame, controller);
@@ -106,6 +111,8 @@ public static class WeaponForgeSceneBuilder
             forgeButton.onClick, controller.Forge);
         UnityEditor.Events.UnityEventTools.AddPersistentListener(
             backButton.onClick, controller.GoBackToTitle);
+        UnityEditor.Events.UnityEventTools.AddPersistentListener(
+            vaultButton.onClick, controller.OpenVault);
 
         WireController(
             controller, drawing, note, preview, forgeButton, status,
@@ -570,7 +577,8 @@ public static class WeaponForgeSceneBuilder
     }
 
     private static Button CreateLabeledButton(
-        Transform parent, Font font, string name, string label, Rect area, Color color)
+        Transform parent, Font font, string name, string label, Rect area, Color color,
+        int fontSize = 34)
     {
         var buttonObject = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(Button));
         buttonObject.transform.SetParent(parent, false);
@@ -582,7 +590,7 @@ public static class WeaponForgeSceneBuilder
         Button button = buttonObject.GetComponent<Button>();
         button.targetGraphic = image;
 
-        Text text = CreateText(buttonObject.transform, "Label", font, label, 34);
+        Text text = CreateText(buttonObject.transform, "Label", font, label, fontSize);
         text.color = Color.white;
         text.alignment = TextAnchor.MiddleCenter;
         return button;

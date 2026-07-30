@@ -54,6 +54,7 @@ public static class TitleSceneBuilder
         {
             new EditorBuildSettingsScene(ScenePath, true),
             new EditorBuildSettingsScene(TitleScreenController.WeaponForgeScenePath, true),
+            new EditorBuildSettingsScene(WeaponVaultSceneBuilder.ScenePath, true),
             new EditorBuildSettingsScene(TitleScreenController.Stage1ScenePath, true)
         };
         AssetDatabase.SaveAssets();

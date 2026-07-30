@@ -16,6 +16,7 @@ public sealed class WeaponForgeController : MonoBehaviour
 {
     public const string TitleScenePath = "Assets/Scenes/Title.unity";
     public const string Stage1ScenePath = "Assets/Scenes/Stage1.unity";
+    public const string VaultScenePath = "Assets/Scenes/WeaponVault.unity";
 
     /// <summary>AI 개입 단계의 최댓값. 백엔드 MAX_STAGE와 같아야 한다.</summary>
     public const int MaxStage = 2;
@@ -287,7 +288,7 @@ public sealed class WeaponForgeController : MonoBehaviour
         }
     }
 
-    /// <summary>"이걸로 하기" — 무기를 확정하고 게임으로 들어간다.</summary>
+    /// <summary>"이걸로 하기" — 무기를 확정하고 무기고에 넣은 뒤 게임으로 들어간다.</summary>
     public void ConfirmResult()
     {
         if (Current != Phase.Confirming || resultSprite == null)
@@ -295,15 +296,53 @@ public sealed class WeaponForgeController : MonoBehaviour
             return;
         }
 
+        StartCoroutine(ConfirmRoutine());
+    }
+
+    private IEnumerator ConfirmRoutine()
+    {
         WeaponStats stats = response != null
             ? WeaponStats.FromDto(response.stats)
             : WeaponStats.Default;
         string weaponName = response != null && !string.IsNullOrWhiteSpace(response.name)
             ? response.name
             : "그린 무기";
+        string flavor = response != null ? response.flavor : string.Empty;
 
         ForgedWeapon.Set(resultSprite, stats, weaponName, Stage);
+
+        // 무기고에 넣어 다음에도 꺼내 쓸 수 있게 한다.
+        // 저장이 실패해도 이번 판은 그대로 진행한다 — 무기고 때문에 게임을 막지 않는다.
+        SetStatus("무기고에 넣는 중…");
+        var vault = new WeaponVaultClient(backendBaseUrl);
+        string failure = null;
+
+        yield return vault.Save(
+            resultSprite.texture.EncodeToPNG(),
+            weaponName,
+            flavor,
+            Stage,
+            stats,
+            _ => { },
+            error => failure = error);
+
+        if (failure != null)
+        {
+            Debug.LogWarning($"[WeaponForge] 무기고 저장 실패, 이번 판은 그대로 진행 — {failure}");
+        }
+
         SceneManager.LoadScene(Stage1ScenePath);
+    }
+
+    /// <summary>"무기고" 버튼 — 저장된 무기를 꺼내 쓰는 화면으로.</summary>
+    public void OpenVault()
+    {
+        if (Current == Phase.Forging)
+        {
+            return;  // 생성 중에는 화면을 떠나지 않는다
+        }
+
+        SceneManager.LoadScene(VaultScenePath);
     }
 
     /// <summary>"다시 그리기" — 결과가 마음에 안 들 때 그리기로 돌아간다.</summary>

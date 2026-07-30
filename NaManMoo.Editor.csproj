@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Editor/WeaponForgeSceneBuilder.cs" />
+    <Compile Include="Assets/Editor/WeaponVaultSceneBuilder.cs" />
     <Compile Include="Assets/Editor/Stage1SceneBuilder.cs" />
     <Compile Include="Assets/Editor/WebGLBuilder.cs" />
     <Compile Include="Assets/Editor/TitleSceneBuilder.cs" />
