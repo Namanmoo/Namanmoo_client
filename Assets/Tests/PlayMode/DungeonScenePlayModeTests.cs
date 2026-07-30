@@ -42,6 +42,41 @@ public sealed class DungeonScenePlayModeTests
     }
 
     [UnityTest]
+    public IEnumerator TheRoomIsDrawnWithVisibleSprites()
+    {
+        // 실제로 겪은 버그: 메시·라인으로 그렸을 때 렌더러·머티리얼·셰이더·카메라가
+        // 전부 정상인데도 WebGL 빌드에서 방이 통째로 보이지 않았다. 그래서 "오브젝트가
+        // 있다"가 아니라 "그릴 것이 붙어 있고 크기가 0이 아니다"까지 확인한다.
+        yield return LoadScene();
+
+        var floor = GameObject.Find("Room Floor");
+        Assert.That(floor, Is.Not.Null, "바닥이 세워지지 않았다");
+
+        var renderer = floor.GetComponent<SpriteRenderer>();
+        Assert.That(renderer, Is.Not.Null, "바닥에 SpriteRenderer 가 없다");
+        Assert.That(renderer.sprite, Is.Not.Null, "바닥에 스프라이트가 없다");
+        Assert.That(renderer.enabled, Is.True);
+        Assert.That(renderer.color.a, Is.GreaterThan(0.9f), "바닥이 투명하다");
+
+        var runner = Object.FindFirstObjectByType<DungeonRunner>();
+        Rect bounds = runner.CurrentShape.Bounds;
+        Assert.That(renderer.bounds.size.x, Is.EqualTo(bounds.width).Within(0.01f));
+        Assert.That(renderer.bounds.size.y, Is.EqualTo(bounds.height).Within(0.01f));
+
+        // 벽도 실제로 그려지는 조각이 있어야 한다
+        int wallPieces = 0;
+        foreach (SpriteRenderer piece in Object.FindObjectsByType<SpriteRenderer>(FindObjectsSortMode.None))
+        {
+            if (piece.gameObject.name.StartsWith("Piece") && piece.sprite != null)
+            {
+                wallPieces++;
+            }
+        }
+
+        Assert.That(wallPieces, Is.GreaterThan(0), "벽이 그려지지 않았다");
+    }
+
+    [UnityTest]
     public IEnumerator TheEncounterSurvivesSceneSerialisation()
     {
         // 인터페이스 필드는 유니티가 직렬화하지 못한다. 이게 끊기면 모든 방이

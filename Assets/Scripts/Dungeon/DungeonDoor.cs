@@ -11,7 +11,7 @@ namespace NaManMoo.Dungeon
     public sealed class DungeonDoor : MonoBehaviour
     {
         private Collider2D bar;
-        private LineRenderer barVisual;
+        private Renderer barVisual;
 
         public Doors Side { get; private set; }
 
@@ -20,7 +20,7 @@ namespace NaManMoo.Dungeon
         /// <summary>플레이어가 이 문을 지났을 때. 인자는 나가는 방향이다.</summary>
         public event System.Action<Doors> Passed;
 
-        public void Configure(Doors side, Collider2D lockBar, LineRenderer visual)
+        public void Configure(Doors side, Collider2D lockBar, Renderer visual)
         {
             Side = side;
             bar = lockBar;

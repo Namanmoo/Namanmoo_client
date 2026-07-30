@@ -19,8 +19,11 @@ namespace NaManMoo.Dungeon
         public const float Step = 18f;
 
         private static readonly Color CurrentColor = new Color(1f, 0.95f, 0.35f, 1f);
-        private static readonly Color VisitedColor = new Color(0.85f, 0.85f, 0.88f, 0.95f);
-        private static readonly Color UnknownColor = new Color(0.42f, 0.42f, 0.48f, 0.75f);
+        private static readonly Color VisitedColor = new Color(0.88f, 0.88f, 0.92f, 1f);
+
+        // 반투명하게 두었더니 판 색과 거의 같아져(측정: 칸 107,107,119 / 판 110,110,110)
+        // 이웃 방이 아예 보이지 않았다. 불투명하게, 판보다 확실히 밝게 둔다.
+        private static readonly Color UnknownColor = new Color(0.52f, 0.52f, 0.60f, 1f);
         private static readonly Color BossColor = new Color(0.90f, 0.30f, 0.28f, 1f);
         private static readonly Color TreasureColor = new Color(0.95f, 0.80f, 0.35f, 1f);
         private static readonly Color ShopColor = new Color(0.45f, 0.75f, 0.95f, 1f);

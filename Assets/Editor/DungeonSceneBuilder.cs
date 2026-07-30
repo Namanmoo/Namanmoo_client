@@ -136,7 +136,8 @@ public static class DungeonSceneBuilder
         panel.sizeDelta = MinimapSize;
 
         Image background = panelObject.AddComponent<Image>();
-        background.color = new Color(0.05f, 0.05f, 0.07f, 0.55f);
+        // 반투명하면 밝은 바닥 위에서 판이 밝아져 칸과 구분이 사라진다
+        background.color = new Color(0.08f, 0.08f, 0.11f, 0.92f);
         background.raycastTarget = false;
 
         // 칸이 판 밖으로 나가지 않게 자른다 — 층이 커도 미니맵은 그대로다
