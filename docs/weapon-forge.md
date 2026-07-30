@@ -1,17 +1,29 @@
 # 무기 만들기 (Weapon Forge)
 
 `게임 시작 → 무기 만들기 → Stage1` 흐름의 가운데 화면. 플레이어가 무기를 직접 그리고,
-"추가 설정" 텍스트를 붙이면 AI가 둘을 보고 **스탯**을 정한다. 무기 그림은 **세 가지 버전**
-중에서 고른다.
+"추가 설정" 텍스트를 붙이면 AI가 둘을 보고 **스탯**을 정한다. 무기 그림은 **슬라이더로
+AI 개입 단계를 골라** 만든다.
 
-| 버전 | 그림 | 만드는 곳 |
+| 단계 | 그림 | 만드는 곳 |
 | --- | --- | --- |
-| 1. 그대로 | 그린 그림 그대로 | 클라이언트 (서버 호출 없음) |
-| 2. 다듬기 | 형태 유지, 선·색만 정리 | 백엔드 → Gemini 이미지 모델 |
-| 3. 완전 새로 | 컨셉만 살린 새 무기 아트 | 백엔드 → Gemini 이미지 모델 |
+| 0. 그대로 | 그린 그림 그대로 | 클라이언트 (이미지 호출 없음) |
+| 1. 조금 멋있게 | 형태 유지, 선·색만 정리 | 백엔드 → Gemini 이미지 모델 |
+| 2. 완전 멋있게 | 컨셉만 살린 새 무기 아트 | 백엔드 → Gemini 이미지 모델 |
 
-고른 무기는 인벤토리 **3번 칸**에 들어간다(검·도끼는 그대로). 숫자 3을 눌러 장착하면
+**고른 단계만 생성한다** — 이미지 API 호출은 최대 1회, 0단계는 0회다. 생성 후 결과
+확인 화면에서 "이걸로 하기" 또는 "다시 그리기"를 고른다.
+
+확정한 무기는 인벤토리 **3번 칸**에 들어간다(검·도끼는 그대로). 숫자 3을 눌러 장착하면
 그 그림이 발사체가 되고, AI가 정한 공격력·연사·탄속·사거리가 적용된다.
+
+## 그리기 도구
+
+목업 도구바의 연필·크레용·지우개·되돌리기·다시하기와 4색(검·빨·파·초), 그리고 도구바
+아래에 **확장 팔레트 12색**을 더 얹었다(AIGame 그리기 도구와 같은 구성). 지금 고른 도구와
+색은 아이콘 아래 **주황 밑줄**로 표시된다 — 목업 그림을 덮지 않기 위해 밑줄을 골랐다.
+
+색 목록은 [WeaponForgeController.PaletteColors](../Assets/Scripts/Forge/WeaponForgeController.cs)
+한 곳에만 있고 씬 빌더가 그 배열로 버튼을 만든다. 색을 늘리려면 거기만 고치면 된다.
 
 ## 실행
 
@@ -54,10 +66,10 @@ Tools → NaManMoo → Build Weapon Forge
 | [DrawingHistory.cs](../Assets/Scripts/Forge/DrawingHistory.cs) | undo/redo 스냅샷 20단계. 순수 로직 |
 | [DrawingCanvas.cs](../Assets/Scripts/Forge/DrawingCanvas.cs) | Texture2D 페인팅 + 포인터 입력 |
 | [WhiteBackgroundKey.cs](../Assets/Scripts/Forge/WhiteBackgroundKey.cs) | 생성 이미지의 흰 배경 제거. 순수 로직 |
-| [ForgeClient.cs](../Assets/Scripts/Forge/ForgeClient.cs) | `POST /forge` 업로드 |
+| [ForgeClient.cs](../Assets/Scripts/Forge/ForgeClient.cs) | `POST /forge` 업로드 (그림 + 메모 + stage) |
 | [ForgeDto.cs](../Assets/Scripts/Forge/ForgeDto.cs) | 응답 DTO + `WeaponStats` 클램프 |
 | [ForgedWeapon.cs](../Assets/Scripts/Forge/ForgedWeapon.cs) | 씬을 넘어 무기를 들고 가는 static 자리 |
-| [WeaponForgeController.cs](../Assets/Scripts/Forge/WeaponForgeController.cs) | 그리기 → 생성 → 선택 → 확정 상태 기계 |
+| [WeaponForgeController.cs](../Assets/Scripts/Forge/WeaponForgeController.cs) | 그리기 → 생성 → 결과 확인 상태 기계, 팔레트 정의 |
 
 ## 알아둘 것
 

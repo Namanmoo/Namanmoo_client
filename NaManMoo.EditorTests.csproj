@@ -57,7 +57,9 @@
     <Compile Include="Assets/Tests/Editor/AxeSwingTests.cs" />
     <Compile Include="Assets/Tests/Editor/PlayerAxeAttackerTests.cs" />
     <Compile Include="Assets/Tests/Editor/PlayerHealthBarViewTests.cs" />
+    <Compile Include="Assets/Tests/Editor/ForgeClientTests.cs" />
     <Compile Include="Assets/Tests/Editor/BossHealthBarViewTests.cs" />
+    <Compile Include="Assets/Tests/Editor/WeaponForgePaletteTests.cs" />
     <Compile Include="Assets/Tests/Editor/BossRobotControllerTests.cs" />
     <Compile Include="Assets/Tests/Editor/PlayerInventoryTests.cs" />
     <Compile Include="Assets/Tests/Editor/ItemHotbarControllerTests.cs" />

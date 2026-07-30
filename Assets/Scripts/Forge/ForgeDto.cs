@@ -11,7 +11,15 @@ public sealed class ForgeResponseDto
     public string name;
     public string flavor;
     public ForgeStatsDto stats;
-    public ForgeVariantDto[] variants;
+
+    /// <summary>요청한 AI 개입 단계를 그대로 돌려준 값 (0/1/2)</summary>
+    public int stage;
+
+    /// <summary>base64 PNG. 0단계이거나 생성이 실패하면 빈 문자열 — 원본 그림을 쓴다.</summary>
+    public string image;
+
+    /// <summary>생성에 실패해 원본으로 대체해야 하는가 (0단계는 실패가 아니다)</summary>
+    public bool imageFailed;
 
     /// <summary>"gemini" 또는 "mock"</summary>
     public string source;
@@ -27,19 +35,6 @@ public sealed class ForgeStatsDto
     public float shotsPerSecond;
     public float projectileSpeed;
     public float lifetime;
-}
-
-[System.Serializable]
-public sealed class ForgeVariantDto
-{
-    /// <summary>1=그대로, 2=다듬기, 3=완전 새로</summary>
-    public int version;
-
-    /// <summary>base64 PNG. 1번은 항상 빈 문자열 — 클라이언트가 원본을 쓴다.</summary>
-    public string image;
-
-    /// <summary>생성에 실패해 원본으로 대체해야 하는가</summary>
-    public bool failed;
 }
 
 /// <summary>

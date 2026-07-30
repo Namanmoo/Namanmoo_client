@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -12,6 +13,8 @@ using UnityEngine.UI;
 ///
 /// 좌표는 Assets/UI/WeaponForge.png를 실제로 측정해서 넣은 값이다(좌상단 원점 비율).
 /// 배경 그림을 다시 그리면 이 값들도 다시 재야 한다.
+///
+/// 목업에 없는 것(단계 슬라이더, 확장 팔레트, 상태 문구)은 그림의 빈 여백에 얹는다.
 /// </summary>
 public static class WeaponForgeSceneBuilder
 {
@@ -29,7 +32,22 @@ public static class WeaponForgeSceneBuilder
 
     // 목업에 입력칸이 없어서, 미리보기와 "무기 만들기" 버튼 사이 빈 띠를 쓴다
     private static readonly Rect NoteArea = Rect.MinMaxRect(0.6364f, 0.6780f, 0.9115f, 0.7240f);
-    private static readonly Rect StatusArea = Rect.MinMaxRect(0.1346f, 0.1250f, 0.6041f, 0.2050f);
+
+    // 제목과 캔버스 사이 빈 띠 — 단계 슬라이더.
+    // 배경 그림을 재보면 제목 잉크는 y=0.165에서 끝나고 캔버스 테두리는 0.203에서
+    // 시작한다. 그 사이 38/1000이 전부라, 라벨과 슬라이더를 위아래로 쌓지 못하고
+    // 가로로 나란히 놓는다.
+    private static readonly Rect StageLabelArea = Rect.MinMaxRect(0.1394f, 0.1680f, 0.3620f, 0.2010f);
+    private static readonly Rect StageSliderArea = Rect.MinMaxRect(0.3700f, 0.1720f, 0.6041f, 0.1970f);
+
+    // 도구바 아래 빈 여백 — 확장 팔레트
+    private const float PaletteTop = 0.9250f;
+    private const float PaletteBottom = 0.9760f;
+    private const float PaletteLeft = 0.1400f;
+    private const float PaletteRight = 0.6041f;
+
+    // 오른쪽 아래 빈 여백 — 상태 문구
+    private static readonly Rect StatusArea = Rect.MinMaxRect(0.6200f, 0.9380f, 0.9960f, 0.9960f);
 
     /// <summary>도구바 아이콘 9개의 가로 중심 (연필·크레용·지우개·undo·redo·검·빨·파·초)</summary>
     private static readonly float[] ToolCenters =
@@ -40,6 +58,12 @@ public static class WeaponForgeSceneBuilder
     private const float ToolCenterY = 0.8582f;
     private const float ToolHalfWidth = 0.0215f;
     private const float ToolHalfHeight = 0.0430f;
+
+    // 선택 표시는 아이콘 그림을 덮지 않도록 밑줄로 — 도구바 안쪽 아래에 놓는다
+    private const float ToolUnderlineTop = 0.9010f;
+    private const float ToolUnderlineBottom = 0.9105f;
+
+    private static readonly Color HighlightColor = new Color(0.98f, 0.55f, 0.1f, 1f);
 
     [MenuItem("Tools/NaManMoo/Build Weapon Forge")]
     public static void Build()
@@ -56,7 +80,6 @@ public static class WeaponForgeSceneBuilder
 
         // 배경 그림과 상호작용 요소를 같은 16:9 프레임 안에 둔다.
         // 창 비율이 16:9가 아닐 때 배경만 레터박스되면 버튼 위치가 그림과 어긋난다.
-        // (TitleSceneBuilder의 Title Frame과 같은 방식)
         RectTransform frame = CreateFrame(canvas.transform, background);
         CreateBackground(frame, background);
 
@@ -73,23 +96,27 @@ public static class WeaponForgeSceneBuilder
         Button forgeButton = CreateInvisibleButton(frame, "Forge Button", ForgeButtonArea);
         Button backButton = CreateInvisibleButton(frame, "Back Button", BackButtonArea);
 
-        CreateToolButtons(frame, controller);
-        // 선택 화면은 그림에 얹는 게 아니라 화면 전체를 덮어야 하므로 캔버스 바로 아래에 둔다
-        ChoicePanelParts choice = CreateChoicePanel(canvas.transform, font, controller);
+        (Slider stageSlider, Text stageLabel) = CreateStageSlider(frame, font);
+        Image[] toolHighlights = CreateToolButtons(frame, controller);
+        Image[] colorHighlights = CreateColorButtons(frame, controller);
+        // 결과 화면은 그림에 얹는 게 아니라 화면 전체를 덮으므로 캔버스 바로 아래에 둔다
+        ResultPanelParts result = CreateResultPanel(canvas.transform, font, controller);
 
         UnityEditor.Events.UnityEventTools.AddPersistentListener(
             forgeButton.onClick, controller.Forge);
         UnityEditor.Events.UnityEventTools.AddPersistentListener(
             backButton.onClick, controller.GoBackToTitle);
 
-        WireController(controller, drawing, note, preview, forgeButton, status, choice);
+        WireController(
+            controller, drawing, note, preview, forgeButton, status,
+            stageSlider, stageLabel, toolHighlights, colorHighlights, result);
 
         EditorSceneManager.SaveScene(scene, ScenePath);
         AddSceneToBuildSettings();
         Debug.Log($"[WeaponForgeSceneBuilder] {ScenePath} 생성 완료");
     }
 
-    // ── 개별 조각 ──────────────────────────────────────────────
+    // ── 화면 골격 ──────────────────────────────────────────────
 
     private static void CreateCamera()
     {
@@ -116,7 +143,6 @@ public static class WeaponForgeSceneBuilder
         CanvasScaler scaler = canvasObject.GetComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = ReferenceResolution;
-        // 배경 그림이 16:9라 가로/세로 어느 쪽에도 치우치지 않게 절반씩 맞춘다
         scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
         scaler.matchWidthOrHeight = 0.5f;
 
@@ -145,28 +171,22 @@ public static class WeaponForgeSceneBuilder
     {
         var backgroundObject = new GameObject("Background", typeof(RectTransform), typeof(Image));
         backgroundObject.transform.SetParent(parent, false);
-
-        RectTransform rect = (RectTransform)backgroundObject.transform;
-        Stretch(rect);
+        Stretch((RectTransform)backgroundObject.transform);
 
         Image image = backgroundObject.GetComponent<Image>();
         image.sprite = sprite;
-        // 프레임이 이미 비율을 잡아 주므로 여기서 또 맞출 필요가 없다
         image.preserveAspect = false;
         // 배경은 클릭을 먹지 않아야 캔버스·버튼이 정상 동작한다
         image.raycastTarget = false;
     }
 
+    // ── 그리기·미리보기 ─────────────────────────────────────────
+
     private static DrawingCanvas CreateDrawingCanvas(Transform parent)
     {
         // 목업의 캔버스 자리에 그려진 예시 무기를 가리는 흰 바탕.
         // 그리기 텍스처 자체는 투명이라야 내보낸 PNG에 알파가 남는다.
-        var backing = new GameObject("Drawing Backing", typeof(RectTransform), typeof(Image));
-        backing.transform.SetParent(parent, false);
-        SetArea((RectTransform)backing.transform, CanvasArea);
-        Image backingImage = backing.GetComponent<Image>();
-        backingImage.color = Color.white;
-        backingImage.raycastTarget = false;
+        CreateSolid(parent, "Drawing Backing", CanvasArea, Color.white);
 
         var canvasObject = new GameObject(
             "Drawing Canvas",
@@ -181,12 +201,7 @@ public static class WeaponForgeSceneBuilder
 
     private static RawImage CreatePreview(Transform parent)
     {
-        var backing = new GameObject("Preview Backing", typeof(RectTransform), typeof(Image));
-        backing.transform.SetParent(parent, false);
-        SetArea((RectTransform)backing.transform, PreviewArea);
-        Image backingImage = backing.GetComponent<Image>();
-        backingImage.color = Color.white;
-        backingImage.raycastTarget = false;
+        CreateSolid(parent, "Preview Backing", PreviewArea, Color.white);
 
         var previewObject = new GameObject("Preview", typeof(RectTransform), typeof(RawImage));
         previewObject.transform.SetParent(parent, false);
@@ -200,15 +215,10 @@ public static class WeaponForgeSceneBuilder
     private static InputField CreateNoteInput(Transform parent, Font font)
     {
         var inputObject = new GameObject(
-            "Note Input",
-            typeof(RectTransform),
-            typeof(Image),
-            typeof(InputField));
+            "Note Input", typeof(RectTransform), typeof(Image), typeof(InputField));
         inputObject.transform.SetParent(parent, false);
         SetArea((RectTransform)inputObject.transform, NoteArea);
-
-        Image background = inputObject.GetComponent<Image>();
-        background.color = new Color(1f, 1f, 1f, 0.9f);
+        inputObject.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.9f);
 
         var viewport = new GameObject("Text Area", typeof(RectTransform), typeof(RectMask2D));
         viewport.transform.SetParent(inputObject.transform, false);
@@ -218,12 +228,12 @@ public static class WeaponForgeSceneBuilder
         viewportRect.offsetMax = new Vector2(-12f, -6f);
 
         Text placeholder = CreateText(
-            viewport.transform, "Placeholder", font, "무기 설명 (예: 불이 나오는 빠른 검)");
+            viewport.transform, "Placeholder", font, "무기 설명 (예: 불이 나오는 빠른 검)", 28);
         placeholder.color = new Color(0.45f, 0.45f, 0.45f, 1f);
         placeholder.fontStyle = FontStyle.Italic;
         placeholder.alignment = TextAnchor.MiddleLeft;
 
-        Text text = CreateText(viewport.transform, "Text", font, string.Empty);
+        Text text = CreateText(viewport.transform, "Text", font, string.Empty, 28);
         text.color = new Color(0.15f, 0.15f, 0.15f, 1f);
         text.alignment = TextAnchor.MiddleLeft;
         text.supportRichText = false;
@@ -238,129 +248,245 @@ public static class WeaponForgeSceneBuilder
 
     private static Text CreateStatusText(Transform parent, Font font)
     {
-        Text status = CreateText(parent, "Status Text", font, string.Empty);
+        Text status = CreateText(parent, "Status Text", font, string.Empty, 24);
         SetArea((RectTransform)status.transform, StatusArea);
-        status.color = new Color(0.75f, 0.15f, 0.1f, 1f);
-        status.fontSize = 30;
+        status.color = new Color(0.72f, 0.14f, 0.09f, 1f);
         status.alignment = TextAnchor.UpperLeft;
         return status;
     }
 
-    private static void CreateToolButtons(Transform parent, WeaponForgeController controller)
+    // ── 단계 슬라이더 ───────────────────────────────────────────
+
+    /// <summary>
+    /// AI 개입 단계 0/1/2를 고르는 슬라이더. 목업에 없는 요소라 제목과 캔버스 사이
+    /// 빈 띠에 얹는다. 칸이 세 개뿐이므로 wholeNumbers로 고정한다.
+    /// </summary>
+    private static (Slider, Text) CreateStageSlider(Transform parent, Font font)
     {
-        (string name, UnityEngine.Events.UnityAction action)[] tools =
-        {
-            ("Pen", controller.SelectPen),
-            ("Crayon", controller.SelectCrayon),
-            ("Eraser", controller.SelectEraser),
-            ("Undo", controller.Undo),
-            ("Redo", controller.Redo),
-            ("Color Black", controller.SelectBlack),
-            ("Color Red", controller.SelectRed),
-            ("Color Blue", controller.SelectBlue),
-            ("Color Green", controller.SelectGreen)
-        };
+        Text label = CreateText(parent, "Stage Label", font, string.Empty, 30);
+        SetArea((RectTransform)label.transform, StageLabelArea);
+        label.color = new Color(0.16f, 0.16f, 0.18f, 1f);
+        label.alignment = TextAnchor.MiddleLeft;
 
-        for (int index = 0; index < tools.Length; index++)
-        {
-            float centerX = ToolCenters[index];
-            Rect area = Rect.MinMaxRect(
-                centerX - ToolHalfWidth,
-                ToolCenterY - ToolHalfHeight,
-                centerX + ToolHalfWidth,
-                ToolCenterY + ToolHalfHeight);
+        var sliderObject = new GameObject("Stage Slider", typeof(RectTransform), typeof(Slider));
+        sliderObject.transform.SetParent(parent, false);
+        SetArea((RectTransform)sliderObject.transform, StageSliderArea);
 
-            Button button = CreateInvisibleButton(parent, tools[index].name + " Button", area);
-            UnityEditor.Events.UnityEventTools.AddPersistentListener(
-                button.onClick, tools[index].action);
-        }
+        Image background = CreateSolid(
+            sliderObject.transform, "Background", null, new Color(0.80f, 0.78f, 0.74f, 1f));
+        SetVerticalBand((RectTransform)background.transform, 0.30f, 0.70f);
+        // 트랙도 클릭을 받아야 한다. 끄면 손잡이를 정확히 잡아 끌어야만 값이 바뀐다.
+        background.raycastTarget = true;
+
+        var fillArea = new GameObject("Fill Area", typeof(RectTransform));
+        fillArea.transform.SetParent(sliderObject.transform, false);
+        SetVerticalBand((RectTransform)fillArea.transform, 0.30f, 0.70f);
+        Image fill = CreateSolid(fillArea.transform, "Fill", null, HighlightColor);
+        Stretch((RectTransform)fill.transform);
+
+        var handleArea = new GameObject("Handle Slide Area", typeof(RectTransform));
+        handleArea.transform.SetParent(sliderObject.transform, false);
+        Stretch((RectTransform)handleArea.transform);
+        Image handle = CreateSolid(
+            handleArea.transform, "Handle", null, new Color(0.15f, 0.15f, 0.17f, 1f));
+        handle.raycastTarget = true;
+        RectTransform handleRect = (RectTransform)handle.transform;
+        handleRect.sizeDelta = new Vector2(28f, 34f);
+
+        Slider slider = sliderObject.GetComponent<Slider>();
+        slider.targetGraphic = handle;
+        slider.fillRect = (RectTransform)fill.transform;
+        slider.handleRect = handleRect;
+        slider.direction = Slider.Direction.LeftToRight;
+        slider.minValue = 0f;
+        slider.maxValue = WeaponForgeController.MaxStage;
+        slider.wholeNumbers = true;
+        slider.value = 0f;
+        return (slider, label);
     }
 
-    private struct ChoicePanelParts
+    // ── 도구·색 버튼 ───────────────────────────────────────────
+
+    /// <summary>연필·크레용·지우개·undo·redo. 앞 3개만 선택 표시를 갖는다.</summary>
+    private static Image[] CreateToolButtons(Transform parent, WeaponForgeController controller)
+    {
+        string[] names = { "Pen", "Crayon", "Eraser" };
+        var highlights = new Image[names.Length];
+
+        for (int index = 0; index < names.Length; index++)
+        {
+            Button button = CreateInvisibleButton(
+                parent, names[index] + " Button", ToolIconArea(index));
+            UnityEditor.Events.UnityEventTools.AddIntPersistentListener(
+                button.onClick, controller.SelectTool, index);
+            highlights[index] = CreateUnderline(parent, names[index] + " Selected", index);
+        }
+
+        Button undo = CreateInvisibleButton(parent, "Undo Button", ToolIconArea(3));
+        UnityEditor.Events.UnityEventTools.AddPersistentListener(undo.onClick, controller.Undo);
+
+        Button redo = CreateInvisibleButton(parent, "Redo Button", ToolIconArea(4));
+        UnityEditor.Events.UnityEventTools.AddPersistentListener(redo.onClick, controller.Redo);
+
+        return highlights;
+    }
+
+    /// <summary>
+    /// 색 버튼. 앞 4개는 목업 도구바에 그려진 점 위에 투명 버튼을 얹고,
+    /// 나머지는 도구바 아래 여백에 색 조각을 직접 그린다.
+    /// </summary>
+    private static Image[] CreateColorButtons(Transform parent, WeaponForgeController controller)
+    {
+        Color32[] colors = WeaponForgeController.PaletteColors;
+        int extendedStart = WeaponForgeController.ExtendedPaletteStart;
+        var highlights = new Image[colors.Length];
+
+        // 목업에 그려진 4색 — 도구바의 6~9번째 아이콘 자리
+        for (int index = 0; index < extendedStart; index++)
+        {
+            int iconSlot = 5 + index;
+            Button button = CreateInvisibleButton(
+                parent, $"Color {index} Button", ToolIconArea(iconSlot));
+            UnityEditor.Events.UnityEventTools.AddIntPersistentListener(
+                button.onClick, controller.SelectColor, index);
+            highlights[index] = CreateUnderline(parent, $"Color {index} Selected", iconSlot);
+        }
+
+        // 확장 팔레트 — 목업에 없으므로 조각과 밑줄을 전부 그린다
+        int extendedCount = colors.Length - extendedStart;
+        float slotWidth = (PaletteRight - PaletteLeft) / extendedCount;
+        float gap = slotWidth * 0.18f;
+
+        for (int offset = 0; offset < extendedCount; offset++)
+        {
+            int index = extendedStart + offset;
+            float left = PaletteLeft + offset * slotWidth;
+            Rect swatchArea = Rect.MinMaxRect(
+                left + gap * 0.5f, PaletteTop, left + slotWidth - gap * 0.5f, PaletteBottom);
+
+            // 흰색·밝은 조각은 종이 위에서 경계가 안 보이므로 테두리를 먼저 깔아 준다
+            Color32 color = colors[index];
+            if (color.r > 200 && color.g > 200 && color.b > 200)
+            {
+                CreateSolid(
+                    parent, $"Color {index} Border",
+                    Grow(swatchArea, 0.0020f, 0.0034f),
+                    new Color(0.45f, 0.45f, 0.45f, 1f));
+            }
+
+            var swatchObject = new GameObject(
+                $"Color {index} Swatch", typeof(RectTransform), typeof(Image), typeof(Button));
+            swatchObject.transform.SetParent(parent, false);
+            SetArea((RectTransform)swatchObject.transform, swatchArea);
+
+            Image swatch = swatchObject.GetComponent<Image>();
+            swatch.color = color;
+
+            Button button = swatchObject.GetComponent<Button>();
+            button.targetGraphic = swatch;
+            UnityEditor.Events.UnityEventTools.AddIntPersistentListener(
+                button.onClick, controller.SelectColor, index);
+
+            Rect underlineArea = Rect.MinMaxRect(
+                swatchArea.xMin, PaletteBottom + 0.005f,
+                swatchArea.xMax, PaletteBottom + 0.016f);
+            Image underline = CreateSolid(
+                parent, $"Color {index} Selected", underlineArea, HighlightColor);
+            underline.enabled = false;
+            highlights[index] = underline;
+        }
+
+        return highlights;
+    }
+
+    private static Rect ToolIconArea(int slot)
+    {
+        float centerX = ToolCenters[slot];
+        return Rect.MinMaxRect(
+            centerX - ToolHalfWidth,
+            ToolCenterY - ToolHalfHeight,
+            centerX + ToolHalfWidth,
+            ToolCenterY + ToolHalfHeight);
+    }
+
+    /// <summary>도구바 아이콘 아래에 그리는 선택 표시. 아이콘 그림을 덮지 않는다.</summary>
+    private static Image CreateUnderline(Transform parent, string name, int slot)
+    {
+        float centerX = ToolCenters[slot];
+        Rect area = Rect.MinMaxRect(
+            centerX - ToolHalfWidth * 0.72f,
+            ToolUnderlineTop,
+            centerX + ToolHalfWidth * 0.72f,
+            ToolUnderlineBottom);
+
+        Image underline = CreateSolid(parent, name, area, HighlightColor);
+        underline.enabled = false;
+        return underline;
+    }
+
+    // ── 결과 확인 화면 ──────────────────────────────────────────
+
+    private struct ResultPanelParts
     {
         public GameObject Panel;
-        public RawImage[] Images;
-        public Button[] Buttons;
-        public Text[] Labels;
+        public RawImage Image;
         public Text Headline;
+        public Text Detail;
     }
 
-    private static ChoicePanelParts CreateChoicePanel(
-        Transform parent,
-        Font font,
-        WeaponForgeController controller)
+    private static ResultPanelParts CreateResultPanel(
+        Transform parent, Font font, WeaponForgeController controller)
     {
-        var panel = new GameObject("Choice Panel", typeof(RectTransform), typeof(Image));
+        var panel = new GameObject("Result Panel", typeof(RectTransform), typeof(Image));
         panel.transform.SetParent(parent, false);
         Stretch((RectTransform)panel.transform);
-        Image dim = panel.GetComponent<Image>();
-        dim.color = new Color(0.08f, 0.08f, 0.1f, 0.94f);
+        // 프로젝트가 Linear 색공간이라 알파를 sRGB 감각으로 잡으면 훨씬 밝게 나온다.
+        // 0.94로는 배경이 (72,72,74)까지밖에 안 어두워져 뒷그림이 내용과 경합했다.
+        panel.GetComponent<Image>().color = new Color(0.06f, 0.06f, 0.08f, 0.98f);
 
-        Text headline = CreateText(
-            panel.transform, "Headline", font, "어떤 걸로 할까?");
-        SetArea((RectTransform)headline.transform, Rect.MinMaxRect(0.1f, 0.08f, 0.9f, 0.18f));
+        Text headline = CreateText(panel.transform, "Headline", font, string.Empty, 58);
+        SetArea((RectTransform)headline.transform, Rect.MinMaxRect(0.1f, 0.06f, 0.9f, 0.16f));
         headline.color = Color.white;
-        headline.fontSize = 56;
         headline.alignment = TextAnchor.MiddleCenter;
 
-        var parts = new ChoicePanelParts
-        {
-            Panel = panel,
-            Images = new RawImage[3],
-            Buttons = new Button[3],
-            Labels = new Text[3],
-            Headline = headline
-        };
+        Rect card = Rect.MinMaxRect(0.355f, 0.19f, 0.645f, 0.62f);
+        CreateSolid(panel.transform, "Result Card", card, Color.white);
 
-        for (int index = 0; index < 3; index++)
-        {
-            float left = 0.06f + index * 0.315f;
-            Rect cardArea = Rect.MinMaxRect(left, 0.22f, left + 0.27f, 0.74f);
+        var imageObject = new GameObject("Result Image", typeof(RectTransform), typeof(RawImage));
+        imageObject.transform.SetParent(panel.transform, false);
+        SetArea((RectTransform)imageObject.transform, Grow(card, -0.008f, -0.014f));
+        imageObject.GetComponent<RawImage>().raycastTarget = false;
 
-            var card = new GameObject($"Choice {index + 1}", typeof(RectTransform), typeof(Image), typeof(Button));
-            card.transform.SetParent(panel.transform, false);
-            SetArea((RectTransform)card.transform, cardArea);
-            card.GetComponent<Image>().color = Color.white;
+        Text detail = CreateText(panel.transform, "Detail", font, string.Empty, 30);
+        SetArea((RectTransform)detail.transform, Rect.MinMaxRect(0.12f, 0.64f, 0.88f, 0.71f));
+        detail.color = new Color(0.92f, 0.92f, 0.92f, 1f);
+        detail.alignment = TextAnchor.MiddleCenter;
 
-            var image = new GameObject("Image", typeof(RectTransform), typeof(RawImage));
-            image.transform.SetParent(card.transform, false);
-            RectTransform imageRect = (RectTransform)image.transform;
-            Stretch(imageRect);
-            imageRect.offsetMin = new Vector2(14f, 60f);
-            imageRect.offsetMax = new Vector2(-14f, -14f);
-            RawImage raw = image.GetComponent<RawImage>();
-            raw.raycastTarget = false;
+        Button confirm = CreateLabeledButton(
+            panel.transform, font, "Confirm Button", "이걸로 하기",
+            Rect.MinMaxRect(0.30f, 0.75f, 0.485f, 0.84f),
+            new Color(0.16f, 0.62f, 0.36f, 1f));
+        UnityEditor.Events.UnityEventTools.AddPersistentListener(
+            confirm.onClick, controller.ConfirmResult);
 
-            Text label = CreateText(card.transform, "Label", font, $"{index + 1}.");
-            SetArea((RectTransform)label.transform, Rect.MinMaxRect(0f, 0.86f, 1f, 1f));
-            label.color = new Color(0.15f, 0.15f, 0.15f, 1f);
-            label.fontSize = 34;
-            label.alignment = TextAnchor.MiddleCenter;
-
-            Button button = card.GetComponent<Button>();
-            int captured = index;
-            UnityEditor.Events.UnityEventTools.AddIntPersistentListener(
-                button.onClick, controller.ChooseVariant, captured);
-
-            parts.Images[index] = raw;
-            parts.Buttons[index] = button;
-            parts.Labels[index] = label;
-        }
-
-        Button retry = CreateInvisibleButton(
-            panel.transform, "Draw Again Button", Rect.MinMaxRect(0.38f, 0.79f, 0.62f, 0.9f));
-        Text retryLabel = CreateText(retry.transform, "Label", font, "다시 그리기");
-        Stretch((RectTransform)retryLabel.transform);
-        retryLabel.color = Color.white;
-        retryLabel.fontSize = 34;
-        retryLabel.alignment = TextAnchor.MiddleCenter;
-        retryLabel.raycastTarget = false;
+        Button retry = CreateLabeledButton(
+            panel.transform, font, "Retry Button", "다시 그리기",
+            Rect.MinMaxRect(0.515f, 0.75f, 0.70f, 0.84f),
+            new Color(0.35f, 0.35f, 0.40f, 1f));
         UnityEditor.Events.UnityEventTools.AddPersistentListener(
             retry.onClick, controller.BackToDrawing);
 
         panel.SetActive(false);
-        return parts;
+        return new ResultPanelParts
+        {
+            Panel = panel,
+            Image = imageObject.GetComponent<RawImage>(),
+            Headline = headline,
+            Detail = detail
+        };
     }
+
+    // ── 배선 ──────────────────────────────────────────────────
 
     private static void WireController(
         WeaponForgeController controller,
@@ -369,7 +495,11 @@ public static class WeaponForgeSceneBuilder
         RawImage preview,
         Button forgeButton,
         Text status,
-        ChoicePanelParts choice)
+        Slider stageSlider,
+        Text stageLabel,
+        Image[] toolHighlights,
+        Image[] colorHighlights,
+        ResultPanelParts result)
     {
         var serialized = new SerializedObject(controller);
         serialized.FindProperty("drawingCanvas").objectReferenceValue = drawing;
@@ -377,12 +507,15 @@ public static class WeaponForgeSceneBuilder
         serialized.FindProperty("previewImage").objectReferenceValue = preview;
         serialized.FindProperty("forgeButton").objectReferenceValue = forgeButton;
         serialized.FindProperty("statusText").objectReferenceValue = status;
-        serialized.FindProperty("choicePanel").objectReferenceValue = choice.Panel;
-        serialized.FindProperty("choiceHeadline").objectReferenceValue = choice.Headline;
+        serialized.FindProperty("stageSlider").objectReferenceValue = stageSlider;
+        serialized.FindProperty("stageLabel").objectReferenceValue = stageLabel;
+        serialized.FindProperty("resultPanel").objectReferenceValue = result.Panel;
+        serialized.FindProperty("resultImage").objectReferenceValue = result.Image;
+        serialized.FindProperty("resultHeadline").objectReferenceValue = result.Headline;
+        serialized.FindProperty("resultDetail").objectReferenceValue = result.Detail;
 
-        AssignArray(serialized, "choiceImages", choice.Images);
-        AssignArray(serialized, "choiceButtons", choice.Buttons);
-        AssignArray(serialized, "choiceLabels", choice.Labels);
+        AssignArray(serialized, "toolHighlights", toolHighlights);
+        AssignArray(serialized, "colorHighlights", colorHighlights);
 
         serialized.ApplyModifiedPropertiesWithoutUndo();
     }
@@ -398,6 +531,21 @@ public static class WeaponForgeSceneBuilder
     }
 
     // ── 공용 도우미 ─────────────────────────────────────────────
+
+    private static Image CreateSolid(Transform parent, string name, Rect? area, Color color)
+    {
+        var solid = new GameObject(name, typeof(RectTransform), typeof(Image));
+        solid.transform.SetParent(parent, false);
+        if (area.HasValue)
+        {
+            SetArea((RectTransform)solid.transform, area.Value);
+        }
+
+        Image image = solid.GetComponent<Image>();
+        image.color = color;
+        image.raycastTarget = false;
+        return image;
+    }
 
     private static Button CreateInvisibleButton(Transform parent, string name, Rect area)
     {
@@ -421,8 +569,27 @@ public static class WeaponForgeSceneBuilder
         return button;
     }
 
+    private static Button CreateLabeledButton(
+        Transform parent, Font font, string name, string label, Rect area, Color color)
+    {
+        var buttonObject = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(Button));
+        buttonObject.transform.SetParent(parent, false);
+        SetArea((RectTransform)buttonObject.transform, area);
+
+        Image image = buttonObject.GetComponent<Image>();
+        image.color = color;
+
+        Button button = buttonObject.GetComponent<Button>();
+        button.targetGraphic = image;
+
+        Text text = CreateText(buttonObject.transform, "Label", font, label, 34);
+        text.color = Color.white;
+        text.alignment = TextAnchor.MiddleCenter;
+        return button;
+    }
+
     private static Text CreateText(
-        Transform parent, string name, Font font, string content)
+        Transform parent, string name, Font font, string content, int fontSize)
     {
         var textObject = new GameObject(name, typeof(RectTransform), typeof(Text));
         textObject.transform.SetParent(parent, false);
@@ -431,10 +598,10 @@ public static class WeaponForgeSceneBuilder
         var text = textObject.GetComponent<Text>();
         text.font = font;
         text.text = content;
-        text.fontSize = 32;
+        text.fontSize = fontSize;
         text.alignment = TextAnchor.UpperLeft;
         text.raycastTarget = false;
-        // 상태 메시지가 길어져도 잘리지 않게
+        // 문구가 길어져도 잘리지 않게
         text.horizontalOverflow = HorizontalWrapMode.Wrap;
         text.verticalOverflow = VerticalWrapMode.Overflow;
         return text;
@@ -448,6 +615,15 @@ public static class WeaponForgeSceneBuilder
         rect.offsetMax = Vector2.zero;
     }
 
+    /// <summary>부모 높이의 일부만 차지하는 가로 띠 (슬라이더 홈·채움에 쓴다).</summary>
+    private static void SetVerticalBand(RectTransform rect, float bottom, float top)
+    {
+        rect.anchorMin = new Vector2(0f, bottom);
+        rect.anchorMax = new Vector2(1f, top);
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
+    }
+
     /// <summary>좌상단 원점 비율 좌표를 Unity 앵커(좌하단 원점)로 옮긴다.</summary>
     private static void SetArea(RectTransform rect, Rect area)
     {
@@ -455,6 +631,11 @@ public static class WeaponForgeSceneBuilder
         rect.anchorMax = new Vector2(area.xMax, 1f - area.yMin);
         rect.offsetMin = Vector2.zero;
         rect.offsetMax = Vector2.zero;
+    }
+
+    private static Rect Grow(Rect area, float x, float y)
+    {
+        return Rect.MinMaxRect(area.xMin - x, area.yMin - y, area.xMax + x, area.yMax + y);
     }
 
     private static void EnsureEventSystem()
@@ -504,8 +685,7 @@ public static class WeaponForgeSceneBuilder
 
     /// <summary>
     /// 한글 표시용 폰트. WebGL에서는 OS 폰트(Arial 폴백)를 쓸 수 없어 한글이 깨지므로,
-    /// 프로젝트에 넣은 Gaegu(OFL)를 직접 참조한다. 프로젝트 안의 TTF는
-    /// 빌드에 포함되고 런타임에 동적으로 래스터화되므로 WebGL에서도 동작한다.
+    /// 프로젝트에 넣은 Gaegu(OFL)를 직접 참조한다.
     /// </summary>
     private static Font LoadFont()
     {
@@ -526,19 +706,15 @@ public static class WeaponForgeSceneBuilder
     /// </summary>
     private static void AddSceneToBuildSettings()
     {
-        var scenes = new System.Collections.Generic.List<EditorBuildSettingsScene>(
-            EditorBuildSettings.scenes);
-
+        var scenes = new List<EditorBuildSettingsScene>(EditorBuildSettings.scenes);
         if (scenes.Exists(scene => scene.path == ScenePath))
         {
             return;
         }
 
         // Title 바로 뒤 — 흐름 순서와 목록 순서를 맞춘다
-        int titleIndex = scenes.FindIndex(
-            scene => scene.path == TitleSceneBuilder.ScenePath);
+        int titleIndex = scenes.FindIndex(scene => scene.path == TitleSceneBuilder.ScenePath);
         scenes.Insert(titleIndex + 1, new EditorBuildSettingsScene(ScenePath, true));
-
         EditorBuildSettings.scenes = scenes.ToArray();
     }
 }

@@ -14,8 +14,11 @@ public sealed class ForgeClient
 {
     public const string DefaultBaseUrl = "http://127.0.0.1:8790";
 
-    /// <summary>이미지 두 장을 생성하므로 넉넉히 잡는다.</summary>
+    /// <summary>이미지 생성이 오래 걸릴 수 있어 넉넉히 잡는다.</summary>
     public const int DefaultTimeoutSeconds = 120;
+
+    /// <summary>백엔드 MAX_STAGE와 같아야 한다.</summary>
+    public const int MaxStage = 2;
 
     private readonly string baseUrl;
     private readonly int timeoutSeconds;
@@ -31,12 +34,37 @@ public sealed class ForgeClient
     public string ForgeUrl => baseUrl + "/forge";
 
     /// <summary>
-    /// 그림과 메모를 올리고 결과를 받는다. 실패해도 예외를 던지지 않고
+    /// 업로드할 multipart 조각들. 따로 떼어 둔 이유가 있다 —
+    /// <see cref="MultipartFormDataSection"/>은 <em>빈 문자열을 거부하고 예외를 던진다.</em>
+    /// 설명을 비워 두면 요청이 아예 못 나가고 화면이 "보내는 중"에서 멈췄다.
+    /// 서버는 note를 생략하면 빈 값으로 받으므로 빈 조각은 넣지 않는다.
+    /// </summary>
+    public static List<IMultipartFormSection> BuildSections(
+        byte[] drawingPng, string note, int stage)
+    {
+        var sections = new List<IMultipartFormSection>
+        {
+            new MultipartFormFileSection("drawing", drawingPng, "drawing.png", "image/png"),
+            new MultipartFormDataSection("stage", Mathf.Clamp(stage, 0, MaxStage).ToString())
+        };
+
+        if (!string.IsNullOrEmpty(note))
+        {
+            sections.Add(new MultipartFormDataSection("note", note));
+        }
+
+        return sections;
+    }
+
+    /// <summary>
+    /// 그림·메모·단계를 올리고 결과를 받는다. 실패해도 예외를 던지지 않고
     /// <paramref name="onError"/>로 사람이 읽을 메시지를 넘긴다 — 화면에 그대로 띄운다.
     /// </summary>
+    /// <param name="stage">AI 개입 단계 0=없음 / 1=조금 / 2=완전</param>
     public IEnumerator Post(
         byte[] drawingPng,
         string note,
+        int stage,
         Action<ForgeResponseDto> onSuccess,
         Action<string> onError)
     {
@@ -46,11 +74,7 @@ public sealed class ForgeClient
             yield break;
         }
 
-        var sections = new List<IMultipartFormSection>
-        {
-            new MultipartFormFileSection("drawing", drawingPng, "drawing.png", "image/png"),
-            new MultipartFormDataSection("note", note ?? string.Empty)
-        };
+        List<IMultipartFormSection> sections = BuildSections(drawingPng, note, stage);
 
         using UnityWebRequest request = UnityWebRequest.Post(ForgeUrl, sections);
         request.timeout = timeoutSeconds;
@@ -74,9 +98,9 @@ public sealed class ForgeClient
             yield break;
         }
 
-        if (parsed == null || parsed.variants == null || parsed.variants.Length == 0)
+        if (parsed == null || parsed.stats == null)
         {
-            onError?.Invoke("서버가 무기 후보를 하나도 주지 않았습니다.");
+            onError?.Invoke("서버 응답에 무기 정보가 없습니다.");
             yield break;
         }
 

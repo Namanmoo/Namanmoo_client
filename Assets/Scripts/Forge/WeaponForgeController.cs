@@ -6,20 +6,59 @@ using UnityEngine.UI;
 /// <summary>
 /// 무기 만들기 화면의 상태 기계.
 ///
-/// 그리기 → (무기 만들기) → 생성 중 → 3버전 중 선택 → 확정 → Stage1.
-/// 서버가 죽어 있거나 생성이 실패해도 흐름은 끊기지 않는다 — 실패한 버전은
-/// 원본 그림으로 채우고, 최악의 경우 그린 그림 그대로 게임에 들어간다.
+/// 그리기 → 단계 선택(슬라이더 0/1/2) → (무기 만들기) → 생성 중 → 결과 확인 → Stage1.
+/// 고른 단계 하나만 생성하므로 이미지 API 호출은 최대 1회다(0단계는 0회).
+///
+/// 서버가 죽어 있거나 생성이 실패해도 흐름은 끊기지 않는다 — 그린 그림 그대로
+/// 게임에 들어간다.
 /// </summary>
 public sealed class WeaponForgeController : MonoBehaviour
 {
     public const string TitleScenePath = "Assets/Scenes/Title.unity";
     public const string Stage1ScenePath = "Assets/Scenes/Stage1.unity";
 
+    /// <summary>AI 개입 단계의 최댓값. 백엔드 MAX_STAGE와 같아야 한다.</summary>
+    public const int MaxStage = 2;
+
+    /// <summary>
+    /// 고를 수 있는 색. 앞 4개는 목업 도구바에 그려진 검·빨·파·초와 같은 순서이고,
+    /// 그 뒤는 확장 팔레트다(AIGame 그리기 도구와 같은 구성).
+    /// 씬 빌더가 이 배열로 색 버튼을 만들므로 여기만 고치면 UI도 따라온다.
+    /// </summary>
+    public static readonly Color32[] PaletteColors =
+    {
+        // 목업 도구바의 4색
+        new Color32(30, 30, 30, 255),
+        new Color32(220, 40, 40, 255),
+        new Color32(40, 90, 220, 255),
+        new Color32(30, 165, 90, 255),
+        // 확장 팔레트
+        new Color32(255, 255, 255, 255),
+        new Color32(230, 57, 70, 255),
+        new Color32(255, 140, 66, 255),
+        new Color32(255, 209, 102, 255),
+        new Color32(138, 201, 38, 255),
+        new Color32(42, 157, 143, 255),
+        new Color32(33, 158, 188, 255),
+        new Color32(90, 24, 154, 255),
+        new Color32(255, 112, 166, 255),
+        new Color32(141, 85, 36, 255),
+        new Color32(173, 181, 189, 255),
+        new Color32(90, 90, 90, 255)
+    };
+
+    /// <summary>확장 팔레트의 시작 인덱스 — 목업 도구바 4색 다음부터</summary>
+    public const int ExtendedPaletteStart = 4;
+
+    private static readonly string[] StageNames = { "그대로", "조금 멋있게", "완전 멋있게" };
+
+
+
     public enum Phase
     {
         Drawing,
         Forging,
-        Choosing
+        Confirming
     }
 
     [SerializeField] private string backendBaseUrl = ForgeClient.DefaultBaseUrl;
@@ -29,20 +68,28 @@ public sealed class WeaponForgeController : MonoBehaviour
     [SerializeField] private Button forgeButton;
     [SerializeField] private Text statusText;
 
-    [Header("3버전 선택")]
-    [SerializeField] private GameObject choicePanel;
-    [SerializeField] private RawImage[] choiceImages = new RawImage[3];
-    [SerializeField] private Button[] choiceButtons = new Button[3];
-    [SerializeField] private Text[] choiceLabels = new Text[3];
-    [SerializeField] private Text choiceHeadline;
+    [Header("AI 개입 단계")]
+    [SerializeField] private Slider stageSlider;
+    [SerializeField] private Text stageLabel;
 
-    private static readonly string[] VersionNames = { "그대로", "다듬기", "완전 새로" };
+    [Header("선택 상태 표시")]
+    [SerializeField] private Image[] toolHighlights = new Image[3];
+    [SerializeField] private Image[] colorHighlights;
+
+    [Header("결과 확인")]
+    [SerializeField] private GameObject resultPanel;
+    [SerializeField] private RawImage resultImage;
+    [SerializeField] private Text resultHeadline;
+    [SerializeField] private Text resultDetail;
 
     private ForgeResponseDto response;
-    private readonly Sprite[] candidateSprites = new Sprite[3];
-    private Coroutine running;
+    private Sprite resultSprite;
 
     public Phase Current { get; private set; } = Phase.Drawing;
+
+    /// <summary>슬라이더가 가리키는 단계 (0/1/2)</summary>
+    public int Stage =>
+        stageSlider != null ? Mathf.Clamp(Mathf.RoundToInt(stageSlider.value), 0, MaxStage) : 0;
 
     /// <summary>테스트에서 서버 주소를 바꿔 끼울 수 있게.</summary>
     public string BackendBaseUrl
@@ -55,7 +102,7 @@ public sealed class WeaponForgeController : MonoBehaviour
     {
         // 화면에 들어올 때마다 이전 무기는 버린다 — 다시 만들러 온 것이므로
         ForgedWeapon.Clear();
-        ShowChoicePanel(false);
+        ShowResultPanel(false);
         SetStatus(string.Empty);
     }
 
@@ -66,6 +113,16 @@ public sealed class WeaponForgeController : MonoBehaviour
             drawingCanvas.Changed += RefreshPreview;
             RefreshPreview();
         }
+
+        if (stageSlider != null)
+        {
+            stageSlider.onValueChanged.AddListener(_ => RefreshStageLabel());
+        }
+
+        RefreshStageLabel();
+        // 기본 도구·색에 표시를 맞춰 둔다
+        SelectTool(0);
+        SelectColor(0);
     }
 
     private void OnDestroy()
@@ -76,27 +133,42 @@ public sealed class WeaponForgeController : MonoBehaviour
         }
     }
 
-    // ── 도구바 버튼이 직접 부르는 것들 ──────────────────────────────
+    // ── 도구바·팔레트 버튼이 부르는 것들 ─────────────────────────────
 
-    public void SelectPen() => drawingCanvas?.SetTool(BrushKind.Pen);
+    /// <summary>0=연필, 1=크레용, 2=지우개</summary>
+    public void SelectTool(int index)
+    {
+        BrushKind kind = index switch
+        {
+            1 => BrushKind.Crayon,
+            2 => BrushKind.Eraser,
+            _ => BrushKind.Pen
+        };
 
-    public void SelectCrayon() => drawingCanvas?.SetTool(BrushKind.Crayon);
+        drawingCanvas?.SetTool(kind);
+        Highlight(toolHighlights, index);
+    }
 
-    public void SelectEraser() => drawingCanvas?.SetTool(BrushKind.Eraser);
+    /// <summary><see cref="PaletteColors"/>의 인덱스</summary>
+    public void SelectColor(int index)
+    {
+        if (index < 0 || index >= PaletteColors.Length)
+        {
+            return;
+        }
+
+        drawingCanvas?.SetColor(PaletteColors[index]);
+        Highlight(colorHighlights, index);
+        // 색을 고르면 지우개에서 빠져나오므로 도구 표시도 연필로 되돌린다
+        if (drawingCanvas != null && drawingCanvas.Tool == BrushKind.Pen)
+        {
+            Highlight(toolHighlights, 0);
+        }
+    }
 
     public void Undo() => drawingCanvas?.Undo();
 
     public void Redo() => drawingCanvas?.Redo();
-
-    public void SelectBlack() => SetColor(new Color32(30, 30, 30, 255));
-
-    public void SelectRed() => SetColor(new Color32(220, 40, 40, 255));
-
-    public void SelectBlue() => SetColor(new Color32(40, 90, 220, 255));
-
-    public void SelectGreen() => SetColor(new Color32(30, 165, 90, 255));
-
-    private void SetColor(Color32 color) => drawingCanvas?.SetColor(color);
 
     // ── 화면 전환 ──────────────────────────────────────────────
 
@@ -119,14 +191,15 @@ public sealed class WeaponForgeController : MonoBehaviour
             return;
         }
 
-        running = StartCoroutine(ForgeRoutine());
+        StartCoroutine(ForgeRoutine());
     }
 
     private IEnumerator ForgeRoutine()
     {
+        int stage = Stage;
         Current = Phase.Forging;
         SetInteractable(false);
-        SetStatus("대장간에 그림을 보내는 중…");
+        SetStatus(stage == 0 ? "무기를 손질하는 중…" : "대장간에 그림을 보내는 중…");
 
         byte[] png = drawingCanvas.EncodeToPng();
         string note = noteInput != null ? noteInput.text : string.Empty;
@@ -138,112 +211,86 @@ public sealed class WeaponForgeController : MonoBehaviour
         yield return client.Post(
             png,
             note,
+            stage,
             result => received = result,
             error => failure = error);
 
-        running = null;
-
-        if (received == null)
-        {
-            // 서버에 못 닿아도 그린 그림으로는 놀 수 있어야 한다
-            OfferDrawingOnlyFallback(png);
-            SetStatus(failure);
-            yield break;
-        }
-
         response = received;
-        BuildCandidates(png);
-        ShowChoices();
+        BuildResult(png, stage);
+        ShowResult(stage, failure);
     }
 
     /// <summary>
-    /// 서버가 죽어 있을 때의 탈출구 — 1번(그대로)만 있는 선택지를 띄운다.
-    /// 스탯은 기본 검과 같게 둔다.
+    /// 결과 스프라이트를 만든다. 생성 이미지가 없으면(0단계·실패·서버 불통)
+    /// 그린 그림을 그대로 쓴다.
     /// </summary>
-    private void OfferDrawingOnlyFallback(byte[] png)
+    private void BuildResult(byte[] originalPng, int stage)
     {
-        response = null;
-        ClearCandidates();
-        candidateSprites[0] = WeaponSpriteFactory.FromPng(png, false, "그린 무기");
-        ShowChoices();
-    }
+        resultSprite = null;
 
-    private void BuildCandidates(byte[] originalPng)
-    {
-        ClearCandidates();
-
-        // 1번은 언제나 플레이어가 그린 원본 — 이미 투명 배경이라 키잉이 필요 없다
-        candidateSprites[0] = WeaponSpriteFactory.FromPng(originalPng, false, "그린 무기");
-
-        foreach (ForgeVariantDto variant in response.variants)
+        string generated = response != null ? response.image : null;
+        if (!string.IsNullOrEmpty(generated))
         {
-            if (variant == null || variant.version < 2 || variant.version > 3)
-            {
-                continue;
-            }
-
             // 생성 이미지는 흰 배경이 채워져 오므로 뚫어 준다
-            candidateSprites[variant.version - 1] = WeaponSpriteFactory.FromBase64(
-                variant.image,
-                removeWhiteBackground: true,
-                name: $"무기 {variant.version}번");
+            resultSprite = WeaponSpriteFactory.FromBase64(
+                generated, removeWhiteBackground: true, name: $"무기 {stage}단계");
+        }
+
+        if (resultSprite == null)
+        {
+            // 그린 원본은 이미 투명 배경이라 키잉이 필요 없다
+            resultSprite = WeaponSpriteFactory.FromPng(originalPng, false, "그린 무기");
         }
     }
 
-    private void ShowChoices()
+    private void ShowResult(int stage, string failure)
     {
-        Current = Phase.Choosing;
-        ShowChoicePanel(true);
+        Current = Phase.Confirming;
+        ShowResultPanel(true);
 
-        string weaponName = response != null ? response.name : "그린 무기";
-        if (choiceHeadline != null)
+        string weaponName = response != null && !string.IsNullOrWhiteSpace(response.name)
+            ? response.name
+            : "그린 무기";
+
+        if (resultHeadline != null)
         {
-            choiceHeadline.text = $"{weaponName} — 어떤 걸로 할까?";
+            resultHeadline.text = weaponName;
         }
 
-        for (int index = 0; index < choiceImages.Length; index++)
+        if (resultImage != null)
         {
-            Sprite sprite = candidateSprites[index];
-            bool available = sprite != null;
-
-            if (choiceImages[index] != null)
-            {
-                choiceImages[index].texture = available ? sprite.texture : null;
-                choiceImages[index].color = available
-                    ? Color.white
-                    : new Color(1f, 1f, 1f, 0.15f);
-            }
-
-            if (choiceButtons[index] != null)
-            {
-                choiceButtons[index].interactable = available;
-            }
-
-            if (choiceLabels[index] != null)
-            {
-                choiceLabels[index].text = available
-                    ? $"{index + 1}. {VersionNames[index]}"
-                    : $"{index + 1}. {VersionNames[index]} (실패)";
-            }
+            resultImage.texture = resultSprite != null ? resultSprite.texture : null;
         }
 
-        bool anyGenerated = candidateSprites[1] != null || candidateSprites[2] != null;
-        SetStatus(
-            anyGenerated
-                ? string.Empty
-                : "생성된 그림이 없어 그린 그림만 쓸 수 있습니다.");
+        if (resultDetail != null)
+        {
+            WeaponStats stats = response != null
+                ? WeaponStats.FromDto(response.stats)
+                : WeaponStats.Default;
+            resultDetail.text =
+                $"공격력 {stats.Damage}   연사 {stats.ShotsPerSecond:0.##}/초   " +
+                $"탄속 {stats.ProjectileSpeed:0.##}   사거리 {stats.Lifetime:0.##}초";
+        }
+
+        // 무엇이 어긋났는지는 숨기지 않고 알려 준다
+        if (failure != null)
+        {
+            SetStatus(failure);
+        }
+        else if (response != null && response.imageFailed)
+        {
+            SetStatus($"{StageNames[stage]} 생성에 실패해 그린 그림을 그대로 씁니다.");
+        }
+        else
+        {
+            SetStatus(string.Empty);
+        }
     }
 
-    /// <summary>선택 버튼 3개가 각각 0/1/2로 부른다.</summary>
-    public void ChooseVariant(int index)
+    /// <summary>"이걸로 하기" — 무기를 확정하고 게임으로 들어간다.</summary>
+    public void ConfirmResult()
     {
-        if (Current != Phase.Choosing || index < 0 || index >= candidateSprites.Length)
-        {
-            return;
-        }
-
-        Sprite chosen = candidateSprites[index];
-        if (chosen == null)
+        if (Current != Phase.Confirming || resultSprite == null)
         {
             return;
         }
@@ -255,26 +302,39 @@ public sealed class WeaponForgeController : MonoBehaviour
             ? response.name
             : "그린 무기";
 
-        ForgedWeapon.Set(chosen, stats, weaponName, index + 1);
+        ForgedWeapon.Set(resultSprite, stats, weaponName, Stage);
         SceneManager.LoadScene(Stage1ScenePath);
     }
 
-    /// <summary>선택을 취소하고 다시 그리기로 — 마음에 드는 게 없을 때.</summary>
+    /// <summary>"다시 그리기" — 결과가 마음에 안 들 때 그리기로 돌아간다.</summary>
     public void BackToDrawing()
     {
-        if (Current != Phase.Choosing)
+        if (Current != Phase.Confirming)
         {
             return;
         }
 
-        ShowChoicePanel(false);
-        ClearCandidates();
+        ShowResultPanel(false);
+        resultSprite = null;
+        response = null;
         Current = Phase.Drawing;
         SetInteractable(true);
         SetStatus(string.Empty);
     }
 
     // ── 표시 갱신 ──────────────────────────────────────────────
+
+    private void RefreshStageLabel()
+    {
+        if (stageLabel == null)
+        {
+            return;
+        }
+
+        int stage = Stage;
+        // 배경 그림의 빈 띠가 좁아 문구를 짧게 유지한다
+        stageLabel.text = $"AI {stage}단계 · {StageNames[stage]}";
+    }
 
     private void RefreshPreview()
     {
@@ -286,11 +346,28 @@ public sealed class WeaponForgeController : MonoBehaviour
         previewImage.texture = drawingCanvas.Texture;
     }
 
-    private void ShowChoicePanel(bool visible)
+    /// <summary>배열 중 하나만 보이게 한다 — 지금 고른 도구·색 표시.</summary>
+    private static void Highlight(Image[] highlights, int selected)
     {
-        if (choicePanel != null)
+        if (highlights == null)
         {
-            choicePanel.SetActive(visible);
+            return;
+        }
+
+        for (int index = 0; index < highlights.Length; index++)
+        {
+            if (highlights[index] != null)
+            {
+                highlights[index].enabled = index == selected;
+            }
+        }
+    }
+
+    private void ShowResultPanel(bool visible)
+    {
+        if (resultPanel != null)
+        {
+            resultPanel.SetActive(visible);
         }
     }
 
@@ -305,6 +382,11 @@ public sealed class WeaponForgeController : MonoBehaviour
         {
             drawingCanvas.enabled = interactable;
         }
+
+        if (stageSlider != null)
+        {
+            stageSlider.interactable = interactable;
+        }
     }
 
     private void SetStatus(string message)
@@ -312,14 +394,6 @@ public sealed class WeaponForgeController : MonoBehaviour
         if (statusText != null)
         {
             statusText.text = message ?? string.Empty;
-        }
-    }
-
-    private void ClearCandidates()
-    {
-        for (int index = 0; index < candidateSprites.Length; index++)
-        {
-            candidateSprites[index] = null;
         }
     }
 }
