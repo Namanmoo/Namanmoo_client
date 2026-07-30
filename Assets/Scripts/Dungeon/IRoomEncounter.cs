@@ -13,6 +13,10 @@ namespace NaManMoo.Dungeon
     public interface IRoomEncounter
     {
         Stage1EncounterGate Spawn(
-            Transform roomRoot, Transform player, RoomShape shape, DungeonRoom room);
+            Transform roomRoot,
+            Transform player,
+            RoomShape shape,
+            DungeonRoom room,
+            int roomSeed);
     }
 }

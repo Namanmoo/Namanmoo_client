@@ -222,6 +222,148 @@ public sealed class DungeonRunnerPlayModeTests
         Assert.That(runner.ClearedRooms, Does.Contain(runner.CurrentCell));
     }
 
+    [UnityTest]
+    public IEnumerator DoorsStayLockedUntilTheRoomIsCleared()
+    {
+        // 이게 안 되면 방을 건너뛰며 보스방까지 걸어갈 수 있다
+        var encounter = new TestEncounter(enemyCount: 2);
+        runner.SetEncounter(encounter);
+        runner.Begin();
+        yield return null;
+
+        Assert.That(runner.IsCleared(runner.CurrentCell), Is.False);
+        Assert.That(encounter.Spawned, Has.Count.EqualTo(2));
+        foreach (DungeonDoor door in FindDoors())
+        {
+            Assert.That(door.IsOpen, Is.False, $"{door.Side} 문이 열려 있다");
+        }
+
+        // 문을 지나려 해도 방이 바뀌지 않아야 한다
+        Vector2Int before = runner.CurrentCell;
+        TriggerDoor(FirstDoor());
+        yield return null;
+        Assert.That(runner.CurrentCell, Is.EqualTo(before), "잠긴 문으로 넘어갔다");
+
+        encounter.KillAll();
+        yield return null;
+
+        Assert.That(runner.IsCleared(before), Is.True);
+        foreach (DungeonDoor door in FindDoors())
+        {
+            Assert.That(door.IsOpen, Is.True, $"{door.Side} 문이 아직 잠겼다");
+        }
+
+        TriggerDoor(FirstDoor());
+        yield return null;
+        Assert.That(runner.CurrentCell, Is.Not.EqualTo(before));
+    }
+
+    [UnityTest]
+    public IEnumerator AClearedRoomDoesNotSpawnEnemiesAgain()
+    {
+        // 지나온 방마다 다시 싸우게 하면 되돌아갈 수 없다
+        var encounter = new TestEncounter(enemyCount: 1);
+        runner.SetEncounter(encounter);
+        runner.Begin();
+        yield return null;
+
+        Vector2Int start = runner.CurrentCell;
+        encounter.KillAll();
+        yield return null;
+
+        Doors side = FirstDoor();
+        TriggerDoor(side);
+        yield return null;
+
+        encounter.KillAll();
+        yield return null;
+
+        int spawnsBefore = encounter.SpawnCalls;
+        TriggerDoor(RoomShape.Opposite(side));
+        yield return null;
+
+        Assert.That(runner.CurrentCell, Is.EqualTo(start));
+        Assert.That(encounter.SpawnCalls, Is.EqualTo(spawnsBefore), "클리어한 방에 적이 다시 나왔다");
+        foreach (DungeonDoor door in FindDoors())
+        {
+            Assert.That(door.IsOpen, Is.True);
+        }
+    }
+
+    [UnityTest]
+    public IEnumerator SafeRoomsAreOpenImmediately()
+    {
+        // 적을 내놓지 않는 방(상점·보물)은 잠기면 안 된다 — 영원히 갇힌다
+        var encounter = new TestEncounter(enemyCount: 0);
+        runner.SetEncounter(encounter);
+        runner.Begin();
+        yield return null;
+
+        Assert.That(runner.IsCleared(runner.CurrentCell), Is.True);
+        foreach (DungeonDoor door in FindDoors())
+        {
+            Assert.That(door.IsOpen, Is.True, $"{door.Side}");
+        }
+    }
+
+    /// <summary>
+    /// 적을 원하는 만큼만 내놓고 마음대로 죽일 수 있는 인카운터. 크랩 스프라이트나
+    /// 실제 AI 없이 잠금 규칙만 확인한다.
+    /// </summary>
+    private sealed class TestEncounter : IRoomEncounter
+    {
+        private readonly int enemyCount;
+
+        public TestEncounter(int enemyCount)
+        {
+            this.enemyCount = enemyCount;
+        }
+
+        public List<EnemyHealth> Spawned { get; } = new List<EnemyHealth>();
+
+        public int SpawnCalls { get; private set; }
+
+        public Stage1EncounterGate Spawn(
+            Transform roomRoot, Transform player, RoomShape shape, DungeonRoom room, int roomSeed)
+        {
+            SpawnCalls++;
+            Spawned.Clear();
+
+            if (enemyCount <= 0)
+            {
+                return null;
+            }
+
+            List<Vector2> spots = RoomSpawnPoints.Inside(shape, enemyCount, roomSeed);
+            foreach (Vector2 spot in spots)
+            {
+                var enemy = new GameObject("Test Enemy");
+                enemy.transform.SetParent(roomRoot, false);
+                enemy.transform.position = spot;
+                EnemyHealth health = enemy.AddComponent<EnemyHealth>();
+                health.Configure(1);
+                Spawned.Add(health);
+            }
+
+            var gateObject = new GameObject("Test Gate");
+            gateObject.transform.SetParent(roomRoot, false);
+            Stage1EncounterGate gate = gateObject.AddComponent<Stage1EncounterGate>();
+            gate.Initialize(Spawned, null, new Renderer[0]);
+            return gate;
+        }
+
+        public void KillAll()
+        {
+            foreach (EnemyHealth enemy in Spawned)
+            {
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(enemy.MaxHealth);
+                }
+            }
+        }
+    }
+
     private int CountRoomRoots()
     {
         int count = 0;

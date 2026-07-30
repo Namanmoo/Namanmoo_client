@@ -113,7 +113,12 @@ namespace NaManMoo.Dungeon
                 return;
             }
 
-            gate = encounter.Spawn(roomRoot.transform, player, CurrentShape, room);
+            gate = encounter.Spawn(
+                roomRoot.transform,
+                player,
+                CurrentShape,
+                room,
+                DungeonNavigation.RoomSeed(seed, floor, room.Cell));
 
             if (gate == null || gate.IsOpen)
             {
