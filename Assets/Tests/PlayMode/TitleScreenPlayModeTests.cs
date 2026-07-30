@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public sealed class TitleScreenPlayModeTests
 {
     [UnityTest]
-    public IEnumerator GameStartButton_LoadsStage1Scene()
+    public IEnumerator GameStartButton_LoadsWeaponForgeScene()
     {
         SceneManager.LoadScene("Assets/Scenes/Title.unity");
         yield return null;
@@ -22,6 +22,6 @@ public sealed class TitleScreenPlayModeTests
 
         Assert.That(
             SceneManager.GetActiveScene().path,
-            Is.EqualTo(TitleScreenController.Stage1ScenePath));
+            Is.EqualTo(TitleScreenController.WeaponForgeScenePath));
     }
 }

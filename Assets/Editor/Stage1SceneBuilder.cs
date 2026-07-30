@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public static class Stage1SceneBuilder
 {
-    public const string ScenePath = "Assets/Scenes/SampleStage.unity";
+    public const string ScenePath = "Assets/Scenes/Stage1.unity";
 
     private const string AssetFolder = "Assets/Stage1";
     private const string FloorMeshPath = AssetFolder + "/Stage1Floor.asset";
@@ -22,7 +22,6 @@ public static class Stage1SceneBuilder
     private const string AxeSpritePath = "Assets/Weapons/weapon_axe.png";
     private const string KrabSpritePath = "Assets/Enemies/enemy_krab.png";
     private const string BossRobotSpritePath = "Assets/boss_robot.png";
-    private const float PlayerVisualHeight = 2f;
 
     [MenuItem("Tools/NaManMoo/Build Stage 1")]
     public static void Build()
@@ -45,11 +44,12 @@ public static class Stage1SceneBuilder
             NewSceneSetup.EmptyScene,
             NewSceneMode.Single);
 
+        Camera camera = CreateCamera();
         CreateGlobalLight();
         CreateStageMap();
         CreateBoundary();
         GameObject player = CreatePlayer(swordSprite, axeSprite, playerHealthHeart);
-        CreateCamera(player.transform);
+        camera.GetComponent<CameraFollow>().Target = player.transform;
         Stage1EncounterGate gate = Stage1KrabEncounterSetup.Create(
             null,
             player.transform,
@@ -68,12 +68,11 @@ public static class Stage1SceneBuilder
         AssetDatabase.Refresh();
     }
 
-    private static void CreateCamera(Transform player)
+    private static Camera CreateCamera()
     {
         var cameraObject = new GameObject("Main Camera");
         cameraObject.tag = "MainCamera";
-        cameraObject.transform.SetParent(player, false);
-        cameraObject.transform.localPosition = new Vector3(0f, 0f, -9.8f);
+        cameraObject.transform.position = new Vector3(0f, 0f, -10f);
 
         Camera camera = cameraObject.AddComponent<Camera>();
         camera.orthographic = true;
@@ -82,6 +81,11 @@ public static class Stage1SceneBuilder
         camera.backgroundColor = new Color(0.93f, 0.93f, 0.93f, 1f);
         cameraObject.AddComponent<AudioListener>();
         cameraObject.AddComponent<UniversalAdditionalCameraData>();
+
+        // 맵이 뷰보다 커서 고정 카메라로는 플레이어가 화면 밖으로 나간다
+        CameraFollow follow = cameraObject.AddComponent<CameraFollow>();
+        follow.Bounds = Stage1MapDefinition.Bounds;
+        return camera;
     }
 
     private static void CreateGlobalLight()
@@ -165,10 +169,6 @@ public static class Stage1SceneBuilder
         Sprite axeSprite,
         Sprite playerHealthHeart)
     {
-        var playerObject = new GameObject("Player");
-        playerObject.tag = "Player";
-        playerObject.transform.position = new Vector3(0f, -5f, -0.2f);
-
         Sprite playerSprite = AssetDatabase.LoadAssetAtPath<Sprite>(PlayerSpritePath);
         if (playerSprite == null)
         {
@@ -176,27 +176,6 @@ public static class Stage1SceneBuilder
                 "Stage 1 requires the player Sprite at " + PlayerSpritePath + ".");
         }
 
-        var visualObject = new GameObject("Player Visual");
-        visualObject.transform.SetParent(playerObject.transform, false);
-        float visualScale = PlayerVisualHeight / playerSprite.bounds.size.y;
-        visualObject.transform.localScale = new Vector3(visualScale, visualScale, 1f);
-
-        SpriteRenderer renderer = visualObject.AddComponent<SpriteRenderer>();
-        renderer.sprite = playerSprite;
-        renderer.color = Color.white;
-        renderer.sortingOrder = 4;
-
-        Rigidbody2D body = playerObject.AddComponent<Rigidbody2D>();
-        body.gravityScale = 0f;
-        body.interpolation = RigidbodyInterpolation2D.Interpolate;
-        body.constraints = RigidbodyConstraints2D.FreezeRotation;
-        body.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-
-        CircleCollider2D collider = playerObject.AddComponent<CircleCollider2D>();
-        collider.radius = 0.5f;
-
-        playerObject.AddComponent<PlayerMovement>();
-        playerObject.AddComponent<PlayerWeaponController>();
         Sprite backgroundSprite = AssetDatabase.LoadAssetAtPath<Sprite>(ItemHotbarBackgroundPath);
         if (backgroundSprite == null)
         {
@@ -204,17 +183,15 @@ public static class Stage1SceneBuilder
                 "Stage 1 requires the ItemUIBackground Sprite at " + ItemHotbarBackgroundPath + ".");
         }
 
-        Stage1ItemHotbarSetup.Create(
-            playerObject,
+        return PlayerFactory.Create(
             null,
-            backgroundSprite,
+            null,
+            new Vector3(0f, -5f, -0.2f),
+            playerSprite,
             swordSprite,
-            axeSprite);
-        Stage1PlayerHealthSetup.Create(
-            playerObject,
-            null,
+            axeSprite,
+            backgroundSprite,
             playerHealthHeart);
-        return playerObject;
     }
 
     private static Sprite LoadRequiredSingleSprite(string path)

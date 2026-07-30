@@ -32,7 +32,8 @@ public static class Stage1KrabEncounterSetup
         var enemies = new List<EnemyHealth>(SpawnPositions.Length);
         for (int index = 0; index < SpawnPositions.Length; index++)
         {
-            enemies.Add(CreateKrab(parent, player, krabSprite, index));
+            enemies.Add(KrabFactory.Create(
+                parent, player, krabSprite, SpawnPositions[index], "Krab " + (index + 1)));
         }
 
         var gateObject = new GameObject("Middle Passage Gate");
@@ -60,49 +61,6 @@ public static class Stage1KrabEncounterSetup
         Stage1EncounterGate gate = gateObject.AddComponent<Stage1EncounterGate>();
         gate.Initialize(enemies, barrier, new Renderer[] { outline, fill });
         return gate;
-    }
-
-    private static EnemyHealth CreateKrab(
-        Transform parent,
-        Transform player,
-        Sprite sprite,
-        int index)
-    {
-        var krab = new GameObject("Krab " + (index + 1));
-        krab.transform.SetParent(parent, false);
-        Vector2 position = SpawnPositions[index];
-        krab.transform.position = new Vector3(position.x, position.y, -0.2f);
-
-        var visual = new GameObject("Krab Visual");
-        visual.transform.SetParent(krab.transform, false);
-        float visualScale = 2f / sprite.bounds.size.y;
-        visual.transform.localScale = new Vector3(visualScale, visualScale, 1f);
-
-        SpriteRenderer renderer = visual.AddComponent<SpriteRenderer>();
-        renderer.sprite = sprite;
-        renderer.sortingOrder = 4;
-
-        Rigidbody2D body = krab.AddComponent<Rigidbody2D>();
-        body.gravityScale = 0f;
-        body.interpolation = RigidbodyInterpolation2D.Interpolate;
-        body.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        body.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-        CircleCollider2D collider = krab.AddComponent<CircleCollider2D>();
-        collider.radius = 0.7f;
-        collider.isTrigger = false;
-
-        var sensorObject = new GameObject("Krab Contact Sensor");
-        sensorObject.transform.SetParent(krab.transform, false);
-        CircleCollider2D sensor = sensorObject.AddComponent<CircleCollider2D>();
-        sensor.radius = 0.75f;
-        sensor.isTrigger = true;
-
-        EnemyHealth health = krab.AddComponent<EnemyHealth>();
-        health.Configure(5);
-        KrabEnemy enemy = krab.AddComponent<KrabEnemy>();
-        enemy.Initialize(player);
-        return health;
     }
 
     private static LineRenderer CreateGateLine(

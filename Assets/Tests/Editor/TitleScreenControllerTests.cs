@@ -9,4 +9,12 @@ public sealed class TitleScreenControllerTests
             TitleScreenController.Stage1ScenePath,
             Is.EqualTo("Assets/Scenes/SampleStage.unity"));
     }
+
+    [Test]
+    public void WeaponForgeScenePath_MatchesTheSceneBuilderOutput()
+    {
+        Assert.That(
+            TitleScreenController.WeaponForgeScenePath,
+            Is.EqualTo(WeaponForgeSceneBuilder.ScenePath));
+    }
 }

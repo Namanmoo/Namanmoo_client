@@ -156,6 +156,15 @@ public sealed class ItemHotbarController : MonoBehaviour
                 1,
                 new ItemData("axe", "Axe", ItemKind.Weapon, startingAxeSprite));
         }
+
+        // 무기 만들기 화면에서 확정한 무기가 있으면 3번 칸에 들어간다.
+        // 안 만들고 건너뛰었으면 아무 일도 일어나지 않는다.
+        if (ForgedWeapon.HasWeapon)
+        {
+            inventory.EnsureUniqueItemInSlot(
+                ForgedWeapon.SlotIndex,
+                ForgedWeapon.ToItemData());
+        }
     }
 
     private void EnsureSampleLoadout()
