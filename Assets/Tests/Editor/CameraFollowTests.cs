@@ -60,6 +60,81 @@ public sealed class CameraFollowTests
     }
 
     [Test]
+    public void OverscanLetsTheCameraShowPastTheEdge()
+    {
+        // 벽 선이 화면 끝에 딱 붙으면 갑갑하다. 바깥이 조금 보여야 방 끝이 눈에 들어온다.
+        const float Margin = 2.5f;
+
+        float withoutMargin = Clamp(new Vector2(100f, 0f)).x;
+        float withMargin = CameraFollow.ClampToBounds(
+            new Vector2(100f, 0f), Map, HalfWidth, HalfHeight, Margin).x;
+
+        Assert.That(withMargin, Is.EqualTo(withoutMargin + Margin).Within(0.001f));
+    }
+
+    [Test]
+    public void OverscanAppliesToEverySide()
+    {
+        const float Margin = 3f;
+
+        Vector2 lowerLeft = CameraFollow.ClampToBounds(
+            new Vector2(-100f, -100f), Map, HalfWidth, HalfHeight, Margin);
+        Vector2 upperRight = CameraFollow.ClampToBounds(
+            new Vector2(100f, 100f), Map, HalfWidth, HalfHeight, Margin);
+
+        Assert.That(lowerLeft.x, Is.EqualTo(Map.xMin - Margin + HalfWidth).Within(0.001f));
+        Assert.That(lowerLeft.y, Is.EqualTo(Map.yMin - Margin + HalfHeight).Within(0.001f));
+        Assert.That(upperRight.x, Is.EqualTo(Map.xMax + Margin - HalfWidth).Within(0.001f));
+        Assert.That(upperRight.y, Is.EqualTo(Map.yMax + Margin - HalfHeight).Within(0.001f));
+    }
+
+    [Test]
+    public void OverscanDoesNotMoveTheCameraInTheMiddle()
+    {
+        // 가운데서는 여백이 아무 영향도 주면 안 된다 — 클램프가 끼어들지 않는 구간이다
+        Assert.That(
+            CameraFollow.ClampToBounds(new Vector2(3f, -4f), Map, HalfWidth, HalfHeight, 2.5f),
+            Is.EqualTo(new Vector2(3f, -4f)));
+    }
+
+    [Test]
+    public void NegativeOverscanIsTreatedAsNone()
+    {
+        Assert.That(
+            CameraFollow.ClampToBounds(new Vector2(100f, 0f), Map, HalfWidth, HalfHeight, -5f).x,
+            Is.EqualTo(Clamp(new Vector2(100f, 0f)).x));
+    }
+
+    [Test]
+    public void AWideViewStillCentresEvenWithOverscan()
+    {
+        // 여백을 줘도 뷰가 맵보다 넓으면 자를 여지가 없다. 넓힌 영역의 가운데는 맵 가운데다.
+        Vector2 result = CameraFollow.ClampToBounds(
+            new Vector2(100f, 100f), Map, halfWidth: 40f, halfHeight: 30f, overscan: 2.5f);
+
+        Assert.That(result, Is.EqualTo(Map.center));
+    }
+
+    [Test]
+    public void TheComponentDefaultsToShowingALittlePastTheEdge()
+    {
+        var cameraObject = new GameObject("Overscan Test", typeof(Camera), typeof(CameraFollow));
+        try
+        {
+            CameraFollow follow = cameraObject.GetComponent<CameraFollow>();
+
+            Assert.That(follow.Overscan, Is.GreaterThan(0f), "기본값이 0이면 벽이 화면에 딱 붙는다");
+
+            follow.Overscan = -3f;
+            Assert.That(follow.Overscan, Is.Zero, "음수 여백은 경계를 좁혀 카메라가 튄다");
+        }
+        finally
+        {
+            Object.DestroyImmediate(cameraObject);
+        }
+    }
+
+    [Test]
     public void MapBoundsMatchTheGeneratedOutline()
     {
         // 카메라가 쓰는 경계가 실제로 그려지는 맵과 어긋나면 빈 공간이 보인다

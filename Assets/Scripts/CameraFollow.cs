@@ -19,6 +19,12 @@ public sealed class CameraFollow : MonoBehaviour
 
     [SerializeField] private Rect bounds = new Rect(-22.5f, -20f, 45f, 40f);
 
+    /// <summary>
+    /// 경계 밖으로 이만큼 더 보여 준다. 0이면 벽 선이 화면 끝에 딱 붙어 갑갑하다.
+    /// 벽 바깥이 조금 보여야 방이 어디서 끝나는지 눈에 들어온다.
+    /// </summary>
+    [SerializeField, Min(0f)] private float overscan = 2.5f;
+
     private Camera followCamera;
     private Vector2 velocity;
 
@@ -34,23 +40,46 @@ public sealed class CameraFollow : MonoBehaviour
         set => bounds = value;
     }
 
+    /// <summary>경계 밖으로 더 보여 줄 여백.</summary>
+    public float Overscan
+    {
+        get => overscan;
+        set => overscan = Mathf.Max(0f, value);
+    }
+
     /// <summary>
     /// 카메라가 놓일 자리. 맵 밖을 보여주지 않도록 자른 결과다.
     /// 씬·시간에 의존하지 않아 EditMode 테스트로 덮을 수 있다.
+    ///
+    /// <paramref name="overscan"/>만큼 경계를 넓혀 잘라, 벽 바깥이 그만큼 보인다.
     /// </summary>
     public static Vector2 ClampToBounds(
-        Vector2 desired, Rect bounds, float halfWidth, float halfHeight)
+        Vector2 desired, Rect bounds, float halfWidth, float halfHeight, float overscan = 0f)
     {
-        // 뷰가 맵보다 넓은 축은 자를 여지가 없다 — 가운데로 둔다
-        float x = bounds.width <= halfWidth * 2f
-            ? bounds.center.x
-            : Mathf.Clamp(desired.x, bounds.xMin + halfWidth, bounds.xMax - halfWidth);
+        Rect area = Expand(bounds, Mathf.Max(0f, overscan));
 
-        float y = bounds.height <= halfHeight * 2f
-            ? bounds.center.y
-            : Mathf.Clamp(desired.y, bounds.yMin + halfHeight, bounds.yMax - halfHeight);
+        // 뷰가 맵보다 넓은 축은 자를 여지가 없다 — 가운데로 둔다
+        float x = area.width <= halfWidth * 2f
+            ? area.center.x
+            : Mathf.Clamp(desired.x, area.xMin + halfWidth, area.xMax - halfWidth);
+
+        float y = area.height <= halfHeight * 2f
+            ? area.center.y
+            : Mathf.Clamp(desired.y, area.yMin + halfHeight, area.yMax - halfHeight);
 
         return new Vector2(x, y);
+    }
+
+    private static Rect Expand(Rect rect, float amount)
+    {
+        if (amount <= 0f)
+        {
+            return rect;
+        }
+
+        return Rect.MinMaxRect(
+            rect.xMin - amount, rect.yMin - amount,
+            rect.xMax + amount, rect.yMax + amount);
     }
 
     private void Awake()
@@ -102,7 +131,7 @@ public sealed class CameraFollow : MonoBehaviour
         // 창 비율이 바뀌면 가로 반폭도 바뀐다 — 매 프레임 다시 읽는다
         float halfWidth = halfHeight * (followCamera != null ? followCamera.aspect : 1.777f);
 
-        return ClampToBounds(target.position, bounds, halfWidth, halfHeight);
+        return ClampToBounds(target.position, bounds, halfWidth, halfHeight, overscan);
     }
 
     private void Move(Vector2 position)

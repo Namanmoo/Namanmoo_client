@@ -159,21 +159,23 @@ public sealed class DungeonScenePlayModeTests
         float halfWidth = halfHeight * camera.aspect;
         Rect bounds = runner.CurrentShape.Bounds;
 
-        // 뷰가 방보다 작은 축에서는 방 밖 여백이 보이면 안 된다
-        if (bounds.width > halfWidth * 2f)
+        // 벽 바깥은 여백(Overscan)만큼만 보인다 — 그보다 더 보이면 빈 공간이 드러난다
+        float margin = follow.Overscan + 0.01f;
+
+        if (bounds.width + follow.Overscan * 2f > halfWidth * 2f)
         {
             Assert.That(camera.transform.position.x - halfWidth,
-                Is.GreaterThanOrEqualTo(bounds.xMin - 0.01f));
+                Is.GreaterThanOrEqualTo(bounds.xMin - margin));
             Assert.That(camera.transform.position.x + halfWidth,
-                Is.LessThanOrEqualTo(bounds.xMax + 0.01f));
+                Is.LessThanOrEqualTo(bounds.xMax + margin));
         }
 
-        if (bounds.height > halfHeight * 2f)
+        if (bounds.height + follow.Overscan * 2f > halfHeight * 2f)
         {
             Assert.That(camera.transform.position.y - halfHeight,
-                Is.GreaterThanOrEqualTo(bounds.yMin - 0.01f));
+                Is.GreaterThanOrEqualTo(bounds.yMin - margin));
             Assert.That(camera.transform.position.y + halfHeight,
-                Is.LessThanOrEqualTo(bounds.yMax + 0.01f));
+                Is.LessThanOrEqualTo(bounds.yMax + margin));
         }
     }
 
