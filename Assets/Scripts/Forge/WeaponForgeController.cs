@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -274,19 +275,40 @@ public sealed class WeaponForgeController : MonoBehaviour
                 $"탄속 {stats.ProjectileSpeed:0.##}   사거리 {stats.Lifetime:0.##}초";
         }
 
-        // 무엇이 어긋났는지는 숨기지 않고 알려 준다
+        SetStatus(NoticeFor(stage, failure, response));
+    }
+
+    /// <summary>
+    /// 결과에 붙일 안내 문구. 스탯과 그림은 따로 실패할 수 있어 둘 다 합쳐서 보여 준다.
+    ///
+    /// <c>fallback</c>을 빼먹으면 AI가 응답하지 못한 날에도 화면은 조용히 "연필 막대"만
+    /// 띄운다. 플레이어는 자기 그림이 그렇게 해석된 줄로 안다 — 그래서 반드시 알린다.
+    /// </summary>
+    public static string NoticeFor(int stage, string failure, ForgeResponseDto result)
+    {
         if (failure != null)
         {
-            SetStatus(failure);
+            return failure;
         }
-        else if (response != null && response.imageFailed)
+
+        if (result == null)
         {
-            SetStatus($"{StageNames[stage]} 생성에 실패해 그린 그림을 그대로 씁니다.");
+            return string.Empty;
         }
-        else
+
+        var notices = new List<string>();
+
+        if (result.fallback)
         {
-            SetStatus(string.Empty);
+            notices.Add("AI가 응답하지 않아 기본 스탯이 들어갔습니다. 잠시 후 다시 만들어 보세요.");
         }
+
+        if (result.imageFailed && stage > 0)
+        {
+            notices.Add($"{StageNames[Mathf.Clamp(stage, 0, StageNames.Length - 1)]} 생성에 실패해 그린 그림을 그대로 씁니다.");
+        }
+
+        return string.Join("  ", notices);
     }
 
     /// <summary>"이걸로 하기" — 무기를 확정하고 무기고에 넣은 뒤 게임으로 들어간다.</summary>
