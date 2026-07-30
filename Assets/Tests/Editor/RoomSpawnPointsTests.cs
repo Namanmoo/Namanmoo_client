@@ -166,7 +166,7 @@ public sealed class RoomSpawnPointsTests
     [Test]
     public void SafeRoomsHaveNoEnemies()
     {
-        // 상점과 보물방에서 싸우게 하면 아이작이 아니다
+        // 상점과 보물방은 숨 돌리는 곳이다. 여기서 싸우게 하면 쉴 곳이 없어진다.
         Assert.That(RoomSpawnPoints.EnemyCount(RoomKind.Start, 0), Is.Zero);
         Assert.That(RoomSpawnPoints.EnemyCount(RoomKind.Treasure, 5), Is.Zero);
         Assert.That(RoomSpawnPoints.EnemyCount(RoomKind.Shop, 5), Is.Zero);

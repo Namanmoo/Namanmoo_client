@@ -48,7 +48,7 @@ namespace NaManMoo.Dungeon
     }
 
     /// <summary>
-    /// 던전 한 층의 방 배치. 바인딩 오브 아이작의 생성 규칙을 따른다.
+    /// 던전 한 층의 방 배치. 격자를 한 칸씩 넓혀 가며 방을 붙이는 방식이다.
     ///
     /// 핵심은 <b>"놓을 칸의 이웃 방이 정확히 1개일 때만 놓는다"</b>는 규칙 하나다.
     /// 이게 없으면 방이 2x2 덩어리로 뭉쳐 미로가 아니라 광장이 되고, 막다른 곳이
@@ -61,7 +61,7 @@ namespace NaManMoo.Dungeon
     /// </summary>
     public sealed class DungeonLayout
     {
-        /// <summary>아이작과 같은 격자 크기.</summary>
+        /// <summary>층이 놓이는 격자 크기. 넓힐수록 층이 길어진다.</summary>
         public static readonly Vector2Int DefaultGrid = new Vector2Int(13, 9);
 
         /// <summary>방을 놓을 확률. 낮추면 층이 길고 가늘어진다.</summary>
@@ -124,7 +124,7 @@ namespace NaManMoo.Dungeon
             return null;
         }
 
-        /// <summary>층 번호로 정해지는 목표 방 개수. 아이작의 식을 따른다.</summary>
+        /// <summary>층 번호로 정해지는 목표 방 개수. 깊이 갈수록 늘어난다.</summary>
         public static int TargetRoomCount(int seed, int floor)
         {
             var rng = new DeterministicRandom(seed ^ 0x5F37);
@@ -213,7 +213,7 @@ namespace NaManMoo.Dungeon
                     continue;
                 }
 
-                // ── 이 규칙이 아이작 생성기의 핵심이다 ──
+                // ── 이 규칙 하나가 층의 모양을 정한다 ──
                 // 이웃이 2개 이상인 칸을 채우면 방들이 2x2로 뭉친다.
                 // 정확히 1개일 때만 놓으므로 2x2 덩어리가 생길 수 없다.
                 if (NeighbourCount(candidate, cells) > 1)
