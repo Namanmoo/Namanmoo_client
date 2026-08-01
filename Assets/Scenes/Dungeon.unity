@@ -1394,6 +1394,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: NaManMoo.Runtime::ItemHotbarController
   startingSwordSprite: {fileID: 21300000, guid: c2b45cf6255b54d4c9cb54f7cd626537, type: 3}
   startingAxeSprite: {fileID: 21300000, guid: 922bc432a99c2644fac9f45a651c3405, type: 3}
+  useSampleLoadout: 0
+  sampleProjectileSprite: {fileID: 0}
+  sampleAxeSprite: {fileID: 0}
 --- !u!114 &587923663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1688,6 +1691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 662761824}
   - component: {fileID: 662761825}
+  - component: {fileID: 662761826}
   m_Layer: 0
   m_Name: Player Visual
   m_TagString: Untagged
@@ -1705,7 +1709,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.56497175, y: 0.56497175, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 587923660}
@@ -1759,17 +1763,39 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: f2d5cf5bd3d11bd4397e4e70bc951885, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 542717178dc433647807a592600bf0ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.21, y: 3.54}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!95 &662761826
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662761823}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf263fcfba7bac044b96f53ee709452e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &693130968
 GameObject:
   m_ObjectHideFlags: 0
