@@ -10,8 +10,14 @@ namespace NaManMoo.Dungeon
     public static class RoomBuilder
     {
         private const float BoundaryColliderRadius = 0.08f;
+        private const float DoorPathInset = 4f;
         private const int GroundOrder = 0;
+        private const int DoorPathOrder = 1;
         private const string GroundResourcePath = "Stage1/Ground/Grass_Base_01";
+        private const string HorizontalDoorPathResourcePath =
+            "Stage1/Ground/Dirt_Path_Horizontal_01";
+        private const string VerticalDoorPathResourcePath =
+            "Stage1/Ground/Dirt_Path_Vertical_01";
 
         /// <summary>
         /// 방 하나를 <paramref name="parent"/> 아래에 만들고 연결된 방향의 출구를 돌려준다.
@@ -20,6 +26,7 @@ namespace NaManMoo.Dungeon
         public static List<DungeonDoor> Build(Transform parent, RoomShape shape, RoomKind kind)
         {
             CreateGround(parent, shape);
+            CreateDoorPaths(parent, shape);
             CreateSafetyBoundary(parent, shape);
             return CreateDoors(parent, shape);
         }
@@ -44,6 +51,49 @@ namespace NaManMoo.Dungeon
             renderer.tileMode = SpriteTileMode.Continuous;
             renderer.size = bounds.size;
             renderer.sortingOrder = GroundOrder;
+        }
+
+        private static void CreateDoorPaths(Transform parent, RoomShape shape)
+        {
+            foreach (DoorOpening opening in shape.DoorOpenings)
+            {
+                string resourcePath = opening.Side is Doors.North or Doors.South
+                    ? VerticalDoorPathResourcePath
+                    : HorizontalDoorPathResourcePath;
+                Sprite sprite = Resources.Load<Sprite>(resourcePath);
+                if (sprite == null)
+                {
+                    throw new InvalidOperationException(
+                        $"Missing door path sprite at Resources/{resourcePath}");
+                }
+
+                Vector2 inward = DungeonNavigation.Inward(opening.Side);
+                CreateDoorPath(
+                    parent,
+                    $"Door Path {opening.Side}",
+                    opening.Center + inward * DoorPathInset,
+                    sprite);
+                CreateDoorPath(
+                    parent,
+                    $"Door Path {opening.Side} Outer",
+                    opening.Center - inward * DoorPathInset,
+                    sprite);
+            }
+        }
+
+        private static void CreateDoorPath(
+            Transform parent,
+            string name,
+            Vector2 position,
+            Sprite sprite)
+        {
+            var path = new GameObject(name);
+            path.transform.SetParent(parent, false);
+            path.transform.localPosition = position;
+
+            SpriteRenderer renderer = path.AddComponent<SpriteRenderer>();
+            renderer.sprite = sprite;
+            renderer.sortingOrder = DoorPathOrder;
         }
 
         private static void CreateSafetyBoundary(Transform parent, RoomShape shape)
