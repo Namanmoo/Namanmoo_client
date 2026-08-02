@@ -14,20 +14,20 @@ public sealed class SampleWeaponFactoryTests
             WeaponDefinition[] weapons = SampleWeaponFactory.Create(sprite, sprite);
 
             Assert.That(weapons, Has.Length.EqualTo(5));
-            Assert.That(weapons[0].Type, Is.EqualTo(WeaponType.Axe));
-            Assert.That(weapons[1].Type, Is.EqualTo(WeaponType.Projectile));
-            Assert.That(weapons[2].Type, Is.EqualTo(WeaponType.Spear));
-            Assert.That(weapons[3].Type, Is.EqualTo(WeaponType.Sword));
+            Assert.That(weapons[0].Type, Is.EqualTo(WeaponType.Sword));
+            Assert.That(weapons[1].Type, Is.EqualTo(WeaponType.Spear));
+            Assert.That(weapons[2].Type, Is.EqualTo(WeaponType.Axe));
+            Assert.That(weapons[3].Type, Is.EqualTo(WeaponType.Projectile));
             Assert.That(weapons[4].Type, Is.EqualTo(WeaponType.Gun));
             Assert.That(weapons[0].Category, Is.EqualTo(WeaponCategory.Melee));
             Assert.That(weapons[4].Category, Is.EqualTo(WeaponCategory.Ranged));
-            Assert.That(weapons[2].Reach, Is.GreaterThan(weapons[3].Reach));
-            Assert.That(weapons[3].Reach, Is.GreaterThan(weapons[0].Reach));
+            Assert.That(weapons[1].Reach, Is.GreaterThan(weapons[0].Reach));
+            Assert.That(weapons[0].Reach, Is.GreaterThan(weapons[2].Reach));
             Assert.That(
-                weapons[1].CollisionRadius,
+                weapons[3].CollisionRadius,
                 Is.GreaterThan(weapons[4].CollisionRadius));
             Assert.That(
-                weapons[1].AttackInterval,
+                weapons[3].AttackInterval,
                 Is.GreaterThan(weapons[4].AttackInterval));
 
             foreach (WeaponDefinition weapon in weapons)

@@ -120,7 +120,10 @@ public sealed class ItemHotbarController : MonoBehaviour
             sampleLoadoutApplied = false;
         }
 
-        EnsureStartingWeapons();
+        if (!useSampleLoadout)
+        {
+            EnsureStartingWeapons();
+        }
         EnsureSampleLoadout();
 
         PlayerSwordShooter shooter = GetComponent<PlayerSwordShooter>();
@@ -136,6 +139,11 @@ public sealed class ItemHotbarController : MonoBehaviour
         }
 
         PlayerWeaponController weaponController = GetComponent<PlayerWeaponController>();
+        if (weaponController == null && useSampleLoadout)
+        {
+            weaponController = gameObject.AddComponent<PlayerWeaponController>();
+        }
+
         if (weaponController != null)
         {
             weaponController.InitializeInventory(inventory);

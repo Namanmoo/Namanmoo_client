@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Passed" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-01 17:16:45Z" end-time="2026-08-01 17:16:45Z" duration="0.3628667">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="346" result="Passed" start-time="2026-08-01 17:16:45Z" end-time="2026-08-01 17:16:45Z" duration="0.362867" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1414" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="346" result="Passed" start-time="2026-08-01 17:16:45Z" end-time="2026-08-01 17:16:45Z" duration="0.356566" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="3552" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1069" name="DungeonEncounterTests" fullname="DungeonEncounterTests" classname="DungeonEncounterTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-01 17:16:45Z" end-time="2026-08-01 17:16:45Z" duration="0.029628" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1070" name="Spawn_NormalRoomBuildsEnemiesFromConfiguredDefinition" fullname="DungeonEncounterTests.Spawn_NormalRoomBuildsEnemiesFromConfiguredDefinition" methodname="Spawn_NormalRoomBuildsEnemiesFromConfiguredDefinition" classname="DungeonEncounterTests" runstate="Runnable" seed="1072278963" result="Passed" start-time="2026-08-01 17:16:45Z" end-time="2026-08-01 17:16:45Z" duration="0.019877" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1103" name="DungeonSceneBuilderTests" fullname="DungeonSceneBuilderTests" classname="DungeonSceneBuilderTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-01 17:16:45Z" end-time="2026-08-01 17:16:45Z" duration="0.321440" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1104" name="Scene_AssignsPersistentEnemyDefinitionToEncounter" fullname="DungeonSceneBuilderTests.Scene_AssignsPersistentEnemyDefinitionToEncounter" methodname="Scene_AssignsPersistentEnemyDefinitionToEncounter" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="316188133" result="Passed" start-time="2026-08-01 17:16:45Z" end-time="2026-08-01 17:16:45Z" duration="0.320378" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

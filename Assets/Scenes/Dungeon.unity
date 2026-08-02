@@ -1361,7 +1361,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 662761824}
@@ -1394,6 +1394,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: NaManMoo.Runtime::ItemHotbarController
   startingSwordSprite: {fileID: 21300000, guid: c2b45cf6255b54d4c9cb54f7cd626537, type: 3}
   startingAxeSprite: {fileID: 21300000, guid: 922bc432a99c2644fac9f45a651c3405, type: 3}
+  useSampleLoadout: 0
+  sampleProjectileSprite: {fileID: 0}
+  sampleAxeSprite: {fileID: 0}
 --- !u!114 &587923663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,7 +1457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3bde2e5f3a26d4aa5a0dba40f1705f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NaManMoo.Runtime::PlayerMovement
-  moveSpeed: 5
+  moveSpeed: 10
 --- !u!58 &587923667
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3854,6 +3857,10 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 4860450580949368832
+      type: {class: 'Provider2DCache`1[[UnityEngine.Rendering.Universal.Light2DProvider, Unity.RenderPipelines.Universal.2D.Runtime]]', ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
+      data:
+        m_Cache: []
     - rid: 7138592024443486208
       type: {class: Light2DProviderSources, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data:
@@ -3861,7 +3868,7 @@ MonoBehaviour:
         m_SelectedSource:
           rid: -2
         m_Provider2DCache:
-          rid: -2
+          rid: 4860450580949368832
 --- !u!4 &1605190373
 Transform:
   m_ObjectHideFlags: 0
@@ -4639,7 +4646,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eec8e6d87b084adab2bbc9e9d0ff9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NaManMoo.Runtime::NaManMoo.Dungeon.DungeonEncounter
-  krabSprite: {fileID: 21300000, guid: 3cf77d533cd8dca47b7cf296d0b1b9f8, type: 3}
+  normalEnemyDefinitions:
+  - {fileID: 11400000, guid: 480d85c7f96528b4eac26d867e3d0f77, type: 2}
+  - {fileID: 11400000, guid: 86680c1233948db43a0bfd910df1aa01, type: 2}
   bossSprite: {fileID: 21300000, guid: 0f4f298b55b6658408e27707fd1f5b33, type: 3}
 --- !u!4 &2050947751
 Transform:

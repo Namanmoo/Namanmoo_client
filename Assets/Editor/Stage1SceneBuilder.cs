@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public static class Stage1SceneBuilder
 {
-    public const string ScenePath = "Assets/Scenes/Stage1.unity";
+    public const string ScenePath = "Assets/Scenes/SampleStage.unity";
 
     private const string AssetFolder = "Assets/Stage1";
     private const string FloorMeshPath = AssetFolder + "/Stage1Floor.asset";

@@ -53,20 +53,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Forge\DrawingBrush.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyVisualController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHealthDebugInput.cs" />
     <Compile Include="Assets\Scripts\Stage1RuntimeBootstrap.cs" />
     <Compile Include="Assets\Scripts\UI\TitleScreenController.cs" />
     <Compile Include="Assets\Scripts\UI\WebTextInput.cs" />
     <Compile Include="Assets\Scripts\Enemies\BossFactory.cs" />
+    <Compile Include="Assets\Scripts\Enemies\ChaseContactEnemyController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyDefinition.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonLayout.cs" />
     <Compile Include="Assets\Scripts\GameScenes.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonNavigation.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemySpawnRequest.cs" />
+    <Compile Include="Assets\Scripts\Items\WeaponFactory.cs" />
     <Compile Include="Assets\Scripts\Forge\WhiteBackgroundKey.cs" />
     <Compile Include="Assets\Scripts\Dungeon\RoomShape.cs" />
     <Compile Include="Assets\Scripts\Forge\WeaponForgeController.cs" />
     <Compile Include="Assets\Scripts\UI\BossHealthBarView.cs" />
     <Compile Include="Assets\Scripts\Items\ItemData.cs" />
     <Compile Include="Assets\Scripts\Stage1ItemHotbarSetup.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyBehaviorType.cs" />
     <Compile Include="Assets\Scripts\Combat\SwordProjectile.cs" />
     <Compile Include="Assets\Scripts\Combat\PlayerWeaponController.cs" />
     <Compile Include="Assets\Scripts\Items\WeaponCategory.cs" />
@@ -77,6 +83,7 @@
     <Compile Include="Assets\Scripts\UI\PlayerHealthBarUIFactory.cs" />
     <Compile Include="Assets\Scripts\Stage1KrabEncounterSetup.cs" />
     <Compile Include="Assets\Scripts\Forge\DrawingCanvas.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyFactory.cs" />
     <Compile Include="Assets\Scripts\Enemies\KrabEnemy.cs" />
     <Compile Include="Assets\Scripts\Items\ItemHotbarController.cs" />
     <Compile Include="Assets\Scripts\UI\ScreenRectOf.cs" />
@@ -106,10 +113,12 @@
     <Compile Include="Assets\Scripts\Enemies\Stage1EncounterGate.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Combat\PlayerAxeAttacker.cs" />
+    <Compile Include="Assets\Scripts\Enemies\ApproachAndShootEnemyController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\MinimapView.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonEncounter.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Combat\PlayerSwordShooter.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyProjectile.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DeterministicRandom.cs" />
     <Compile Include="Assets\Scripts\Dungeon\RoomBuilder.cs" />
     <Compile Include="Assets\Scripts\Forge\DrawingFill.cs" />

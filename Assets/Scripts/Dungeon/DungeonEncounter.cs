@@ -16,13 +16,65 @@ namespace NaManMoo.Dungeon
     /// </summary>
     public sealed class DungeonEncounter : MonoBehaviour, IRoomEncounter
     {
-        [SerializeField] private Sprite krabSprite;
+        [SerializeField] private EnemyDefinition[] normalEnemyDefinitions;
         [SerializeField] private Sprite bossSprite;
 
-        public void Configure(Sprite krab, Sprite boss)
+        public void Configure(EnemyDefinition[] normalEnemies, Sprite boss)
         {
-            krabSprite = krab;
+            normalEnemyDefinitions = normalEnemies;
             bossSprite = boss;
+        }
+
+        public void Configure(EnemyDefinition normalEnemy, Sprite boss)
+        {
+            Configure(
+                normalEnemy == null ? new EnemyDefinition[0] : new[] { normalEnemy },
+                boss);
+        }
+
+        public static EnemyDefinition[] SelectDefinitions(
+            EnemyDefinition[] definitions, int count, int seed)
+        {
+            if (count <= 0)
+            {
+                return new EnemyDefinition[0];
+            }
+
+            var valid = new List<EnemyDefinition>();
+            if (definitions != null)
+            {
+                foreach (EnemyDefinition definition in definitions)
+                {
+                    if (definition != null)
+                    {
+                        valid.Add(definition);
+                    }
+                }
+            }
+
+            if (valid.Count == 0)
+            {
+                return new EnemyDefinition[0];
+            }
+
+            var rng = new DeterministicRandom(seed);
+            var selected = new EnemyDefinition[count];
+            int selectedCount = 0;
+            if (count >= valid.Count)
+            {
+                foreach (EnemyDefinition definition in valid)
+                {
+                    selected[selectedCount++] = definition;
+                }
+            }
+
+            while (selectedCount < selected.Length)
+            {
+                selected[selectedCount++] = valid[rng.Next(valid.Count)];
+            }
+
+            rng.Shuffle(selected);
+            return selected;
         }
 
         public Stage1EncounterGate Spawn(
@@ -39,7 +91,7 @@ namespace NaManMoo.Dungeon
 
             List<EnemyHealth> enemies = room.Kind == RoomKind.Boss
                 ? SpawnBoss(roomRoot, player, shape)
-                : SpawnKrabs(roomRoot, player, shape, room, roomSeed);
+                : SpawnEnemies(roomRoot, player, shape, room, roomSeed);
 
             if (enemies == null || enemies.Count == 0)
             {
@@ -74,18 +126,13 @@ namespace NaManMoo.Dungeon
             };
         }
 
-        private List<EnemyHealth> SpawnKrabs(
+        private List<EnemyHealth> SpawnEnemies(
             Transform roomRoot,
             Transform player,
             RoomShape shape,
             DungeonRoom room,
             int roomSeed)
         {
-            if (krabSprite == null)
-            {
-                return null;
-            }
-
             int count = RoomSpawnPoints.EnemyCount(room.Kind, room.DistanceFromStart);
             if (count <= 0)
             {
@@ -94,11 +141,37 @@ namespace NaManMoo.Dungeon
 
             // 방 기하와 같은 시드를 쓴다 — 되돌아왔을 때 벽도 배치도 그대로여야 한다
             List<Vector2> spots = RoomSpawnPoints.Inside(shape, count, roomSeed);
+            EnemyDefinition[] definitions = SelectDefinitions(
+                normalEnemyDefinitions,
+                spots.Count,
+                roomSeed);
+            if (definitions.Length == 0)
+            {
+                return null;
+            }
+
             var enemies = new List<EnemyHealth>(spots.Count);
+            var instancesByDefinition = new Dictionary<string, int>();
             for (int i = 0; i < spots.Count; i++)
             {
-                enemies.Add(KrabFactory.Create(
-                    roomRoot, player, krabSprite, spots[i], $"Krab {i + 1}"));
+                EnemyDefinition definition = definitions[i];
+                string key = string.IsNullOrEmpty(definition.Id)
+                    ? definition.DisplayName
+                    : definition.Id;
+                instancesByDefinition.TryGetValue(key, out int currentCount);
+                int nextCount = currentCount + 1;
+                instancesByDefinition[key] = nextCount;
+
+                string baseName = string.IsNullOrEmpty(definition.DisplayName)
+                    ? "Enemy"
+                    : definition.DisplayName;
+                enemies.Add(EnemyFactory.Create(
+                    definition,
+                    new EnemySpawnRequest(
+                        roomRoot,
+                        player,
+                        spots[i],
+                        $"{baseName} {nextCount}")));
             }
 
             return enemies;

@@ -17,6 +17,10 @@ public sealed class DungeonBossPlayModeTests
     private GameObject cameraObject;
     private DungeonRunner runner;
     private DungeonEncounter encounter;
+    private Sprite sprite;
+    private Sprite projectileSprite;
+    private EnemyDefinition contactDefinition;
+    private EnemyDefinition rangedDefinition;
 
     /// <summary>보스방을 가진 층과 그 방의 좌표를 찾는다.</summary>
     private static (int seed, DungeonRoom boss) FindFloorWithBoss()
@@ -51,9 +55,42 @@ public sealed class DungeonBossPlayModeTests
         runner = root.AddComponent<DungeonRunner>();
         encounter = root.AddComponent<DungeonEncounter>();
 
-        Sprite sprite = Sprite.Create(
+        sprite = Sprite.Create(
             Texture2D.whiteTexture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f), 1f);
-        encounter.Configure(sprite, sprite);
+        projectileSprite = Sprite.Create(
+            Texture2D.blackTexture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f), 1f);
+        contactDefinition =
+            ScriptableObject.CreateInstance<EnemyDefinition>();
+        contactDefinition.Configure(
+            "test-krab",
+            "Test Krab",
+            sprite,
+            null,
+            EnemyBehaviorType.ChaseContact,
+            5,
+            2.5f,
+            2,
+            0.75f,
+            1f,
+            0f,
+            0.01f,
+            0.01f);
+        rangedDefinition = ScriptableObject.CreateInstance<EnemyDefinition>();
+        rangedDefinition.Configure(
+            "test-squirrel",
+            "Test Squirrel",
+            sprite,
+            projectileSprite,
+            EnemyBehaviorType.ApproachAndShoot,
+            5,
+            2.5f,
+            2,
+            4f,
+            1f,
+            7f,
+            1f,
+            0.25f);
+        encounter.Configure(new[] { contactDefinition, rangedDefinition }, sprite);
         runner.SetEncounter(encounter);
     }
 
@@ -63,6 +100,10 @@ public sealed class DungeonBossPlayModeTests
         Object.DestroyImmediate(root);
         Object.DestroyImmediate(player);
         Object.DestroyImmediate(cameraObject);
+        Object.DestroyImmediate(contactDefinition);
+        Object.DestroyImmediate(rangedDefinition);
+        Object.DestroyImmediate(sprite);
+        Object.DestroyImmediate(projectileSprite);
     }
 
     /// <summary>보스방까지 문을 따라 걸어간다. 도중의 방은 전부 클리어 처리한다.</summary>
@@ -223,7 +264,7 @@ public sealed class DungeonBossPlayModeTests
 
         Assert.That(Object.FindFirstObjectByType<BossRobotController>(), Is.Null,
             "일반 방에 보스가 나왔다");
-        Assert.That(Object.FindFirstObjectByType<KrabEnemy>(), Is.Not.Null,
+        Assert.That(Object.FindFirstObjectByType<ChaseContactEnemyController>(), Is.Not.Null,
             "일반 방에 크랩이 나오지 않았다");
     }
 }

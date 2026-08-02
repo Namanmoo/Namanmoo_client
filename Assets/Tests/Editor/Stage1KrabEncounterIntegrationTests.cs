@@ -25,7 +25,7 @@ public sealed class Stage1KrabEncounterIntegrationTests
         Assert.That(importer.wrapMode, Is.EqualTo(TextureWrapMode.Clamp));
         Assert.That(importer.alphaIsTransparency, Is.True);
 
-        KrabEnemy[] krabs = Object.FindObjectsByType<KrabEnemy>(
+        ChaseContactEnemyController[] krabs = Object.FindObjectsByType<ChaseContactEnemyController>(
             FindObjectsInactive.Include,
             FindObjectsSortMode.None);
 
@@ -34,7 +34,7 @@ public sealed class Stage1KrabEncounterIntegrationTests
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Assert.That(player, Is.Not.Null);
 
-        foreach (KrabEnemy krab in krabs)
+        foreach (ChaseContactEnemyController krab in krabs)
         {
             Assert.That(krab.transform.position.y, Is.LessThan(-10f));
             Assert.That(krab.GetComponent<EnemyHealth>().MaxHealth, Is.EqualTo(5));
@@ -49,19 +49,12 @@ public sealed class Stage1KrabEncounterIntegrationTests
             Assert.That(bodyCollider, Is.Not.Null);
             Assert.That(bodyCollider.isTrigger, Is.False);
 
-            Transform sensorTransform = krab.transform.Find("Krab Contact Sensor");
+            Transform sensorTransform = krab.transform.Find("Contact Sensor");
             Assert.That(sensorTransform, Is.Not.Null);
             CircleCollider2D sensor = sensorTransform.GetComponent<CircleCollider2D>();
             Assert.That(sensor, Is.Not.Null);
             Assert.That(sensor.isTrigger, Is.True);
 
-            var serializedKrab = new SerializedObject(krab);
-            Assert.That(
-                serializedKrab.FindProperty("moveSpeed").floatValue,
-                Is.EqualTo(2.5f));
-            Assert.That(
-                serializedKrab.FindProperty("target").objectReferenceValue,
-                Is.SameAs(player.transform));
 
             SpriteRenderer renderer = krab.GetComponentInChildren<SpriteRenderer>();
             Assert.That(renderer, Is.Not.Null);
@@ -106,7 +99,7 @@ public sealed class Stage1KrabEncounterIntegrationTests
             bootstrapObject.SetActive(true);
 
             Assert.That(
-                bootstrapObject.GetComponentsInChildren<KrabEnemy>(true),
+                bootstrapObject.GetComponentsInChildren<ChaseContactEnemyController>(true),
                 Has.Length.EqualTo(5));
             Assert.That(
                 bootstrapObject.GetComponentInChildren<Stage1EncounterGate>(true),

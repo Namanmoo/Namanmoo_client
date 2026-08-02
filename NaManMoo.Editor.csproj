@@ -55,6 +55,7 @@
     <Compile Include="Assets\Editor\WeaponForgeSceneBuilder.cs" />
     <Compile Include="Assets\Editor\WeaponVaultSceneBuilder.cs" />
     <Compile Include="Assets\Editor\Stage1SceneBuilder.cs" />
+    <Compile Include="Assets\Editor\DungeonEnemyAssetBuilder.cs" />
     <Compile Include="Assets\Editor\DungeonLayoutPreview.cs" />
     <Compile Include="Assets\Editor\WebGLBuilder.cs" />
     <Compile Include="Assets\Editor\DungeonSceneBuilder.cs" />

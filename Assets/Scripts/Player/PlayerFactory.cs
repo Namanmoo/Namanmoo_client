@@ -7,8 +7,8 @@ using UnityEngine;
 /// </summary>
 public static class PlayerFactory
 {
-    public const float VisualHeight = 2f;
-    public const float ColliderRadius = 0.5f;
+    public const float VisualHeight = 4f;
+    public const float ColliderRadius = 1f;
 
     /// <summary>
     /// 플레이어와 딸린 UI(핫바·체력)를 만든다.

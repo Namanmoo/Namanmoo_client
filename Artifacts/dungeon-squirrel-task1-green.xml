@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Passed" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-01 18:41:01Z" end-time="2026-08-01 18:41:01Z" duration="0.0553321">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="352" result="Passed" start-time="2026-08-01 18:41:01Z" end-time="2026-08-01 18:41:01Z" duration="0.055332" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1420" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="352" result="Passed" start-time="2026-08-01 18:41:01Z" end-time="2026-08-01 18:41:01Z" duration="0.048751" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="7428" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1069" name="DungeonEncounterTests" fullname="DungeonEncounterTests" classname="DungeonEncounterTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-08-01 18:41:01Z" end-time="2026-08-01 18:41:01Z" duration="0.045408" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1071" name="SelectDefinitions_CountEqualsDefinitionsReturnsOneOfEach" fullname="DungeonEncounterTests.SelectDefinitions_CountEqualsDefinitionsReturnsOneOfEach" methodname="SelectDefinitions_CountEqualsDefinitionsReturnsOneOfEach" classname="DungeonEncounterTests" runstate="Runnable" seed="809825611" result="Passed" start-time="2026-08-01 18:41:01Z" end-time="2026-08-01 18:41:01Z" duration="0.015658" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1072" name="SelectDefinitions_FiltersNullDefinitions" fullname="DungeonEncounterTests.SelectDefinitions_FiltersNullDefinitions" methodname="SelectDefinitions_FiltersNullDefinitions" classname="DungeonEncounterTests" runstate="Runnable" seed="620810607" result="Passed" start-time="2026-08-01 18:41:01Z" end-time="2026-08-01 18:41:01Z" duration="0.000857" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1073" name="SelectDefinitions_OneValidDefinitionFillsEverySlot" fullname="DungeonEncounterTests.SelectDefinitions_OneValidDefinitionFillsEverySlot" methodname="SelectDefinitions_OneValidDefinitionFillsEverySlot" classname="DungeonEncounterTests" runstate="Runnable" seed="479008404" result="Passed" start-time="2026-08-01 18:41:01Z" end-time="2026-08-01 18:41:01Z" duration="0.000340" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1075" name="SelectDefinitions_RemainingSlotsUseBothDefinitionsAcrossFixedSeeds" fullname="DungeonEncounterTests.SelectDefinitions_RemainingSlotsUseBothDefinitionsAcrossFixedSeeds" methodname="SelectDefinitions_RemainingSlotsUseBothDefinitionsAcrossFixedSeeds" classname="DungeonEncounterTests" runstate="Runnable" seed="412355185" result="Passed" start-time="2026-08-01 18:41:01Z" end-time="2026-08-01 18:41:01Z" duration="0.000447" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1070" name="SelectDefinitions_ReturnsDeterministicMixedSelection" fullname="DungeonEncounterTests.SelectDefinitions_ReturnsDeterministicMixedSelection" methodname="SelectDefinitions_ReturnsDeterministicMixedSelection" classname="DungeonEncounterTests" runstate="Runnable" seed="1064435082" result="Passed" start-time="2026-08-01 18:41:01Z" end-time="2026-08-01 18:41:01Z" duration="0.000531" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1074" name="SelectDefinitions_ZeroCountOrNoValidDefinitionsReturnsEmpty" fullname="DungeonEncounterTests.SelectDefinitions_ZeroCountOrNoValidDefinitionsReturnsEmpty" methodname="SelectDefinitions_ZeroCountOrNoValidDefinitionsReturnsEmpty" classname="DungeonEncounterTests" runstate="Runnable" seed="1876145502" result="Passed" start-time="2026-08-01 18:41:01Z" end-time="2026-08-01 18:41:01Z" duration="0.000542" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1076" name="Spawn_NormalRoomBuildsGuaranteedContactAndRangedEnemies" fullname="DungeonEncounterTests.Spawn_NormalRoomBuildsGuaranteedContactAndRangedEnemies" methodname="Spawn_NormalRoomBuildsGuaranteedContactAndRangedEnemies" classname="DungeonEncounterTests" runstate="Runnable" seed="2114479511" result="Passed" start-time="2026-08-01 18:41:01Z" end-time="2026-08-01 18:41:01Z" duration="0.015891" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

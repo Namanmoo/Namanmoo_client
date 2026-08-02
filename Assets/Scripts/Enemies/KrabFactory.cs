@@ -28,39 +28,25 @@ public static class KrabFactory
             throw new System.ArgumentNullException(nameof(sprite));
         }
 
-        var krab = new GameObject(name);
-        krab.transform.SetParent(parent, false);
-        krab.transform.position = new Vector3(position.x, position.y, -0.2f);
+        EnemyDefinition definition = ScriptableObject.CreateInstance<EnemyDefinition>();
+        definition.hideFlags = HideFlags.HideAndDontSave;
+        definition.Configure(
+            "krab",
+            "Krab",
+            sprite,
+            null,
+            EnemyBehaviorType.ChaseContact,
+            Hitpoints,
+            2.5f,
+            2,
+            0.75f,
+            1f,
+            0f,
+            0.01f,
+            0.01f);
 
-        var visual = new GameObject("Krab Visual");
-        visual.transform.SetParent(krab.transform, false);
-        float visualScale = VisualHeight / sprite.bounds.size.y;
-        visual.transform.localScale = new Vector3(visualScale, visualScale, 1f);
-
-        SpriteRenderer renderer = visual.AddComponent<SpriteRenderer>();
-        renderer.sprite = sprite;
-        renderer.sortingOrder = 4;
-
-        Rigidbody2D body = krab.AddComponent<Rigidbody2D>();
-        body.gravityScale = 0f;
-        body.interpolation = RigidbodyInterpolation2D.Interpolate;
-        body.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        body.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-        CircleCollider2D collider = krab.AddComponent<CircleCollider2D>();
-        collider.radius = 0.7f;
-        collider.isTrigger = false;
-
-        var sensorObject = new GameObject("Krab Contact Sensor");
-        sensorObject.transform.SetParent(krab.transform, false);
-        CircleCollider2D sensor = sensorObject.AddComponent<CircleCollider2D>();
-        sensor.radius = 0.75f;
-        sensor.isTrigger = true;
-
-        EnemyHealth health = krab.AddComponent<EnemyHealth>();
-        health.Configure(Hitpoints);
-        KrabEnemy enemy = krab.AddComponent<KrabEnemy>();
-        enemy.Initialize(player);
-        return health;
+        return EnemyFactory.Create(
+            definition,
+            new EnemySpawnRequest(parent, player, position, name));
     }
 }

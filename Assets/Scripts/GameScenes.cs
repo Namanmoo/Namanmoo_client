@@ -10,7 +10,7 @@ public static class GameScenes
     public const string Title = "Assets/Scenes/Title.unity";
     public const string WeaponForge = "Assets/Scenes/WeaponForge.unity";
     public const string WeaponVault = "Assets/Scenes/WeaponVault.unity";
-    public const string Stage1 = "Assets/Scenes/Stage1.unity";
+    public const string Stage1 = "Assets/Scenes/SampleStage.unity";
 
     /// <summary>무기를 확정하면 들어가는 곳. 시드로 매번 새 층을 만든다.</summary>
     public const string Dungeon = "Assets/Scenes/Dungeon.unity";
