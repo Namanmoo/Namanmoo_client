@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using NaManMoo.Dungeon;
 using NUnit.Framework;
 using UnityEngine;
@@ -42,38 +43,45 @@ public sealed class DungeonScenePlayModeTests
     }
 
     [UnityTest]
-    public IEnumerator TheRoomIsDrawnWithVisibleSprites()
+    public IEnumerator TheRoomUsesOutdoorGroundAndInvisibleBoundaries()
     {
         // 실제로 겪은 버그: 메시·라인으로 그렸을 때 렌더러·머티리얼·셰이더·카메라가
         // 전부 정상인데도 WebGL 빌드에서 방이 통째로 보이지 않았다. 그래서 "오브젝트가
         // 있다"가 아니라 "그릴 것이 붙어 있고 크기가 0이 아니다"까지 확인한다.
         yield return LoadScene();
 
-        var floor = GameObject.Find("Room Floor");
-        Assert.That(floor, Is.Not.Null, "바닥이 세워지지 않았다");
+        var ground = GameObject.Find("Room Ground");
+        Assert.That(ground, Is.Not.Null, "야외 잔디 바닥이 생성되지 않았다");
 
-        var renderer = floor.GetComponent<SpriteRenderer>();
+        var renderer = ground.GetComponent<SpriteRenderer>();
         Assert.That(renderer, Is.Not.Null, "바닥에 SpriteRenderer 가 없다");
         Assert.That(renderer.sprite, Is.Not.Null, "바닥에 스프라이트가 없다");
         Assert.That(renderer.enabled, Is.True);
+        Assert.That(renderer.drawMode, Is.EqualTo(SpriteDrawMode.Tiled));
+        Assert.That(renderer.tileMode, Is.EqualTo(SpriteTileMode.Continuous));
         Assert.That(renderer.color.a, Is.GreaterThan(0.9f), "바닥이 투명하다");
 
-        var runner = Object.FindFirstObjectByType<DungeonRunner>();
-        Rect bounds = runner.CurrentShape.Bounds;
-        Assert.That(renderer.bounds.size.x, Is.EqualTo(bounds.width).Within(0.01f));
-        Assert.That(renderer.bounds.size.y, Is.EqualTo(bounds.height).Within(0.01f));
+        Assert.That(renderer.bounds.size.x, Is.EqualTo(64f).Within(0.01f));
+        Assert.That(renderer.bounds.size.y, Is.EqualTo(64f).Within(0.01f));
 
-        // 벽도 실제로 그려지는 조각이 있어야 한다
+        var boundary = GameObject.Find("Safety Boundary");
+        Assert.That(boundary, Is.Not.Null, "보이지 않는 안전 경계가 생성되지 않았다");
+        Assert.That(boundary.GetComponent<EdgeCollider2D>(), Is.Not.Null);
+        Assert.That(boundary.GetComponent<Renderer>(), Is.Null);
+
+        // 방 테두리와 전투 중 출구 잠금에는 보이는 스프라이트가 없어야 한다.
         int wallPieces = 0;
         foreach (SpriteRenderer piece in Object.FindObjectsByType<SpriteRenderer>(FindObjectsSortMode.None))
         {
-            if (piece.gameObject.name.StartsWith("Piece") && piece.sprite != null)
+            if ((piece.gameObject.name.StartsWith("Piece")
+                    || piece.gameObject.name.StartsWith("Door Bar"))
+                && piece.sprite != null)
             {
                 wallPieces++;
             }
         }
 
-        Assert.That(wallPieces, Is.GreaterThan(0), "벽이 그려지지 않았다");
+        Assert.That(wallPieces, Is.EqualTo(0), "보이는 벽 또는 출구 잠금이 남아 있다");
     }
 
     [UnityTest]
@@ -89,16 +97,12 @@ public sealed class DungeonScenePlayModeTests
 
         // 시작 방은 적이 없어 바로 클리어다. 싸울 것이 있는 방을 만날 때까지 걸어간다.
         // 씬은 실행마다 시드를 새로 뽑으므로 옆 방 하나만 보면 시드에 따라 결과가 갈린다.
-        bool foundFight = false;
-        for (int step = 0; step < 12 && !foundFight; step++)
-        {
-            DungeonRoom here = runner.Layout.RoomAt(runner.CurrentCell);
-            Doors side = FirstSide(here.Doors);
-            if (side == Doors.None)
-            {
-                break;
-            }
+        List<Doors> path = PathToFight(runner.Layout);
+        Assert.That(path, Is.Not.Empty, "전투방으로 이어지는 경로가 없다");
 
+        bool foundFight = false;
+        foreach (Doors side in path)
+        {
             Pass(side);
             yield return null;
 
@@ -192,17 +196,48 @@ public sealed class DungeonScenePlayModeTests
         Assert.That(second, Is.Not.EqualTo(first), "매번 같은 층이 나온다");
     }
 
-    private static Doors FirstSide(Doors doors)
+    private static List<Doors> PathToFight(DungeonLayout layout)
     {
-        foreach (Doors side in new[] { Doors.North, Doors.South, Doors.East, Doors.West })
+        var queue = new Queue<Vector2Int>();
+        var paths = new Dictionary<Vector2Int, List<Doors>>
         {
-            if (doors.HasFlag(side))
+            [layout.StartCell] = new List<Doors>()
+        };
+        queue.Enqueue(layout.StartCell);
+
+        while (queue.Count > 0)
+        {
+            Vector2Int cell = queue.Dequeue();
+            DungeonRoom room = layout.RoomAt(cell);
+            if (cell != layout.StartCell
+                && (room.Kind == RoomKind.Boss
+                    || RoomSpawnPoints.EnemyCount(
+                        room.Kind, room.DistanceFromStart) > 0))
             {
-                return side;
+                return paths[cell];
+            }
+
+            foreach (Doors side in new[]
+                     { Doors.North, Doors.South, Doors.East, Doors.West })
+            {
+                if (!room.Doors.HasFlag(side))
+                {
+                    continue;
+                }
+
+                Vector2Int next = DungeonNavigation.Neighbour(cell, side);
+                if (paths.ContainsKey(next))
+                {
+                    continue;
+                }
+
+                var nextPath = new List<Doors>(paths[cell]) { side };
+                paths.Add(next, nextPath);
+                queue.Enqueue(next);
             }
         }
 
-        return Doors.None;
+        return new List<Doors>();
     }
 
     private static void Pass(Doors side)
