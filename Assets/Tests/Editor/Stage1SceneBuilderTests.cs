@@ -11,7 +11,8 @@ using UnityEngine.UI;
 public class Stage1SceneBuilderTests
 {
     private const string ItemHotbarBackgroundPath = "Assets/UI/ItemUIBackground.png";
-    private const string PlayerSpritePath = "Assets/Player/player.png";
+    private const string PlayerSpritePath =
+        "Assets/Player/Animation/Sword/Idle/Down/Frames/프레임0000.png";
     private const string SwordSpritePath = "Assets/Weapons/sword.png";
 
     [Test]

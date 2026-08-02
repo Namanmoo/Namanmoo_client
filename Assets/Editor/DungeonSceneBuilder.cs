@@ -18,7 +18,8 @@ public static class DungeonSceneBuilder
 {
     public const string ScenePath = "Assets/Scenes/Dungeon.unity";
 
-    private const string PlayerSpritePath = "Assets/Player/player.png";
+    private const string PlayerSpritePath =
+        "Assets/Player/Animation/Sword/Idle/Down/Frames/프레임0000.png";
     private const string ItemHotbarBackgroundPath = "Assets/UI/ItemUIBackground.png";
     private const string PlayerHealthHeartPath = "Assets/UI/HP_heart.png";
     private const string SwordSpritePath = "Assets/Weapons/sword.png";
