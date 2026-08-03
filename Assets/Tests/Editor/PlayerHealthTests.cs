@@ -80,6 +80,25 @@ public class PlayerHealthTests
     }
 
     [UnityTest]
+    public IEnumerator LethalDamage_RaisesDiedExactlyOnce()
+    {
+        yield return new EnterPlayMode();
+        var player = new GameObject(nameof(PlayerHealthTests));
+        PlayerHealth health = player.AddComponent<PlayerHealth>();
+        int deathCount = 0;
+        health.Died += () => deathCount++;
+
+        Assert.That(health.TryTakeDamage(20, 0f, 0f), Is.True);
+        Assert.That(health.TryTakeDamage(1, 1f, 0f), Is.False);
+
+        Assert.That(health.CurrentHealth, Is.Zero);
+        Assert.That(deathCount, Is.EqualTo(1));
+
+        Object.Destroy(player);
+        yield return new ExitPlayMode();
+    }
+
+    [UnityTest]
     public IEnumerator TryTakeDamage_RejectsHitsUntilOneSecondInvulnerabilityExpires()
     {
         yield return new EnterPlayMode();

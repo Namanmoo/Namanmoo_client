@@ -1,5 +1,7 @@
+using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 public sealed class ApproachAndShootEnemyControllerTests
 {
@@ -75,6 +77,81 @@ public sealed class ApproachAndShootEnemyControllerTests
         {
             context.Dispose();
         }
+    }
+
+    [Test]
+    public void Initialize_CreatesTriggerSensorAndIgnoresPlayerBodyCollision()
+    {
+        GameObject enemy = new GameObject("Squirrel");
+        enemy.AddComponent<Rigidbody2D>();
+        CircleCollider2D enemyBody = enemy.AddComponent<CircleCollider2D>();
+        GameObject player = new GameObject("Player");
+        CircleCollider2D playerCollider = player.AddComponent<CircleCollider2D>();
+        EnemyDefinition definition = CreateDefinition();
+
+        try
+        {
+            ApproachAndShootEnemyController controller =
+                enemy.AddComponent<ApproachAndShootEnemyController>();
+            controller.Initialize(definition, player.transform);
+
+            CircleCollider2D sensor = enemy.transform
+                .Find("Contact Sensor")
+                .GetComponent<CircleCollider2D>();
+            Assert.That(sensor.isTrigger, Is.True);
+            Assert.That(sensor.radius, Is.EqualTo(enemyBody.radius));
+            Assert.That(
+                Physics2D.GetIgnoreCollision(enemyBody, playerCollider),
+                Is.True);
+        }
+        finally
+        {
+            Object.DestroyImmediate(enemy);
+            Object.DestroyImmediate(player);
+            Texture2D projectileTexture = definition.ProjectileSprite.texture;
+            Object.DestroyImmediate(definition.ProjectileSprite);
+            Object.DestroyImmediate(projectileTexture);
+            Object.DestroyImmediate(definition);
+        }
+    }
+
+    [UnityTest]
+    public IEnumerator TryDamagePlayer_DealsTwoWithSharedInvulnerability()
+    {
+        yield return new EnterPlayMode();
+        GameObject enemy = new GameObject("Squirrel");
+        enemy.AddComponent<Rigidbody2D>();
+        enemy.AddComponent<CircleCollider2D>();
+        GameObject player = new GameObject("Player");
+        Collider2D playerCollider = player.AddComponent<CircleCollider2D>();
+        PlayerHealth health = player.AddComponent<PlayerHealth>();
+        EnemyDefinition definition = CreateDefinition();
+        ApproachAndShootEnemyController controller =
+            enemy.AddComponent<ApproachAndShootEnemyController>();
+        controller.Initialize(definition, player.transform);
+
+        Assert.That(controller.TryDamagePlayer(playerCollider, 0f), Is.True);
+        Assert.That(health.CurrentHealth, Is.EqualTo(18));
+        Assert.That(controller.TryDamagePlayer(playerCollider, 0.5f), Is.False);
+        Assert.That(controller.TryDamagePlayer(playerCollider, 1f), Is.True);
+        Assert.That(health.CurrentHealth, Is.EqualTo(16));
+
+        Object.Destroy(enemy);
+        Object.Destroy(player);
+        Texture2D projectileTexture = definition.ProjectileSprite.texture;
+        Object.Destroy(definition.ProjectileSprite);
+        Object.Destroy(projectileTexture);
+        Object.Destroy(definition);
+        yield return new ExitPlayMode();
+    }
+
+    private static EnemyDefinition CreateDefinition()
+    {
+        EnemyDefinition definition = ScriptableObject.CreateInstance<EnemyDefinition>();
+        definition.Configure(
+            "squirrel", "Squirrel", null, CreateSprite(),
+            EnemyBehaviorType.ApproachAndShoot, 5, 2f, 6, 3f, 1f, 7f, 8f, 0.25f);
+        return definition;
     }
 
     private static TestContext CreateContext()
