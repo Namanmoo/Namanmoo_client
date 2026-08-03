@@ -58,7 +58,9 @@ public static class DungeonSceneBuilder
             swordSprite,
             axeSprite,
             hotbarBackground,
-            healthHeart);
+            healthHeart,
+            // 던전은 샘플 무기를 넣지 않는다 — 대장간에서 만든 무기만 들고 들어간다.
+            useSampleLoadout: false);
 
         DungeonRunner runner = CreateRunner(
             player.transform,

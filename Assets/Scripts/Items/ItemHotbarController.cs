@@ -125,6 +125,8 @@ public sealed class ItemHotbarController : MonoBehaviour
             EnsureStartingWeapons();
         }
         EnsureSampleLoadout();
+        // 샘플 로드아웃 뒤에 넣는다 — 먼저 넣으면 샘플이 같은 칸을 덮어쓴다.
+        EnsureForgedWeapon();
 
         PlayerSwordShooter shooter = GetComponent<PlayerSwordShooter>();
         if (shooter != null)
@@ -148,6 +150,15 @@ public sealed class ItemHotbarController : MonoBehaviour
         {
             weaponController.InitializeInventory(inventory);
         }
+
+        // 손에 든 그림도 같은 인벤토리를 봐야 한다. 이 재연결이 없으면 씬을 저장했다
+        // 다시 열었을 때 참조가 끊긴 채로 남아 무기가 영영 안 그려진다 —
+        // 굽는 시점에만 묶어 두면 직렬화를 못 넘는다.
+        PlayerWeaponVisual weaponVisual = GetComponent<PlayerWeaponVisual>();
+        if (weaponVisual != null)
+        {
+            weaponVisual.InitializeInventory(inventory);
+        }
     }
 
     private void EnsureStartingWeapons()
@@ -164,15 +175,25 @@ public sealed class ItemHotbarController : MonoBehaviour
                 1,
                 new ItemData("axe", "Axe", ItemKind.Weapon, startingAxeSprite));
         }
+    }
 
-        // 무기 만들기 화면에서 확정한 무기가 있으면 3번 칸에 들어간다.
-        // 안 만들고 건너뛰었으면 아무 일도 일어나지 않는다.
-        if (ForgedWeapon.HasWeapon)
+    /// <summary>
+    /// 무기 만들기 화면에서 확정한 무기를 3번 칸에 넣는다.
+    /// 안 만들고 건너뛰었으면 아무 일도 일어나지 않는다.
+    ///
+    /// 시작 무기와 떼어 놓는다 — 예전엔 <see cref="EnsureStartingWeapons"/> 안에 있었고
+    /// 그 함수는 샘플 로드아웃일 때 아예 호출되지 않아서, 만든 무기가 조용히 사라졌다.
+    /// </summary>
+    private void EnsureForgedWeapon()
+    {
+        if (!ForgedWeapon.HasWeapon)
         {
-            inventory.EnsureUniqueItemInSlot(
-                ForgedWeapon.SlotIndex,
-                ForgedWeapon.ToItemData());
+            return;
         }
+
+        inventory.EnsureUniqueItemInSlot(
+            ForgedWeapon.SlotIndex,
+            ForgedWeapon.ToItemData());
     }
 
     private void EnsureSampleLoadout()

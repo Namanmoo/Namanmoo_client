@@ -24,6 +24,21 @@ public static class Stage1ItemHotbarSetup
         Sprite swordSprite,
         Sprite axeSprite)
     {
+        Create(player, canvasParent, backgroundSprite, swordSprite, axeSprite, true);
+    }
+
+    /// <summary>
+    /// <paramref name="useSampleLoadout"/>가 false면 샘플 무기 5종을 넣지 않는다.
+    /// 던전은 대장간에서 만든 무기 하나만 들고 들어간다.
+    /// </summary>
+    public static void Create(
+        GameObject player,
+        Transform canvasParent,
+        Sprite backgroundSprite,
+        Sprite swordSprite,
+        Sprite axeSprite,
+        bool useSampleLoadout)
+    {
         if (backgroundSprite == null)
         {
             throw new System.ArgumentNullException(nameof(backgroundSprite));
@@ -35,9 +50,12 @@ public static class Stage1ItemHotbarSetup
         }
 
         ItemHotbarController controller = player.AddComponent<ItemHotbarController>();
-        controller.ConfigureSampleLoadout(
-            swordSprite,
-            axeSprite ?? swordSprite);
+        if (useSampleLoadout)
+        {
+            controller.ConfigureSampleLoadout(
+                swordSprite,
+                axeSprite ?? swordSprite);
+        }
         PlayerInventory inventory = controller.Inventory;
         EnsureEventSystem(canvasParent);
 
