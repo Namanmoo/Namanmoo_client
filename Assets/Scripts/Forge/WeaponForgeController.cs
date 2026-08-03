@@ -78,8 +78,12 @@ public sealed class WeaponForgeController : MonoBehaviour
     [SerializeField] private Text stageLabel;
 
     [Header("선택 상태 표시")]
-    [SerializeField] private Image[] toolHighlights = new Image[4];
+    [SerializeField] private Image[] toolHighlights = new Image[5];
     [SerializeField] private Image[] colorHighlights;
+
+    [Header("그립")]
+    /// <summary>캔버스 위에 떠서 잡는 자리를 알려 주는 표시.</summary>
+    [SerializeField] private RectTransform gripMarker;
 
     [Header("결과 확인")]
     [SerializeField] private GameObject resultPanel;
@@ -116,7 +120,9 @@ public sealed class WeaponForgeController : MonoBehaviour
         if (drawingCanvas != null)
         {
             drawingCanvas.Changed += RefreshPreview;
+            drawingCanvas.GripChanged += RefreshGripMarker;
             RefreshPreview();
+            RefreshGripMarker();
         }
 
         if (stageSlider != null)
@@ -135,14 +141,26 @@ public sealed class WeaponForgeController : MonoBehaviour
         if (drawingCanvas != null)
         {
             drawingCanvas.Changed -= RefreshPreview;
+            drawingCanvas.GripChanged -= RefreshGripMarker;
         }
     }
 
     // ── 도구바·팔레트 버튼이 부르는 것들 ─────────────────────────────
 
-    /// <summary>0=연필, 1=크레용, 2=지우개, 3=색 채우기</summary>
+    /// <summary>0=연필, 1=크레용, 2=지우개, 3=색 채우기, 4=그립</summary>
+    public const int GripToolIndex = 4;
+
+    /// <summary>0=연필, 1=크레용, 2=지우개, 3=색 채우기, 4=그립</summary>
     public void SelectTool(int index)
     {
+        // 그립은 칠하는 도구가 아니라서 붓 종류로 넘기지 않는다
+        if (index == GripToolIndex)
+        {
+            drawingCanvas?.EnterGripMode();
+            Highlight(toolHighlights, index);
+            return;
+        }
+
         BrushKind kind = index switch
         {
             1 => BrushKind.Crayon,
@@ -234,18 +252,22 @@ public sealed class WeaponForgeController : MonoBehaviour
     {
         resultSprite = null;
 
+        // 그린 그림 기준으로 찍은 자리다. 생성 이미지도 같은 구도로 돌아오므로
+        // 정규화 좌표는 그대로 통한다.
+        Vector2 grip = drawingCanvas != null ? drawingCanvas.Grip : DrawingCanvas.DefaultGrip;
+
         string generated = response != null ? response.image : null;
         if (!string.IsNullOrEmpty(generated))
         {
             // 생성 이미지는 흰 배경이 채워져 오므로 뚫어 준다
             resultSprite = WeaponSpriteFactory.FromBase64(
-                generated, removeWhiteBackground: true, name: $"무기 {stage}단계");
+                generated, removeWhiteBackground: true, name: $"무기 {stage}단계", pivot: grip);
         }
 
         if (resultSprite == null)
         {
             // 그린 원본은 이미 투명 배경이라 키잉이 필요 없다
-            resultSprite = WeaponSpriteFactory.FromPng(originalPng, false, "그린 무기");
+            resultSprite = WeaponSpriteFactory.FromPng(originalPng, false, "그린 무기", grip);
         }
     }
 
@@ -409,6 +431,28 @@ public sealed class WeaponForgeController : MonoBehaviour
         }
 
         previewImage.texture = drawingCanvas.Texture;
+    }
+
+    /// <summary>
+    /// 그립 표시를 잡는 자리로 옮긴다. 캔버스와 같은 부모에 두고 앵커만 움직이므로
+    /// 캔버스가 커지거나 창 비율이 바뀌어도 같은 자리를 가리킨다.
+    /// </summary>
+    private void RefreshGripMarker()
+    {
+        if (gripMarker == null || drawingCanvas == null)
+        {
+            return;
+        }
+
+        var canvasRect = (RectTransform)drawingCanvas.transform;
+        Vector2 grip = drawingCanvas.Grip;
+        Vector2 anchor = new Vector2(
+            Mathf.Lerp(canvasRect.anchorMin.x, canvasRect.anchorMax.x, grip.x),
+            Mathf.Lerp(canvasRect.anchorMin.y, canvasRect.anchorMax.y, grip.y));
+
+        gripMarker.anchorMin = anchor;
+        gripMarker.anchorMax = anchor;
+        gripMarker.anchoredPosition = Vector2.zero;
     }
 
     /// <summary>배열 중 하나만 보이게 한다 — 지금 고른 도구·색 표시.</summary>

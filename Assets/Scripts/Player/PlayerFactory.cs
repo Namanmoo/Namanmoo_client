@@ -22,7 +22,8 @@ public static class PlayerFactory
         Sprite swordSprite,
         Sprite axeSprite,
         Sprite hotbarBackground,
-        Sprite healthHeart)
+        Sprite healthHeart,
+        bool useSampleLoadout = true)
     {
         if (playerSprite == null)
         {
@@ -63,7 +64,7 @@ public static class PlayerFactory
         axeAttacker.AxeSprite = axeSprite;
 
         Stage1ItemHotbarSetup.Create(
-            playerObject, uiParent, hotbarBackground, swordSprite, axeSprite);
+            playerObject, uiParent, hotbarBackground, swordSprite, axeSprite, useSampleLoadout);
         Stage1PlayerHealthSetup.Create(playerObject, uiParent, healthHeart);
 
         return playerObject;

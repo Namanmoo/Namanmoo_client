@@ -32,9 +32,14 @@ public sealed class DrawingCanvas : MonoBehaviour,
 
     private BrushKind tool = BrushKind.Pen;
     private Color32 color = new Color32(30, 30, 30, 255);
+    private bool gripMode;
+    private Vector2 grip = DefaultGrip;
     private bool hasLastPoint;
     private int lastX;
     private int lastY;
+
+    /// <summary>아무것도 정하지 않았으면 그림 한가운데를 잡는다.</summary>
+    public static readonly Vector2 DefaultGrip = new Vector2(0.5f, 0.5f);
 
     public Texture2D Texture => texture;
     public BrushKind Tool => tool;
@@ -42,8 +47,23 @@ public sealed class DrawingCanvas : MonoBehaviour,
     public bool CanUndo => history != null && history.CanUndo;
     public bool CanRedo => history != null && history.CanRedo;
 
+    /// <summary>
+    /// 그립을 찍는 중인가. 이 동안에는 캔버스를 눌러도 칠하지 않는다 —
+    /// 그림을 망치지 않고 잡을 자리만 옮길 수 있어야 한다.
+    /// </summary>
+    public bool GripMode => gripMode;
+
+    /// <summary>
+    /// 무기를 잡는 자리. 그림 기준 정규화 좌표(0~1)이고 원점은 왼쪽 아래다 —
+    /// 스프라이트 pivot과 같은 규약이라 그대로 구워 넣을 수 있다.
+    /// </summary>
+    public Vector2 Grip => grip;
+
     /// <summary>그림이 바뀔 때마다 — 미리보기 갱신·버튼 활성화에 쓴다.</summary>
     public event System.Action Changed;
+
+    /// <summary>그립이 움직일 때마다 — 화면의 그립 표시를 따라 옮기는 데 쓴다.</summary>
+    public event System.Action GripChanged;
 
     private void Awake()
     {
@@ -82,6 +102,16 @@ public sealed class DrawingCanvas : MonoBehaviour,
     {
         EnsureInitialized();
         tool = newTool;
+        // 붓을 집으면 그립 찍기는 끝난다 — 안 그러면 연필을 눌러도 계속 그립만 옮긴다
+        gripMode = false;
+    }
+
+    /// <summary>"그립" 도구 — 다음 클릭·드래그가 잡는 자리를 옮긴다.</summary>
+    public void EnterGripMode()
+    {
+        EnsureInitialized();
+        gripMode = true;
+        hasLastPoint = false;
     }
 
     public void SetColor(Color32 newColor)
@@ -94,6 +124,24 @@ public sealed class DrawingCanvas : MonoBehaviour,
         {
             tool = BrushKind.Pen;
         }
+
+        // 색을 고르는 것은 그리려는 뜻이다 — 그립 찍기에서도 빠져나온다
+        gripMode = false;
+    }
+
+    /// <summary>정규화 좌표(0~1, 왼쪽 아래 원점)로 그립을 옮긴다. 범위 밖은 잘라 넣는다.</summary>
+    public void SetGrip(Vector2 normalized)
+    {
+        EnsureInitialized();
+        var clamped = new Vector2(
+            Mathf.Clamp01(normalized.x), Mathf.Clamp01(normalized.y));
+        if (clamped == grip)
+        {
+            return;
+        }
+
+        grip = clamped;
+        GripChanged?.Invoke();
     }
 
     public void Clear()
@@ -157,6 +205,12 @@ public sealed class DrawingCanvas : MonoBehaviour,
     public void OnPointerDown(PointerEventData eventData)
     {
         EnsureInitialized();
+        if (gripMode)
+        {
+            TryMoveGrip(eventData);
+            return;
+        }
+
         if (!TryGetPixel(eventData, out int x, out int y))
         {
             return;
@@ -186,6 +240,13 @@ public sealed class DrawingCanvas : MonoBehaviour,
     public void OnDrag(PointerEventData eventData)
     {
         EnsureInitialized();
+        if (gripMode)
+        {
+            // 끌어서 자리를 맞출 수 있어야 한다 — 한 번에 정확히 찍기는 어렵다
+            TryMoveGrip(eventData);
+            return;
+        }
+
         if (tool == BrushKind.Fill)
         {
             return;  // 채우기는 끌어서 이어 칠하지 않는다
@@ -231,10 +292,43 @@ public sealed class DrawingCanvas : MonoBehaviour,
         return new BrushSettings(tool, radius, color);
     }
 
+    /// <summary>
+    /// 그립을 포인터 자리로. 캔버스 밖으로 끌어도 가장자리에 붙여 둔다 —
+    /// 칠하기와 달리 중간에 끊기면 그립이 어디 있는지 알 수 없어진다.
+    /// </summary>
+    private void TryMoveGrip(PointerEventData eventData)
+    {
+        if (TryGetNormalized(eventData, out Vector2 normalized, clampOutside: true))
+        {
+            SetGrip(normalized);
+        }
+    }
+
     private bool TryGetPixel(PointerEventData eventData, out int x, out int y)
     {
         x = 0;
         y = 0;
+
+        if (!TryGetNormalized(eventData, out Vector2 normalized, clampOutside: false))
+        {
+            return false;
+        }
+
+        x = Mathf.Clamp(
+            Mathf.FloorToInt(normalized.x * texture.width), 0, texture.width - 1);
+        y = Mathf.Clamp(
+            Mathf.FloorToInt(normalized.y * texture.height), 0, texture.height - 1);
+        return true;
+    }
+
+    /// <summary>
+    /// 포인터를 캔버스 기준 정규화 좌표(0~1, 왼쪽 아래 원점)로.
+    /// <paramref name="clampOutside"/>가 false면 캔버스 밖은 실패로 돌려준다.
+    /// </summary>
+    private bool TryGetNormalized(
+        PointerEventData eventData, out Vector2 normalized, bool clampOutside)
+    {
+        normalized = Vector2.zero;
 
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 rectTransform,
@@ -248,13 +342,12 @@ public sealed class DrawingCanvas : MonoBehaviour,
         Rect rect = rectTransform.rect;
         float u = (local.x - rect.xMin) / rect.width;
         float v = (local.y - rect.yMin) / rect.height;
-        if (u < 0f || u > 1f || v < 0f || v > 1f)
+        if (!clampOutside && (u < 0f || u > 1f || v < 0f || v > 1f))
         {
             return false;
         }
 
-        x = Mathf.Clamp(Mathf.FloorToInt(u * texture.width), 0, texture.width - 1);
-        y = Mathf.Clamp(Mathf.FloorToInt(v * texture.height), 0, texture.height - 1);
+        normalized = new Vector2(Mathf.Clamp01(u), Mathf.Clamp01(v));
         return true;
     }
 

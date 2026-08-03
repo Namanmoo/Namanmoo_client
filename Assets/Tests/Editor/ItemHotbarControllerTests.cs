@@ -210,6 +210,56 @@ public class ItemHotbarControllerTests : InputTestFixture
         }
     }
 
+    /// <summary>
+    /// 손에 든 그림은 씬을 구울 때 한 번 묶어 두는 것만으로는 부족하다 — 참조가
+    /// 직렬화를 못 넘어서, 저장했다 다시 연 씬에서는 무기가 영영 안 그려졌다.
+    /// 인벤토리를 챙길 때마다 다시 묶는지 본다.
+    /// </summary>
+    [Test]
+    public void Inventory_RewiresThePlayerWeaponVisualOnTheSamePlayer()
+    {
+        // 컨트롤러가 Awake를 지난 뒤에 붙인다 — 씬을 다시 열었을 때와 같은 순서다
+        PlayerWeaponVisual weaponVisual = controllerObject.AddComponent<PlayerWeaponVisual>();
+        Sprite swordSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SwordSpritePath);
+        Assert.That(swordSprite, Is.Not.Null);
+
+        ConfigureStartingSword(swordSprite);
+        PlayerInventory inventory = controller.Inventory;
+        weaponVisual.Refresh();
+
+        Assert.That(inventory.EquippedItem, Is.Not.Null);
+        Assert.That(weaponVisual.Renderer, Is.Not.Null);
+        Assert.That(weaponVisual.Renderer.enabled, Is.True);
+        Assert.That(weaponVisual.Renderer.sprite, Is.SameAs(inventory.EquippedItem.Icon));
+    }
+
+    /// <summary>
+    /// 만든 무기 주입은 시작 무기 안에 얹혀 있었고, 그 경로는 샘플 로드아웃일 때
+    /// 아예 호출되지 않았다. 샘플을 켜 둔 채로도 들어오는지, 그리고 샘플이
+    /// 같은 칸을 덮지 않는지 본다.
+    /// </summary>
+    [Test]
+    public void Inventory_WithSampleLoadout_StillCarriesTheForgedWeapon()
+    {
+        Sprite swordSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SwordSpritePath);
+        Assert.That(swordSprite, Is.Not.Null);
+        ForgedWeapon.Set(swordSprite, WeaponStats.Default, "테스트 무기", 1);
+
+        try
+        {
+            controller.ConfigureSampleLoadout(swordSprite, swordSprite);
+            PlayerInventory inventory = controller.Inventory;
+
+            ItemData forged = inventory.Slots[ForgedWeapon.SlotIndex];
+            Assert.That(forged, Is.Not.Null);
+            Assert.That(forged.Id, Is.EqualTo(ForgedWeapon.ItemId));
+        }
+        finally
+        {
+            ForgedWeapon.Clear();
+        }
+    }
+
     private void ConfigureStartingSword(Sprite swordSprite)
     {
         controller.ConfigureStartingSword(swordSprite);

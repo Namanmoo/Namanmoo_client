@@ -103,12 +103,14 @@ public static class WeaponForgeSceneBuilder
 
         (Slider stageSlider, Text stageLabel) = CreateStageSlider(frame, font);
         Image[] strokeHighlights = CreateToolButtons(frame, controller);
-        (Image[] colorHighlights, Image fillHighlight) =
+        (Image[] colorHighlights, Image fillHighlight, Image gripHighlight) =
             CreateColorButtons(frame, font, controller);
-        // 연필·크레용·지우개 + 채우기 — SelectTool의 인덱스 순서와 같아야 한다
+        RectTransform gripMarker = CreateGripMarker(frame);
+        // 연필·크레용·지우개 + 채우기 + 그립 — SelectTool의 인덱스 순서와 같아야 한다
         var toolHighlights = new[]
         {
-            strokeHighlights[0], strokeHighlights[1], strokeHighlights[2], fillHighlight
+            strokeHighlights[0], strokeHighlights[1], strokeHighlights[2],
+            fillHighlight, gripHighlight
         };
         // 결과 화면은 그림에 얹는 게 아니라 화면 전체를 덮으므로 캔버스 바로 아래에 둔다
         ResultPanelParts result = CreateResultPanel(canvas.transform, font, controller);
@@ -122,7 +124,7 @@ public static class WeaponForgeSceneBuilder
 
         WireController(
             controller, drawing, note, preview, forgeButton, status,
-            stageSlider, stageLabel, toolHighlights, colorHighlights, result);
+            stageSlider, stageLabel, toolHighlights, colorHighlights, result, gripMarker);
 
         EditorSceneManager.SaveScene(scene, ScenePath);
         AddSceneToBuildSettings();
@@ -356,8 +358,8 @@ public static class WeaponForgeSceneBuilder
     /// 채우기 버튼도 여기서 만든다 — 목업 도구바에 빈 자리가 없어 팔레트 줄의
     /// 맨 앞 칸을 쓴다. 색 조각과 구분되게 회색 라벨 버튼으로 둔다.
     /// </summary>
-    private static (Image[] colorHighlights, Image fillHighlight) CreateColorButtons(
-        Transform parent, Font font, WeaponForgeController controller)
+    private static (Image[] colorHighlights, Image fillHighlight, Image gripHighlight)
+        CreateColorButtons(Transform parent, Font font, WeaponForgeController controller)
     {
         Color32[] colors = WeaponForgeController.PaletteColors;
         int extendedStart = WeaponForgeController.ExtendedPaletteStart;
@@ -375,9 +377,10 @@ public static class WeaponForgeSceneBuilder
         }
 
         // 확장 팔레트 — 목업에 없으므로 조각과 밑줄을 전부 그린다.
-        // 맨 앞 한 칸은 색 채우기 버튼이 쓴다.
+        // 맨 앞 두 칸은 색 채우기·그립 버튼이 쓴다.
+        const int reservedSlots = 2;
         int extendedCount = colors.Length - extendedStart;
-        int slots = extendedCount + 1;
+        int slots = extendedCount + reservedSlots;
         float slotWidth = (PaletteRight - PaletteLeft) / slots;
         float gap = slotWidth * 0.18f;
 
@@ -389,10 +392,18 @@ public static class WeaponForgeSceneBuilder
                 PaletteLeft + gap * 0.5f, PaletteTop,
                 PaletteLeft + slotWidth - gap * 0.5f, PaletteBottom));
 
+        Image gripHighlight = CreateGripButton(
+            parent,
+            font,
+            controller,
+            Rect.MinMaxRect(
+                PaletteLeft + slotWidth + gap * 0.5f, PaletteTop,
+                PaletteLeft + slotWidth * 2f - gap * 0.5f, PaletteBottom));
+
         for (int offset = 0; offset < extendedCount; offset++)
         {
             int index = extendedStart + offset;
-            float left = PaletteLeft + (offset + 1) * slotWidth;
+            float left = PaletteLeft + (offset + reservedSlots) * slotWidth;
             Rect swatchArea = Rect.MinMaxRect(
                 left + gap * 0.5f, PaletteTop, left + slotWidth - gap * 0.5f, PaletteBottom);
 
@@ -428,7 +439,51 @@ public static class WeaponForgeSceneBuilder
             highlights[index] = underline;
         }
 
-        return (highlights, fillHighlight);
+        return (highlights, fillHighlight, gripHighlight);
+    }
+
+    /// <summary>그립 도구 버튼과 그 선택 표시.</summary>
+    private static Image CreateGripButton(
+        Transform parent, Font font, WeaponForgeController controller, Rect area)
+    {
+        Button button = CreateLabeledButton(
+            parent, font, "Grip Button", "손잡이", area,
+            new Color(0.55f, 0.35f, 0.15f, 1f), fontSize: 20);
+        UnityEditor.Events.UnityEventTools.AddIntPersistentListener(
+            button.onClick, controller.SelectTool, WeaponForgeController.GripToolIndex);
+
+        Rect underlineArea = Rect.MinMaxRect(
+            area.xMin, PaletteBottom + 0.005f, area.xMax, PaletteBottom + 0.016f);
+        Image underline = CreateSolid(parent, "Grip Selected", underlineArea, HighlightColor);
+        underline.enabled = false;
+        return underline;
+    }
+
+    /// <summary>
+    /// 캔버스 위에 떠서 잡는 자리를 알려 주는 표시.
+    /// 캔버스와 같은 부모에 두고 앵커만 옮긴다 — 자식으로 넣으면 그리기 입력을 가로챈다.
+    /// </summary>
+    private static RectTransform CreateGripMarker(Transform parent)
+    {
+        var markerObject = new GameObject("Grip Marker", typeof(RectTransform), typeof(Image));
+        markerObject.transform.SetParent(parent, false);
+
+        var rect = (RectTransform)markerObject.transform;
+        Vector2 center = new Vector2(
+            Mathf.Lerp(CanvasArea.xMin, CanvasArea.xMax, 0.5f),
+            // 화면 좌표는 좌상단 원점이라 위아래가 뒤집힌다
+            Mathf.Lerp(CanvasArea.yMin, CanvasArea.yMax, 0.5f));
+        rect.anchorMin = new Vector2(center.x, 1f - center.y);
+        rect.anchorMax = rect.anchorMin;
+        rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.anchoredPosition = Vector2.zero;
+        rect.sizeDelta = new Vector2(22f, 22f);
+
+        Image image = markerObject.GetComponent<Image>();
+        image.color = new Color(0.98f, 0.35f, 0.1f, 0.85f);
+        // 표시일 뿐이다 — 눌러도 캔버스가 받아야 그립을 옮길 수 있다
+        image.raycastTarget = false;
+        return rect;
     }
 
     /// <summary>색 채우기 버튼과 그 선택 표시.</summary>
@@ -548,9 +603,11 @@ public static class WeaponForgeSceneBuilder
         Text stageLabel,
         Image[] toolHighlights,
         Image[] colorHighlights,
-        ResultPanelParts result)
+        ResultPanelParts result,
+        RectTransform gripMarker)
     {
         var serialized = new SerializedObject(controller);
+        serialized.FindProperty("gripMarker").objectReferenceValue = gripMarker;
         serialized.FindProperty("drawingCanvas").objectReferenceValue = drawing;
         serialized.FindProperty("noteInput").objectReferenceValue = note;
         serialized.FindProperty("previewImage").objectReferenceValue = preview;
