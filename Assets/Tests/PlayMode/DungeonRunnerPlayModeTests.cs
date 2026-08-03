@@ -43,6 +43,9 @@ public sealed class DungeonRunnerPlayModeTests
         Object.DestroyImmediate(root);
         Object.DestroyImmediate(playerObject);
         Object.DestroyImmediate(cameraObject);
+        DestroyProjectiles<SwordProjectile>();
+        DestroyProjectiles<WeaponProjectile>();
+        DestroyProjectiles<EnemyProjectile>();
     }
 
     [UnityTest]
@@ -92,6 +95,26 @@ public sealed class DungeonRunnerPlayModeTests
         Assert.That(
             runner.CurrentCell,
             Is.EqualTo(DungeonNavigation.Neighbour(before, side)));
+    }
+
+    [UnityTest]
+    public IEnumerator ChangingRoomsDestroysAllActiveAndInactiveProjectiles()
+    {
+        yield return null;
+
+        CreateProjectile<SwordProjectile>("Active Sword Projectile", true);
+        CreateProjectile<SwordProjectile>("Inactive Sword Projectile", false);
+        CreateProjectile<WeaponProjectile>("Active Weapon Projectile", true);
+        CreateProjectile<WeaponProjectile>("Inactive Weapon Projectile", false);
+        CreateProjectile<EnemyProjectile>("Active Enemy Projectile", true);
+        CreateProjectile<EnemyProjectile>("Inactive Enemy Projectile", false);
+
+        TriggerDoor(FirstDoor());
+        yield return null;
+
+        Assert.That(FindProjectiles<SwordProjectile>(), Is.Empty);
+        Assert.That(FindProjectiles<WeaponProjectile>(), Is.Empty);
+        Assert.That(FindProjectiles<EnemyProjectile>(), Is.Empty);
     }
 
     [UnityTest]
@@ -420,5 +443,31 @@ public sealed class DungeonRunnerPlayModeTests
 
         TriggerDoor(side);
         return true;
+    }
+
+    private static void CreateProjectile<T>(string name, bool active)
+        where T : Component
+    {
+        GameObject projectile = new GameObject(name);
+        projectile.AddComponent<T>();
+        projectile.SetActive(active);
+    }
+
+    private static T[] FindProjectiles<T>() where T : Component
+    {
+        return Object.FindObjectsByType<T>(
+            FindObjectsInactive.Include,
+            FindObjectsSortMode.None);
+    }
+
+    private static void DestroyProjectiles<T>() where T : Component
+    {
+        foreach (T projectile in FindProjectiles<T>())
+        {
+            if (projectile != null)
+            {
+                Object.DestroyImmediate(projectile.gameObject);
+            }
+        }
     }
 }

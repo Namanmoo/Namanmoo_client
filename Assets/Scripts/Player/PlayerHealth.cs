@@ -9,6 +9,7 @@ public sealed class PlayerHealth : MonoBehaviour
     private float invulnerableUntil;
 
     public event Action<int, int> HealthChanged;
+    public event Action Died;
 
     public int CurrentHealth { get; private set; }
     public int MaxHealth => maxHealth;
@@ -21,6 +22,21 @@ public sealed class PlayerHealth : MonoBehaviour
         // 실제로 던전 씬을 다시 만들었더니 컴포넌트 순서가 바뀌어 0/20으로
         // 시작했다. 여기서 한 번 알려 주면 어느 순서로 돌아도 맞는다.
         HealthChanged?.Invoke(CurrentHealth, MaxHealth);
+    }
+
+    private void Start()
+    {
+        if (!CompareTag("Player") ||
+            UnityEngine.Object.FindAnyObjectByType<PlayerDeathScreen>(
+                FindObjectsInactive.Include) != null)
+        {
+            return;
+        }
+
+        PlayerDeathScreenView deathView = PlayerDeathScreenUIFactory.Create(null);
+        PlayerDeathScreen deathScreen =
+            deathView.gameObject.AddComponent<PlayerDeathScreen>();
+        deathScreen.Initialize(gameObject, this, deathView);
     }
 
     public void TakeDamage(int amount)
@@ -47,6 +63,11 @@ public sealed class PlayerHealth : MonoBehaviour
         CurrentHealth = nextHealth;
         GrantInvulnerability(currentTime, invulnerabilityDuration);
         HealthChanged?.Invoke(CurrentHealth, MaxHealth);
+        if (CurrentHealth == 0)
+        {
+            Died?.Invoke();
+        }
+
         return true;
     }
 

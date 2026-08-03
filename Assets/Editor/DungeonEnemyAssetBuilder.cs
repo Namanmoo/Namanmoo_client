@@ -10,12 +10,16 @@ public static class DungeonEnemyAssetBuilder
 
     private const string KrabSpritePath = "Assets/Enemies/enemy_krab.png";
     private const string SquirrelSpritePath = "Assets/Enemies/enemy_squirrel.png";
+    private const string SquirrelProjectilePath = "Assets/Enemies/Nuts.png";
+    private const string SquirrelProjectileName = "Nuts_1";
 
     public static EnemyDefinition[] BuildDefinitions()
     {
         Sprite krabSprite = RequireSprite(KrabSpritePath);
         Sprite squirrelSprite = LoadFirstSprite(SquirrelSpritePath);
-        Sprite projectileSprite = GetOrCreateProjectileSprite();
+        Sprite projectileSprite = LoadSpriteByName(
+            SquirrelProjectilePath,
+            SquirrelProjectileName);
 
         EnemyDefinition krab = GetOrCreateDefinition(KrabDefinitionPath);
         krab.Configure("krab", "Krab", krabSprite, null,
@@ -118,6 +122,20 @@ public static class DungeonEnemyAssetBuilder
         }
 
         throw new System.InvalidOperationException($"No Sprite subasset exists at {path}.");
+    }
+
+    private static Sprite LoadSpriteByName(string path, string spriteName)
+    {
+        foreach (Object asset in AssetDatabase.LoadAllAssetsAtPath(path))
+        {
+            if (asset is Sprite sprite && sprite.name == spriteName)
+            {
+                return sprite;
+            }
+        }
+
+        throw new System.InvalidOperationException(
+            $"No Sprite named {spriteName} exists at {path}.");
     }
 
     private static Sprite RequireSprite(string path)

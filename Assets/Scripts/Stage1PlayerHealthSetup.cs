@@ -56,6 +56,11 @@ public static class Stage1PlayerHealthSetup
         PlayerHealthBarView healthView =
             PlayerHealthBarUIFactory.Create(canvasObject.transform, health, heartSprite);
         PlayerDashChargeUIFactory.Create(canvasObject.transform, dash);
+        PlayerDeathScreenView deathView =
+            PlayerDeathScreenUIFactory.Create(canvasParent);
+        PlayerDeathScreen deathScreen =
+            deathView.gameObject.AddComponent<PlayerDeathScreen>();
+        deathScreen.Initialize(player, health, deathView);
         return healthView;
     }
 }

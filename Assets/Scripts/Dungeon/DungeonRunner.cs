@@ -248,6 +248,10 @@ namespace NaManMoo.Dungeon
 
         private void Teardown()
         {
+            DestroyProjectiles<SwordProjectile>();
+            DestroyProjectiles<WeaponProjectile>();
+            DestroyProjectiles<EnemyProjectile>();
+
             foreach (DungeonDoor door in doors)
             {
                 if (door != null)
@@ -263,6 +267,19 @@ namespace NaManMoo.Dungeon
             {
                 Destroy(roomRoot);
                 roomRoot = null;
+            }
+        }
+
+        private static void DestroyProjectiles<T>() where T : Component
+        {
+            foreach (T projectile in FindObjectsByType<T>(
+                         FindObjectsInactive.Include,
+                         FindObjectsSortMode.None))
+            {
+                if (projectile != null)
+                {
+                    Destroy(projectile.gameObject);
+                }
             }
         }
 

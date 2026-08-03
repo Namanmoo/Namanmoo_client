@@ -23,6 +23,8 @@ public sealed class EnemyProjectileTests
 
             Assert.That(firstObject.GetComponent<SpriteRenderer>().sprite, Is.EqualTo(firstSprite));
             Assert.That(secondObject.GetComponent<SpriteRenderer>().sprite, Is.EqualTo(secondSprite));
+            Assert.That(firstObject.GetComponent<SpriteRenderer>().sortingOrder, Is.EqualTo(10));
+            Assert.That(secondObject.GetComponent<SpriteRenderer>().sortingOrder, Is.EqualTo(10));
             Assert.That(firstObject.GetComponent<CircleCollider2D>().radius, Is.EqualTo(0.2f));
             Assert.That(secondObject.GetComponent<CircleCollider2D>().radius, Is.EqualTo(0.4f));
             Assert.That(firstObject.GetComponent<CircleCollider2D>().isTrigger, Is.True);

@@ -71,12 +71,14 @@
     <Compile Include="Assets\Scripts\Forge\WeaponForgeController.cs" />
     <Compile Include="Assets\Scripts\UI\BossHealthBarView.cs" />
     <Compile Include="Assets\Scripts\Items\ItemData.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerDeathScreenUIFactory.cs" />
     <Compile Include="Assets\Scripts\Stage1ItemHotbarSetup.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyBehaviorType.cs" />
     <Compile Include="Assets\Scripts\Combat\SwordProjectile.cs" />
     <Compile Include="Assets\Scripts\Combat\PlayerWeaponController.cs" />
     <Compile Include="Assets\Scripts\Items\WeaponCategory.cs" />
     <Compile Include="Assets\Scripts\Dungeon\MinimapModel.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerDeathScreen.cs" />
     <Compile Include="Assets\Scripts\Forge\ForgeDto.cs" />
     <Compile Include="Assets\Scripts\Forge\WeaponSpriteFactory.cs" />
     <Compile Include="Assets\Scripts\Enemies\BossBullet.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerWeaponVisual.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Combat\PlayerSwordShooter.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerDeathScreenView.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyProjectile.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DeterministicRandom.cs" />
     <Compile Include="Assets\Scripts\Dungeon\RoomBuilder.cs" />

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-03 11:53:38Z" end-time="2026-08-03 11:53:38Z" duration="0.058071">
+  <test-suite type="TestSuite" id="1055" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="40" result="Failed" site="Child" start-time="2026-08-03 11:53:38Z" end-time="2026-08-03 11:53:38Z" duration="0.058071" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1051" name="NaManMoo.PlayModeTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.PlayModeTests.dll" runstate="Runnable" testcasecount="40" result="Failed" site="Child" start-time="2026-08-03 11:53:38Z" end-time="2026-08-03 11:53:38Z" duration="0.053178" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="14292" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1008" name="DungeonRunnerPlayModeTests" fullname="DungeonRunnerPlayModeTests" classname="DungeonRunnerPlayModeTests" runstate="Runnable" testcasecount="15" result="Failed" site="Child" start-time="2026-08-03 11:53:38Z" end-time="2026-08-03 11:53:38Z" duration="0.051743" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1012" name="ChangingRoomsDestroysAllActiveAndInactiveProjectiles" fullname="DungeonRunnerPlayModeTests.ChangingRoomsDestroysAllActiveAndInactiveProjectiles" methodname="ChangingRoomsDestroysAllActiveAndInactiveProjectiles" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="375629109" result="Failed" start-time="2026-08-03 11:53:38Z" end-time="2026-08-03 11:53:38Z" duration="0.042964" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: <empty>
+  But was:  < <Inactive Sword Projectile (SwordProjectile)>, <Active Sword Projectile (SwordProjectile)> >
+]]></message>
+            <stack-trace><![CDATA[at DungeonRunnerPlayModeTests+<ChangingRoomsDestroysAllActiveAndInactiveProjectiles>d__11.MoveNext () [0x000a5] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\PlayMode\DungeonRunnerPlayModeTests.cs:115
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
