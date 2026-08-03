@@ -65,6 +65,14 @@ public static class Stage1ItemHotbarSetup
             weaponController = player.AddComponent<PlayerWeaponController>();
         }
         weaponController.InitializeInventory(inventory);
+
+        // 장착한 무기를 손에 그린다. 판정과 같은 인벤토리를 봐야 화면과 실제가 어긋나지 않는다.
+        PlayerWeaponVisual weaponVisual = player.GetComponent<PlayerWeaponVisual>();
+        if (weaponVisual == null)
+        {
+            weaponVisual = player.AddComponent<PlayerWeaponVisual>();
+        }
+        weaponVisual.InitializeInventory(inventory);
     }
 
     private static void EnsureEventSystem(Transform parent)

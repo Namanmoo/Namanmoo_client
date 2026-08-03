@@ -19,7 +19,16 @@ public static class WeaponSpriteFactory
     /// <param name="removeWhiteBackground">
     /// 생성 이미지처럼 흰 배경이 채워져 있으면 true.
     /// </param>
-    public static Sprite FromPng(byte[] png, bool removeWhiteBackground, string name = "Forged Weapon")
+    /// <param name="pivot">
+    /// 무기를 잡는 자리(0~1, 왼쪽 아래 원점). 스프라이트 pivot으로 구워 두면
+    /// 캐릭터 손 위치에 그대로 얹기만 해도 잡은 모양이 나온다.
+    /// 넘기지 않으면 한가운데다.
+    /// </param>
+    public static Sprite FromPng(
+        byte[] png,
+        bool removeWhiteBackground,
+        string name = "Forged Weapon",
+        Vector2? pivot = null)
     {
         if (png == null || png.Length == 0)
         {
@@ -47,17 +56,19 @@ public static class WeaponSpriteFactory
             texture.Apply(false);
         }
 
+        Vector2 grip = pivot ?? new Vector2(0.5f, 0.5f);
         Sprite sprite = Sprite.Create(
             texture,
             new Rect(0f, 0f, texture.width, texture.height),
-            new Vector2(0.5f, 0.5f),
+            new Vector2(Mathf.Clamp01(grip.x), Mathf.Clamp01(grip.y)),
             PixelsPerUnit);
         sprite.name = name;
         return sprite;
     }
 
     /// <summary>base64 문자열로 온 이미지를 Sprite로. 잘못된 base64면 null.</summary>
-    public static Sprite FromBase64(string base64, bool removeWhiteBackground, string name)
+    public static Sprite FromBase64(
+        string base64, bool removeWhiteBackground, string name, Vector2? pivot = null)
     {
         if (string.IsNullOrEmpty(base64))
         {
@@ -74,6 +85,6 @@ public static class WeaponSpriteFactory
             return null;
         }
 
-        return FromPng(png, removeWhiteBackground, name);
+        return FromPng(png, removeWhiteBackground, name, pivot);
     }
 }
