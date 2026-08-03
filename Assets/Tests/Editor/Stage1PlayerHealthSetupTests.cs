@@ -37,12 +37,18 @@ public class Stage1PlayerHealthSetupTests
             Stage1PlayerHealthSetup.Create(player, root.transform, heartSprite);
 
         PlayerHealth health = player.GetComponent<PlayerHealth>();
+        PlayerDash dash = player.GetComponent<PlayerDash>();
         PlayerHealthDebugInput debugInput = player.GetComponent<PlayerHealthDebugInput>();
         Canvas canvas = view.GetComponentInParent<Canvas>();
         CanvasScaler scaler = canvas.GetComponent<CanvasScaler>();
+        PlayerDashChargeView chargeView =
+            canvas.GetComponentInChildren<PlayerDashChargeView>(true);
         Image heart = view.transform.Find("Heart").GetComponent<Image>();
 
         Assert.That(health, Is.Not.Null);
+        Assert.That(dash, Is.Not.Null);
+        Assert.That(chargeView, Is.Not.Null);
+        Assert.That(chargeView.transform.childCount, Is.EqualTo(dash.MaxCharges));
         Assert.That(debugInput, Is.Not.Null);
         Assert.That(canvas.name, Is.EqualTo("Player Health Canvas"));
         Assert.That(canvas.renderMode, Is.EqualTo(RenderMode.ScreenSpaceOverlay));

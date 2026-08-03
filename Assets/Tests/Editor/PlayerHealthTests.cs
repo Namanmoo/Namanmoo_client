@@ -116,4 +116,37 @@ public class PlayerHealthTests
         Object.Destroy(player);
         yield return new ExitPlayMode();
     }
+
+    [UnityTest]
+    public IEnumerator GrantInvulnerability_BlocksDamageUntilGrantedDeadline()
+    {
+        yield return new EnterPlayMode();
+        var player = new GameObject(nameof(PlayerHealthTests));
+        PlayerHealth health = player.AddComponent<PlayerHealth>();
+
+        health.GrantInvulnerability(10f, 0.6f);
+
+        Assert.That(health.TryTakeDamage(2, 10.59f, 1f), Is.False);
+        Assert.That(health.TryTakeDamage(2, 10.6f, 1f), Is.True);
+
+        Object.Destroy(player);
+        yield return new ExitPlayMode();
+    }
+
+    [UnityTest]
+    public IEnumerator GrantInvulnerability_DoesNotShortenExistingProtection()
+    {
+        yield return new EnterPlayMode();
+        var player = new GameObject(nameof(PlayerHealthTests));
+        PlayerHealth health = player.AddComponent<PlayerHealth>();
+
+        health.GrantInvulnerability(10f, 2f);
+        health.GrantInvulnerability(10.5f, 0.1f);
+
+        Assert.That(health.IsInvulnerable(11.99f), Is.True);
+        Assert.That(health.IsInvulnerable(12f), Is.False);
+
+        Object.Destroy(player);
+        yield return new ExitPlayMode();
+    }
 }

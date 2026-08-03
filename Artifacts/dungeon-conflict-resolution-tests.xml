@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="22" result="Passed" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-03 06:20:26Z" end-time="2026-08-03 06:20:27Z" duration="0.6080498">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="408" result="Passed" start-time="2026-08-03 06:20:26Z" end-time="2026-08-03 06:20:27Z" duration="0.608050" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1488" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="408" result="Passed" start-time="2026-08-03 06:20:26Z" end-time="2026-08-03 06:20:27Z" duration="0.601309" total="22" passed="22" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="33444" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1112" name="DungeonSceneBuilderTests" fullname="DungeonSceneBuilderTests" classname="DungeonSceneBuilderTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-08-03 06:20:26Z" end-time="2026-08-03 06:20:27Z" duration="0.513623" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1114" name="Scene_AssignsBothPersistentEnemyDefinitionsToEncounter" fullname="DungeonSceneBuilderTests.Scene_AssignsBothPersistentEnemyDefinitionsToEncounter" methodname="Scene_AssignsBothPersistentEnemyDefinitionsToEncounter" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="718893914" result="Passed" start-time="2026-08-03 06:20:26Z" end-time="2026-08-03 06:20:27Z" duration="0.282233" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1113" name="Scene_PlayerHasDashComponent" fullname="DungeonSceneBuilderTests.Scene_PlayerHasDashComponent" methodname="Scene_PlayerHasDashComponent" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="685719409" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.219003" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1259" name="PlayerDashChargeViewTests" fullname="PlayerDashChargeViewTests" classname="PlayerDashChargeViewTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.065628" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1261" name="ChargeChanges_RecolorAndRebuildIndicators" fullname="PlayerDashChargeViewTests.ChargeChanges_RecolorAndRebuildIndicators" methodname="ChargeChanges_RecolorAndRebuildIndicators" classname="PlayerDashChargeViewTests" runstate="Runnable" seed="1172224107" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.009024" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1260" name="Create_ShowsOneOutlinedCirclePerMaximumCharge" fullname="PlayerDashChargeViewTests.Create_ShowsOneOutlinedCirclePerMaximumCharge" methodname="Create_ShowsOneOutlinedCirclePerMaximumCharge" classname="PlayerDashChargeViewTests" runstate="Runnable" seed="1148883088" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000596" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1262" name="PlayerDashTests" fullname="PlayerDashTests" classname="PlayerDashTests" runstate="Runnable" testcasecount="18" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.011125" total="18" passed="18" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1274" name="CalculateDashDelta_UsesMoveSpeedMultiplierAndFixedDelta" fullname="PlayerDashTests.CalculateDashDelta_UsesMoveSpeedMultiplierAndFixedDelta" methodname="CalculateDashDelta_UsesMoveSpeedMultiplierAndFixedDelta" classname="PlayerDashTests" runstate="Runnable" seed="1697681359" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.001031" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1279" name="ChargesChanged_ReportsNewMaximumAndPreservedCurrentCount" fullname="PlayerDashTests.ChargesChanged_ReportsNewMaximumAndPreservedCurrentCount" methodname="ChargesChanged_ReportsNewMaximumAndPreservedCurrentCount" classname="PlayerDashTests" runstate="Runnable" seed="1306564136" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000241" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1278" name="ChargesChanged_ReportsSpendingAndRecharge" fullname="PlayerDashTests.ChargesChanged_ReportsSpendingAndRecharge" methodname="ChargesChanged_ReportsSpendingAndRecharge" classname="PlayerDashTests" runstate="Runnable" seed="1664698443" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000705" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1263" name="Defaults_StartFullyCharged" fullname="PlayerDashTests.Defaults_StartFullyCharged" methodname="Defaults_StartFullyCharged" classname="PlayerDashTests" runstate="Runnable" seed="1545496519" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000245" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1271" name="MaxCharges_IncreaseLeavesNewCapacityEmptyAndDecreaseClampsCharges" fullname="PlayerDashTests.MaxCharges_IncreaseLeavesNewCapacityEmptyAndDecreaseClampsCharges" methodname="MaxCharges_IncreaseLeavesNewCapacityEmptyAndDecreaseClampsCharges" classname="PlayerDashTests" runstate="Runnable" seed="930080957" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000161" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1273" name="RechargeDurationChange_AffectsActiveRechargeCycle" fullname="PlayerDashTests.RechargeDurationChange_AffectsActiveRechargeCycle" methodname="RechargeDurationChange_AffectsActiveRechargeCycle" classname="PlayerDashTests" runstate="Runnable" seed="955040742" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000184" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1272" name="RuntimeConfiguration_ClampsInvalidValues" fullname="PlayerDashTests.RuntimeConfiguration_ClampsInvalidValues" methodname="RuntimeConfiguration_ClampsInvalidValues" classname="PlayerDashTests" runstate="Runnable" seed="201269686" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.001592" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1280" name="Tick_EmitsAfterimageFromChildRendererWithoutExplicitConfiguration" fullname="PlayerDashTests.Tick_EmitsAfterimageFromChildRendererWithoutExplicitConfiguration" methodname="Tick_EmitsAfterimageFromChildRendererWithoutExplicitConfiguration" classname="PlayerDashTests" runstate="Runnable" seed="1659729980" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.002019" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1269" name="Tick_EndsDashAtConfiguredDuration" fullname="PlayerDashTests.Tick_EndsDashAtConfiguredDuration" methodname="Tick_EndsDashAtConfiguredDuration" classname="PlayerDashTests" runstate="Runnable" seed="56627628" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000232" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1270" name="Tick_RechargesMissingChargesSequentially" fullname="PlayerDashTests.Tick_RechargesMissingChargesSequentially" methodname="Tick_RechargesMissingChargesSequentially" classname="PlayerDashTests" runstate="Runnable" seed="954519817" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000242" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1267" name="TryStartDash_ConsumesChargeSuppressesMovementAndGrantsInvulnerability" fullname="PlayerDashTests.TryStartDash_ConsumesChargeSuppressesMovementAndGrantsInvulnerability" methodname="TryStartDash_ConsumesChargeSuppressesMovementAndGrantsInvulnerability" classname="PlayerDashTests" runstate="Runnable" seed="140223978" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000316" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1266" name="TryStartDash_RejectsMissingDirectionWithoutSpendingCharge" fullname="PlayerDashTests.TryStartDash_RejectsMissingDirectionWithoutSpendingCharge" methodname="TryStartDash_RejectsMissingDirectionWithoutSpendingCharge" classname="PlayerDashTests" runstate="Runnable" seed="572123768" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000194" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1268" name="TryStartDash_RejectsSecondRequestWithoutSpendingAnotherCharge" fullname="PlayerDashTests.TryStartDash_RejectsSecondRequestWithoutSpendingAnotherCharge" methodname="TryStartDash_RejectsSecondRequestWithoutSpendingAnotherCharge" classname="PlayerDashTests" runstate="Runnable" seed="1766534472" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000390" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1264" name="TryStartDash_UsesCurrentDirectionBeforeRememberedDirection" fullname="PlayerDashTests.TryStartDash_UsesCurrentDirectionBeforeRememberedDirection" methodname="TryStartDash_UsesCurrentDirectionBeforeRememberedDirection" classname="PlayerDashTests" runstate="Runnable" seed="259820233" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000208" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1265" name="TryStartDash_UsesRememberedDirectionWhenInputIsZero" fullname="PlayerDashTests.TryStartDash_UsesRememberedDirectionWhenInputIsZero" methodname="TryStartDash_UsesRememberedDirectionWhenInputIsZero" classname="PlayerDashTests" runstate="Runnable" seed="1298645585" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000318" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1275" name="UpdateDashDirection_ImmediatelyUsesCurrentMovementInput" fullname="PlayerDashTests.UpdateDashDirection_ImmediatelyUsesCurrentMovementInput" methodname="UpdateDashDirection_ImmediatelyUsesCurrentMovementInput" classname="PlayerDashTests" runstate="Runnable" seed="961144518" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000240" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1276" name="UpdateDashDirection_NormalizesDiagonalInput" fullname="PlayerDashTests.UpdateDashDirection_NormalizesDiagonalInput" methodname="UpdateDashDirection_NormalizesDiagonalInput" classname="PlayerDashTests" runstate="Runnable" seed="168701864" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000238" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1277" name="UpdateDashDirection_PreservesDirectionWhenInputIsZero" fullname="PlayerDashTests.UpdateDashDirection_PreservesDirectionWhenInputIsZero" methodname="UpdateDashDirection_PreservesDirectionWhenInputIsZero" classname="PlayerDashTests" runstate="Runnable" seed="463621591" result="Passed" start-time="2026-08-03 06:20:27Z" end-time="2026-08-03 06:20:27Z" duration="0.000178" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

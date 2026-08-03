@@ -86,14 +86,19 @@
     <Compile Include="Assets\Scripts\Enemies\EnemyFactory.cs" />
     <Compile Include="Assets\Scripts\Enemies\KrabEnemy.cs" />
     <Compile Include="Assets\Scripts\Items\ItemHotbarController.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerDash.cs" />
     <Compile Include="Assets\Scripts\UI\ScreenRectOf.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerFactory.cs" />
+    <Compile Include="Assets\Scripts\Dungeon\OutdoorRoomGeometry.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerDashChargeView.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonRunner.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerDashAfterimage.cs" />
     <Compile Include="Assets\Scripts\Stage1PlayerHealthSetup.cs" />
     <Compile Include="Assets\Scripts\Dungeon\RoomSpawnPoints.cs" />
     <Compile Include="Assets\Scripts\Forge\WeaponVaultController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonDoor.cs" />
     <Compile Include="Assets\Scripts\UI\BossHealthBarUIFactory.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerDashChargeUIFactory.cs" />
     <Compile Include="Assets\Scripts\Items\SampleWeaponFactory.cs" />
     <Compile Include="Assets\Scripts\Combat\AxeSwing.cs" />
     <Compile Include="Assets\Scripts\Forge\ForgedWeapon.cs" />
@@ -116,6 +121,7 @@
     <Compile Include="Assets\Scripts\Enemies\ApproachAndShootEnemyController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\MinimapView.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonEncounter.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerWeaponVisual.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Combat\PlayerSwordShooter.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyProjectile.cs" />

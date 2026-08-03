@@ -3,6 +3,23 @@ using UnityEngine;
 
 public class PlayerMovementTests
 {
+    private GameObject player;
+    private PlayerMovement movement;
+
+    [SetUp]
+    public void SetUp()
+    {
+        player = new GameObject(nameof(PlayerMovementTests));
+        player.AddComponent<Rigidbody2D>();
+        movement = player.AddComponent<PlayerMovement>();
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        Object.DestroyImmediate(player);
+    }
+
     [Test]
     public void CalculateDirection_NormalizesDiagonalInput()
     {
@@ -26,5 +43,25 @@ public class PlayerMovementTests
         Assert.That(
             PlayerMovement.CalculateDirection(Vector2.zero),
             Is.EqualTo(Vector2.zero));
+    }
+
+    [Test]
+    public void SetMoveInput_RemembersLastNonZeroDirection()
+    {
+        movement.SetMoveInput(Vector2.right);
+        movement.SetMoveInput(Vector2.zero);
+
+        Assert.That(movement.CurrentDirection, Is.EqualTo(Vector2.zero));
+        Assert.That(movement.LastMoveDirection, Is.EqualTo(Vector2.right));
+    }
+
+    [Test]
+    public void MovementProperties_ClampSpeedAndExposeSuppression()
+    {
+        movement.MoveSpeed = -2f;
+        movement.MovementSuppressed = true;
+
+        Assert.That(movement.MoveSpeed, Is.Zero);
+        Assert.That(movement.MovementSuppressed, Is.True);
     }
 }

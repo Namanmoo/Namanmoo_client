@@ -29,6 +29,24 @@ public sealed class SampleStageSceneTests
         Assert.That(camera.transform.localPosition.y, Is.Zero);
     }
 
+    [Test]
+    public void SampleStagePlayer_HasConfiguredDash()
+    {
+        EditorSceneManager.OpenScene(Stage1SceneBuilder.ScenePath);
+        GameObject player = Object.FindFirstObjectByType<PlayerMovement>().gameObject;
+        PlayerDash dash = player.GetComponent<PlayerDash>();
+
+        Assert.That(dash, Is.Not.Null);
+        Assert.That(player.GetComponent<PlayerMovement>(), Is.Not.Null);
+        Assert.That(player.GetComponent<PlayerHealth>(), Is.Not.Null);
+        Assert.That(
+            player.GetComponentInChildren<SpriteRenderer>(),
+            Is.Not.Null);
+        Assert.That(
+            Object.FindAnyObjectByType<PlayerDashChargeView>(),
+            Is.Not.Null);
+    }
+
     [UnityTest]
     public IEnumerator SampleStageStart_LoadsFiveExampleWeapons()
     {

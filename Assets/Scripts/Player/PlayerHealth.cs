@@ -33,7 +33,7 @@ public sealed class PlayerHealth : MonoBehaviour
         float currentTime,
         float invulnerabilityDuration)
     {
-        if (amount <= 0 || currentTime < invulnerableUntil)
+        if (amount <= 0 || IsInvulnerable(currentTime))
         {
             return false;
         }
@@ -45,8 +45,20 @@ public sealed class PlayerHealth : MonoBehaviour
         }
 
         CurrentHealth = nextHealth;
-        invulnerableUntil = currentTime + Mathf.Max(0f, invulnerabilityDuration);
+        GrantInvulnerability(currentTime, invulnerabilityDuration);
         HealthChanged?.Invoke(CurrentHealth, MaxHealth);
         return true;
+    }
+
+    public void GrantInvulnerability(float currentTime, float duration)
+    {
+        invulnerableUntil = Mathf.Max(
+            invulnerableUntil,
+            currentTime + Mathf.Max(0f, duration));
+    }
+
+    public bool IsInvulnerable(float currentTime)
+    {
+        return currentTime < invulnerableUntil;
     }
 }
