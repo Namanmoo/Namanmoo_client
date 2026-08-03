@@ -57,6 +57,7 @@
     <Compile Include="Assets\Tests\PlayMode\SwordProjectilePhysicsPlayModeTests.cs" />
     <Compile Include="Assets\Tests\PlayMode\KrabContactHealthUIPlayModeTests.cs" />
     <Compile Include="Assets\Tests\PlayMode\TitleScreenPlayModeTests.cs" />
+    <Compile Include="Assets\Tests\PlayMode\PlayerDeathScreenPlayModeTests.cs" />
     <Compile Include="Assets\Tests\PlayMode\ItemHotbarPlayModeTests.cs" />
     <Compile Include="Assets\Tests\PlayMode\PlayerHealthBarOrderPlayModeTests.cs" />
     <Compile Include="Assets\Tests\PlayMode\DungeonRunnerPlayModeTests.cs" />

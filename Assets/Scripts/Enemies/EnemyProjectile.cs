@@ -5,6 +5,7 @@ public sealed class EnemyProjectile : MonoBehaviour
     private const float MinimumLifetime = 0.01f;
     private const float MinimumCollisionRadius = 0.01f;
     private const float PlayerInvulnerabilityDuration = 1f;
+    private const int SortingOrder = 10;
 
     private Vector2 direction;
     private int damage;
@@ -42,6 +43,7 @@ public sealed class EnemyProjectile : MonoBehaviour
         CircleCollider2D circleCollider = GetOrAddComponent<CircleCollider2D>();
 
         spriteRenderer.sprite = projectileSprite;
+        spriteRenderer.sortingOrder = SortingOrder;
         body.bodyType = RigidbodyType2D.Kinematic;
         body.gravityScale = 0f;
         circleCollider.isTrigger = true;

@@ -43,11 +43,15 @@ public class Stage1PlayerHealthSetupTests
         CanvasScaler scaler = canvas.GetComponent<CanvasScaler>();
         PlayerDashChargeView chargeView =
             canvas.GetComponentInChildren<PlayerDashChargeView>(true);
+        PlayerDeathScreen deathScreen =
+            root.GetComponentInChildren<PlayerDeathScreen>(true);
         Image heart = view.transform.Find("Heart").GetComponent<Image>();
 
         Assert.That(health, Is.Not.Null);
         Assert.That(dash, Is.Not.Null);
         Assert.That(chargeView, Is.Not.Null);
+        Assert.That(deathScreen, Is.Not.Null);
+        Assert.That(deathScreen.GetComponent<PlayerDeathScreenView>(), Is.Not.Null);
         Assert.That(chargeView.transform.childCount, Is.EqualTo(dash.MaxCharges));
         Assert.That(debugInput, Is.Not.Null);
         Assert.That(canvas.name, Is.EqualTo("Player Health Canvas"));

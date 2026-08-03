@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-03 09:54:35Z" end-time="2026-08-03 09:54:35Z" duration="0.0266448">
+  <test-suite type="TestSuite" id="1054" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="39" result="Failed" site="Child" start-time="2026-08-03 09:54:35Z" end-time="2026-08-03 09:54:35Z" duration="0.026645" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1050" name="NaManMoo.PlayModeTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.PlayModeTests.dll" runstate="Runnable" testcasecount="39" result="Failed" site="Child" start-time="2026-08-03 09:54:35Z" end-time="2026-08-03 09:54:35Z" duration="0.022110" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="16288" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1036" name="PlayerDeathScreenPlayModeTests" fullname="PlayerDeathScreenPlayModeTests" classname="PlayerDeathScreenPlayModeTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-08-03 09:54:35Z" end-time="2026-08-03 09:54:35Z" duration="0.020813" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1041" name="TaggedPlayerWithoutConfiguredScreen_CreatesOneAtRuntime" fullname="PlayerDeathScreenPlayModeTests.TaggedPlayerWithoutConfiguredScreen_CreatesOneAtRuntime" methodname="TaggedPlayerWithoutConfiguredScreen_CreatesOneAtRuntime" classname="PlayerDeathScreenPlayModeTests" runstate="Runnable" seed="374291296" result="Failed" start-time="2026-08-03 09:54:35Z" end-time="2026-08-03 09:54:35Z" duration="0.013168" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at PlayerDeathScreenPlayModeTests+<TaggedPlayerWithoutConfiguredScreen_CreatesOneAtRuntime>d__6.MoveNext () [0x0007c] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\PlayMode\PlayerDeathScreenPlayModeTests.cs:113
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

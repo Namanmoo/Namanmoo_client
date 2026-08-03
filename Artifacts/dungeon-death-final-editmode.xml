@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="15" result="Passed" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-03 09:56:47Z" end-time="2026-08-03 09:56:53Z" duration="5.7617973">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="410" result="Passed" start-time="2026-08-03 09:56:47Z" end-time="2026-08-03 09:56:53Z" duration="5.761797" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1491" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="410" result="Passed" start-time="2026-08-03 09:56:47Z" end-time="2026-08-03 09:56:53Z" duration="5.754883" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="29392" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1112" name="DungeonSceneBuilderTests" fullname="DungeonSceneBuilderTests" classname="DungeonSceneBuilderTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-08-03 09:56:47Z" end-time="2026-08-03 09:56:47Z" duration="0.530836" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1114" name="Scene_AssignsBothPersistentEnemyDefinitionsToEncounter" fullname="DungeonSceneBuilderTests.Scene_AssignsBothPersistentEnemyDefinitionsToEncounter" methodname="Scene_AssignsBothPersistentEnemyDefinitionsToEncounter" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="981572156" result="Passed" start-time="2026-08-03 09:56:47Z" end-time="2026-08-03 09:56:47Z" duration="0.298130" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1113" name="Scene_PlayerHasDashComponent" fullname="DungeonSceneBuilderTests.Scene_PlayerHasDashComponent" methodname="Scene_PlayerHasDashComponent" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="1570856825" result="Passed" start-time="2026-08-03 09:56:47Z" end-time="2026-08-03 09:56:47Z" duration="0.223591" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1281" name="PlayerDeathScreenUIFactoryTests" fullname="PlayerDeathScreenUIFactoryTests" classname="PlayerDeathScreenUIFactoryTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-03 09:56:47Z" end-time="2026-08-03 09:56:47Z" duration="0.065471" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1282" name="Create_BuildsHiddenDeathMenuAboveTransparentBlackOverlay" fullname="PlayerDeathScreenUIFactoryTests.Create_BuildsHiddenDeathMenuAboveTransparentBlackOverlay" methodname="Create_BuildsHiddenDeathMenuAboveTransparentBlackOverlay" classname="PlayerDeathScreenUIFactoryTests" runstate="Runnable" seed="1019682907" result="Passed" start-time="2026-08-03 09:56:47Z" end-time="2026-08-03 09:56:47Z" duration="0.010066" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1287" name="PlayerHealthTests" fullname="PlayerHealthTests" classname="PlayerHealthTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-08-03 09:56:47Z" end-time="2026-08-03 09:56:52Z" duration="4.432546" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1295" name="GrantInvulnerability_BlocksDamageUntilGrantedDeadline" fullname="PlayerHealthTests.GrantInvulnerability_BlocksDamageUntilGrantedDeadline" methodname="GrantInvulnerability_BlocksDamageUntilGrantedDeadline" classname="PlayerHealthTests" runstate="Runnable" seed="1181781618" result="Passed" start-time="2026-08-03 09:56:47Z" end-time="2026-08-03 09:56:48Z" duration="0.591296" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1296" name="GrantInvulnerability_DoesNotShortenExistingProtection" fullname="PlayerHealthTests.GrantInvulnerability_DoesNotShortenExistingProtection" methodname="GrantInvulnerability_DoesNotShortenExistingProtection" classname="PlayerHealthTests" runstate="Runnable" seed="73830034" result="Passed" start-time="2026-08-03 09:56:48Z" end-time="2026-08-03 09:56:48Z" duration="0.492799" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1291" name="LethalDamage_ClampsAtZeroWithoutDestroyingPlayer" fullname="PlayerHealthTests.LethalDamage_ClampsAtZeroWithoutDestroyingPlayer" methodname="LethalDamage_ClampsAtZeroWithoutDestroyingPlayer" classname="PlayerHealthTests" runstate="Runnable" seed="344001040" result="Passed" start-time="2026-08-03 09:56:48Z" end-time="2026-08-03 09:56:49Z" duration="0.486065" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1292" name="LethalDamage_RaisesDiedExactlyOnce" fullname="PlayerHealthTests.LethalDamage_RaisesDiedExactlyOnce" methodname="LethalDamage_RaisesDiedExactlyOnce" classname="PlayerHealthTests" runstate="Runnable" seed="2093690580" result="Passed" start-time="2026-08-03 09:56:49Z" end-time="2026-08-03 09:56:49Z" duration="0.497700" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1288" name="NewPlayer_StartsAtTwentyOfTwentyHealth" fullname="PlayerHealthTests.NewPlayer_StartsAtTwentyOfTwentyHealth" methodname="NewPlayer_StartsAtTwentyOfTwentyHealth" classname="PlayerHealthTests" runstate="Runnable" seed="1606522976" result="Passed" start-time="2026-08-03 09:56:49Z" end-time="2026-08-03 09:56:50Z" duration="0.473678" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1290" name="NonPositiveDamage_DoesNotChangeHealthOrNotify" fullname="PlayerHealthTests.NonPositiveDamage_DoesNotChangeHealthOrNotify" methodname="NonPositiveDamage_DoesNotChangeHealthOrNotify" classname="PlayerHealthTests" runstate="Runnable" seed="2119245398" result="Passed" start-time="2026-08-03 09:56:50Z" end-time="2026-08-03 09:56:50Z" duration="0.471206" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1289" name="TakingFiveDamage_ReportsFifteenOfTwentyHealth" fullname="PlayerHealthTests.TakingFiveDamage_ReportsFifteenOfTwentyHealth" methodname="TakingFiveDamage_ReportsFifteenOfTwentyHealth" classname="PlayerHealthTests" runstate="Runnable" seed="1618008069" result="Passed" start-time="2026-08-03 09:56:50Z" end-time="2026-08-03 09:56:51Z" duration="0.471075" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1294" name="TryTakeDamage_NonPositiveAmountDoesNotStartInvulnerability" fullname="PlayerHealthTests.TryTakeDamage_NonPositiveAmountDoesNotStartInvulnerability" methodname="TryTakeDamage_NonPositiveAmountDoesNotStartInvulnerability" classname="PlayerHealthTests" runstate="Runnable" seed="403917906" result="Passed" start-time="2026-08-03 09:56:51Z" end-time="2026-08-03 09:56:51Z" duration="0.481643" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1293" name="TryTakeDamage_RejectsHitsUntilOneSecondInvulnerabilityExpires" fullname="PlayerHealthTests.TryTakeDamage_RejectsHitsUntilOneSecondInvulnerabilityExpires" methodname="TryTakeDamage_RejectsHitsUntilOneSecondInvulnerabilityExpires" classname="PlayerHealthTests" runstate="Runnable" seed="1850415235" result="Passed" start-time="2026-08-03 09:56:51Z" end-time="2026-08-03 09:56:52Z" duration="0.464769" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1422" name="Stage1PlayerHealthSceneTests" fullname="Stage1PlayerHealthSceneTests" classname="Stage1PlayerHealthSceneTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-08-03 09:56:52Z" end-time="2026-08-03 09:56:53Z" duration="0.705502" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1423" name="Build_CreatesPlayerHealthBarUsingProjectHeartSprite" fullname="Stage1PlayerHealthSceneTests.Build_CreatesPlayerHealthBarUsingProjectHeartSprite" methodname="Build_CreatesPlayerHealthBarUsingProjectHeartSprite" classname="Stage1PlayerHealthSceneTests" runstate="Runnable" seed="451870910" result="Passed" start-time="2026-08-03 09:56:52Z" end-time="2026-08-03 09:56:53Z" duration="0.695834" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1424" name="RuntimeBootstrap_AssignsHeartAndBuildsPlayerHealthBar" fullname="Stage1PlayerHealthSceneTests.RuntimeBootstrap_AssignsHeartAndBuildsPlayerHealthBar" methodname="RuntimeBootstrap_AssignsHeartAndBuildsPlayerHealthBar" classname="Stage1PlayerHealthSceneTests" runstate="Runnable" seed="2134497312" result="Passed" start-time="2026-08-03 09:56:53Z" end-time="2026-08-03 09:56:53Z" duration="0.008984" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1425" name="Stage1PlayerHealthSetupTests" fullname="Stage1PlayerHealthSetupTests" classname="Stage1PlayerHealthSetupTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-03 09:56:53Z" end-time="2026-08-03 09:56:53Z" duration="0.007432" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1426" name="Create_AddsPlayerHealthAndTopLeftScaledCanvas" fullname="Stage1PlayerHealthSetupTests.Create_AddsPlayerHealthAndTopLeftScaledCanvas" methodname="Create_AddsPlayerHealthAndTopLeftScaledCanvas" classname="Stage1PlayerHealthSetupTests" runstate="Runnable" seed="404812651" result="Passed" start-time="2026-08-03 09:56:53Z" end-time="2026-08-03 09:56:53Z" duration="0.003884" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

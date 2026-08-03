@@ -4,16 +4,27 @@ using UnityEngine;
 public sealed class ApproachAndShootEnemyController : MonoBehaviour
 {
     private const string ProjectileName = "Enemy Projectile";
+    private const string ContactSensorName = "Contact Sensor";
+    private const int ContactDamage = 2;
+    private const float PlayerInvulnerabilityDuration = 1f;
+    private const float DefaultSensorRadius = 0.5f;
 
     private EnemyDefinition definition;
     private Transform target;
     private Rigidbody2D body;
+    private Collider2D bodyCollider;
     private EnemyVisualController visualController;
     private float nextAttackTime;
 
     private void Awake()
     {
         CacheComponents();
+        EnsureContactSensor();
+    }
+
+    private void OnEnable()
+    {
+        ConfigurePlayerOverlap();
     }
 
     public void Initialize(EnemyDefinition newDefinition, Transform newTarget)
@@ -22,6 +33,8 @@ public sealed class ApproachAndShootEnemyController : MonoBehaviour
         target = newTarget;
         nextAttackTime = 0f;
         CacheComponents();
+        EnsureContactSensor();
+        ConfigurePlayerOverlap();
     }
 
     private void FixedUpdate()
@@ -86,6 +99,37 @@ public sealed class ApproachAndShootEnemyController : MonoBehaviour
         return true;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        TryDamagePlayer(other, Time.time);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        TryDamagePlayer(other, Time.time);
+    }
+
+    public bool TryDamagePlayer(Collider2D other, float currentTime)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+
+        PlayerHealth health = other.GetComponentInParent<PlayerHealth>();
+        if (health == null ||
+            !health.TryTakeDamage(
+                ContactDamage,
+                currentTime,
+                PlayerInvulnerabilityDuration))
+        {
+            return false;
+        }
+
+        visualController?.PlayAttack();
+        return true;
+    }
+
     private void CacheComponents()
     {
         if (body == null)
@@ -93,9 +137,63 @@ public sealed class ApproachAndShootEnemyController : MonoBehaviour
             body = GetComponent<Rigidbody2D>();
         }
 
+        if (bodyCollider == null)
+        {
+            bodyCollider = GetComponent<Collider2D>();
+        }
+
         if (visualController == null)
         {
             visualController = GetComponentInChildren<EnemyVisualController>();
+        }
+    }
+
+    private void EnsureContactSensor()
+    {
+        Transform existing = transform.Find(ContactSensorName);
+        CircleCollider2D sensor;
+        if (existing == null)
+        {
+            var sensorObject = new GameObject(ContactSensorName);
+            sensorObject.transform.SetParent(transform, false);
+            sensor = sensorObject.AddComponent<CircleCollider2D>();
+        }
+        else
+        {
+            sensor = existing.GetComponent<CircleCollider2D>();
+            if (sensor == null)
+            {
+                sensor = existing.gameObject.AddComponent<CircleCollider2D>();
+            }
+        }
+
+        sensor.isTrigger = true;
+        CircleCollider2D circleBody = bodyCollider as CircleCollider2D;
+        sensor.radius = circleBody != null
+            ? circleBody.radius
+            : DefaultSensorRadius;
+    }
+
+    private void ConfigurePlayerOverlap()
+    {
+        if (target == null)
+        {
+            return;
+        }
+
+        CacheComponents();
+        if (bodyCollider == null)
+        {
+            return;
+        }
+
+        foreach (Collider2D playerCollider in
+            target.GetComponentsInChildren<Collider2D>(true))
+        {
+            if (playerCollider != null)
+            {
+                Physics2D.IgnoreCollision(bodyCollider, playerCollider, true);
+            }
         }
     }
 }
