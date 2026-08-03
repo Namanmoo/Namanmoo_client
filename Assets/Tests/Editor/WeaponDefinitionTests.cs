@@ -57,6 +57,50 @@ public sealed class WeaponDefinitionTests
         }
     }
 
+    /// <summary>
+    /// 재질은 소리에만 쓰이므로 빠뜨려도 무기가 망가지면 안 된다.
+    /// Any로 떨어져야 효과음이 동작만 보고 정해진다.
+    /// </summary>
+    [Test]
+    public void Configure_WithoutMaterial_FallsBackToAny()
+    {
+        WeaponDefinition weapon = ScriptableObject.CreateInstance<WeaponDefinition>();
+        try
+        {
+            weapon.Configure(
+                "plain-sword", "Plain Sword", WeaponCategory.Melee, WeaponType.Sword,
+                7, 0.6f, 2f, 0.2f, 90f, 0f, 0f, null, null, Color.white);
+
+            Assert.That(weapon.Material, Is.EqualTo(WeaponMaterial.Any));
+        }
+        finally
+        {
+            Object.DestroyImmediate(weapon);
+        }
+    }
+
+    [Test]
+    public void Configure_KeepsMaterialSeparateFromWeaponType()
+    {
+        WeaponDefinition weapon = ScriptableObject.CreateInstance<WeaponDefinition>();
+        try
+        {
+            // 쇠몽둥이가 총처럼 발사되는 조합 — 타입과 재질은 서로를 구속하지 않는다
+            weapon.Configure(
+                "iron-gun", "Iron Gun", WeaponCategory.Ranged, WeaponType.Gun,
+                3, 0.2f, 0f, 0.15f, 0f, 14f, 2f, null, null, Color.white,
+                WeaponMaterial.Metal);
+
+            Assert.That(weapon.Type, Is.EqualTo(WeaponType.Gun));
+            Assert.That(weapon.Material, Is.EqualTo(WeaponMaterial.Metal));
+            Assert.That(weapon.IsValid, Is.True);
+        }
+        finally
+        {
+            Object.DestroyImmediate(weapon);
+        }
+    }
+
     [Test]
     public void ItemData_WithWeaponDefinition_ExposesWeaponAndUsesWeaponIdentity()
     {
