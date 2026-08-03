@@ -50,6 +50,8 @@ public static class Stage1SceneBuilder
         CreateStageMap();
         CreateBoundary();
         GameObject player = CreatePlayer(swordSprite, axeSprite, playerHealthHeart);
+        camera.transform.SetParent(player.transform, false);
+        camera.transform.localPosition = new Vector3(0f, 0f, -10f);
         camera.GetComponent<CameraFollow>().Target = player.transform;
         Stage1EncounterGate gate = Stage1KrabEncounterSetup.Create(
             null,

@@ -32,6 +32,12 @@ public static class Stage1PlayerHealthSetup
             player.AddComponent<PlayerHealthDebugInput>();
         }
 
+        PlayerDash dash = player.GetComponent<PlayerDash>();
+        if (dash == null)
+        {
+            dash = player.AddComponent<PlayerDash>();
+        }
+
         var canvasObject = new GameObject(
             "Player Health Canvas",
             typeof(RectTransform),
@@ -47,6 +53,9 @@ public static class Stage1PlayerHealthSetup
         scaler.referenceResolution = ReferenceResolution;
         scaler.matchWidthOrHeight = 0f;
 
-        return PlayerHealthBarUIFactory.Create(canvasObject.transform, health, heartSprite);
+        PlayerHealthBarView healthView =
+            PlayerHealthBarUIFactory.Create(canvasObject.transform, health, heartSprite);
+        PlayerDashChargeUIFactory.Create(canvasObject.transform, dash);
+        return healthView;
     }
 }

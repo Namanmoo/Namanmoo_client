@@ -19,9 +19,9 @@ MonoBehaviour:
   behaviorType: 1
   animatorController: {fileID: 0}
   maxHealth: 5
-  moveSpeed: 4
+  moveSpeed: 2
   attackDamage: 1
-  attackRange: 9
+  attackRange: 7
   attackInterval: 1.5
   projectileSpeed: 6
   projectileLifetime: 3

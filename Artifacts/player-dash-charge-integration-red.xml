@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Failed(Child)" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-03 05:26:10Z" end-time="2026-08-03 05:26:11Z" duration="0.6378313">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="392" result="Failed" site="Child" start-time="2026-08-03 05:26:10Z" end-time="2026-08-03 05:26:11Z" duration="0.637831" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1470" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="392" result="Failed" site="Child" start-time="2026-08-03 05:26:10Z" end-time="2026-08-03 05:26:11Z" duration="0.629776" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="26616" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1112" name="DungeonSceneBuilderTests" fullname="DungeonSceneBuilderTests" classname="DungeonSceneBuilderTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-08-03 05:26:10Z" end-time="2026-08-03 05:26:11Z" duration="0.308894" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1113" name="Scene_PlayerHasDashComponent" fullname="DungeonSceneBuilderTests.Scene_PlayerHasDashComponent" methodname="Scene_PlayerHasDashComponent" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="128756291" result="Failed" start-time="2026-08-03 05:26:10Z" end-time="2026-08-03 05:26:11Z" duration="0.299919" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at DungeonSceneBuilderTests.Scene_PlayerHasDashComponent () [0x0004e] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\DungeonSceneBuilderTests.cs:26
+]]></stack-trace>
+          </failure>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1358" name="SampleStageSceneTests" fullname="SampleStageSceneTests" classname="SampleStageSceneTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-08-03 05:26:11Z" end-time="2026-08-03 05:26:11Z" duration="0.297861" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1361" name="SampleStagePlayer_HasConfiguredDash" fullname="SampleStageSceneTests.SampleStagePlayer_HasConfiguredDash" methodname="SampleStagePlayer_HasConfiguredDash" classname="SampleStageSceneTests" runstate="Runnable" seed="582216291" result="Failed" start-time="2026-08-03 05:26:11Z" end-time="2026-08-03 05:26:11Z" duration="0.230009" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at SampleStageSceneTests.SampleStagePlayer_HasConfiguredDash () [0x00068] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\SampleStageSceneTests.cs:45
+]]></stack-trace>
+          </failure>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1412" name="Stage1PlayerHealthSetupTests" fullname="Stage1PlayerHealthSetupTests" classname="Stage1PlayerHealthSetupTests" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2026-08-03 05:26:11Z" end-time="2026-08-03 05:26:11Z" duration="0.013841" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1413" name="Create_AddsPlayerHealthAndTopLeftScaledCanvas" fullname="Stage1PlayerHealthSetupTests.Create_AddsPlayerHealthAndTopLeftScaledCanvas" methodname="Create_AddsPlayerHealthAndTopLeftScaledCanvas" classname="Stage1PlayerHealthSetupTests" runstate="Runnable" seed="986418846" result="Failed" start-time="2026-08-03 05:26:11Z" end-time="2026-08-03 05:26:11Z" duration="0.011518" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at Stage1PlayerHealthSetupTests.Create_AddsPlayerHealthAndTopLeftScaledCanvas () [0x0008b] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\Stage1PlayerHealthSetupTests.cs:49
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

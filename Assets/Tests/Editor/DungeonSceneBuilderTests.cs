@@ -13,6 +13,22 @@ public sealed class DungeonSceneBuilderTests
         "Assets/Enemies/DungeonSquirrel.asset";
 
     [Test]
+    public void Scene_PlayerHasDashComponent()
+    {
+        Scene scene = EditorSceneManager.OpenScene(
+            DungeonSceneBuilder.ScenePath,
+            OpenSceneMode.Single);
+        Assert.That(scene.IsValid, Is.True);
+
+        PlayerMovement movement = Object.FindAnyObjectByType<PlayerMovement>();
+        Assert.That(movement, Is.Not.Null);
+        Assert.That(movement.GetComponent<PlayerDash>(), Is.Not.Null);
+        Assert.That(
+            Object.FindAnyObjectByType<PlayerDashChargeView>(),
+            Is.Not.Null);
+    }
+
+    [Test]
     public void Scene_AssignsBothPersistentEnemyDefinitionsToEncounter()
     {
         EnemyDefinition krab =

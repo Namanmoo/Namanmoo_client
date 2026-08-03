@@ -67,6 +67,13 @@ public static class PlayerFactory
             playerObject, uiParent, hotbarBackground, swordSprite, axeSprite, useSampleLoadout);
         Stage1PlayerHealthSetup.Create(playerObject, uiParent, healthHeart);
 
+        PlayerDash dash = playerObject.GetComponent<PlayerDash>();
+        if (dash == null)
+        {
+            dash = playerObject.AddComponent<PlayerDash>();
+        }
+        dash.ConfigureVisual(renderer);
+
         return playerObject;
     }
 }
