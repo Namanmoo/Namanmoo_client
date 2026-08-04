@@ -93,6 +93,54 @@ public sealed class EnemyProjectileTests
         yield return new ExitPlayMode();
     }
 
+    [Test]
+    public void Advance_RotatesByConfiguredDegreesPerSecond()
+    {
+        var projectileObject = new GameObject("Spinning Projectile");
+        try
+        {
+            EnemyProjectile projectile =
+                projectileObject.AddComponent<EnemyProjectile>();
+            projectile.Initialize(
+                null, null, Vector2.right, 1, 0f, 2f, 0.1f, 720f);
+
+            projectile.Advance(0.25f);
+
+            Assert.That(projectile.RotationSpeed, Is.EqualTo(720f));
+            Assert.That(
+                Mathf.DeltaAngle(projectile.transform.eulerAngles.z, 180f),
+                Is.Zero.Within(0.001f));
+        }
+        finally
+        {
+            Object.DestroyImmediate(projectileObject);
+        }
+    }
+
+    [Test]
+    public void Initialize_WithoutRotationSpeedDoesNotRotate()
+    {
+        var projectileObject = new GameObject("Static Projectile");
+        try
+        {
+            EnemyProjectile projectile =
+                projectileObject.AddComponent<EnemyProjectile>();
+            projectile.Initialize(
+                null, null, Vector2.right, 1, 0f, 2f, 0.1f);
+
+            projectile.Advance(0.25f);
+
+            Assert.That(projectile.RotationSpeed, Is.Zero);
+            Assert.That(
+                projectile.transform.eulerAngles.z,
+                Is.Zero.Within(0.001f));
+        }
+        finally
+        {
+            Object.DestroyImmediate(projectileObject);
+        }
+    }
+
     private static Sprite CreateSprite(Color color)
     {
         Texture2D texture = new Texture2D(1, 1);

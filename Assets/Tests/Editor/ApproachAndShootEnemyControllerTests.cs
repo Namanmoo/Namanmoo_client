@@ -46,6 +46,7 @@ public sealed class ApproachAndShootEnemyControllerTests
                 Assert.That(projectile.Damage, Is.EqualTo(6));
                 Assert.That(projectile.Speed, Is.EqualTo(7f));
                 Assert.That(projectile.RemainingLifetime, Is.EqualTo(8f));
+                Assert.That(projectile.RotationSpeed, Is.Zero);
                 Assert.That(projectile.GetComponent<CircleCollider2D>().radius,
                     Is.EqualTo(0.25f));
             }
@@ -61,6 +62,30 @@ public sealed class ApproachAndShootEnemyControllerTests
         }
     }
 
+    [Test]
+    public void TryAttack_SquirrelProjectileUsesAcornRotation()
+    {
+        TestContext context = CreateContext("squirrel");
+        context.Target.position = new Vector3(2f, 0f);
+
+        try
+        {
+            Assert.That(context.Controller.TryAttack(0f), Is.True);
+            EnemyProjectile projectile =
+                Object.FindAnyObjectByType<EnemyProjectile>();
+            Assert.That(projectile, Is.Not.Null);
+            Assert.That(projectile.RotationSpeed, Is.EqualTo(720f));
+        }
+        finally
+        {
+            foreach (EnemyProjectile projectile in
+                Object.FindObjectsByType<EnemyProjectile>(FindObjectsSortMode.None))
+            {
+                Object.DestroyImmediate(projectile.gameObject);
+            }
+            context.Dispose();
+        }
+    }
     [Test]
     public void TryAttack_OutsideRangeDoesNotSpawnProjectile()
     {
@@ -154,7 +179,7 @@ public sealed class ApproachAndShootEnemyControllerTests
         return definition;
     }
 
-    private static TestContext CreateContext()
+    private static TestContext CreateContext(string definitionId = "ranged")
     {
         GameObject enemy = new GameObject("Ranged Enemy");
         enemy.AddComponent<Rigidbody2D>();
@@ -165,7 +190,7 @@ public sealed class ApproachAndShootEnemyControllerTests
         Sprite projectileSprite = CreateSprite();
         EnemyDefinition definition = ScriptableObject.CreateInstance<EnemyDefinition>();
         definition.Configure(
-            "ranged", "Ranged", null, projectileSprite,
+            definitionId, "Ranged", null, projectileSprite,
             EnemyBehaviorType.ApproachAndShoot, 10, 2f, 6, 3f, 1f, 7f, 8f, 0.25f);
         controller.Initialize(definition, target.transform);
         return new TestContext(enemy, target.transform, definition, projectileSprite, controller);

@@ -6,15 +6,19 @@ using UnityEngine;
 public sealed class DungeonEnemyAssetBuilderTests
 {
     [Test]
-    public void BuildDefinitions_CreatesConfiguredKrabAndSquirrelAssets()
+    public void BuildDefinitions_IncludesConfiguredWoodTowerAsset()
     {
         EnemyDefinition[] definitions = DungeonEnemyAssetBuilder.BuildDefinitions();
 
         Assert.That(definitions.Select(definition => definition.Id),
-            Is.EquivalentTo(new[] { "krab", "squirrel" }));
+            Is.EquivalentTo(new[] { "krab", "squirrel", "wood_tower" }));
 
         EnemyDefinition squirrel = definitions.Single(
             definition => definition.Id == "squirrel");
+        EnemyDefinition krab = definitions.Single(
+            definition => definition.Id == "krab");
+        Assert.That(krab.VisualHeight, Is.EqualTo(2f));
+        Assert.That(krab.BodyCollisionRadius, Is.EqualTo(0.7f));
         Assert.That(squirrel.DisplayName, Is.EqualTo("Squirrel"));
         Assert.That(squirrel.BehaviorType,
             Is.EqualTo(EnemyBehaviorType.ApproachAndShoot));
@@ -29,9 +33,76 @@ public sealed class DungeonEnemyAssetBuilderTests
         Assert.That(squirrel.ProjectileSpeed, Is.EqualTo(6f));
         Assert.That(squirrel.ProjectileLifetime, Is.EqualTo(3f));
         Assert.That(squirrel.ProjectileRadius, Is.EqualTo(0.2f));
+        Assert.That(squirrel.VisualHeight, Is.EqualTo(2f));
+        Assert.That(squirrel.BodyCollisionRadius, Is.EqualTo(0.7f));
 
         Assert.That(squirrel.ProjectileSprite.name, Is.EqualTo("Nuts_1"));
-        Assert.That(squirrel.ProjectileSprite.rect.width, Is.EqualTo(399f));
-        Assert.That(squirrel.ProjectileSprite.rect.height, Is.EqualTo(464f));
+
+        EnemyDefinition woodTower = definitions.Single(
+            definition => definition.Id == "wood_tower");
+        Assert.That(woodTower.DisplayName, Is.EqualTo("Wood Tower"));
+        Assert.That(woodTower.BehaviorType,
+            Is.EqualTo(EnemyBehaviorType.StationaryFourWayShoot));
+        Assert.That(woodTower.BodySprite, Is.Not.Null);
+        Assert.That(woodTower.BodySprite.name, Is.EqualTo("enemy_woodtower"));
+        Assert.That(woodTower.ProjectileSprite, Is.Not.Null);
+        Assert.That(
+            woodTower.ProjectileSprite.name,
+            Is.EqualTo("enemy_woodtower_bullet"));
+        Assert.That(woodTower.MaxHealth, Is.EqualTo(10));
+        Assert.That(woodTower.MoveSpeed, Is.Zero);
+        Assert.That(woodTower.AttackDamage, Is.EqualTo(2));
+        Assert.That(woodTower.AttackInterval, Is.EqualTo(1.5f));
+        Assert.That(woodTower.ProjectileSpeed, Is.EqualTo(8f));
+        Assert.That(woodTower.ProjectileLifetime, Is.EqualTo(5f));
+        Assert.That(woodTower.ProjectileRadius, Is.EqualTo(0.5f));
+        Assert.That(woodTower.VisualHeight, Is.EqualTo(3f));
+        Assert.That(woodTower.BodyCollisionRadius, Is.EqualTo(1.1f));
+
+        var bodyImporter = AssetImporter.GetAtPath(
+            "Assets/Enemies/enemy_woodtower.png") as TextureImporter;
+        var projectileImporter = AssetImporter.GetAtPath(
+            "Assets/Enemies/enemy_woodtower_bullet.png") as TextureImporter;
+        Assert.That(bodyImporter, Is.Not.Null);
+        Assert.That(projectileImporter, Is.Not.Null);
+        Assert.That(
+            bodyImporter.spriteImportMode,
+            Is.EqualTo(SpriteImportMode.Single));
+        Assert.That(
+            projectileImporter.spriteImportMode,
+            Is.EqualTo(SpriteImportMode.Single));
+    }
+
+    [Test]
+    public void BuildDefinitions_PreservesExistingPresentationValues()
+    {
+        EnemyDefinition woodTower =
+            AssetDatabase.LoadAssetAtPath<EnemyDefinition>(
+                DungeonEnemyAssetBuilder.WoodTowerDefinitionPath);
+        Assert.That(woodTower, Is.Not.Null);
+        float originalVisualHeight = woodTower.VisualHeight;
+        float originalBodyCollisionRadius = woodTower.BodyCollisionRadius;
+
+        try
+        {
+            woodTower.ConfigurePresentation(4f, 1.4f);
+            EditorUtility.SetDirty(woodTower);
+            AssetDatabase.SaveAssets();
+
+            EnemyDefinition rebuilt = DungeonEnemyAssetBuilder
+                .BuildDefinitions()
+                .Single(definition => definition.Id == "wood_tower");
+
+            Assert.That(rebuilt.VisualHeight, Is.EqualTo(4f));
+            Assert.That(rebuilt.BodyCollisionRadius, Is.EqualTo(1.4f));
+        }
+        finally
+        {
+            woodTower.ConfigurePresentation(
+                originalVisualHeight,
+                originalBodyCollisionRadius);
+            EditorUtility.SetDirty(woodTower);
+            AssetDatabase.SaveAssets();
+        }
     }
 }

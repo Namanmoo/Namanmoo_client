@@ -18,6 +18,15 @@ namespace NaManMoo.Dungeon
     {
         [SerializeField] private EnemyDefinition[] normalEnemyDefinitions;
         [SerializeField] private Sprite bossSprite;
+        [SerializeField] private SlimeBossDefinition slimeBossDefinition;
+
+        public void ConfigureSlimeBoss(
+            EnemyDefinition[] normalEnemies, SlimeBossDefinition slimeBoss)
+        {
+            normalEnemyDefinitions = normalEnemies;
+            slimeBossDefinition = slimeBoss;
+            bossSprite = null;
+        }
 
         public void Configure(EnemyDefinition[] normalEnemies, Sprite boss)
         {
@@ -110,6 +119,17 @@ namespace NaManMoo.Dungeon
         private List<EnemyHealth> SpawnBoss(
             Transform roomRoot, Transform player, RoomShape shape)
         {
+            if (slimeBossDefinition != null)
+            {
+                Transform slimeCanvas = BossFactory.CreateOverlayCanvas(
+                    roomRoot, "Boss Health Canvas");
+                return new List<EnemyHealth>
+                {
+                    SlimeBossFactory.Create(
+                        roomRoot, slimeCanvas, player, slimeBossDefinition, shape.Bounds.center)
+                };
+            }
+
             if (bossSprite == null)
             {
                 return null;

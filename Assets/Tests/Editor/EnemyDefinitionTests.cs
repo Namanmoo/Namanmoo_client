@@ -74,6 +74,33 @@ public sealed class EnemyDefinitionTests
     }
 
     [Test]
+    public void ConfigurePresentation_StoresValuesAndClampsInvalidInputs()
+    {
+        EnemyDefinition definition =
+            ScriptableObject.CreateInstance<EnemyDefinition>();
+
+        try
+        {
+            Assert.That(definition.VisualHeight, Is.EqualTo(2f));
+            Assert.That(definition.BodyCollisionRadius, Is.EqualTo(0.7f));
+
+            definition.ConfigurePresentation(3f, 1.1f);
+
+            Assert.That(definition.VisualHeight, Is.EqualTo(3f));
+            Assert.That(definition.BodyCollisionRadius, Is.EqualTo(1.1f));
+
+            definition.ConfigurePresentation(0f, -1f);
+
+            Assert.That(definition.VisualHeight, Is.EqualTo(0.01f));
+            Assert.That(definition.BodyCollisionRadius, Is.EqualTo(0.01f));
+        }
+        finally
+        {
+            Object.DestroyImmediate(definition);
+        }
+    }
+
+    [Test]
     public void SpawnRequest_PreservesPerInstanceValues()
     {
         GameObject parentObject = new GameObject("Parent");

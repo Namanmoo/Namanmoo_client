@@ -68,9 +68,11 @@
     <Compile Include="Assets\Tests\Editor\WeaponAttackGeometryTests.cs" />
     <Compile Include="Assets\Tests\Editor\CameraFollowTests.cs" />
     <Compile Include="Assets\Tests\Editor\WeaponForgePaletteTests.cs" />
+    <Compile Include="Assets\Tests\Editor\EnemyProjectileInitialRotationTests.cs" />
     <Compile Include="Assets\Tests\Editor\BossRobotControllerTests.cs" />
     <Compile Include="Assets\Tests\Editor\WeaponDefinitionTests.cs" />
     <Compile Include="Assets\Tests\Editor\ApproachAndShootEnemyControllerTests.cs" />
+    <Compile Include="Assets\Tests\Editor\SlimeBossFactoryTests.cs" />
     <Compile Include="Assets\Tests\Editor\WeaponGripTests.cs" />
     <Compile Include="Assets\Tests\Editor\PlayerDashTests.cs" />
     <Compile Include="Assets\Tests\Editor\EnemyVisualControllerTests.cs" />
@@ -109,18 +111,23 @@
     <Compile Include="Assets\Tests\Editor\PlayerMovementTests.cs" />
     <Compile Include="Assets\Tests\Editor\PlayerHealthTests.cs" />
     <Compile Include="Assets\Tests\Editor\ItemHotbarViewTests.cs" />
+    <Compile Include="Assets\Tests\Editor\StationaryFourWayShooterControllerTests.cs" />
     <Compile Include="Assets\Tests\Editor\WhiteBackgroundKeyTests.cs" />
     <Compile Include="Assets\Tests\Editor\Stage1DirtPathAssetTests.cs" />
     <Compile Include="Assets\Tests\Editor\TitleSceneBuilderTests.cs" />
     <Compile Include="Assets\Tests\Editor\PlayerSwordShooterTests.cs" />
+    <Compile Include="Assets\Tests\Editor\SlimeBossDefinitionTests.cs" />
     <Compile Include="Assets\Tests\Editor\DungeonLayoutTests.cs" />
     <Compile Include="Assets\Tests\Editor\Stage1PlayerHealthSceneTests.cs" />
     <Compile Include="Assets\Tests\Editor\PlayerDashAfterimageTests.cs" />
     <Compile Include="Assets\Tests\Editor\KrabEnemyTests.cs" />
+    <Compile Include="Assets\Tests\Editor\PlayerDeathExistingSceneRegressionTests.cs" />
     <Compile Include="Assets\Tests\Editor\DrawingHistoryTests.cs" />
     <Compile Include="Assets\Tests\Editor\Stage1AxeIntegrationTests.cs" />
+    <Compile Include="Assets\Tests\Editor\PlayerDamageFlashTests.cs" />
     <Compile Include="Assets\Tests\Editor\Stage1KrabEncounterIntegrationTests.cs" />
     <Compile Include="Assets\Tests\Editor\Stage1EncounterGateTests.cs" />
+    <Compile Include="Assets\Tests\Editor\PlayerHealthDamageEventTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Tests\Editor\NaManMoo.EditorTests.asmdef" />

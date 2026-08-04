@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Passed" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-04 06:50:25Z" end-time="2026-08-04 06:50:26Z" duration="1.0750368">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="421" result="Passed" start-time="2026-08-04 06:50:25Z" end-time="2026-08-04 06:50:26Z" duration="1.075037" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1504" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="421" result="Passed" start-time="2026-08-04 06:50:25Z" end-time="2026-08-04 06:50:26Z" duration="1.067183" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="33596" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1138" name="EnemyProjectileTests" fullname="EnemyProjectileTests" classname="EnemyProjectileTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-08-04 06:50:25Z" end-time="2026-08-04 06:50:26Z" duration="1.063241" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1141" name="Advance_NormalizesDirectionAndDestroysAfterLifetime" fullname="EnemyProjectileTests.Advance_NormalizesDirectionAndDestroysAfterLifetime" methodname="Advance_NormalizesDirectionAndDestroysAfterLifetime" classname="EnemyProjectileTests" runstate="Runnable" seed="1730623715" result="Passed" start-time="2026-08-04 06:50:25Z" end-time="2026-08-04 06:50:25Z" duration="0.562241" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1142" name="Advance_RotatesByConfiguredDegreesPerSecond" fullname="EnemyProjectileTests.Advance_RotatesByConfiguredDegreesPerSecond" methodname="Advance_RotatesByConfiguredDegreesPerSecond" classname="EnemyProjectileTests" runstate="Runnable" seed="1325655544" result="Passed" start-time="2026-08-04 06:50:25Z" end-time="2026-08-04 06:50:25Z" duration="0.001901" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1139" name="Initialize_PreservesEachProjectileVisualAndPhysicsConfiguration" fullname="EnemyProjectileTests.Initialize_PreservesEachProjectileVisualAndPhysicsConfiguration" methodname="Initialize_PreservesEachProjectileVisualAndPhysicsConfiguration" classname="EnemyProjectileTests" runstate="Runnable" seed="102437700" result="Passed" start-time="2026-08-04 06:50:25Z" end-time="2026-08-04 06:50:25Z" duration="0.005891" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1143" name="Initialize_WithoutRotationSpeedDoesNotRotate" fullname="EnemyProjectileTests.Initialize_WithoutRotationSpeedDoesNotRotate" methodname="Initialize_WithoutRotationSpeedDoesNotRotate" classname="EnemyProjectileTests" runstate="Runnable" seed="382733322" result="Passed" start-time="2026-08-04 06:50:25Z" end-time="2026-08-04 06:50:25Z" duration="0.000374" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1140" name="TryDamagePlayer_DamagesPlayerAndIgnoresSceneryAndOwner" fullname="EnemyProjectileTests.TryDamagePlayer_DamagesPlayerAndIgnoresSceneryAndOwner" methodname="TryDamagePlayer_DamagesPlayerAndIgnoresSceneryAndOwner" classname="EnemyProjectileTests" runstate="Runnable" seed="2089826764" result="Passed" start-time="2026-08-04 06:50:25Z" end-time="2026-08-04 06:50:26Z" duration="0.483608" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -13,6 +13,7 @@ public sealed class EnemyHealth : MonoBehaviour
 
     public int CurrentHealth { get; private set; }
     public int MaxHealth => maxHealth;
+    public bool IsInvulnerable { get; private set; }
 
     private void Awake()
     {
@@ -24,11 +25,17 @@ public sealed class EnemyHealth : MonoBehaviour
         maxHealth = Mathf.Max(1, maximumHealth);
         CurrentHealth = maxHealth;
         deathReported = false;
+        IsInvulnerable = false;
+    }
+
+    public void SetInvulnerable(bool isInvulnerable)
+    {
+        IsInvulnerable = isInvulnerable;
     }
 
     public void TakeDamage(int amount)
     {
-        if (amount <= 0 || CurrentHealth == 0)
+        if (amount <= 0 || CurrentHealth == 0 || IsInvulnerable)
         {
             return;
         }

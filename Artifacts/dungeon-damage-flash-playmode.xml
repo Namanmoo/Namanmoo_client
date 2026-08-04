@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="6" result="Passed" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-04 05:49:04Z" end-time="2026-08-04 05:49:06Z" duration="1.6551513">
+  <test-suite type="TestSuite" id="1055" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="40" result="Passed" start-time="2026-08-04 05:49:04Z" end-time="2026-08-04 05:49:06Z" duration="1.655151" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1051" name="NaManMoo.PlayModeTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.PlayModeTests.dll" runstate="Runnable" testcasecount="40" result="Passed" start-time="2026-08-04 05:49:04Z" end-time="2026-08-04 05:49:06Z" duration="1.650540" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="968" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1024" name="DungeonScenePlayModeTests" fullname="DungeonScenePlayModeTests" classname="DungeonScenePlayModeTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-08-04 05:49:04Z" end-time="2026-08-04 05:49:06Z" duration="1.649023" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1030" name="EachRunGeneratesADifferentFloor" fullname="DungeonScenePlayModeTests.EachRunGeneratesADifferentFloor" methodname="EachRunGeneratesADifferentFloor" classname="DungeonScenePlayModeTests" runstate="Runnable" seed="749623348" result="Passed" start-time="2026-08-04 05:49:04Z" end-time="2026-08-04 05:49:04Z" duration="0.566187" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1029" name="TheCameraStaysInsideTheRoom" fullname="DungeonScenePlayModeTests.TheCameraStaysInsideTheRoom" methodname="TheCameraStaysInsideTheRoom" classname="DungeonScenePlayModeTests" runstate="Runnable" seed="888796389" result="Passed" start-time="2026-08-04 05:49:04Z" end-time="2026-08-04 05:49:05Z" duration="0.223954" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1027" name="TheEncounterSurvivesSceneSerialisation" fullname="DungeonScenePlayModeTests.TheEncounterSurvivesSceneSerialisation" methodname="TheEncounterSurvivesSceneSerialisation" classname="DungeonScenePlayModeTests" runstate="Runnable" seed="571062287" result="Passed" start-time="2026-08-04 05:49:05Z" end-time="2026-08-04 05:49:05Z" duration="0.220922" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1028" name="TheMinimapSurvivesSceneSerialisationAndDrawsCells" fullname="DungeonScenePlayModeTests.TheMinimapSurvivesSceneSerialisationAndDrawsCells" methodname="TheMinimapSurvivesSceneSerialisationAndDrawsCells" classname="DungeonScenePlayModeTests" runstate="Runnable" seed="506056217" result="Passed" start-time="2026-08-04 05:49:05Z" end-time="2026-08-04 05:49:05Z" duration="0.211331" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1026" name="TheRoomUsesOutdoorGroundAndInvisibleBoundaries" fullname="DungeonScenePlayModeTests.TheRoomUsesOutdoorGroundAndInvisibleBoundaries" methodname="TheRoomUsesOutdoorGroundAndInvisibleBoundaries" classname="DungeonScenePlayModeTests" runstate="Runnable" seed="1049539378" result="Passed" start-time="2026-08-04 05:49:05Z" end-time="2026-08-04 05:49:05Z" duration="0.211712" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1025" name="TheSceneBuildsARoomAroundThePlayer" fullname="DungeonScenePlayModeTests.TheSceneBuildsARoomAroundThePlayer" methodname="TheSceneBuildsARoomAroundThePlayer" classname="DungeonScenePlayModeTests" runstate="Runnable" seed="182970122" result="Passed" start-time="2026-08-04 05:49:05Z" end-time="2026-08-04 05:49:06Z" duration="0.206420" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

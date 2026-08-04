@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-04 07:51:00Z" end-time="2026-08-04 07:51:00Z" duration="0.1270889">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="425" result="Passed" start-time="2026-08-04 07:51:00Z" end-time="2026-08-04 07:51:00Z" duration="0.127089" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1510" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="425" result="Passed" start-time="2026-08-04 07:51:00Z" end-time="2026-08-04 07:51:00Z" duration="0.120805" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="19596" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1081" name="DungeonEnemyAssetBuilderTests" fullname="DungeonEnemyAssetBuilderTests" classname="DungeonEnemyAssetBuilderTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-04 07:51:00Z" end-time="2026-08-04 07:51:00Z" duration="0.117194" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1082" name="BuildDefinitions_IncludesConfiguredWoodTowerAsset" fullname="DungeonEnemyAssetBuilderTests.BuildDefinitions_IncludesConfiguredWoodTowerAsset" methodname="BuildDefinitions_IncludesConfiguredWoodTowerAsset" classname="DungeonEnemyAssetBuilderTests" runstate="Runnable" seed="720647732" result="Passed" start-time="2026-08-04 07:51:00Z" end-time="2026-08-04 07:51:00Z" duration="0.109107" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

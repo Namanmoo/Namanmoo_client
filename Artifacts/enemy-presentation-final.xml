@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="19" result="Passed" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-04 08:30:22Z" end-time="2026-08-04 08:30:23Z" duration="0.938277">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="427" result="Passed" start-time="2026-08-04 08:30:22Z" end-time="2026-08-04 08:30:23Z" duration="0.938277" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1512" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="427" result="Passed" start-time="2026-08-04 08:30:22Z" end-time="2026-08-04 08:30:23Z" duration="0.931515" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="29500" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1081" name="DungeonEnemyAssetBuilderTests" fullname="DungeonEnemyAssetBuilderTests" classname="DungeonEnemyAssetBuilderTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-08-04 08:30:22Z" end-time="2026-08-04 08:30:23Z" duration="0.166353" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1082" name="BuildDefinitions_IncludesConfiguredWoodTowerAsset" fullname="DungeonEnemyAssetBuilderTests.BuildDefinitions_IncludesConfiguredWoodTowerAsset" methodname="BuildDefinitions_IncludesConfiguredWoodTowerAsset" classname="DungeonEnemyAssetBuilderTests" runstate="Runnable" seed="79219665" result="Passed" start-time="2026-08-04 08:30:22Z" end-time="2026-08-04 08:30:22Z" duration="0.014357" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1083" name="BuildDefinitions_PreservesExistingPresentationValues" fullname="DungeonEnemyAssetBuilderTests.BuildDefinitions_PreservesExistingPresentationValues" methodname="BuildDefinitions_PreservesExistingPresentationValues" classname="DungeonEnemyAssetBuilderTests" runstate="Runnable" seed="1895285596" result="Passed" start-time="2026-08-04 08:30:22Z" end-time="2026-08-04 08:30:23Z" duration="0.143317" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1116" name="DungeonSceneBuilderTests" fullname="DungeonSceneBuilderTests" classname="DungeonSceneBuilderTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.668294" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1119" name="Scene_AssignsAllPersistentEnemyDefinitionsToEncounter" fullname="DungeonSceneBuilderTests.Scene_AssignsAllPersistentEnemyDefinitionsToEncounter" methodname="Scene_AssignsAllPersistentEnemyDefinitionsToEncounter" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="1616838177" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.255874" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1117" name="Scene_PlayerHasDashComponent" fullname="DungeonSceneBuilderTests.Scene_PlayerHasDashComponent" methodname="Scene_PlayerHasDashComponent" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="479930266" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.204682" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1118" name="Scene_WiresDamageFlashToPlayerBody" fullname="DungeonSceneBuilderTests.Scene_WiresDamageFlashToPlayerBody" methodname="Scene_WiresDamageFlashToPlayerBody" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="781871953" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.206459" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1120" name="EnemyDefinitionTests" fullname="EnemyDefinitionTests" classname="EnemyDefinitionTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.065439" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1121" name="Configure_AllowsSharedBehaviorWithDifferentVisualsAndStats" fullname="EnemyDefinitionTests.Configure_AllowsSharedBehaviorWithDifferentVisualsAndStats" methodname="Configure_AllowsSharedBehaviorWithDifferentVisualsAndStats" classname="EnemyDefinitionTests" runstate="Runnable" seed="1559171445" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.002652" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1122" name="Configure_ClampsInvalidNumericValues" fullname="EnemyDefinitionTests.Configure_ClampsInvalidNumericValues" methodname="Configure_ClampsInvalidNumericValues" classname="EnemyDefinitionTests" runstate="Runnable" seed="244167392" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.000298" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1123" name="ConfigurePresentation_StoresValuesAndClampsInvalidInputs" fullname="EnemyDefinitionTests.ConfigurePresentation_StoresValuesAndClampsInvalidInputs" methodname="ConfigurePresentation_StoresValuesAndClampsInvalidInputs" classname="EnemyDefinitionTests" runstate="Runnable" seed="1335457687" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.000199" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1124" name="SpawnRequest_PreservesPerInstanceValues" fullname="EnemyDefinitionTests.SpawnRequest_PreservesPerInstanceValues" methodname="SpawnRequest_PreservesPerInstanceValues" classname="EnemyDefinitionTests" runstate="Runnable" seed="1338593307" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.000974" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1125" name="EnemyFactoryTests" fullname="EnemyFactoryTests" classname="EnemyFactoryTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.012265" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1127" name="Create_ApproachAndShootBuildsSharedBodyAndOnlyRangedController" fullname="EnemyFactoryTests.Create_ApproachAndShootBuildsSharedBodyAndOnlyRangedController" methodname="Create_ApproachAndShootBuildsSharedBodyAndOnlyRangedController" classname="EnemyFactoryTests" runstate="Runnable" seed="453325417" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.005788" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1126" name="Create_ChaseContactBuildsSharedBodyVisualAndContactController" fullname="EnemyFactoryTests.Create_ChaseContactBuildsSharedBodyVisualAndContactController" methodname="Create_ChaseContactBuildsSharedBodyVisualAndContactController" classname="EnemyFactoryTests" runstate="Runnable" seed="2038977491" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.001011" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-suite type="ParameterizedMethod" id="1134" name="Create_InvalidRangedProjectileDataThrowsDefinitionArgumentException" fullname="EnemyFactoryTests.Create_InvalidRangedProjectileDataThrowsDefinitionArgumentException" classname="EnemyFactoryTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.002430" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-case id="1132" name="Create_InvalidRangedProjectileDataThrowsDefinitionArgumentException(False,8.0f)" fullname="EnemyFactoryTests.Create_InvalidRangedProjectileDataThrowsDefinitionArgumentException(False,8.0f)" methodname="Create_InvalidRangedProjectileDataThrowsDefinitionArgumentException" classname="EnemyFactoryTests" runstate="Runnable" seed="2043295312" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.001627" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+          <test-case id="1133" name="Create_InvalidRangedProjectileDataThrowsDefinitionArgumentException(True,0.0f)" fullname="EnemyFactoryTests.Create_InvalidRangedProjectileDataThrowsDefinitionArgumentException(True,0.0f)" methodname="Create_InvalidRangedProjectileDataThrowsDefinitionArgumentException" classname="EnemyFactoryTests" runstate="Runnable" seed="411088622" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.000192" asserts="0">
+            <properties>
+              <property name="retryIteration" value="0" />
+              <property name="repeatIteration" value="0" />
+            </properties>
+          </test-case>
+        </test-suite>
+        <test-case id="1131" name="Create_MissingBodySpriteThrowsDefinitionArgumentException" fullname="EnemyFactoryTests.Create_MissingBodySpriteThrowsDefinitionArgumentException" methodname="Create_MissingBodySpriteThrowsDefinitionArgumentException" classname="EnemyFactoryTests" runstate="Runnable" seed="1274734948" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.000249" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1128" name="Create_NullDefinitionThrowsNamedArgumentNullException" fullname="EnemyFactoryTests.Create_NullDefinitionThrowsNamedArgumentNullException" methodname="Create_NullDefinitionThrowsNamedArgumentNullException" classname="EnemyFactoryTests" runstate="Runnable" seed="427698086" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.000313" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1129" name="Create_NullRequestThrowsNamedArgumentNullException" fullname="EnemyFactoryTests.Create_NullRequestThrowsNamedArgumentNullException" methodname="Create_NullRequestThrowsNamedArgumentNullException" classname="EnemyFactoryTests" runstate="Runnable" seed="1821723508" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.000304" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1130" name="Create_NullTargetThrowsNamedArgumentNullException" fullname="EnemyFactoryTests.Create_NullTargetThrowsNamedArgumentNullException" methodname="Create_NullTargetThrowsNamedArgumentNullException" classname="EnemyFactoryTests" runstate="Runnable" seed="1347267809" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.000406" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1453" name="StationaryFourWayShooterControllerTests" fullname="StationaryFourWayShooterControllerTests" classname="StationaryFourWayShooterControllerTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.006236" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1455" name="EnemyFactory_StationaryFourWayShootAddsOnlyStationaryController" fullname="StationaryFourWayShooterControllerTests.EnemyFactory_StationaryFourWayShootAddsOnlyStationaryController" methodname="EnemyFactory_StationaryFourWayShootAddsOnlyStationaryController" classname="StationaryFourWayShooterControllerTests" runstate="Runnable" seed="1554505470" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.001512" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1454" name="TryAttack_WaitsOneIntervalThenFiresFourOrientedCardinalProjectiles" fullname="StationaryFourWayShooterControllerTests.TryAttack_WaitsOneIntervalThenFiresFourOrientedCardinalProjectiles" methodname="TryAttack_WaitsOneIntervalThenFiresFourOrientedCardinalProjectiles" classname="StationaryFourWayShooterControllerTests" runstate="Runnable" seed="548153420" result="Passed" start-time="2026-08-04 08:30:23Z" end-time="2026-08-04 08:30:23Z" duration="0.003901" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

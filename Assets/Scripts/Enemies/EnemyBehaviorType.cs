@@ -1,5 +1,6 @@
 public enum EnemyBehaviorType
 {
     ChaseContact,
-    ApproachAndShoot
+    ApproachAndShoot,
+    StationaryFourWayShoot
 }

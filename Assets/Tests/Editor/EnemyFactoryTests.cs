@@ -81,6 +81,7 @@ public sealed class EnemyFactoryTests
         Sprite projectileSprite = CreateSprite(Color.yellow);
         EnemyDefinition definition = CreateDefinition(
             EnemyBehaviorType.ApproachAndShoot, bodySprite, projectileSprite, 11, 4f);
+        definition.ConfigurePresentation(3f, 1.1f);
 
         EnemyHealth health = EnemyFactory.Create(
             definition,
@@ -90,12 +91,17 @@ public sealed class EnemyFactoryTests
         Assert.That(root.name, Is.EqualTo("Test Enemy"));
         Assert.That(health.MaxHealth, Is.EqualTo(11));
         Assert.That(root.GetComponent<Rigidbody2D>(), Is.Not.Null);
-        Assert.That(root.GetComponent<CircleCollider2D>(), Is.Not.Null);
+        CircleCollider2D bodyCollider = root.GetComponent<CircleCollider2D>();
+        Assert.That(bodyCollider, Is.Not.Null);
+        Assert.That(bodyCollider.radius, Is.EqualTo(1.1f));
         Assert.That(root.GetComponent<ApproachAndShootEnemyController>(), Is.Not.Null);
         Assert.That(root.GetComponent<ChaseContactEnemyController>(), Is.Null);
         Assert.That(
             root.GetComponentInChildren<SpriteRenderer>().sprite,
             Is.SameAs(bodySprite));
+        Assert.That(
+            root.GetComponentInChildren<SpriteRenderer>().bounds.size.y,
+            Is.EqualTo(3f).Within(0.001f));
     }
 
     [Test]

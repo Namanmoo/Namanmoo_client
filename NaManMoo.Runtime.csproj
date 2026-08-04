@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Dungeon\DungeonNavigation.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemySpawnRequest.cs" />
     <Compile Include="Assets\Scripts\Items\WeaponFactory.cs" />
+    <Compile Include="Assets\Scripts\Enemies\SlimeFallMaker.cs" />
     <Compile Include="Assets\Scripts\Forge\WhiteBackgroundKey.cs" />
     <Compile Include="Assets\Scripts\Dungeon\RoomShape.cs" />
     <Compile Include="Assets\Scripts\Forge\WeaponForgeController.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Assets\Scripts\Items\ItemData.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerDeathScreenUIFactory.cs" />
     <Compile Include="Assets\Scripts\Stage1ItemHotbarSetup.cs" />
+    <Compile Include="Assets\Scripts\Enemies\SlimeBossFactory.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyBehaviorType.cs" />
     <Compile Include="Assets\Scripts\Combat\SwordProjectile.cs" />
     <Compile Include="Assets\Scripts\Combat\PlayerWeaponController.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="Assets\Scripts\Enemies\EnemyFactory.cs" />
     <Compile Include="Assets\Scripts\Enemies\KrabEnemy.cs" />
     <Compile Include="Assets\Scripts\Items\ItemHotbarController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\StationaryFourWayShooterController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerDash.cs" />
     <Compile Include="Assets\Scripts\UI\ScreenRectOf.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerFactory.cs" />
@@ -100,6 +103,7 @@
     <Compile Include="Assets\Scripts\Forge\WeaponVaultController.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonDoor.cs" />
     <Compile Include="Assets\Scripts\UI\BossHealthBarUIFactory.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerDamageFlash.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerDashChargeUIFactory.cs" />
     <Compile Include="Assets\Scripts\Items\SampleWeaponFactory.cs" />
     <Compile Include="Assets\Scripts\Combat\AxeSwing.cs" />
@@ -113,6 +117,7 @@
     <Compile Include="Assets\Scripts\Stage1MapDefinition.cs" />
     <Compile Include="Assets\Scripts\Enemies\KrabFactory.cs" />
     <Compile Include="Assets\Scripts\Forge\WeaponVaultClient.cs" />
+    <Compile Include="Assets\Scripts\Enemies\SlimeBossController.cs" />
     <Compile Include="Assets\Scripts\Items\WeaponDefinition.cs" />
     <Compile Include="Assets\Scripts\Forge\ForgeClient.cs" />
     <Compile Include="Assets\Scripts\Stage1BossEncounterSetup.cs" />
@@ -121,13 +126,16 @@
     <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
     <Compile Include="Assets\Scripts\Combat\PlayerAxeAttacker.cs" />
     <Compile Include="Assets\Scripts\Enemies\ApproachAndShootEnemyController.cs" />
+    <Compile Include="Assets\Scripts\UI\PlayerDeathScreenRuntimeBinder.cs" />
     <Compile Include="Assets\Scripts\Dungeon\MinimapView.cs" />
+    <Compile Include="Assets\Scripts\Enemies\SlimeBossProjectile.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonEncounter.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerWeaponVisual.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Combat\PlayerSwordShooter.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerDeathScreenView.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyProjectile.cs" />
+    <Compile Include="Assets\Scripts\Enemies\SlimeBossDefinition.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DeterministicRandom.cs" />
     <Compile Include="Assets\Scripts\Dungeon\RoomBuilder.cs" />
     <Compile Include="Assets\Scripts\Forge\DrawingFill.cs" />

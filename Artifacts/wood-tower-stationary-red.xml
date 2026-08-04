@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-04 08:00:25Z" end-time="2026-08-04 08:00:25Z" duration="0.0409869">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="425" result="Failed" site="Child" start-time="2026-08-04 08:00:25Z" end-time="2026-08-04 08:00:25Z" duration="0.040987" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1510" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="425" result="Failed" site="Child" start-time="2026-08-04 08:00:25Z" end-time="2026-08-04 08:00:25Z" duration="0.032355" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="3704" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1451" name="StationaryFourWayShooterControllerTests" fullname="StationaryFourWayShooterControllerTests" classname="StationaryFourWayShooterControllerTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-08-04 08:00:25Z" end-time="2026-08-04 08:00:25Z" duration="0.028568" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1453" name="EnemyFactory_StationaryFourWayShootAddsOnlyStationaryController" fullname="StationaryFourWayShooterControllerTests.EnemyFactory_StationaryFourWayShootAddsOnlyStationaryController" methodname="EnemyFactory_StationaryFourWayShootAddsOnlyStationaryController" classname="StationaryFourWayShooterControllerTests" runstate="Runnable" seed="1475989632" result="Failed" start-time="2026-08-04 08:00:25Z" end-time="2026-08-04 08:00:25Z" duration="0.020148" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: FreezeAll
+  But was:  FreezeRotation
+]]></message>
+            <stack-trace><![CDATA[at StationaryFourWayShooterControllerTests.EnemyFactory_StationaryFourWayShootAddsOnlyStationaryController () [0x00085] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\StationaryFourWayShooterControllerTests.cs:88
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
