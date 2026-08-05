@@ -85,6 +85,26 @@ public sealed class WeaponProjectilePierceTests
     }
 
     [Test]
+    public void HittingAChaseEnemyAppliesKnockbackOppositeTheTravelDirection()
+    {
+        ExpectEditModeDestroyError();
+        WeaponProjectile projectile = Spawn();
+        var enemyObject = new GameObject("enemy");
+        var collider = enemyObject.AddComponent<CircleCollider2D>();
+        EnemyHealth enemyHealth = enemyObject.AddComponent<EnemyHealth>();
+        enemyHealth.Configure(100);
+        enemyObject.AddComponent<ChaseContactEnemyController>();
+
+        Assert.That(projectile.TryHit(collider), Is.True);
+
+        EnemyStatus status = enemyObject.GetComponent<EnemyStatus>();
+        Assert.That(status, Is.Not.Null);
+        Assert.That(status.IsKnockedBack, Is.True);
+
+        Object.DestroyImmediate(enemyObject);
+    }
+
+    [Test]
     public void PierceLetsTheProjectileHitSeveralEnemies()
     {
         ExpectEditModeDestroyError();

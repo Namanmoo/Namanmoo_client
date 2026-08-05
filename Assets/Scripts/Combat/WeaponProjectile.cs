@@ -228,6 +228,7 @@ public sealed class WeaponProjectile : MonoBehaviour
         }
 
         health.TakeDamage(definition.Damage);
+        EnemyKnockback.Apply(health, direction);
         // 죽음 판정은 피해 적용 후 — on_kill이 여기서 갈린다
         effectRunner?.NotifyHit(health, transform.position, direction);
 
