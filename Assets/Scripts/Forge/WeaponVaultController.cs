@@ -249,9 +249,14 @@ public sealed class WeaponVaultController : MonoBehaviour
                     ? StageNames[weapon.stage]
                     : weapon.stage.ToString();
                 string effects = WeaponSummary.Effects(loadout);
-                cardDetails[index].text = string.IsNullOrEmpty(effects)
+                string detail = string.IsNullOrEmpty(effects)
                     ? $"{stage} · {WeaponSummary.Headline(loadout)}\n{WeaponSummary.Stats(loadout)}"
                     : $"{stage} · {WeaponSummary.Headline(loadout)}\n{WeaponSummary.Stats(loadout)}\n효과: {effects}";
+
+                // 플레이버는 카드에서 유일하게 무기마다 다른 문장 — 맨 위에 둔다
+                cardDetails[index].text = string.IsNullOrWhiteSpace(weapon.flavor)
+                    ? detail
+                    : weapon.flavor.Trim() + "\n" + detail;
             }
 
             if (cardImages[index] != null)
