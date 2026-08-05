@@ -25,6 +25,7 @@ public static class EnemyFactory
         CreateVisual(root.transform, definition);
         ConfigurePhysics(root, definition);
 
+        root.AddComponent<EnemyDamageFlash>();
         EnemyHealth health = root.AddComponent<EnemyHealth>();
         health.Configure(definition.MaxHealth);
 

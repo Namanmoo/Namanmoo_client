@@ -39,8 +39,8 @@ public static class DungeonSceneBuilder
         Sprite axeSprite = Require(AxeSpritePath);
         Sprite hotbarBackground = Require(ItemHotbarBackgroundPath);
         Sprite healthHeart = Require(PlayerHealthHeartPath);
-        SlimeBossDefinition slimeBossDefinition =
-            DungeonSlimeBossAssetBuilder.BuildDefinition();
+        SultanBossDefinition sultanBossDefinition =
+            DungeonSultanBossAssetBuilder.BuildDefinition();
         EnemyDefinition[] normalEnemyDefinitions =
             DungeonEnemyAssetBuilder.BuildDefinitions();
 
@@ -65,7 +65,7 @@ public static class DungeonSceneBuilder
         DungeonRunner runner = CreateRunner(
             player.transform,
             normalEnemyDefinitions,
-            slimeBossDefinition);
+            sultanBossDefinition);
         CreateMinimap(runner);
 
         EditorSceneManager.MarkSceneDirty(scene);
@@ -108,13 +108,13 @@ public static class DungeonSceneBuilder
     private static DungeonRunner CreateRunner(
         Transform player,
         EnemyDefinition[] normalEnemyDefinitions,
-        SlimeBossDefinition slimeBossDefinition)
+        SultanBossDefinition sultanBossDefinition)
     {
         var runnerObject = new GameObject("Dungeon");
         DungeonRunner runner = runnerObject.AddComponent<DungeonRunner>();
 
         DungeonEncounter encounter = runnerObject.AddComponent<DungeonEncounter>();
-        encounter.ConfigureSlimeBoss(normalEnemyDefinitions, slimeBossDefinition);
+        encounter.ConfigureSultanBoss(normalEnemyDefinitions, sultanBossDefinition);
 
         // 시드는 런너가 실행할 때 뽑는다. 여기서 뽑으면 씬에 구워져 매번 같은 층이 된다.
         runner.ConfigurePlayer(player, dungeonFloor: 1);

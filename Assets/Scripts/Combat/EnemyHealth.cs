@@ -7,6 +7,7 @@ public sealed class EnemyHealth : MonoBehaviour
     private int maxHealth = 20;
 
     private bool deathReported;
+    private EnemyDamageFlash damageFlash;
 
     public event Action<EnemyHealth> Died;
     public event Action<int, int> HealthChanged;
@@ -18,6 +19,7 @@ public sealed class EnemyHealth : MonoBehaviour
     private void Awake()
     {
         CurrentHealth = maxHealth;
+        damageFlash = GetComponent<EnemyDamageFlash>();
     }
 
     public void Configure(int maximumHealth)
@@ -41,6 +43,7 @@ public sealed class EnemyHealth : MonoBehaviour
         }
 
         CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
+        damageFlash?.Flash();
         HealthChanged?.Invoke(CurrentHealth, MaxHealth);
         if (CurrentHealth == 0)
         {
