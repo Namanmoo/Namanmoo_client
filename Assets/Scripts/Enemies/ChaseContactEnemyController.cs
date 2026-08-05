@@ -41,8 +41,10 @@ public sealed class ChaseContactEnemyController : MonoBehaviour
         }
 
         Vector2 offsetToTarget = (Vector2)target.position - body.position;
+        // 냉기·경직 배율 — 상태이상이 없으면 1이라 원래 속도 그대로다
+        float statusScale = EnemyStatus.SpeedMultiplierOf(gameObject);
         body.MovePosition(
-            body.position + CalculateVelocity(offsetToTarget) * Time.fixedDeltaTime);
+            body.position + CalculateVelocity(offsetToTarget) * statusScale * Time.fixedDeltaTime);
     }
 
     public Vector2 CalculateVelocity(Vector2 offsetToTarget)

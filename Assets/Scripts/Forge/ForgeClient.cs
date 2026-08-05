@@ -98,7 +98,7 @@ public sealed class ForgeClient
             yield break;
         }
 
-        if (parsed == null || parsed.stats == null)
+        if (parsed == null || parsed.weapon == null)
         {
             onError?.Invoke("서버 응답에 무기 정보가 없습니다.");
             yield break;

@@ -15,7 +15,8 @@ public sealed class SavedWeaponDto
     /// <summary>어떤 AI 개입 단계로 만들었는지 (0/1/2)</summary>
     public int stage;
 
-    public ForgeStatsDto stats;
+    /// <summary>분류·스탯·궤도·효과. 저장한 무기를 그대로 되살리려면 통째로 필요하다.</summary>
+    public ForgeWeaponDto weapon;
 
     /// <summary>ISO8601 UTC</summary>
     public string createdAt;
@@ -87,7 +88,7 @@ public sealed class WeaponVaultClient
         string name,
         string flavor,
         int stage,
-        WeaponStats stats,
+        ForgeWeaponDto weapon,
         Action<SavedWeaponDto> onSuccess,
         Action<string> onError)
     {
@@ -97,16 +98,20 @@ public sealed class WeaponVaultClient
             yield break;
         }
 
+        if (weapon == null)
+        {
+            onError?.Invoke("저장할 무기 정보가 없습니다.");
+            yield break;
+        }
+
         var sections = new List<IMultipartFormSection>
         {
             new MultipartFormFileSection("image", imagePng, "weapon.png", "image/png"),
             // MultipartFormDataSection은 빈 문자열을 거부한다 — 비어 있을 수 있는 값은 걸러 넣는다
             new MultipartFormDataSection("name", Fallback(name, "만든 무기")),
             new MultipartFormDataSection("stage", Mathf.Clamp(stage, 0, ForgeClient.MaxStage).ToString()),
-            new MultipartFormDataSection("damage", stats.Damage.ToString()),
-            new MultipartFormDataSection("shotsPerSecond", Number(stats.ShotsPerSecond)),
-            new MultipartFormDataSection("projectileSpeed", Number(stats.ProjectileSpeed)),
-            new MultipartFormDataSection("lifetime", Number(stats.Lifetime))
+            // 스탯 키가 분류마다 달라 폼 필드로 펼칠 수 없다 — 무기를 통째로 JSON으로 보낸다
+            new MultipartFormDataSection("weapon", JsonUtility.ToJson(weapon))
         };
 
         if (!string.IsNullOrWhiteSpace(flavor))

@@ -106,7 +106,12 @@ public sealed class WeaponVaultController : MonoBehaviour
         // 씬을 넘어가는 동안 텍스처가 지워지지 않게 소유권을 넘긴다
         textures.Remove(weapon.id);
 
-        ForgedWeapon.Set(sprite, WeaponStats.FromDto(weapon.stats), weapon.name, weapon.stage);
+        ForgedWeapon.Set(
+            sprite,
+            ForgeWeaponAssembler.FromDto(weapon.weapon, sprite, weapon.name),
+            weapon.weapon,
+            weapon.name,
+            weapon.stage);
         SceneManager.LoadScene(PlayScenePath);
     }
 
@@ -238,12 +243,15 @@ public sealed class WeaponVaultController : MonoBehaviour
 
             if (cardDetails[index] != null)
             {
-                WeaponStats stats = WeaponStats.FromDto(weapon.stats);
+                WeaponLoadout loadout =
+                    ForgeWeaponAssembler.FromDto(weapon.weapon, null, weapon.name);
                 string stage = weapon.stage >= 0 && weapon.stage < StageNames.Length
                     ? StageNames[weapon.stage]
                     : weapon.stage.ToString();
-                cardDetails[index].text =
-                    $"{stage}\n공격력 {stats.Damage}  연사 {stats.ShotsPerSecond:0.##}";
+                string effects = WeaponSummary.Effects(loadout);
+                cardDetails[index].text = string.IsNullOrEmpty(effects)
+                    ? $"{stage} · {WeaponSummary.Headline(loadout)}\n{WeaponSummary.Stats(loadout)}"
+                    : $"{stage} · {WeaponSummary.Headline(loadout)}\n{WeaponSummary.Stats(loadout)}\n효과: {effects}";
             }
 
             if (cardImages[index] != null)

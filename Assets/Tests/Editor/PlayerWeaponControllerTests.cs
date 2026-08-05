@@ -87,6 +87,41 @@ public sealed class PlayerWeaponControllerTests : InputTestFixture
         }
     }
 
+    [Test]
+    public void SwingArc_MatchesTheHitJudgementOfEachMeleeDelivery()
+    {
+        WeaponDefinition sword = CreateDefinition(
+            WeaponCategory.Melee, WeaponType.Sword, 0.6f, 0.2f);
+
+        // 그림과 판정이 어긋나면 안 된다 — 휘두른 만큼만 맞아야 한다
+        Assert.That(
+            PlayerWeaponController.SwingArcFor("swing", sword), Is.EqualTo(sword.AttackArc));
+        Assert.That(
+            PlayerWeaponController.SwingArcFor("thrust", sword),
+            Is.EqualTo(ThrustDelivery.ThrustArc));
+        Assert.That(PlayerWeaponController.SwingArcFor("spin", sword), Is.EqualTo(360f));
+        Assert.That(
+            PlayerWeaponController.SwingArcFor("blade_wave", sword),
+            Is.EqualTo(sword.AttackArc));
+    }
+
+    [Test]
+    public void SwingDuration_ShrinksWithFastAttacksAndNeverExceedsTheCap()
+    {
+        WeaponDefinition slow = CreateDefinition(
+            WeaponCategory.Melee, WeaponType.Sword, 1f, 0.2f);
+        WeaponDefinition fast = CreateDefinition(
+            WeaponCategory.Melee, WeaponType.Sword, 0.1f, 0.2f);
+
+        Assert.That(
+            PlayerWeaponController.SwingSecondsFor(slow),
+            Is.EqualTo(PlayerWeaponController.MaxSwingSeconds).Within(0.001f));
+        // 다음 공격 전에 팔이 제자리로 돌아와야 한다
+        Assert.That(
+            PlayerWeaponController.SwingSecondsFor(fast),
+            Is.LessThan(fast.AttackInterval));
+    }
+
     private WeaponDefinition CreateDefinition(
         WeaponCategory category, WeaponType type, float interval, float radius)
     {
