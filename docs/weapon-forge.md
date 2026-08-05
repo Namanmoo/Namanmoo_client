@@ -1,8 +1,11 @@
 # 무기 만들기 (Weapon Forge)
 
 `게임 시작 → 무기 만들기 → Stage1` 흐름의 가운데 화면. 플레이어가 무기를 직접 그리고,
-"추가 설정" 텍스트를 붙이면 AI가 둘을 보고 **스탯**을 정한다. 무기 그림은 **슬라이더로
-AI 개입 단계를 골라** 만든다.
+"추가 설정" 텍스트를 붙이면 AI가 둘을 보고 **무기 전체를 3축으로** 정한다 —
+분류(근접/원거리) × 궤도(직선·유도·부메랑·검기 등 9종) × 효과(화염·관통·흡혈 등 10종).
+고를 수 있는 것의 전부가 **무기 카탈로그**(백엔드 `app/forge/weapon-catalog.json`이 원본,
+`Assets/Resources/weapon-catalog.json`은 `tools/sync-catalog.py`로 맞춘 사본)에 있고,
+AI는 그 안에서 조합만 고른다. 무기 그림은 **슬라이더로 AI 개입 단계를 골라** 만든다.
 
 | 단계 | 그림 | 만드는 곳 |
 | --- | --- | --- |
@@ -14,7 +17,12 @@ AI 개입 단계를 골라** 만든다.
 확인 화면에서 "이걸로 하기" 또는 "다시 그리기"를 고른다.
 
 확정한 무기는 인벤토리 **3번 칸**에 들어간다(검·도끼는 그대로). 숫자 3을 눌러 장착하면
-그 그림이 발사체가 되고, AI가 정한 공격력·연사·탄속·사거리가 적용된다.
+AI가 정한 분류대로 움직인다 — 원거리는 그 그림이 발사체가 되고, 근접은 그 그림을 휘두른다.
+궤도와 효과는 `PlayerWeaponController`가 `DeliveryRegistry`/`EffectRegistry`에서 찾아 실행한다.
+
+효과·궤도를 **덜어내거나 더할 때 고치는 곳은 세 곳**이다: 백엔드 카탈로그 JSON(+동기화),
+구현 파일(`Assets/Scripts/Combat/{Effects,Deliveries}/`), 레지스트리 등록 한 줄.
+하나라도 빠뜨리면 `WeaponCatalogParityTests`가 잡는다.
 
 ## 무기고
 
@@ -106,10 +114,12 @@ Tools → NaManMoo → Build Weapon Forge
   `Image`다. 이렇게 해야 내보낸 PNG에 알파가 남아 스프라이트로 바로 쓸 수 있다.
 - **한글 폰트**: WebGL은 OS 폰트를 쓸 수 없어 한글이 깨진다. `Assets/Fonts/Gaegu-Regular.ttf`
   (OFL, AIGame에서 가져옴)를 프로젝트에 넣고 UI Text가 직접 참조한다.
-- **스탯 검증이 두 곳에 있다.** 백엔드 `app/forge/clamp.py`와 클라이언트 `WeaponStats`가
-  같은 범위를 갖는다. 범위를 바꾸면 **양쪽을 함께** 고쳐야 한다.
+- **검증이 두 곳에 있다.** 백엔드 `app/forge/clamp.py`와 클라이언트 `ForgeWeaponAssembler`가
+  둘 다 카탈로그로 응답을 조인다. 범위는 카탈로그 한 곳에만 있으므로 값을 바꾸면
+  `tools/sync-catalog.py`로 사본을 맞추기만 하면 된다.
 - **생성 이미지 배경 제거**는 가장자리에서 시작하는 플러드 필이다. 무기 안쪽의 흰
   하이라이트는 남기고 바깥과 이어진 흰색만 지운다. 음영이 강한 아트에서는 거칠 수 있고,
   그러면 서버에 제대로 된 누끼(rembg)를 붙이는 편이 낫다.
-- `PlayerSwordShooter`는 이제 슬롯 번호가 아니라 **장착된 아이템**으로 발사 여부를
-  판단한다(`IsProjectileWeapon`). 검은 인스펙터 값을, 만든 무기는 `ItemData.Stats`를 쓴다.
+- 공격 경로가 갈린다 — 기본 검은 `PlayerSwordShooter`(인스펙터 값), 만든 무기는
+  `PlayerWeaponController`(`ItemData.Loadout`의 정의·궤도·효과). 만든 무기가 근접일 수도
+  있어서 스탯 4개만 아는 옛 경로로는 표현할 수 없었다.

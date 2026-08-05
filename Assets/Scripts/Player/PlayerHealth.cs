@@ -44,6 +44,18 @@ public sealed class PlayerHealth : MonoBehaviour
         TryTakeDamage(amount, Time.time, 1f);
     }
 
+    /// <summary>회복 — 최대 체력을 넘지 않는다. 흡혈 효과가 쓴다.</summary>
+    public void Heal(int amount)
+    {
+        if (amount <= 0 || CurrentHealth <= 0 || CurrentHealth >= maxHealth)
+        {
+            return;
+        }
+
+        CurrentHealth = Mathf.Min(maxHealth, CurrentHealth + amount);
+        HealthChanged?.Invoke(CurrentHealth, MaxHealth);
+    }
+
     public bool TryTakeDamage(
         int amount,
         float currentTime,
