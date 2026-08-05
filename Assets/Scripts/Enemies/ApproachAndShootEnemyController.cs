@@ -4,10 +4,12 @@ using UnityEngine;
 public sealed class ApproachAndShootEnemyController : MonoBehaviour
 {
     private const string ProjectileName = "Enemy Projectile";
+    private const string SquirrelId = "squirrel";
     private const string ContactSensorName = "Contact Sensor";
     private const int ContactDamage = 2;
     private const float PlayerInvulnerabilityDuration = 1f;
     private const float DefaultSensorRadius = 0.5f;
+    private const float ProjectileRotationSpeed = 720f;
 
     private EnemyDefinition definition;
     private Transform target;
@@ -96,7 +98,8 @@ public sealed class ApproachAndShootEnemyController : MonoBehaviour
             definition.AttackDamage,
             definition.ProjectileSpeed,
             definition.ProjectileLifetime,
-            definition.ProjectileRadius);
+            definition.ProjectileRadius,
+            definition.Id == SquirrelId ? ProjectileRotationSpeed : 0f);
 
         nextAttackTime = currentTime + definition.AttackInterval;
         return true;

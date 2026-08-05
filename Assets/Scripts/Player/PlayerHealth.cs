@@ -9,6 +9,7 @@ public sealed class PlayerHealth : MonoBehaviour
     private float invulnerableUntil;
 
     public event Action<int, int> HealthChanged;
+    public event Action<float> Damaged;
     public event Action Died;
 
     public int CurrentHealth { get; private set; }
@@ -26,9 +27,15 @@ public sealed class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
-        if (!CompareTag("Player") ||
+        if (!CompareTag("Player"))
+        {
+            return;
+        }
+
+        PlayerDeathScreen existingScreen =
             UnityEngine.Object.FindAnyObjectByType<PlayerDeathScreen>(
-                FindObjectsInactive.Include) != null)
+                FindObjectsInactive.Include);
+        if (PlayerDeathScreenRuntimeBinder.TryBind(this, existingScreen))
         {
             return;
         }
@@ -74,6 +81,7 @@ public sealed class PlayerHealth : MonoBehaviour
 
         CurrentHealth = nextHealth;
         GrantInvulnerability(currentTime, invulnerabilityDuration);
+        Damaged?.Invoke(Mathf.Max(0f, invulnerableUntil - currentTime));
         HealthChanged?.Invoke(CurrentHealth, MaxHealth);
         if (CurrentHealth == 0)
         {

@@ -9,6 +9,8 @@ public sealed class EnemyDefinition : ScriptableObject
     [SerializeField] private Sprite projectileSprite;
     [SerializeField] private EnemyBehaviorType behaviorType;
     [SerializeField] private RuntimeAnimatorController animatorController;
+    [SerializeField, Min(0.01f)] private float visualHeight = 2f;
+    [SerializeField, Min(0.01f)] private float bodyCollisionRadius = 0.7f;
     [SerializeField, Min(1)] private int maxHealth = 1;
     [SerializeField, Min(0f)] private float moveSpeed;
     [SerializeField, Min(0)] private int attackDamage;
@@ -24,6 +26,8 @@ public sealed class EnemyDefinition : ScriptableObject
     public Sprite ProjectileSprite => projectileSprite;
     public EnemyBehaviorType BehaviorType => behaviorType;
     public RuntimeAnimatorController AnimatorController => animatorController;
+    public float VisualHeight => visualHeight;
+    public float BodyCollisionRadius => bodyCollisionRadius;
     public int MaxHealth => maxHealth;
     public float MoveSpeed => moveSpeed;
     public int AttackDamage => attackDamage;
@@ -64,6 +68,15 @@ public sealed class EnemyDefinition : ScriptableObject
         NormalizeValues();
     }
 
+    public void ConfigurePresentation(
+        float newVisualHeight,
+        float newBodyCollisionRadius)
+    {
+        visualHeight = newVisualHeight;
+        bodyCollisionRadius = newBodyCollisionRadius;
+        NormalizeValues();
+    }
+
     private void OnValidate()
     {
         NormalizeValues();
@@ -71,6 +84,8 @@ public sealed class EnemyDefinition : ScriptableObject
 
     private void NormalizeValues()
     {
+        visualHeight = Mathf.Max(0.01f, visualHeight);
+        bodyCollisionRadius = Mathf.Max(0.01f, bodyCollisionRadius);
         maxHealth = Mathf.Max(1, maxHealth);
         moveSpeed = Mathf.Max(0f, moveSpeed);
         attackDamage = Mathf.Max(0, attackDamage);

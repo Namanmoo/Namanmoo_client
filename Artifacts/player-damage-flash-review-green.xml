@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Passed" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-04 05:40:45Z" end-time="2026-08-04 05:40:47Z" duration="1.8961286">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="418" result="Passed" start-time="2026-08-04 05:40:45Z" end-time="2026-08-04 05:40:47Z" duration="1.896129" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1501" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="418" result="Passed" start-time="2026-08-04 05:40:45Z" end-time="2026-08-04 05:40:47Z" duration="1.888548" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="11552" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1254" name="PlayerDamageFlashTests" fullname="PlayerDamageFlashTests" classname="PlayerDamageFlashTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-08-04 05:40:45Z" end-time="2026-08-04 05:40:47Z" duration="1.884996" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1255" name="AcceptedDamage_FlashesBodyBlackAndRestoresOriginalColor" fullname="PlayerDamageFlashTests.AcceptedDamage_FlashesBodyBlackAndRestoresOriginalColor" methodname="AcceptedDamage_FlashesBodyBlackAndRestoresOriginalColor" classname="PlayerDamageFlashTests" runstate="Runnable" seed="1413586234" result="Passed" start-time="2026-08-04 05:40:45Z" end-time="2026-08-04 05:40:46Z" duration="0.878045" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1257" name="ReinitializeAfterDestroyedHealth_SubscribesToNewHealth" fullname="PlayerDamageFlashTests.ReinitializeAfterDestroyedHealth_SubscribesToNewHealth" methodname="ReinitializeAfterDestroyedHealth_SubscribesToNewHealth" classname="PlayerDamageFlashTests" runstate="Runnable" seed="286295540" result="Passed" start-time="2026-08-04 05:40:46Z" end-time="2026-08-04 05:40:46Z" duration="0.434602" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1256" name="RejectedDamage_DoesNotRestartFlash" fullname="PlayerDamageFlashTests.RejectedDamage_DoesNotRestartFlash" methodname="RejectedDamage_DoesNotRestartFlash" classname="PlayerDamageFlashTests" runstate="Runnable" seed="1839091131" result="Passed" start-time="2026-08-04 05:40:46Z" end-time="2026-08-04 05:40:47Z" duration="0.563267" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

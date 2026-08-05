@@ -94,4 +94,20 @@ public class EnemyHealthTests
 
         yield return new ExitPlayMode();
     }
+
+    [UnityTest]
+    public IEnumerator InvulnerableEnemy_IgnoresDamageUntilInvulnerabilityEnds()
+    {
+        yield return new EnterPlayMode();
+        var enemy = new GameObject("Enemy");
+        EnemyHealth health = enemy.AddComponent<EnemyHealth>();
+        health.SetInvulnerable(true);
+        health.TakeDamage(5);
+        Assert.That(health.CurrentHealth, Is.EqualTo(20));
+        health.SetInvulnerable(false);
+        health.TakeDamage(5);
+        Assert.That(health.CurrentHealth, Is.EqualTo(15));
+        Object.Destroy(enemy);
+        yield return new ExitPlayMode();
+    }
 }
