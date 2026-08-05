@@ -93,7 +93,7 @@ public sealed class PlayerAxeAttacker : MonoBehaviour
         body.gravityScale = 0f;
 
         AxeSwing swing = swingObject.AddComponent<AxeSwing>();
-        swing.Initialize(gameObject, damage, swingDuration);
+        swing.Initialize(gameObject, damage, swingDuration, direction);
 
         var visualObject = new GameObject("Axe Visual");
         visualObject.transform.SetParent(swingObject.transform, false);

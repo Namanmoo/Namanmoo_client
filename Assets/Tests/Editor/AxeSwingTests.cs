@@ -57,6 +57,28 @@ public class AxeSwingTests
     }
 
     [UnityTest]
+    public IEnumerator TryHit_AppliesKnockbackOppositeTheSwingDirection()
+    {
+        yield return new EnterPlayMode();
+        AxeSwing swing = CreateSwing();
+        swing.Initialize(null, 10, 0.45f, Vector2.right);
+        var enemy = new GameObject("Enemy");
+        Collider2D collider = enemy.AddComponent<BoxCollider2D>();
+        enemy.AddComponent<EnemyHealth>();
+        enemy.AddComponent<ChaseContactEnemyController>();
+
+        Assert.That(swing.TryHit(collider), Is.True);
+
+        EnemyStatus status = enemy.GetComponent<EnemyStatus>();
+        Assert.That(status, Is.Not.Null);
+        Assert.That(status.IsKnockedBack, Is.True);
+
+        Object.Destroy(swing.gameObject);
+        Object.Destroy(enemy);
+        yield return new ExitPlayMode();
+    }
+
+    [UnityTest]
     public IEnumerator TryHit_IgnoresOwnerChildrenAndNonEnemies()
     {
         yield return new EnterPlayMode();
