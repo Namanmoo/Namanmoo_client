@@ -60,6 +60,9 @@ public sealed class EnemyStatus : MonoBehaviour
     public bool IsKnockedBack => knockbackRemaining > 0f;
     public int PoisonStacks => poisonStacks;
 
+    /// <summary>넉백 진행 중의 이동 속도. 진행 중이 아니면 0. 이동 스크립트가 자기 MovePosition에 더해서 쓴다.</summary>
+    public Vector2 KnockbackVelocity => knockbackRemaining > 0f ? knockbackVelocity : Vector2.zero;
+
     /// <summary>쌓인 소수 피해. 1을 넘으면 정수만큼 적용하고 나머지를 남긴다.</summary>
     private float pendingDamage;
 
@@ -90,6 +93,18 @@ public sealed class EnemyStatus : MonoBehaviour
 
         EnemyStatus status = target.GetComponent<EnemyStatus>();
         return status != null ? status.SpeedMultiplier : 1f;
+    }
+
+    /// <summary>이동 스크립트가 자기 MovePosition 델타에 더할 값. 상태이상이 없으면 0이다.</summary>
+    public static Vector2 KnockbackVelocityOf(GameObject target)
+    {
+        if (target == null)
+        {
+            return Vector2.zero;
+        }
+
+        EnemyStatus status = target.GetComponent<EnemyStatus>();
+        return status != null ? status.KnockbackVelocity : Vector2.zero;
     }
 
     /// <summary>화염 — 겹쳐 걸면 센 쪽으로 갱신된다(중첩이 아니라 덮어쓰기).</summary>
@@ -144,7 +159,7 @@ public sealed class EnemyStatus : MonoBehaviour
         staggerRemaining = Mathf.Max(staggerRemaining, duration);
     }
 
-    /// <summary>넉백 — 공격 반대 방향으로 짧게 밀어낸다. 다시 걸리면 최신 값으로 덮어쓴다.</summary>
+    /// <summary>넉백 — 받은 방향(공격자 반대쪽)으로 짧게 밀어낸다. 다시 걸리면 최신 값으로 덮어쓴다.</summary>
     public void ApplyKnockback(Vector2 direction, float distance, float duration)
     {
         if (direction == Vector2.zero || distance <= 0f || duration <= 0f)
@@ -174,9 +189,7 @@ public sealed class EnemyStatus : MonoBehaviour
 
         if (knockbackRemaining > 0f)
         {
-            float knockbackSlice = Mathf.Min(deltaTime, knockbackRemaining);
-            transform.position += (Vector3)(knockbackVelocity * knockbackSlice);
-            knockbackRemaining -= knockbackSlice;
+            knockbackRemaining = Mathf.Max(0f, knockbackRemaining - deltaTime);
         }
 
         if (burnRemaining > 0f)

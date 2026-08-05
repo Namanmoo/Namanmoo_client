@@ -36,6 +36,9 @@ public sealed class EnemyKnockbackTests
         EnemyStatus status = enemy.GetComponent<EnemyStatus>();
         Assert.That(status, Is.Not.Null);
         Assert.That(status.IsKnockedBack, Is.True);
+        // 0.3 / 0.12 = 2.5 — 공격 방향(오른쪽)과 같은 방향이어야 한다(공격자 반대쪽으로 밀림)
+        Assert.That(status.KnockbackVelocity.x, Is.EqualTo(2.5f).Within(0.0001f));
+        Assert.That(status.KnockbackVelocity.y, Is.EqualTo(0f).Within(0.0001f));
     }
 
     [Test]

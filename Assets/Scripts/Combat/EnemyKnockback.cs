@@ -22,7 +22,7 @@ public static class EnemyKnockback
             return;
         }
 
-        EnemyStatus.EnsureOn(target).ApplyKnockback(-attackDirection, Distance, Duration);
+        EnemyStatus.EnsureOn(target).ApplyKnockback(attackDirection, Distance, Duration);
     }
 
     private static bool IsEligible(GameObject enemy)

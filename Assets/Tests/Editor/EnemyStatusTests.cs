@@ -112,14 +112,18 @@ public sealed class EnemyStatusTests
     }
 
     [Test]
-    public void KnockbackSlidesTheDistanceOverItsDuration()
+    public void KnockbackExposesVelocityForTheDurationThenClears()
     {
         status.ApplyKnockback(Vector2.left, distance: 0.3f, duration: 0.12f);
 
+        // 0.3 / 0.12 = 2.5 units/sec, in the applied direction (no longer negated)
+        Assert.That(status.KnockbackVelocity.x, Is.EqualTo(-2.5f).Within(0.0001f));
+        Assert.That(status.KnockbackVelocity.y, Is.EqualTo(0f).Within(0.0001f));
+
         status.Tick(0.12f);
 
-        Assert.That(enemy.transform.position.x, Is.EqualTo(-0.3f).Within(0.0001f));
         Assert.That(status.IsKnockedBack, Is.False);
+        Assert.That(status.KnockbackVelocity, Is.EqualTo(Vector2.zero));
     }
 
     [Test]
@@ -143,16 +147,14 @@ public sealed class EnemyStatusTests
     }
 
     [Test]
-    public void ReapplyingKnockbackOverwritesThePreviousSlide()
+    public void ReapplyingKnockbackOverwritesThePreviousVelocity()
     {
         status.ApplyKnockback(Vector2.left, distance: 0.3f, duration: 0.12f);
         status.ApplyKnockback(Vector2.up, distance: 0.3f, duration: 0.12f);
 
-        status.Tick(0.12f);
-
         // 나중에 건 위쪽 넉백만 반영된다 — 먼저 걸린 왼쪽 방향은 누적되지 않는다
-        Assert.That(enemy.transform.position.x, Is.EqualTo(0f).Within(0.0001f));
-        Assert.That(enemy.transform.position.y, Is.EqualTo(0.3f).Within(0.0001f));
+        Assert.That(status.KnockbackVelocity.x, Is.EqualTo(0f).Within(0.0001f));
+        Assert.That(status.KnockbackVelocity.y, Is.EqualTo(2.5f).Within(0.0001f));
     }
 
     [Test]
