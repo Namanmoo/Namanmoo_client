@@ -74,6 +74,7 @@ public sealed class SwordProjectile : MonoBehaviour
 
         consumed = true;
         enemyHealth.TakeDamage(damage);
+        EnemyKnockback.Apply(enemyHealth, direction);
         Destroy(gameObject);
         return true;
     }
