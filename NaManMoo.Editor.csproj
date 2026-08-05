@@ -60,6 +60,7 @@
     <Compile Include="Assets\Editor\WebGLBuilder.cs" />
     <Compile Include="Assets\Editor\DungeonSceneBuilder.cs" />
     <Compile Include="Assets\Editor\TitleSceneBuilder.cs" />
+    <Compile Include="Assets\Editor\DungeonSlimeBossAssetBuilder.cs" />
     <Compile Include="Assets\Editor\Stage1GroundTextureImporter.cs" />
   </ItemGroup>
   <ItemGroup>

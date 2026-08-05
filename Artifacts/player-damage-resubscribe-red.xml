@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-04 05:39:54Z" end-time="2026-08-04 05:39:55Z" duration="0.582895">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="418" result="Failed" site="Child" start-time="2026-08-04 05:39:54Z" end-time="2026-08-04 05:39:55Z" duration="0.582895" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1501" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="418" result="Failed" site="Child" start-time="2026-08-04 05:39:54Z" end-time="2026-08-04 05:39:55Z" duration="0.575349" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="29992" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1254" name="PlayerDamageFlashTests" fullname="PlayerDamageFlashTests" classname="PlayerDamageFlashTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-08-04 05:39:54Z" end-time="2026-08-04 05:39:55Z" duration="0.567812" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1257" name="ReinitializeAfterDestroyedHealth_SubscribesToNewHealth" fullname="PlayerDamageFlashTests.ReinitializeAfterDestroyedHealth_SubscribesToNewHealth" methodname="ReinitializeAfterDestroyedHealth_SubscribesToNewHealth" classname="PlayerDamageFlashTests" runstate="Runnable" seed="1509784676" result="Failed" start-time="2026-08-04 05:39:54Z" end-time="2026-08-04 05:39:55Z" duration="0.559256" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: RGBA(0.000, 0.000, 0.000, 1.000)
+  But was:  RGBA(1.000, 1.000, 1.000, 1.000)
+]]></message>
+            <stack-trace><![CDATA[at PlayerDamageFlashTests+<ReinitializeAfterDestroyedHealth_SubscribesToNewHealth>d__2.MoveNext () [0x000f1] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\PlayerDamageFlashTests.cs:80
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

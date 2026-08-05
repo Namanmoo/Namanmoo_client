@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-04 08:08:40Z" end-time="2026-08-04 08:08:40Z" duration="0.4501479">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="425" result="Failed" site="Child" start-time="2026-08-04 08:08:40Z" end-time="2026-08-04 08:08:40Z" duration="0.450148" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1510" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="425" result="Failed" site="Child" start-time="2026-08-04 08:08:40Z" end-time="2026-08-04 08:08:40Z" duration="0.444424" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="16224" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1081" name="DungeonEnemyAssetBuilderTests" fullname="DungeonEnemyAssetBuilderTests" classname="DungeonEnemyAssetBuilderTests" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2026-08-04 08:08:40Z" end-time="2026-08-04 08:08:40Z" duration="0.440470" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1082" name="BuildDefinitions_IncludesConfiguredWoodTowerAsset" fullname="DungeonEnemyAssetBuilderTests.BuildDefinitions_IncludesConfiguredWoodTowerAsset" methodname="BuildDefinitions_IncludesConfiguredWoodTowerAsset" classname="DungeonEnemyAssetBuilderTests" runstate="Runnable" seed="997408661" result="Failed" start-time="2026-08-04 08:08:40Z" end-time="2026-08-04 08:08:40Z" duration="0.432049" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected string length 17 but was 15. Strings differ at index 15.
+  Expected: "enemy_woodtower_0"
+  But was:  "enemy_woodtower"
+  --------------------------^
+]]></message>
+            <stack-trace><![CDATA[at DungeonEnemyAssetBuilderTests.BuildDefinitions_IncludesConfiguredWoodTowerAsset () [0x0022d] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\DungeonEnemyAssetBuilderTests.cs:41
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

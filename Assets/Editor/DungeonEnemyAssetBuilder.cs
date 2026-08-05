@@ -6,33 +6,54 @@ public static class DungeonEnemyAssetBuilder
 {
     public const string KrabDefinitionPath = "Assets/Enemies/DungeonKrab.asset";
     public const string SquirrelDefinitionPath = "Assets/Enemies/DungeonSquirrel.asset";
+    public const string WoodTowerDefinitionPath =
+        "Assets/Enemies/DungeonWoodTower.asset";
     public const string ProjectilePath = "Assets/Enemies/TemporaryBlueProjectile.png";
 
     private const string KrabSpritePath = "Assets/Enemies/enemy_krab.png";
     private const string SquirrelSpritePath = "Assets/Enemies/enemy_squirrel.png";
     private const string SquirrelProjectilePath = "Assets/Enemies/Nuts.png";
     private const string SquirrelProjectileName = "Nuts_1";
+    private const string WoodTowerSpritePath =
+        "Assets/Enemies/enemy_woodtower.png";
+    private const string WoodTowerProjectilePath =
+        "Assets/Enemies/enemy_woodtower_bullet.png";
 
     public static EnemyDefinition[] BuildDefinitions()
     {
-        Sprite krabSprite = RequireSprite(KrabSpritePath);
-        Sprite squirrelSprite = LoadFirstSprite(SquirrelSpritePath);
-        Sprite projectileSprite = LoadSpriteByName(
-            SquirrelProjectilePath,
-            SquirrelProjectileName);
+        EnemyDefinition krab = RequireDefinition(KrabDefinitionPath);
+        EnemyDefinition squirrel = RequireDefinition(SquirrelDefinitionPath);
 
-        EnemyDefinition krab = GetOrCreateDefinition(KrabDefinitionPath);
-        krab.Configure("krab", "Krab", krabSprite, null,
-            EnemyBehaviorType.ChaseContact, 5, 2.5f, 2, 0.75f, 1f, 0f, 0.01f, 0.01f);
-
-        EnemyDefinition squirrel = GetOrCreateDefinition(SquirrelDefinitionPath);
-        squirrel.Configure("squirrel", "Squirrel", squirrelSprite, projectileSprite,
-            EnemyBehaviorType.ApproachAndShoot, 5, 2f, 1, 7f, 1.5f, 6f, 3f, 0.2f);
-
-        EditorUtility.SetDirty(krab);
-        EditorUtility.SetDirty(squirrel);
-        AssetDatabase.SaveAssets();
-        return new[] { krab, squirrel };
+        ConfigureWoodTowerImporter(WoodTowerSpritePath);
+        ConfigureWoodTowerImporter(WoodTowerProjectilePath);
+        EnemyDefinition woodTower =
+            AssetDatabase.LoadAssetAtPath<EnemyDefinition>(
+                WoodTowerDefinitionPath);
+        if (woodTower == null)
+        {
+            Sprite woodTowerSprite = LoadFirstSprite(WoodTowerSpritePath);
+            Sprite woodTowerProjectile =
+                LoadFirstSprite(WoodTowerProjectilePath);
+            woodTower = ScriptableObject.CreateInstance<EnemyDefinition>();
+            woodTower.Configure(
+                "wood_tower",
+                "Wood Tower",
+                woodTowerSprite,
+                woodTowerProjectile,
+                EnemyBehaviorType.StationaryFourWayShoot,
+                10,
+                0f,
+                2,
+                1f,
+                1.5f,
+                8f,
+                5f,
+                0.5f);
+            woodTower.ConfigurePresentation(3f, 1.1f);
+            AssetDatabase.CreateAsset(woodTower, WoodTowerDefinitionPath);
+            AssetDatabase.SaveAssets();
+        }
+        return new[] { krab, squirrel, woodTower };
     }
 
     private static Sprite GetOrCreateProjectileSprite()
@@ -98,16 +119,45 @@ public static class DungeonEnemyAssetBuilder
         importer.SaveAndReimport();
     }
 
-    private static EnemyDefinition GetOrCreateDefinition(string path)
+    private static void ConfigureWoodTowerImporter(string path)
     {
-        EnemyDefinition definition = AssetDatabase.LoadAssetAtPath<EnemyDefinition>(path);
-        if (definition != null)
+        var importer = AssetImporter.GetAtPath(path) as TextureImporter;
+        if (importer == null)
         {
-            return definition;
+            throw new System.InvalidOperationException(
+                $"Could not load the texture importer at {path}.");
         }
 
-        definition = ScriptableObject.CreateInstance<EnemyDefinition>();
-        AssetDatabase.CreateAsset(definition, path);
+        bool needsReimport = importer.textureType != TextureImporterType.Sprite
+            || importer.spriteImportMode != SpriteImportMode.Single
+            || importer.mipmapEnabled
+            || importer.filterMode != FilterMode.Point
+            || importer.wrapMode != TextureWrapMode.Clamp
+            || !importer.alphaIsTransparency;
+        if (!needsReimport)
+        {
+            return;
+        }
+
+        importer.textureType = TextureImporterType.Sprite;
+        importer.spriteImportMode = SpriteImportMode.Single;
+        importer.mipmapEnabled = false;
+        importer.filterMode = FilterMode.Point;
+        importer.wrapMode = TextureWrapMode.Clamp;
+        importer.alphaIsTransparency = true;
+        importer.SaveAndReimport();
+    }
+
+    private static EnemyDefinition RequireDefinition(string path)
+    {
+        EnemyDefinition definition =
+            AssetDatabase.LoadAssetAtPath<EnemyDefinition>(path);
+        if (definition == null)
+        {
+            throw new System.InvalidOperationException(
+                $"No EnemyDefinition exists at {path}.");
+        }
+
         return definition;
     }
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-04 15:06:08Z" end-time="2026-08-04 15:06:10Z" duration="2.2017755">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="431" result="Failed" site="Child" start-time="2026-08-04 15:06:08Z" end-time="2026-08-04 15:06:10Z" duration="2.201776" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1519" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="431" result="Failed" site="Child" start-time="2026-08-04 15:06:08Z" end-time="2026-08-04 15:06:10Z" duration="2.194394" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="35820" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1296" name="PlayerDeathExistingSceneRegressionTests" fullname="PlayerDeathExistingSceneRegressionTests" classname="PlayerDeathExistingSceneRegressionTests" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2026-08-04 15:06:08Z" end-time="2026-08-04 15:06:10Z" duration="2.190175" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1297" name="ExistingScene_PlayerDeathShowsGameOver" fullname="PlayerDeathExistingSceneRegressionTests.ExistingScene_PlayerDeathShowsGameOver" methodname="ExistingScene_PlayerDeathShowsGameOver" classname="PlayerDeathExistingSceneRegressionTests" runstate="Runnable" seed="1067755378" result="Failed" start-time="2026-08-04 15:06:08Z" end-time="2026-08-04 15:06:10Z" duration="2.181382" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: False
+  But was:  True
+]]></message>
+            <stack-trace><![CDATA[at PlayerDeathExistingSceneRegressionTests+<ExistingScene_PlayerDeathShowsGameOver>d__0.MoveNext () [0x000b3] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\PlayerDeathExistingSceneRegressionTests.cs:22
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

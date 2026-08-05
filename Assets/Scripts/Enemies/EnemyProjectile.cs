@@ -10,6 +10,7 @@ public sealed class EnemyProjectile : MonoBehaviour
     private Vector2 direction;
     private int damage;
     private float speed;
+    private float rotationSpeed;
     private float remainingLifetime;
     private GameObject owner;
     private bool initialized;
@@ -17,6 +18,7 @@ public sealed class EnemyProjectile : MonoBehaviour
 
     public int Damage => damage;
     public float Speed => speed;
+    public float RotationSpeed => rotationSpeed;
     public float RemainingLifetime => remainingLifetime;
 
     public void Initialize(
@@ -36,7 +38,9 @@ public sealed class EnemyProjectile : MonoBehaviour
         int newDamage,
         float newSpeed,
         float newLifetime,
-        float collisionRadius)
+        float collisionRadius,
+        float newRotationSpeed = 0f,
+        float initialRotation = 0f)
     {
         SpriteRenderer spriteRenderer = GetOrAddComponent<SpriteRenderer>();
         Rigidbody2D body = GetOrAddComponent<Rigidbody2D>();
@@ -48,11 +52,13 @@ public sealed class EnemyProjectile : MonoBehaviour
         body.gravityScale = 0f;
         circleCollider.isTrigger = true;
         circleCollider.radius = Mathf.Max(MinimumCollisionRadius, collisionRadius);
+        transform.localRotation = Quaternion.Euler(0f, 0f, initialRotation);
 
         owner = newOwner;
         direction = newDirection.sqrMagnitude > 0f ? newDirection.normalized : Vector2.zero;
         damage = Mathf.Max(0, newDamage);
         speed = Mathf.Max(0f, newSpeed);
+        rotationSpeed = newRotationSpeed;
         remainingLifetime = Mathf.Max(MinimumLifetime, newLifetime);
         initialized = true;
         consumed = false;
@@ -74,6 +80,7 @@ public sealed class EnemyProjectile : MonoBehaviour
         }
 
         transform.position += (Vector3)(direction * speed * deltaTime);
+        transform.Rotate(0f, 0f, rotationSpeed * deltaTime);
         remainingLifetime -= deltaTime;
 
         if (remainingLifetime <= 0f)

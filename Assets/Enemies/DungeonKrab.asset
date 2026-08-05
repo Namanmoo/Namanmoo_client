@@ -18,8 +18,10 @@ MonoBehaviour:
   projectileSprite: {fileID: 0}
   behaviorType: 0
   animatorController: {fileID: 0}
+  visualHeight: 2
+  bodyCollisionRadius: 0.7
   maxHealth: 5
-  moveSpeed: 2.5
+  moveSpeed: 6
   attackDamage: 2
   attackRange: 0.75
   attackInterval: 1
