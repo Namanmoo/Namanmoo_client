@@ -31,12 +31,15 @@ public sealed class EnemyStatus : MonoBehaviour
 
     private float staggerRemaining;
 
+    private Vector2 knockbackVelocity;
+    private float knockbackRemaining;
+
     /// <summary>1이면 정상 속도. 경직 중에는 0.</summary>
     public float SpeedMultiplier
     {
         get
         {
-            if (staggerRemaining > 0f)
+            if (staggerRemaining > 0f || knockbackRemaining > 0f)
             {
                 return 0f;
             }
@@ -54,6 +57,7 @@ public sealed class EnemyStatus : MonoBehaviour
     public bool IsPoisoned => poisonRemaining > 0f && poisonStacks > 0;
     public bool IsChilled => chillRemaining > 0f;
     public bool IsStaggered => staggerRemaining > 0f;
+    public bool IsKnockedBack => knockbackRemaining > 0f;
     public int PoisonStacks => poisonStacks;
 
     /// <summary>쌓인 소수 피해. 1을 넘으면 정수만큼 적용하고 나머지를 남긴다.</summary>
@@ -140,6 +144,18 @@ public sealed class EnemyStatus : MonoBehaviour
         staggerRemaining = Mathf.Max(staggerRemaining, duration);
     }
 
+    /// <summary>넉백 — 공격 반대 방향으로 짧게 밀어낸다. 다시 걸리면 최신 값으로 덮어쓴다.</summary>
+    public void ApplyKnockback(Vector2 direction, float distance, float duration)
+    {
+        if (direction == Vector2.zero || distance <= 0f || duration <= 0f)
+        {
+            return;
+        }
+
+        knockbackVelocity = direction.normalized * (distance / duration);
+        knockbackRemaining = duration;
+    }
+
     private void Update()
     {
         Tick(Time.deltaTime);
@@ -155,6 +171,13 @@ public sealed class EnemyStatus : MonoBehaviour
 
         staggerRemaining = Mathf.Max(0f, staggerRemaining - deltaTime);
         chillRemaining = Mathf.Max(0f, chillRemaining - deltaTime);
+
+        if (knockbackRemaining > 0f)
+        {
+            float knockbackSlice = Mathf.Min(deltaTime, knockbackRemaining);
+            transform.position += (Vector3)(knockbackVelocity * knockbackSlice);
+            knockbackRemaining -= knockbackSlice;
+        }
 
         if (burnRemaining > 0f)
         {
