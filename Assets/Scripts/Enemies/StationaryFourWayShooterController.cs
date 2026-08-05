@@ -16,9 +16,9 @@ public sealed class StationaryFourWayShooterController : MonoBehaviour
     private static readonly float[] VisualAngles =
     {
         0f,
-        90f,
+        270f,
         180f,
-        270f
+        90f
     };
 
     private EnemyDefinition definition;

@@ -27,9 +27,15 @@ public sealed class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
-        if (!CompareTag("Player") ||
+        if (!CompareTag("Player"))
+        {
+            return;
+        }
+
+        PlayerDeathScreen existingScreen =
             UnityEngine.Object.FindAnyObjectByType<PlayerDeathScreen>(
-                FindObjectsInactive.Include) != null)
+                FindObjectsInactive.Include);
+        if (PlayerDeathScreenRuntimeBinder.TryBind(this, existingScreen))
         {
             return;
         }

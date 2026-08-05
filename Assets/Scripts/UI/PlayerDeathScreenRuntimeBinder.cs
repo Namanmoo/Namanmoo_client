@@ -10,16 +10,21 @@ public static class PlayerDeathScreenRuntimeBinder
             Object.FindAnyObjectByType<PlayerHealth>(FindObjectsInactive.Include);
         PlayerDeathScreen screen =
             Object.FindAnyObjectByType<PlayerDeathScreen>(FindObjectsInactive.Include);
+        TryBind(health, screen);
+    }
+
+    public static bool TryBind(PlayerHealth health, PlayerDeathScreen screen)
+    {
         if (health == null || !health.CompareTag("Player") || screen == null)
         {
-            return;
+            return false;
         }
 
         PlayerDeathScreenView view =
             screen.GetComponent<PlayerDeathScreenView>();
         if (view == null)
         {
-            return;
+            return false;
         }
 
         Transform overlay = view.transform.Find("Fade Overlay");
@@ -31,7 +36,7 @@ public static class PlayerDeathScreenRuntimeBinder
         if (overlay == null || menu == null ||
             titleButton == null || restartButton == null)
         {
-            return;
+            return false;
         }
 
         view.Initialize(
@@ -40,5 +45,6 @@ public static class PlayerDeathScreenRuntimeBinder
             titleButton.GetComponent<Button>(),
             restartButton.GetComponent<Button>());
         screen.Initialize(health.gameObject, health, view);
+        return true;
     }
 }
