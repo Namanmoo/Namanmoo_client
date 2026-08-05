@@ -41,6 +41,7 @@ public static class MeleeStrike
 
             hits++;
             enemy.TakeDamage(weapon.Damage);
+            EnemyKnockback.Apply(enemy, context.Direction);
             // 죽음 판정은 피해 적용 후 — on_kill이 여기서 갈린다
             context.Runner?.NotifyHit(enemy, enemy.transform.position, context.Direction);
         }
