@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1370a8b17595f45478e40ff222902eb3, type: 3}
+  m_Name: DungeonSultanBoss
+  m_EditorClassIdentifier: NaManMoo.Runtime::SultanBossDefinition
+  phase1Sprite: {fileID: 21300000, guid: 951d15d9fe2a270468ea360cf10024ec, type: 3}
+  phase2Sprite: {fileID: 21300000, guid: 34fc666f94b399045aad0886de8af705, type: 3}
+  fallMarkerSprite: {fileID: 21300000, guid: 245110764531b57489da1a93d8ab1081, type: 3}
+  arcProjectileSprite: {fileID: 21300000, guid: 7cbe8597b878eeb418496ec9428a12a8, type: 3}
+  maxHealth: 100
+  moveSpeed: 5
+  patternInterval: 1.5
+  contactDamage: 4
+  visualHeight: 6
+  contactRadius: 1.2
+  phaseTwoHealthRatio: 0.5
+  krabDefinition: {fileID: 11400000, guid: 480d85c7f96528b4eac26d867e3d0f77, type: 2}
+  squirrelDefinition: {fileID: 11400000, guid: 86680c1233948db43a0bfd910df1aa01, type: 2}
+  woodTowerDefinition: {fileID: 11400000, guid: efcd27d40245a1f48ba6ac1b1d773c11, type: 2}
+  maxSummonedMonsters: 5
+  maxSummonedWoodTowers: 2
+  summonOffsetDistance: 4
+  roomEdgeInset: 5
+  summonWindup: 1
+  hiddenDuration: 2
+  markerSpeed: 2.5
+  markerVisualHeight: 2
+  arcProjectileDamage: 3
+  arcProjectileVisualHeight: 0.8
+  arcProjectileRadius: 0.4
+  arcDistance: 6
+  arcDuration: 1
+  arcHeight: 1.5
+  chargeWindup: 0.5
+  chargeDuration: 0.7
+  chargeSpeedMultiplier: 2

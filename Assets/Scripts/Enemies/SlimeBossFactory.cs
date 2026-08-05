@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-public static class SlimeBossFactory
+public sealed class SlimeBossFactory : BossFactoryBase
 {
     public static EnemyHealth Create(
         Transform worldParent,
@@ -10,12 +9,10 @@ public static class SlimeBossFactory
         SlimeBossDefinition definition,
         Vector2 position)
     {
-        if (player == null) throw new ArgumentNullException(nameof(player));
-        if (definition == null) throw new ArgumentNullException(nameof(definition));
+        RequireNotNull(player, nameof(player));
+        RequireNotNull(definition, nameof(definition));
 
-        var boss = new GameObject("Slime Boss");
-        boss.transform.SetParent(worldParent, false);
-        boss.transform.position = new Vector3(position.x, position.y, -0.2f);
+        var boss = CreateRoot(worldParent, "Slime Boss", position);
 
         var body = boss.AddComponent<Rigidbody2D>();
         body.bodyType = RigidbodyType2D.Kinematic;
@@ -26,23 +23,16 @@ public static class SlimeBossFactory
         sensor.isTrigger = true;
         sensor.radius = definition.ContactRadius;
 
-        var visualObject = new GameObject("Slime Boss Visual");
-        visualObject.transform.SetParent(boss.transform, false);
-        var visual = visualObject.AddComponent<SpriteRenderer>();
-        visual.sprite = definition.BodySprite;
-        visual.sortingOrder = 6;
-        float scale = definition.VisualHeight / definition.BodySprite.bounds.size.y;
-        visualObject.transform.localScale = Vector3.one * scale;
+        SpriteRenderer visual = CreateVisual(
+            boss.transform, "Slime Boss Visual", definition.BodySprite, definition.VisualHeight);
 
-        EnemyHealth health = boss.AddComponent<EnemyHealth>();
-        health.Configure(definition.MaxHealth);
+        EnemyHealth health = CreateHealth(boss, definition.MaxHealth, uiParent);
 
         var projectilePool = new GameObject("Slime Projectile Pool");
         projectilePool.transform.SetParent(worldParent, false);
         var controller = boss.AddComponent<SlimeBossController>();
         controller.Initialize(definition, player, health, body, visual, projectilePool.transform);
 
-        if (uiParent != null) BossHealthBarUIFactory.Create(uiParent, health);
         return health;
     }
 }
