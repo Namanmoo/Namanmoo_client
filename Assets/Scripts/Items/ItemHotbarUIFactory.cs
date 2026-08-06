@@ -93,7 +93,7 @@ public static class ItemHotbarUIFactory
 
         Image slotImage = slotObject.GetComponent<Image>();
         slotImage.color = Color.clear;
-        slotImage.raycastTarget = false;
+        slotImage.raycastTarget = false; // 호버 세팅은 ItemHotbarView.EnsureTooltip이 켠다
 
         icons[index] = CreateIcon(slotObject.transform);
         selectionOutlines[index] = CreateSelectionOutline(slotObject.transform);

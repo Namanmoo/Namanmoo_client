@@ -78,12 +78,18 @@ public sealed class WeaponForgeController : MonoBehaviour
     [SerializeField] private Text stageLabel;
 
     [Header("선택 상태 표시")]
-    [SerializeField] private Image[] toolHighlights = new Image[5];
+    [SerializeField] private Image[] toolHighlights = new Image[7];
     [SerializeField] private Image[] colorHighlights;
 
-    [Header("그립")]
+    [Header("기준점 표시")]
     /// <summary>캔버스 위에 떠서 잡는 자리를 알려 주는 표시.</summary>
     [SerializeField] private RectTransform gripMarker;
+
+    /// <summary>무기 몸통 가운데 표시.</summary>
+    [SerializeField] private RectTransform centerMarker;
+
+    /// <summary>칼끝 표시 — 손잡이→끝이 무기의 축이다.</summary>
+    [SerializeField] private RectTransform tipMarker;
 
     [Header("결과 확인")]
     [SerializeField] private GameObject resultPanel;
@@ -120,9 +126,11 @@ public sealed class WeaponForgeController : MonoBehaviour
         if (drawingCanvas != null)
         {
             drawingCanvas.Changed += RefreshPreview;
-            drawingCanvas.GripChanged += RefreshGripMarker;
+            drawingCanvas.PointChanged += RefreshPointMarker;
             RefreshPreview();
-            RefreshGripMarker();
+            RefreshPointMarker(WeaponPointKind.Grip);
+            RefreshPointMarker(WeaponPointKind.Center);
+            RefreshPointMarker(WeaponPointKind.Tip);
         }
 
         if (stageSlider != null)
@@ -141,22 +149,28 @@ public sealed class WeaponForgeController : MonoBehaviour
         if (drawingCanvas != null)
         {
             drawingCanvas.Changed -= RefreshPreview;
-            drawingCanvas.GripChanged -= RefreshGripMarker;
+            drawingCanvas.PointChanged -= RefreshPointMarker;
         }
     }
 
     // ── 도구바·팔레트 버튼이 부르는 것들 ─────────────────────────────
 
-    /// <summary>0=연필, 1=크레용, 2=지우개, 3=색 채우기, 4=그립</summary>
+    /// <summary>0=연필, 1=크레용, 2=지우개, 3=색 채우기, 4=그립, 5=중심, 6=끝</summary>
     public const int GripToolIndex = 4;
 
-    /// <summary>0=연필, 1=크레용, 2=지우개, 3=색 채우기, 4=그립</summary>
+    /// <summary><see cref="GripToolIndex"/> 다음 — 무기 몸통 가운데를 찍는 도구.</summary>
+    public const int CenterToolIndex = 5;
+
+    /// <summary><see cref="CenterToolIndex"/> 다음 — 칼끝을 찍는 도구.</summary>
+    public const int TipToolIndex = 6;
+
+    /// <summary>0=연필, 1=크레용, 2=지우개, 3=색 채우기, 4=그립, 5=중심, 6=끝</summary>
     public void SelectTool(int index)
     {
-        // 그립은 칠하는 도구가 아니라서 붓 종류로 넘기지 않는다
-        if (index == GripToolIndex)
+        // 기준점은 칠하는 도구가 아니라서 붓 종류로 넘기지 않는다
+        if (index >= GripToolIndex && index <= TipToolIndex)
         {
-            drawingCanvas?.EnterGripMode();
+            drawingCanvas?.EnterPointMode(PointKindFor(index));
             Highlight(toolHighlights, index);
             return;
         }
@@ -368,6 +382,16 @@ public sealed class WeaponForgeController : MonoBehaviour
         string flavor = response != null ? response.flavor : string.Empty;
         WeaponLoadout loadout = BuildLoadout();
 
+        // 그린 축(그립→끝)이 "위"에서 벗어난 만큼 손에 들 때 되돌린다
+        Vector2 center = drawingCanvas != null
+            ? drawingCanvas.WeaponCenter : DrawingCanvas.DefaultCenter;
+        Vector2 tip = drawingCanvas != null ? drawingCanvas.Tip : DrawingCanvas.DefaultTip;
+        if (loadout.Definition != null)
+        {
+            loadout.Definition.SpriteAxisDegrees = WeaponDefinition.AxisDegrees(
+                drawingCanvas != null ? drawingCanvas.Grip : DrawingCanvas.DefaultGrip, tip);
+        }
+
         ForgedWeapon.Set(resultSprite, loadout, response?.weapon, weaponName, Stage);
 
         // 무기고에 넣어 다음에도 꺼내 쓸 수 있게 한다.
@@ -376,12 +400,20 @@ public sealed class WeaponForgeController : MonoBehaviour
         var vault = new WeaponVaultClient(backendBaseUrl);
         string failure = null;
 
+        // 그립은 스프라이트 pivot에 구워져 있다 — 정규화해 무기고에도 실어 보낸다
+        Vector2 grip = new Vector2(
+            resultSprite.pivot.x / resultSprite.rect.width,
+            resultSprite.pivot.y / resultSprite.rect.height);
+
         yield return vault.Save(
             resultSprite.texture.EncodeToPNG(),
             weaponName,
             flavor,
             Stage,
             ForgedWeapon.Source,
+            grip,
+            center,
+            tip,
             _ => { },
             error => failure = error);
 
@@ -444,26 +476,40 @@ public sealed class WeaponForgeController : MonoBehaviour
         previewImage.texture = drawingCanvas.Texture;
     }
 
+    private static WeaponPointKind PointKindFor(int toolIndex) => toolIndex switch
+    {
+        CenterToolIndex => WeaponPointKind.Center,
+        TipToolIndex => WeaponPointKind.Tip,
+        _ => WeaponPointKind.Grip
+    };
+
     /// <summary>
-    /// 그립 표시를 잡는 자리로 옮긴다. 캔버스와 같은 부모에 두고 앵커만 움직이므로
+    /// 기준점 표시를 찍은 자리로 옮긴다. 캔버스와 같은 부모에 두고 앵커만 움직이므로
     /// 캔버스가 커지거나 창 비율이 바뀌어도 같은 자리를 가리킨다.
     /// </summary>
-    private void RefreshGripMarker()
+    private void RefreshPointMarker(WeaponPointKind kind)
     {
-        if (gripMarker == null || drawingCanvas == null)
+        RectTransform marker = kind switch
+        {
+            WeaponPointKind.Center => centerMarker,
+            WeaponPointKind.Tip => tipMarker,
+            _ => gripMarker
+        };
+
+        if (marker == null || drawingCanvas == null)
         {
             return;
         }
 
         var canvasRect = (RectTransform)drawingCanvas.transform;
-        Vector2 grip = drawingCanvas.Grip;
+        Vector2 point = drawingCanvas.Point(kind);
         Vector2 anchor = new Vector2(
-            Mathf.Lerp(canvasRect.anchorMin.x, canvasRect.anchorMax.x, grip.x),
-            Mathf.Lerp(canvasRect.anchorMin.y, canvasRect.anchorMax.y, grip.y));
+            Mathf.Lerp(canvasRect.anchorMin.x, canvasRect.anchorMax.x, point.x),
+            Mathf.Lerp(canvasRect.anchorMin.y, canvasRect.anchorMax.y, point.y));
 
-        gripMarker.anchorMin = anchor;
-        gripMarker.anchorMax = anchor;
-        gripMarker.anchoredPosition = Vector2.zero;
+        marker.anchorMin = anchor;
+        marker.anchorMax = anchor;
+        marker.anchoredPosition = Vector2.zero;
     }
 
     /// <summary>배열 중 하나만 보이게 한다 — 지금 고른 도구·색 표시.</summary>

@@ -18,7 +18,7 @@ public static class WeaponVaultSceneBuilder
 {
     public const string ScenePath = "Assets/Scenes/WeaponVault.unity";
 
-    private const string FontPath = "Assets/Fonts/Gaegu-Regular.ttf";
+    private const string FontPath = "Assets/Resources/Fonts/Gaegu-Regular.ttf";
     private static readonly Vector2 ReferenceResolution = new Vector2(1920f, 1080f);
 
     private static readonly Color Paper = new Color(0.957f, 0.949f, 0.933f, 1f);
@@ -76,7 +76,8 @@ public static class WeaponVaultSceneBuilder
             forge.onClick, controller.GoToForge);
 
         CardParts parts = CreateCards(canvas.transform, font, controller);
-        WireController(controller, status, back, forge, parts);
+        EditPanelParts edit = CreateEditPanel(canvas.transform, font, controller);
+        WireController(controller, status, back, forge, parts, edit);
 
         EditorSceneManager.SaveScene(scene, ScenePath);
         AddSceneToBuildSettings();
@@ -93,6 +94,16 @@ public static class WeaponVaultSceneBuilder
         public Text[] Details;
         public Button[] Equip;
         public Button[] Delete;
+    }
+
+    private struct EditPanelParts
+    {
+        public GameObject Panel;
+        public RawImage Image;
+        public WeaponPointPicker Picker;
+        public Text Title;
+        public RectTransform[] Markers;
+        public Image[] Highlights;
     }
 
     private static CardParts CreateCards(
@@ -158,13 +169,21 @@ public static class WeaponVaultSceneBuilder
 
             Button equip = CreateLabeledButton(
                 card.transform, font, "Equip", "장착",
-                Rect.MinMaxRect(0.06f, 0.87f, 0.60f, 0.97f), Accent);
+                Rect.MinMaxRect(0.05f, 0.87f, 0.40f, 0.97f), Accent);
             UnityEditor.Events.UnityEventTools.AddIntPersistentListener(
                 equip.onClick, controller.Equip, index);
 
+            // 그립·중심·끝을 다시 찍는 화면을 연다
+            Button edit = CreateLabeledButton(
+                card.transform, font, "Edit", "수정",
+                Rect.MinMaxRect(0.43f, 0.87f, 0.66f, 0.97f),
+                new Color(0.42f, 0.42f, 0.46f, 1f));
+            UnityEditor.Events.UnityEventTools.AddIntPersistentListener(
+                edit.onClick, controller.BeginEdit, index);
+
             Button delete = CreateLabeledButton(
                 card.transform, font, "Delete", "삭제",
-                Rect.MinMaxRect(0.64f, 0.87f, 0.94f, 0.97f), Danger);
+                Rect.MinMaxRect(0.69f, 0.87f, 0.95f, 0.97f), Danger);
             UnityEditor.Events.UnityEventTools.AddIntPersistentListener(
                 delete.onClick, controller.Delete, index);
 
@@ -181,12 +200,132 @@ public static class WeaponVaultSceneBuilder
         return parts;
     }
 
+    /// <summary>
+    /// 기준점 수정 화면 — 화면을 덮는 어두운 막 위에 그림을 크게 띄우고,
+    /// 그립·중심·끝을 골라 다시 찍는다. 평소에는 꺼 둔다.
+    /// </summary>
+    private static EditPanelParts CreateEditPanel(
+        Transform parent, Font font, WeaponVaultController controller)
+    {
+        // 뒤 카드가 눌리지 않게 화면 전체를 덮는다
+        var panel = new GameObject("Edit Panel", typeof(RectTransform), typeof(Image));
+        panel.transform.SetParent(parent, false);
+        Stretch((RectTransform)panel.transform);
+        Image scrim = panel.GetComponent<Image>();
+        scrim.color = new Color(0f, 0f, 0f, 0.55f);
+        scrim.raycastTarget = true;
+
+        Text title = CreateText(panel.transform, "Title", font, string.Empty, 40);
+        SetArea((RectTransform)title.transform, Rect.MinMaxRect(0.20f, 0.075f, 0.80f, 0.145f));
+        title.color = Color.white;
+        title.alignment = TextAnchor.MiddleCenter;
+
+        // 그림 자리 — 기준 해상도(1920×1080)에서 정사각형이 되게 잡는다
+        Rect imageArea = Rect.MinMaxRect(0.32f, 0.16f, 0.68f, 0.80f);
+        CreateSolid(panel.transform, "Image Border", Grow(imageArea, 0.004f, 0.007f), Ink);
+        CreateSolid(panel.transform, "Image Face", imageArea, CardFace);
+
+        var imageObject = new GameObject(
+            "Weapon Image", typeof(RectTransform), typeof(RawImage), typeof(WeaponPointPicker));
+        imageObject.transform.SetParent(panel.transform, false);
+        SetArea((RectTransform)imageObject.transform, imageArea);
+        RawImage image = imageObject.GetComponent<RawImage>();
+        image.raycastTarget = true;  // 눌러야 점이 옮겨진다
+
+        // 마커 — 그림의 자식으로 두고 앵커만 움직인다 (RefreshEditMarkers)
+        var markers = new RectTransform[3];
+        var markerColors = new[]
+        {
+            new Color(0.98f, 0.35f, 0.1f, 0.9f),   // 그립
+            new Color(0.15f, 0.5f, 0.95f, 0.9f),   // 중심
+            new Color(0.1f, 0.75f, 0.3f, 0.9f)     // 끝
+        };
+        var markerNames = new[] { "Grip Marker", "Center Marker", "Tip Marker" };
+        for (int index = 0; index < markers.Length; index++)
+        {
+            var markerObject = new GameObject(
+                markerNames[index], typeof(RectTransform), typeof(Image));
+            markerObject.transform.SetParent(imageObject.transform, false);
+            var rect = (RectTransform)markerObject.transform;
+            rect.anchorMin = new Vector2(0.5f, 0.5f);
+            rect.anchorMax = rect.anchorMin;
+            rect.pivot = new Vector2(0.5f, 0.5f);
+            rect.anchoredPosition = Vector2.zero;
+            rect.sizeDelta = new Vector2(20f, 20f);
+            Image markerImage = markerObject.GetComponent<Image>();
+            markerImage.color = markerColors[index];
+            markerImage.raycastTarget = false;
+            markers[index] = rect;
+        }
+
+        // 어느 점을 옮길지 고르는 버튼 줄 + 선택 밑줄
+        var highlights = new Image[3];
+        var pointLabels = new[] { "손잡이", "중심", "끝" };
+        var pointButtonColors = new[]
+        {
+            new Color(0.55f, 0.35f, 0.15f, 1f),
+            new Color(0.15f, 0.4f, 0.7f, 1f),
+            new Color(0.1f, 0.55f, 0.25f, 1f)
+        };
+        for (int index = 0; index < 3; index++)
+        {
+            float left = 0.32f + index * 0.125f;
+            Rect buttonArea = Rect.MinMaxRect(left, 0.815f, left + 0.11f, 0.875f);
+            Button pointButton = CreateLabeledButton(
+                panel.transform, font, $"{markerNames[index]} Button",
+                pointLabels[index], buttonArea, pointButtonColors[index]);
+            UnityEditor.Events.UnityEventTools.AddIntPersistentListener(
+                pointButton.onClick, controller.SelectEditPoint, index);
+
+            Image underline = CreateSolid(
+                panel.transform, $"{markerNames[index]} Selected",
+                Rect.MinMaxRect(buttonArea.xMin, 0.878f, buttonArea.xMax, 0.888f),
+                new Color(0.98f, 0.55f, 0.1f, 1f));
+            underline.enabled = false;
+            highlights[index] = underline;
+        }
+
+        Button save = CreateLabeledButton(
+            panel.transform, font, "Save Button", "저장",
+            Rect.MinMaxRect(0.38f, 0.90f, 0.49f, 0.96f), Accent);
+        UnityEditor.Events.UnityEventTools.AddPersistentListener(
+            save.onClick, controller.SaveEdit);
+
+        Button cancel = CreateLabeledButton(
+            panel.transform, font, "Cancel Button", "취소",
+            Rect.MinMaxRect(0.51f, 0.90f, 0.62f, 0.96f),
+            new Color(0.42f, 0.42f, 0.46f, 1f));
+        UnityEditor.Events.UnityEventTools.AddPersistentListener(
+            cancel.onClick, controller.CancelEdit);
+
+        panel.SetActive(false);
+
+        return new EditPanelParts
+        {
+            Panel = panel,
+            Image = image,
+            Picker = imageObject.GetComponent<WeaponPointPicker>(),
+            Title = title,
+            Markers = markers,
+            Highlights = highlights
+        };
+    }
+
+    /// <summary>좌상단 원점 비율 영역을 사방으로 조금 키운다 — 테두리용.</summary>
+    private static Rect Grow(Rect area, float horizontal, float vertical)
+    {
+        return Rect.MinMaxRect(
+            area.xMin - horizontal, area.yMin - vertical,
+            area.xMax + horizontal, area.yMax + vertical);
+    }
+
     private static void WireController(
         WeaponVaultController controller,
         Text status,
         Button back,
         Button forge,
-        CardParts parts)
+        CardParts parts,
+        EditPanelParts edit)
     {
         var serialized = new SerializedObject(controller);
         serialized.FindProperty("statusText").objectReferenceValue = status;
@@ -199,6 +338,13 @@ public static class WeaponVaultSceneBuilder
         AssignArray(serialized, "cardDetails", parts.Details);
         AssignArray(serialized, "equipButtons", parts.Equip);
         AssignArray(serialized, "deleteButtons", parts.Delete);
+
+        serialized.FindProperty("editPanel").objectReferenceValue = edit.Panel;
+        serialized.FindProperty("editImage").objectReferenceValue = edit.Image;
+        serialized.FindProperty("editPicker").objectReferenceValue = edit.Picker;
+        serialized.FindProperty("editTitle").objectReferenceValue = edit.Title;
+        AssignArray(serialized, "editMarkers", edit.Markers);
+        AssignArray(serialized, "editPointHighlights", edit.Highlights);
 
         serialized.ApplyModifiedPropertiesWithoutUndo();
     }

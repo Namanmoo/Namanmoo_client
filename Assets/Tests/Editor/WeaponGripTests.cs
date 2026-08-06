@@ -36,7 +36,7 @@ public sealed class WeaponGripTests
         try
         {
             int raised = 0;
-            canvas.GripChanged += () => raised++;
+            canvas.PointChanged += _ => raised++;
 
             canvas.SetGrip(new Vector2(0.25f, 0.75f));
             // 같은 자리를 다시 찍어도 표시를 옮길 이유가 없다
@@ -49,6 +49,35 @@ public sealed class WeaponGripTests
         {
             Object.DestroyImmediate(owner);
         }
+    }
+
+    /// <summary>손잡이·중심·끝은 서로 독립으로 움직여야 한다.</summary>
+    [Test]
+    public void SetPoint_MovesCenterAndTipWithoutTouchingTheGrip()
+    {
+        DrawingCanvas canvas = CreateCanvas(out GameObject owner);
+        try
+        {
+            canvas.SetPoint(WeaponPointKind.Center, new Vector2(0.3f, 0.4f));
+            canvas.SetPoint(WeaponPointKind.Tip, new Vector2(0.9f, 0.95f));
+
+            Assert.That(canvas.Grip, Is.EqualTo(DrawingCanvas.DefaultGrip));
+            Assert.That(canvas.WeaponCenter, Is.EqualTo(new Vector2(0.3f, 0.4f)));
+            Assert.That(canvas.Tip, Is.EqualTo(new Vector2(0.9f, 0.95f)));
+        }
+        finally
+        {
+            Object.DestroyImmediate(owner);
+        }
+    }
+
+    /// <summary>아무것도 안 찍으면 위로 뻗은 그림으로 친다 — 축 보정이 0이어야 한다.</summary>
+    [Test]
+    public void DefaultPoints_KeepTheUpAxis()
+    {
+        Assert.That(
+            WeaponDefinition.AxisDegrees(DrawingCanvas.DefaultGrip, DrawingCanvas.DefaultTip),
+            Is.EqualTo(0f).Within(0.01f));
     }
 
     /// <summary>

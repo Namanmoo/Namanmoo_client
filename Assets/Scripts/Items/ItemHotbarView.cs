@@ -29,6 +29,7 @@ public sealed class ItemHotbarView : MonoBehaviour
 
     private PlayerInventory inventory;
     private bool isSubscribed;
+    private WeaponTooltipView tooltip;
 
     public void Initialize(PlayerInventory newInventory)
     {
@@ -86,9 +87,66 @@ public sealed class ItemHotbarView : MonoBehaviour
         Refresh();
     }
 
+    /// <summary>
+    /// 슬롯 호버 툴팁을 붙인다. 팩토리로 만든 핫바든 씬에 저장된 핫바든
+    /// 여기서 소급 적용된다 — 씬 쪽만 빠뜨리는 사고를 막는다.
+    /// </summary>
+    private void EnsureTooltip()
+    {
+        if (tooltip != null || icons == null || icons.Length < SlotCount)
+        {
+            return;
+        }
+
+        // 캔버스에 레이캐스터가 없으면 호버 이벤트가 아예 안 닿는다
+        Canvas canvas = GetComponentInParent<Canvas>();
+        if (canvas != null && canvas.GetComponent<GraphicRaycaster>() == null)
+        {
+            canvas.gameObject.AddComponent<GraphicRaycaster>();
+        }
+
+        tooltip = WeaponTooltipView.Create(transform);
+
+        for (int index = 0; index < SlotCount; index++)
+        {
+            if (icons[index] == null)
+            {
+                continue;
+            }
+
+            Transform slot = icons[index].transform.parent;
+            if (slot == null)
+            {
+                continue;
+            }
+
+            var slotImage = slot.GetComponent<Image>();
+            if (slotImage != null)
+            {
+                slotImage.raycastTarget = true; // 투명해도 호버 판정은 받는다
+            }
+
+            var hover = slot.GetComponent<HotbarSlotHover>();
+            if (hover == null)
+            {
+                hover = slot.gameObject.AddComponent<HotbarSlotHover>();
+            }
+
+            hover.Configure(this, tooltip, index);
+        }
+    }
+
     public void Disconnect()
     {
         Unsubscribe();
+    }
+
+    /// <summary>슬롯의 아이템 — 비었거나 범위 밖이면 null. 툴팁이 쓴다.</summary>
+    public ItemData ItemAt(int index)
+    {
+        return inventory != null && index >= 0 && index < inventory.Slots.Count
+            ? inventory.Slots[index]
+            : null;
     }
 
     private void Refresh()
@@ -100,6 +158,9 @@ public sealed class ItemHotbarView : MonoBehaviour
         {
             return;
         }
+
+        // 팩토리 경로는 Awake 때 아이콘이 없어 여기서야 붙일 수 있다 — 멱등이라 비용 없음
+        EnsureTooltip();
 
         int selectedIndex = inventory != null && inventory.SelectedSlotIndex >= 0 && inventory.SelectedSlotIndex < SlotCount
             ? inventory.SelectedSlotIndex

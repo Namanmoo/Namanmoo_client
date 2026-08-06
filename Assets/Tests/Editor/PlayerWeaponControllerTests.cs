@@ -67,10 +67,10 @@ public sealed class PlayerWeaponControllerTests : InputTestFixture
     }
 
     [Test]
-    public void Gun_CanUseFasterIntervalAndSmallerCollider()
+    public void Projectile_CanUseFasterIntervalAndSmallerCollider()
     {
         WeaponDefinition gun = CreateDefinition(
-            WeaponCategory.Ranged, WeaponType.Gun, 0.2f, 0.15f);
+            WeaponCategory.Ranged, WeaponType.Projectile, 0.2f, 0.15f);
         var inventory = new PlayerInventory();
         inventory.TryAcquire(new ItemData(gun));
         controller.InitializeInventory(inventory);
@@ -100,9 +100,6 @@ public sealed class PlayerWeaponControllerTests : InputTestFixture
             PlayerWeaponController.SwingArcFor("thrust", sword),
             Is.EqualTo(ThrustDelivery.ThrustArc));
         Assert.That(PlayerWeaponController.SwingArcFor("spin", sword), Is.EqualTo(360f));
-        Assert.That(
-            PlayerWeaponController.SwingArcFor("blade_wave", sword),
-            Is.EqualTo(sword.AttackArc));
     }
 
     [Test]

@@ -52,7 +52,7 @@ public class Stage1AxeIntegrationTests
 
             Assert.That(weaponController, Is.Not.Null);
             Assert.That(hotbar.Inventory.Slots[0].Weapon.Type, Is.EqualTo(WeaponType.Axe));
-            Assert.That(hotbar.Inventory.Slots[4].Weapon.Type, Is.EqualTo(WeaponType.Gun));
+            Assert.That(hotbar.Inventory.Slots[4].Weapon.Type, Is.EqualTo(WeaponType.Missile));
             Assert.That(GetInventory(weaponController), Is.SameAs(hotbar.Inventory));
         }
         finally

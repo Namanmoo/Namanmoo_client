@@ -109,14 +109,14 @@ public sealed class DeliveryRegistry
         registry.Register(new StraightDelivery());
         registry.Register(new HomingDelivery());
         registry.Register(new BoomerangDelivery());
-        registry.Register(new SummonVolleyDelivery());
-        registry.Register(new RainDelivery());
+        // SummonVolleyDelivery(무기 강림)·RainDelivery(낙하)는 카탈로그에서 뺐다 —
+        // 근접 이펙트 또는 스킬로 되살릴 예정이라 구현은 남겨 둔다. 등록하면
+        // 카탈로그 대조 검사가 고아 구현으로 잡는다.
 
-        // 근접
+        // 근접 — 검기(blade_wave)는 궤도가 아니라 효과다 (BladeWaveAction)
         registry.Register(new SwingDelivery());
         registry.Register(new ThrustDelivery());
         registry.Register(new SpinDelivery());
-        registry.Register(new BladeWaveDelivery());
 
         return registry;
     }
