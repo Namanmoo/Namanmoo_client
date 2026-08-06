@@ -1,0 +1,130 @@
+using UnityEngine;
+
+/// <summary>
+/// 근접 궤도들이 공유하는 타격 판정. <see cref="WeaponAttackGeometry"/>를 그대로 쓰되
+/// 궤도가 사거리·부채꼴을 덮어쓸 수 있게 한다 (찌르기 = 좁고 길게, 회전 = 360도).
+/// </summary>
+public static class MeleeStrike
+{
+    /// <summary>범위 안 적을 때리고 맞은 수를 돌려준다. 효과는 맞은 적마다 발동한다.</summary>
+    public static int Execute(
+        DeliveryContext context, float reachOverride = -1f, float arcOverride = -1f)
+    {
+        WeaponDefinition weapon = context.Weapon;
+        if (weapon == null)
+        {
+            return 0;
+        }
+
+        float reach = reachOverride > 0f ? reachOverride : weapon.Reach;
+        float arc = arcOverride > 0f ? arcOverride : weapon.AttackArc;
+        int hits = 0;
+
+        foreach (EnemyHealth enemy in EffectHelpers.EnemiesInRadius(
+            context.Origin, reach + weapon.CollisionRadius, context.Owner))
+        {
+            bool hit = arc >= 360f
+                ? Vector2.Distance(context.Origin, enemy.transform.position) <= reach
+                : WeaponAttackGeometry.IsMeleeHit(
+                    weapon.Type,
+                    context.Origin,
+                    context.Direction,
+                    enemy.transform.position,
+                    reach,
+                    weapon.CollisionRadius,
+                    arc);
+
+            if (!hit)
+            {
+                continue;
+            }
+
+            hits++;
+            enemy.TakeDamage(weapon.Damage);
+            EnemyKnockback.Apply(enemy, context.Direction);
+            // 죽음 판정은 피해 적용 후 — on_kill이 여기서 갈린다
+            context.Runner?.NotifyHit(enemy, enemy.transform.position, context.Direction);
+        }
+
+        return hits;
+    }
+}
+
+/// <summary>휘두르기 — 전방 부채꼴. 기본 근접 동작. 파라미터 없음.</summary>
+public sealed class SwingDelivery : IDeliveryBehavior
+{
+    public string DeliveryId => "swing";
+
+    public void Execute(DeliveryContext context, ParamSet parameters)
+    {
+        MeleeStrike.Execute(context);
+    }
+}
+
+/// <summary>찌르기 — 좁고 길게. 파라미터: reachBonus.</summary>
+public sealed class ThrustDelivery : IDeliveryBehavior
+{
+    /// <summary>찌르기의 부채꼴 — 좁을수록 창처럼 나간다.</summary>
+    public const float ThrustArc = 20f;
+
+    public string DeliveryId => "thrust";
+
+    public void Execute(DeliveryContext context, ParamSet parameters)
+    {
+        float reach = (context.Weapon != null ? context.Weapon.Reach : 1f)
+            + parameters.Get("reachBonus", 0.5f);
+        MeleeStrike.Execute(context, reachOverride: reach, arcOverride: ThrustArc);
+    }
+}
+
+/// <summary>회전 베기 — 방향 없이 제자리 한 바퀴. 파라미터 없음.</summary>
+public sealed class SpinDelivery : IDeliveryBehavior
+{
+    public string DeliveryId => "spin";
+
+    public void Execute(DeliveryContext context, ParamSet parameters)
+    {
+        MeleeStrike.Execute(context, arcOverride: 360f);
+    }
+}
+
+/// <summary>
+/// 검기 — 휘두른 자리에서 참격이 전방으로 날아간다.
+/// 파라미터: waveSpeed, waveRange, waveDamagePercent.
+/// </summary>
+public sealed class BladeWaveDelivery : IDeliveryBehavior
+{
+    public string DeliveryId => "blade_wave";
+
+    public void Execute(DeliveryContext context, ParamSet parameters)
+    {
+        // 휘두르기 자체는 그대로 — 검기는 덤이다
+        MeleeStrike.Execute(context);
+
+        WeaponDefinition weapon = context.Weapon;
+        if (weapon == null || context.Direction == Vector2.zero)
+        {
+            return;
+        }
+
+        float speed = parameters.Get("waveSpeed", 4f);
+        float range = parameters.Get("waveRange", 3f);
+        int damage = EffectHelpers.RoundDamage(
+            weapon.Damage * parameters.Get("waveDamagePercent", 30f) / 100f);
+
+        WeaponDefinition wave = ProjectileSpawner.DerivedWeapon(
+            weapon, damage, speed, lifetime: range / Mathf.Max(0.1f, speed));
+
+        var waveContext = new DeliveryContext(
+            context.Host,
+            context.Owner,
+            context.Origin,
+            context.Direction,
+            new WeaponLoadout(wave, context.Loadout.Delivery, context.Loadout.Effects),
+            tuning: null,
+            context.Runner);
+
+        ProjectileSpawner.Spawn(
+            waveContext, context.Origin + context.Direction * 0.5f, context.Direction);
+    }
+}

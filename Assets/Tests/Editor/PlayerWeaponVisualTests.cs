@@ -108,7 +108,7 @@ public sealed class PlayerWeaponVisualTests
             var inventory = new PlayerInventory();
             inventory.EnsureUniqueItemInSlot(
                 0,
-                new ItemData("forged", "그린 무기", ItemKind.Weapon, sprite, WeaponStats.Default));
+                new ItemData(ForgeWeaponAssembler.Fallback(sprite, "그린 무기"), sprite));
             inventory.SelectSlot(0);
 
             visual.InitializeInventory(inventory);
@@ -121,6 +121,39 @@ public sealed class PlayerWeaponVisualTests
             DestroySprite(sprite);
             Object.DestroyImmediate(player);
         }
+    }
+
+    [Test]
+    public void SwingAngleAt_SweepsFromHalfArcAboveToHalfArcBelowTheAim()
+    {
+        // 오른손 베기 — 부채꼴 위쪽 끝에서 시작해 아래쪽 끝에서 멈춘다
+        Assert.That(
+            PlayerWeaponVisual.SwingAngleAt(0f, baseAngle: -90f, arcDegrees: 90f),
+            Is.EqualTo(-45f).Within(0.01f));
+        Assert.That(
+            PlayerWeaponVisual.SwingAngleAt(0.5f, baseAngle: -90f, arcDegrees: 90f),
+            Is.EqualTo(-90f).Within(0.01f));
+        Assert.That(
+            PlayerWeaponVisual.SwingAngleAt(1f, baseAngle: -90f, arcDegrees: 90f),
+            Is.EqualTo(-135f).Within(0.01f));
+    }
+
+    [Test]
+    public void SwingAngleAt_SpinsAFullCircleWhenTheArcIs360()
+    {
+        float start = PlayerWeaponVisual.SwingAngleAt(0f, 0f, 360f);
+        float end = PlayerWeaponVisual.SwingAngleAt(1f, 0f, 360f);
+
+        Assert.That(start - end, Is.EqualTo(360f).Within(0.01f));
+    }
+
+    [Test]
+    public void SwingAngleAt_ClampsProgressOutsideTheSwingWindow()
+    {
+        // 스윙이 끝난 뒤에도 각도가 부채꼴 밖으로 튀면 안 된다
+        Assert.That(
+            PlayerWeaponVisual.SwingAngleAt(1.7f, 0f, 90f),
+            Is.EqualTo(-45f).Within(0.01f));
     }
 
     private static PlayerWeaponVisual CreateVisual(out GameObject player)

@@ -292,15 +292,30 @@ public sealed class WeaponForgeController : MonoBehaviour
 
         if (resultDetail != null)
         {
-            WeaponStats stats = response != null
-                ? WeaponStats.FromDto(response.stats)
-                : WeaponStats.Default;
-            resultDetail.text =
-                $"공격력 {stats.Damage}   연사 {stats.ShotsPerSecond:0.##}/초   " +
-                $"탄속 {stats.ProjectileSpeed:0.##}   사거리 {stats.Lifetime:0.##}초";
+            string detail = WeaponSummary.Describe(BuildLoadout());
+            string flavor = response != null ? response.flavor : null;
+            resultDetail.text = string.IsNullOrWhiteSpace(flavor)
+                ? detail
+                : flavor.Trim() + "\n\n" + detail;
         }
 
         SetStatus(NoticeFor(stage, failure, response));
+    }
+
+    private string WeaponName()
+    {
+        return response != null && !string.IsNullOrWhiteSpace(response.name)
+            ? response.name
+            : "그린 무기";
+    }
+
+    /// <summary>
+    /// 서버 응답을 게임이 쓰는 무기로 옮긴다. 응답이 없거나 해석에 실패하면
+    /// 기본 원거리 무기를 쓴다 — 무기 없이 게임에 들어가는 일은 없어야 한다.
+    /// </summary>
+    private WeaponLoadout BuildLoadout()
+    {
+        return ForgeWeaponAssembler.FromDto(response?.weapon, resultSprite, WeaponName());
     }
 
     /// <summary>
@@ -349,15 +364,11 @@ public sealed class WeaponForgeController : MonoBehaviour
 
     private IEnumerator ConfirmRoutine()
     {
-        WeaponStats stats = response != null
-            ? WeaponStats.FromDto(response.stats)
-            : WeaponStats.Default;
-        string weaponName = response != null && !string.IsNullOrWhiteSpace(response.name)
-            ? response.name
-            : "그린 무기";
+        string weaponName = WeaponName();
         string flavor = response != null ? response.flavor : string.Empty;
+        WeaponLoadout loadout = BuildLoadout();
 
-        ForgedWeapon.Set(resultSprite, stats, weaponName, Stage);
+        ForgedWeapon.Set(resultSprite, loadout, response?.weapon, weaponName, Stage);
 
         // 무기고에 넣어 다음에도 꺼내 쓸 수 있게 한다.
         // 저장이 실패해도 이번 판은 그대로 진행한다 — 무기고 때문에 게임을 막지 않는다.
@@ -370,7 +381,7 @@ public sealed class WeaponForgeController : MonoBehaviour
             weaponName,
             flavor,
             Stage,
-            stats,
+            ForgedWeapon.Source,
             _ => { },
             error => failure = error);
 

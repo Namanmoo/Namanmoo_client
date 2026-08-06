@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Reflection;
 using NUnit.Framework;
 using UnityEditor;
@@ -6,6 +7,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.TestTools;
 using UnityEngine.UI;
 
 public class Stage1SceneBuilderTests
@@ -69,8 +71,54 @@ public class Stage1SceneBuilderTests
         Assert.That(
             playerRenderer.bounds.size.x / playerRenderer.bounds.size.y,
             Is.EqualTo(221f / 354f).Within(0.01f));
+
     }
 
+    [UnityTest]
+    public IEnumerator Build_WiresDamageFlashToPlayerBodyOnly()
+    {
+        Stage1SceneBuilder.Build();
+        EditorSceneManager.OpenScene(Stage1SceneBuilder.ScenePath);
+        yield return new EnterPlayMode();
+
+        GameObject player = GameObject.Find("Player");
+        Assert.That(player, Is.Not.Null);
+        PlayerDamageFlash damageFlash = player.GetComponent<PlayerDamageFlash>();
+        Assert.That(damageFlash, Is.Not.Null);
+
+        PlayerHealth health = player.GetComponent<PlayerHealth>();
+        SpriteRenderer bodyRenderer =
+            player.transform.Find("Player Visual").GetComponent<SpriteRenderer>();
+        Assert.That(health.TryTakeDamage(1, Time.time, 0.2f), Is.True);
+        Assert.That(bodyRenderer.color, Is.EqualTo(Color.black));
+
+        PlayerWeaponVisual weaponVisual = player.GetComponent<PlayerWeaponVisual>();
+        if (weaponVisual != null && weaponVisual.Renderer != null)
+        {
+            Assert.That(weaponVisual.Renderer.color, Is.Not.EqualTo(Color.black));
+        }
+
+        yield return new ExitPlayMode();
+    }
+
+    [UnityTest]
+    public IEnumerator ExistingScene_WiresDamageFlashToPlayerBodyOnly()
+    {
+        EditorSceneManager.OpenScene(Stage1SceneBuilder.ScenePath);
+        yield return new EnterPlayMode();
+
+        GameObject player = GameObject.Find("Player");
+        Assert.That(player, Is.Not.Null);
+        Assert.That(player.GetComponent<PlayerDamageFlash>(), Is.Not.Null);
+
+        PlayerHealth health = player.GetComponent<PlayerHealth>();
+        SpriteRenderer bodyRenderer =
+            player.transform.Find("Player Visual").GetComponent<SpriteRenderer>();
+        Assert.That(health.TryTakeDamage(1, Time.time, 0.2f), Is.True);
+        Assert.That(bodyRenderer.color, Is.EqualTo(Color.black));
+
+        yield return new ExitPlayMode();
+    }
     [Test]
     public void Build_AssignsGenericWeaponControllerToPlayer()
     {

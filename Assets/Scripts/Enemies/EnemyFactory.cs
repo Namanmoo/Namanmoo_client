@@ -3,9 +3,6 @@ using UnityEngine;
 
 public static class EnemyFactory
 {
-    private const float VisualHeight = 2f;
-    private const float BodyRadius = 0.7f;
-
     public static EnemyHealth Create(
         EnemyDefinition definition,
         EnemySpawnRequest request)
@@ -26,8 +23,9 @@ public static class EnemyFactory
             new Vector3(request.Position.x, request.Position.y, -0.2f);
 
         CreateVisual(root.transform, definition);
-        ConfigurePhysics(root);
+        ConfigurePhysics(root, definition);
 
+        root.AddComponent<EnemyDamageFlash>();
         EnemyHealth health = root.AddComponent<EnemyHealth>();
         health.Configure(definition.MaxHealth);
 
@@ -43,6 +41,15 @@ public static class EnemyFactory
                 ApproachAndShootEnemyController rangedController =
                     root.AddComponent<ApproachAndShootEnemyController>();
                 rangedController.Initialize(definition, request.Target);
+                break;
+
+            case EnemyBehaviorType.StationaryFourWayShoot:
+                StationaryFourWayShooterController stationaryController =
+                    root.AddComponent<StationaryFourWayShooterController>();
+                stationaryController.Initialize(
+                    definition,
+                    request.Target,
+                    Time.time);
                 break;
         }
 
@@ -77,7 +84,10 @@ public static class EnemyFactory
                 nameof(definition));
         }
 
-        if (definition.BehaviorType == EnemyBehaviorType.ApproachAndShoot &&
+        bool usesProjectiles =
+            definition.BehaviorType == EnemyBehaviorType.ApproachAndShoot ||
+            definition.BehaviorType == EnemyBehaviorType.StationaryFourWayShoot;
+        if (usesProjectiles &&
             (definition.ProjectileSprite == null ||
              definition.ProjectileSpeed <= 0f ||
              definition.ProjectileLifetime <= 0f ||
@@ -89,7 +99,8 @@ public static class EnemyFactory
         }
 
         if (definition.BehaviorType != EnemyBehaviorType.ChaseContact &&
-            definition.BehaviorType != EnemyBehaviorType.ApproachAndShoot)
+            definition.BehaviorType != EnemyBehaviorType.ApproachAndShoot &&
+            definition.BehaviorType != EnemyBehaviorType.StationaryFourWayShoot)
         {
             throw new ArgumentException(
                 "Enemy definition uses an unsupported behavior type.",
@@ -108,7 +119,8 @@ public static class EnemyFactory
         visualObject.transform.SetParent(parent, false);
 
         float visualScale =
-            VisualHeight / Mathf.Max(definition.BodySprite.bounds.size.y, 0.01f);
+            definition.VisualHeight /
+            Mathf.Max(definition.BodySprite.bounds.size.y, 0.01f);
         visualObject.transform.localScale =
             new Vector3(visualScale, visualScale, 1f);
 
@@ -120,7 +132,9 @@ public static class EnemyFactory
         visualObject.GetComponent<SpriteRenderer>().sortingOrder = 4;
     }
 
-    private static void ConfigurePhysics(GameObject root)
+    private static void ConfigurePhysics(
+        GameObject root,
+        EnemyDefinition definition)
     {
         Rigidbody2D body = root.AddComponent<Rigidbody2D>();
         body.gravityScale = 0f;
@@ -129,7 +143,7 @@ public static class EnemyFactory
         body.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         CircleCollider2D collider = root.AddComponent<CircleCollider2D>();
-        collider.radius = BodyRadius;
+        collider.radius = definition.BodyCollisionRadius;
         collider.isTrigger = false;
     }
 }

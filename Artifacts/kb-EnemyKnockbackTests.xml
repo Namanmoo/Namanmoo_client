@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Passed" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-05 17:15:41Z" end-time="2026-08-05 17:15:41Z" duration="0.0395664">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="492" result="Passed" start-time="2026-08-05 17:15:41Z" end-time="2026-08-05 17:15:41Z" duration="0.039566" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1587" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="492" result="Passed" start-time="2026-08-05 17:15:41Z" end-time="2026-08-05 17:15:41Z" duration="0.031435" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="17720" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1159" name="EnemyKnockbackTests" fullname="EnemyKnockbackTests" classname="EnemyKnockbackTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-08-05 17:15:41Z" end-time="2026-08-05 17:15:41Z" duration="0.027370" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1160" name="ChaseEnemyGetsKnockedBack" fullname="EnemyKnockbackTests.ChaseEnemyGetsKnockedBack" methodname="ChaseEnemyGetsKnockedBack" classname="EnemyKnockbackTests" runstate="Runnable" seed="905567418" result="Passed" start-time="2026-08-05 17:15:41Z" end-time="2026-08-05 17:15:41Z" duration="0.013823" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1162" name="DeadEnemyIsIgnored" fullname="EnemyKnockbackTests.DeadEnemyIsIgnored" methodname="DeadEnemyIsIgnored" classname="EnemyKnockbackTests" runstate="Runnable" seed="279610270" result="Passed" start-time="2026-08-05 17:15:41Z" end-time="2026-08-05 17:15:41Z" duration="0.002834" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[enemy: Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently
+]]></output>
+        </test-case>
+        <test-case id="1161" name="EnemyWithoutAChaseControllerIsIgnored" fullname="EnemyKnockbackTests.EnemyWithoutAChaseControllerIsIgnored" methodname="EnemyWithoutAChaseControllerIsIgnored" classname="EnemyKnockbackTests" runstate="Runnable" seed="161024255" result="Passed" start-time="2026-08-05 17:15:41Z" end-time="2026-08-05 17:15:41Z" duration="0.000290" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1163" name="ZeroDirectionIsIgnored" fullname="EnemyKnockbackTests.ZeroDirectionIsIgnored" methodname="ZeroDirectionIsIgnored" classname="EnemyKnockbackTests" runstate="Runnable" seed="1769507746" result="Passed" start-time="2026-08-05 17:15:41Z" end-time="2026-08-05 17:15:41Z" duration="0.000261" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

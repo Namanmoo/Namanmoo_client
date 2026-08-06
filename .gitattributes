@@ -1,0 +1,6 @@
+# Unity YAML 파일은 UnityYAMLMerge(Smart Merge)로 병합한다 — 줄 단위가 아니라
+# 씬 오브젝트 단위로 합쳐서, 서로 다른 오브젝트를 고친 변경은 충돌 없이 합쳐진다.
+# 드라이버 등록은 클론마다 한 번: tools/setup-unity-smartmerge.sh
+*.unity merge=unityyamlmerge
+*.prefab merge=unityyamlmerge
+*.asset merge=unityyamlmerge

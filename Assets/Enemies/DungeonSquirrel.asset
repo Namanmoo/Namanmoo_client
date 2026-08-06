@@ -18,11 +18,13 @@ MonoBehaviour:
   projectileSprite: {fileID: 7351223683821489012, guid: 430ea4e7fa2cf84478e255067998cefa, type: 3}
   behaviorType: 1
   animatorController: {fileID: 0}
+  visualHeight: 2
+  bodyCollisionRadius: 0.8
   maxHealth: 5
-  moveSpeed: 2
-  attackDamage: 1
-  attackRange: 7
+  moveSpeed: 4
+  attackDamage: 2
+  attackRange: 14
   attackInterval: 1.5
-  projectileSpeed: 6
+  projectileSpeed: 7
   projectileLifetime: 3
   projectileRadius: 0.2

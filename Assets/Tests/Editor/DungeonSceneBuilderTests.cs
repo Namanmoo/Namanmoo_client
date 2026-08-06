@@ -11,6 +11,8 @@ public sealed class DungeonSceneBuilderTests
         "Assets/Enemies/DungeonKrab.asset";
     private const string SquirrelDefinitionPath =
         "Assets/Enemies/DungeonSquirrel.asset";
+    private const string WoodTowerDefinitionPath =
+        "Assets/Enemies/DungeonWoodTower.asset";
 
     [Test]
     public void Scene_PlayerHasDashComponent()
@@ -29,14 +31,35 @@ public sealed class DungeonSceneBuilderTests
     }
 
     [Test]
-    public void Scene_AssignsBothPersistentEnemyDefinitionsToEncounter()
+    public void Scene_WiresDamageFlashToPlayerBody()
+    {
+        Scene scene = EditorSceneManager.OpenScene(
+            DungeonSceneBuilder.ScenePath,
+            OpenSceneMode.Single);
+        Assert.That(scene.IsValid, Is.True);
+
+        PlayerMovement movement = Object.FindAnyObjectByType<PlayerMovement>();
+        Assert.That(movement, Is.Not.Null);
+        PlayerDamageFlash flash = movement.GetComponent<PlayerDamageFlash>();
+        Assert.That(flash, Is.Not.Null);
+
+        var serialized = new SerializedObject(flash);
+        Assert.That(serialized.FindProperty("health").objectReferenceValue, Is.Not.Null);
+        Assert.That(serialized.FindProperty("bodyRenderer").objectReferenceValue, Is.Not.Null);
+    }
+
+    [Test]
+    public void Scene_AssignsAllPersistentEnemyDefinitionsToEncounter()
     {
         EnemyDefinition krab =
             AssetDatabase.LoadAssetAtPath<EnemyDefinition>(KrabDefinitionPath);
         EnemyDefinition squirrel =
             AssetDatabase.LoadAssetAtPath<EnemyDefinition>(SquirrelDefinitionPath);
+        EnemyDefinition woodTower =
+            AssetDatabase.LoadAssetAtPath<EnemyDefinition>(WoodTowerDefinitionPath);
         Assert.That(krab, Is.Not.Null);
         Assert.That(squirrel, Is.Not.Null);
+        Assert.That(woodTower, Is.Not.Null);
 
         Scene scene = EditorSceneManager.OpenScene(
             DungeonSceneBuilder.ScenePath,
@@ -50,13 +73,16 @@ public sealed class DungeonSceneBuilderTests
         var serialized = new SerializedObject(encounter);
         SerializedProperty definitions =
             serialized.FindProperty("normalEnemyDefinitions");
-        Assert.That(definitions.arraySize, Is.EqualTo(2));
+        Assert.That(definitions.arraySize, Is.EqualTo(3));
         Assert.That(
             definitions.GetArrayElementAtIndex(0).objectReferenceValue,
             Is.SameAs(krab));
         Assert.That(
             definitions.GetArrayElementAtIndex(1).objectReferenceValue,
             Is.SameAs(squirrel));
+        Assert.That(
+            definitions.GetArrayElementAtIndex(2).objectReferenceValue,
+            Is.SameAs(woodTower));
         Assert.That(serialized.FindProperty("krabSprite"), Is.Null);
     }
 }

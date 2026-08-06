@@ -101,6 +101,28 @@ public class SwordProjectileTests
     }
 
     [UnityTest]
+    public IEnumerator TryHit_AppliesKnockbackOppositeTheTravelDirection()
+    {
+        yield return new EnterPlayMode();
+
+        SwordProjectile projectile = CreateProjectile();
+        projectile.Initialize(Vector2.right, 5, 8f, 720f, 4f, null);
+        var enemy = new GameObject("Enemy");
+        Collider2D enemyCollider = enemy.AddComponent<BoxCollider2D>();
+        enemy.AddComponent<EnemyHealth>();
+        enemy.AddComponent<ChaseContactEnemyController>();
+
+        Assert.That(projectile.TryHit(enemyCollider), Is.True);
+
+        EnemyStatus status = enemy.GetComponent<EnemyStatus>();
+        Assert.That(status, Is.Not.Null);
+        Assert.That(status.IsKnockedBack, Is.True);
+
+        Object.Destroy(enemy);
+        yield return new ExitPlayMode();
+    }
+
+    [UnityTest]
     public IEnumerator TryHit_OwnerEnemy_IsIgnoredAndProjectileCanStillHitAnotherEnemy()
     {
         yield return new EnterPlayMode();

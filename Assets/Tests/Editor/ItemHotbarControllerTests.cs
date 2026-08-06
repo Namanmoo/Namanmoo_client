@@ -243,7 +243,12 @@ public class ItemHotbarControllerTests : InputTestFixture
     {
         Sprite swordSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SwordSpritePath);
         Assert.That(swordSprite, Is.Not.Null);
-        ForgedWeapon.Set(swordSprite, WeaponStats.Default, "테스트 무기", 1);
+        ForgedWeapon.Set(
+            swordSprite,
+            ForgeWeaponAssembler.Fallback(swordSprite, "테스트 무기"),
+            null,
+            "테스트 무기",
+            1);
 
         try
         {

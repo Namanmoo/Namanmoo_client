@@ -27,6 +27,12 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
     private SpriteRenderer weaponRenderer;
     private Vector2 aim = DefaultAim;
 
+    // 스윙 중이면 조준 각도 대신 부채꼴을 쓸어 내려간다
+    private float swingEndsAt = float.NegativeInfinity;
+    private float swingDuration;
+    private float swingArc;
+    private float swingBaseAngle;
+
     public SpriteRenderer Renderer => weaponRenderer;
 
     public Vector2 Aim => aim;
@@ -89,6 +95,24 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 근접 공격 순간 무기를 부채꼴로 휘두른다. 그립(pivot)을 축으로
+    /// 조준 각도 ±arc/2 를 쓸어 내려간 뒤 원래 조준 각도로 돌아온다.
+    /// </summary>
+    public void PlaySwing(Vector2 direction, float arcDegrees, float durationSeconds)
+    {
+        if (arcDegrees <= 0f || durationSeconds <= 0f)
+        {
+            return;
+        }
+
+        SetAim(direction);
+        swingBaseAngle = AngleFor(aim);
+        swingArc = arcDegrees;
+        swingDuration = durationSeconds;
+        swingEndsAt = Time.time + durationSeconds;
+    }
+
     /// <summary>손에 든 그림과 각도를 지금 상태에 맞춘다.</summary>
     public void Refresh()
     {
@@ -99,8 +123,15 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
         // 맨손이면 아무것도 안 보여야 한다
         weaponRenderer.enabled = sprite != null;
 
+        float angle = AngleFor(aim);
+        if (Time.time < swingEndsAt)
+        {
+            float progress = 1f - (swingEndsAt - Time.time) / swingDuration;
+            angle = SwingAngleAt(progress, swingBaseAngle, swingArc);
+        }
+
         weaponRenderer.transform.localPosition = handOffset;
-        weaponRenderer.transform.localRotation = Quaternion.Euler(0f, 0f, AngleFor(aim));
+        weaponRenderer.transform.localRotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     private static Sprite SpriteFor(ItemData item)
@@ -138,5 +169,16 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
 
         // Atan2는 오른쪽이 0도 — 위쪽 기준으로 90도 돌려 맞춘다
         return Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+    }
+
+    /// <summary>
+    /// 스윙 진행도(0~1)에 따른 각도. +arc/2 에서 -arc/2 로 쓸어 내려간다
+    /// (화면상 시계 방향 — 오른손 베기). 회전 베기는 arc 360으로 한 바퀴가 된다.
+    /// 씬 없이 계산만 하므로 EditMode 테스트로 덮는다.
+    /// </summary>
+    public static float SwingAngleAt(float progress01, float baseAngle, float arcDegrees)
+    {
+        float eased = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(progress01));
+        return baseAngle + arcDegrees * (0.5f - eased);
     }
 }

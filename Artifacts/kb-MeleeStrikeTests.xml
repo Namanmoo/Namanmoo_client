@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Passed" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-05 17:15:53Z" end-time="2026-08-05 17:15:53Z" duration="0.0374511">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="492" result="Passed" start-time="2026-08-05 17:15:53Z" end-time="2026-08-05 17:15:53Z" duration="0.037451" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1587" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="492" result="Passed" start-time="2026-08-05 17:15:53Z" end-time="2026-08-05 17:15:53Z" duration="0.029120" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="4652" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1286" name="MeleeStrikeTests" fullname="MeleeStrikeTests" classname="MeleeStrikeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-08-05 17:15:53Z" end-time="2026-08-05 17:15:53Z" duration="0.025008" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1287" name="HitEnemyIsKnockedBackOppositeTheAttackDirection" fullname="MeleeStrikeTests.HitEnemyIsKnockedBackOppositeTheAttackDirection" methodname="HitEnemyIsKnockedBackOppositeTheAttackDirection" classname="MeleeStrikeTests" runstate="Runnable" seed="1658912914" result="Passed" start-time="2026-08-05 17:15:53Z" end-time="2026-08-05 17:15:53Z" duration="0.014441" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1288" name="MissedEnemyOutsideReachIsNotKnockedBack" fullname="MeleeStrikeTests.MissedEnemyOutsideReachIsNotKnockedBack" methodname="MissedEnemyOutsideReachIsNotKnockedBack" classname="MeleeStrikeTests" runstate="Runnable" seed="1297445600" result="Passed" start-time="2026-08-05 17:15:53Z" end-time="2026-08-05 17:15:53Z" duration="0.000549" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

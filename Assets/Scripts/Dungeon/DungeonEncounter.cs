@@ -18,6 +18,15 @@ namespace NaManMoo.Dungeon
     {
         [SerializeField] private EnemyDefinition[] normalEnemyDefinitions;
         [SerializeField] private Sprite bossSprite;
+        [SerializeField] private SultanBossDefinition sultanBossDefinition;
+
+        public void ConfigureSultanBoss(
+            EnemyDefinition[] normalEnemies, SultanBossDefinition sultanBoss)
+        {
+            normalEnemyDefinitions = normalEnemies;
+            sultanBossDefinition = sultanBoss;
+            bossSprite = null;
+        }
 
         public void Configure(EnemyDefinition[] normalEnemies, Sprite boss)
         {
@@ -110,6 +119,18 @@ namespace NaManMoo.Dungeon
         private List<EnemyHealth> SpawnBoss(
             Transform roomRoot, Transform player, RoomShape shape)
         {
+            if (sultanBossDefinition != null)
+            {
+                Transform bossCanvas = BossFactory.CreateOverlayCanvas(
+                    roomRoot, "Boss Health Canvas");
+                return new List<EnemyHealth>
+                {
+                    SultanBossFactory.Create(
+                        roomRoot, bossCanvas, player, sultanBossDefinition,
+                        shape.Bounds.center, shape.Bounds)
+                };
+            }
+
             if (bossSprite == null)
             {
                 return null;

@@ -70,12 +70,14 @@ public sealed class PlayerSwordShooter : MonoBehaviour
     }
 
     /// <summary>
-    /// 발사체를 쏘는 무기인가. 기본 검과 무기 만들기로 만든 무기가 여기에 해당한다.
-    /// (슬롯 번호가 아니라 장착된 아이템으로 판단한다 — 만든 무기는 3번 칸에 들어간다.)
+    /// 발사체를 쏘는 무기인가. 인스펙터 값으로 도는 기본 검만 여기에 해당한다.
+    ///
+    /// 만든 무기는 <see cref="PlayerWeaponController"/>가 맡는다 — 근접으로도 나올 수 있고
+    /// 궤도·효과를 붙여야 해서, 스탯 4개만 아는 이 경로로는 표현할 수 없다.
     /// </summary>
     public static bool IsProjectileWeapon(ItemData item)
     {
-        return item != null && (item.Id == "sword" || item.Id == ForgedWeapon.ItemId);
+        return item != null && item.Id == "sword";
     }
 
     public void ProcessInput(Keyboard keyboard, float currentTime)
@@ -95,22 +97,15 @@ public sealed class PlayerSwordShooter : MonoBehaviour
         if (currentTime >= nextShotTime)
         {
             SpawnProjectile(direction, equipped);
-            nextShotTime = currentTime + (1f / ShotsPerSecondFor(equipped));
+            nextShotTime = currentTime + (1f / shotsPerSecond);
         }
-    }
-
-    private float ShotsPerSecondFor(ItemData item)
-    {
-        return item?.Stats != null ? item.Stats.ShotsPerSecond : shotsPerSecond;
     }
 
     private void SpawnProjectile(Vector2 direction, ItemData equipped)
     {
-        // 만든 무기는 AI가 정한 성능을, 기본 검은 인스펙터 값을 쓴다
-        WeaponStats stats = equipped?.Stats;
-        int shotDamage = stats != null ? stats.Damage : damage;
-        float shotSpeed = stats != null ? stats.ProjectileSpeed : projectileSpeed;
-        float shotLifetime = stats != null ? stats.Lifetime : projectileLifetime;
+        int shotDamage = damage;
+        float shotSpeed = projectileSpeed;
+        float shotLifetime = projectileLifetime;
         Sprite shotSprite = equipped?.Icon != null ? equipped.Icon : swordSprite;
 
         var projectileObject = new GameObject("Sword Projectile");

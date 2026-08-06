@@ -34,9 +34,9 @@ public sealed class ForgedWeaponTests
     [Test]
     public void SetStoresTheWeaponAsAnInventoryItem()
     {
-        var stats = new WeaponStats(12, 2f, 10f, 3f);
+        WeaponLoadout loadout = ForgeWeaponAssembler.Fallback(sprite, "불꽃 검");
 
-        ForgedWeapon.Set(sprite, stats, "불꽃 검", version: 3);
+        ForgedWeapon.Set(sprite, loadout, null, "불꽃 검", version: 3);
 
         Assert.That(ForgedWeapon.HasWeapon, Is.True);
         Assert.That(ForgedWeapon.Version, Is.EqualTo(3));
@@ -46,23 +46,24 @@ public sealed class ForgedWeaponTests
         Assert.That(item.DisplayName, Is.EqualTo("불꽃 검"));
         Assert.That(item.Kind, Is.EqualTo(ItemKind.Weapon));
         Assert.That(item.Icon, Is.SameAs(sprite));
-        Assert.That(item.Stats, Is.SameAs(stats));
+        Assert.That(item.Loadout, Is.SameAs(loadout));
     }
 
     [Test]
     public void BlankNameFallsBackToAReadableLabel()
     {
-        ForgedWeapon.Set(sprite, WeaponStats.Default, "   ", version: 1);
+        ForgedWeapon.Set(sprite, ForgeWeaponAssembler.Fallback(sprite, "x"), null, "   ", version: 1);
 
         Assert.That(ForgedWeapon.ToItemData().DisplayName, Is.EqualTo("만든 무기"));
     }
 
     [Test]
-    public void MissingStatsFallBackToTheDefaultWeapon()
+    public void MissingLoadoutFallsBackToTheDefaultWeapon()
     {
-        ForgedWeapon.Set(sprite, null, "이름", version: 1);
+        ForgedWeapon.Set(sprite, null, null, "이름", version: 1);
 
-        Assert.That(ForgedWeapon.Stats.Damage, Is.EqualTo(WeaponStats.Default.Damage));
+        Assert.That(ForgedWeapon.HasWeapon, Is.True);
+        Assert.That(ForgedWeapon.Loadout.Definition.Category, Is.EqualTo(WeaponCategory.Ranged));
     }
 
     [Test]
@@ -70,7 +71,7 @@ public sealed class ForgedWeaponTests
     {
         Assert.That(ForgedWeapon.SlotIndex, Is.EqualTo(2));
 
-        ForgedWeapon.Set(sprite, WeaponStats.Default, "이름", version: 1);
+        ForgedWeapon.Set(sprite, ForgeWeaponAssembler.Fallback(sprite, "이름"), null, "이름", version: 1);
         var inventory = new PlayerInventory();
         inventory.EnsureUniqueItemInSlotZero(new ItemData("sword", "Sword", ItemKind.Weapon));
         inventory.EnsureUniqueItemInSlot(1, new ItemData("axe", "Axe", ItemKind.Weapon));

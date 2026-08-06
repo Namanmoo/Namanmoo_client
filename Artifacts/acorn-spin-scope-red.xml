@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="6" result="Failed(Child)" total="6" passed="5" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-04 06:58:00Z" end-time="2026-08-04 06:58:00Z" duration="0.5403348">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="422" result="Failed" site="Child" start-time="2026-08-04 06:58:00Z" end-time="2026-08-04 06:58:00Z" duration="0.540335" total="6" passed="5" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1505" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="422" result="Failed" site="Child" start-time="2026-08-04 06:58:00Z" end-time="2026-08-04 06:58:00Z" duration="0.533687" total="6" passed="5" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="6240" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1001" name="ApproachAndShootEnemyControllerTests" fullname="ApproachAndShootEnemyControllerTests" classname="ApproachAndShootEnemyControllerTests" runstate="Runnable" testcasecount="6" result="Failed" site="Child" start-time="2026-08-04 06:58:00Z" end-time="2026-08-04 06:58:00Z" duration="0.530050" total="6" passed="5" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1002" name="CalculateVelocity_ApproachesOutsideRangeAndStopsInsideRange" fullname="ApproachAndShootEnemyControllerTests.CalculateVelocity_ApproachesOutsideRangeAndStopsInsideRange" methodname="CalculateVelocity_ApproachesOutsideRangeAndStopsInsideRange" classname="ApproachAndShootEnemyControllerTests" runstate="Runnable" seed="1211956244" result="Passed" start-time="2026-08-04 06:58:00Z" end-time="2026-08-04 06:58:00Z" duration="0.013253" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1006" name="Initialize_CreatesTriggerSensorAndIgnoresPlayerBodyCollision" fullname="ApproachAndShootEnemyControllerTests.Initialize_CreatesTriggerSensorAndIgnoresPlayerBodyCollision" methodname="Initialize_CreatesTriggerSensorAndIgnoresPlayerBodyCollision" classname="ApproachAndShootEnemyControllerTests" runstate="Runnable" seed="2086147412" result="Passed" start-time="2026-08-04 06:58:00Z" end-time="2026-08-04 06:58:00Z" duration="0.001933" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1003" name="TryAttack_EnforcesIntervalAndInitializesProjectileFromDefinition" fullname="ApproachAndShootEnemyControllerTests.TryAttack_EnforcesIntervalAndInitializesProjectileFromDefinition" methodname="TryAttack_EnforcesIntervalAndInitializesProjectileFromDefinition" classname="ApproachAndShootEnemyControllerTests" runstate="Runnable" seed="1386150724" result="Failed" start-time="2026-08-04 06:58:00Z" end-time="2026-08-04 06:58:00Z" duration="0.008706" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: 0
+  But was:  720.0f
+]]></message>
+            <stack-trace><![CDATA[at ApproachAndShootEnemyControllerTests.TryAttack_EnforcesIntervalAndInitializesProjectileFromDefinition () [0x00105] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\ApproachAndShootEnemyControllerTests.cs:49
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1005" name="TryAttack_OutsideRangeDoesNotSpawnProjectile" fullname="ApproachAndShootEnemyControllerTests.TryAttack_OutsideRangeDoesNotSpawnProjectile" methodname="TryAttack_OutsideRangeDoesNotSpawnProjectile" classname="ApproachAndShootEnemyControllerTests" runstate="Runnable" seed="1589325316" result="Passed" start-time="2026-08-04 06:58:00Z" end-time="2026-08-04 06:58:00Z" duration="0.000664" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1004" name="TryAttack_SquirrelProjectileUsesAcornRotation" fullname="ApproachAndShootEnemyControllerTests.TryAttack_SquirrelProjectileUsesAcornRotation" methodname="TryAttack_SquirrelProjectileUsesAcornRotation" classname="ApproachAndShootEnemyControllerTests" runstate="Runnable" seed="1782384441" result="Passed" start-time="2026-08-04 06:58:00Z" end-time="2026-08-04 06:58:00Z" duration="0.000776" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1007" name="TryDamagePlayer_DealsTwoWithSharedInvulnerability" fullname="ApproachAndShootEnemyControllerTests.TryDamagePlayer_DealsTwoWithSharedInvulnerability" methodname="TryDamagePlayer_DealsTwoWithSharedInvulnerability" classname="ApproachAndShootEnemyControllerTests" runstate="Runnable" seed="119981288" result="Passed" start-time="2026-08-04 06:58:00Z" end-time="2026-08-04 06:58:00Z" duration="0.496020" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
