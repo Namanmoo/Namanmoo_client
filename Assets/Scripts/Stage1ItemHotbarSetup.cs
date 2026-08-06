@@ -63,7 +63,8 @@ public static class Stage1ItemHotbarSetup
             CanvasName,
             typeof(RectTransform),
             typeof(Canvas),
-            typeof(CanvasScaler));
+            typeof(CanvasScaler),
+            typeof(GraphicRaycaster)); // 없으면 슬롯 호버(툴팁)가 이벤트를 못 받는다
         canvasObject.transform.SetParent(canvasParent, false);
 
         Canvas canvas = canvasObject.GetComponent<Canvas>();

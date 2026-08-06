@@ -60,7 +60,7 @@ public sealed class SampleStageSceneTests
         Assert.That(hotbar.Inventory.Slots[1].Weapon.Type, Is.EqualTo(WeaponType.Spear));
         Assert.That(hotbar.Inventory.Slots[2].Weapon.Type, Is.EqualTo(WeaponType.Axe));
         Assert.That(hotbar.Inventory.Slots[3].Weapon.Type, Is.EqualTo(WeaponType.Projectile));
-        Assert.That(hotbar.Inventory.Slots[4].Weapon.Type, Is.EqualTo(WeaponType.Gun));
+        Assert.That(hotbar.Inventory.Slots[4].Weapon.Type, Is.EqualTo(WeaponType.Missile));
         Assert.That(hotbar.Inventory.Slots[5], Is.Null);
 
         yield return new ExitPlayMode();

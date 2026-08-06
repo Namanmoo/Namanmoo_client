@@ -88,43 +88,5 @@ public sealed class SpinDelivery : IDeliveryBehavior
     }
 }
 
-/// <summary>
-/// 검기 — 휘두른 자리에서 참격이 전방으로 날아간다.
-/// 파라미터: waveSpeed, waveRange, waveDamagePercent.
-/// </summary>
-public sealed class BladeWaveDelivery : IDeliveryBehavior
-{
-    public string DeliveryId => "blade_wave";
-
-    public void Execute(DeliveryContext context, ParamSet parameters)
-    {
-        // 휘두르기 자체는 그대로 — 검기는 덤이다
-        MeleeStrike.Execute(context);
-
-        WeaponDefinition weapon = context.Weapon;
-        if (weapon == null || context.Direction == Vector2.zero)
-        {
-            return;
-        }
-
-        float speed = parameters.Get("waveSpeed", 4f);
-        float range = parameters.Get("waveRange", 3f);
-        int damage = EffectHelpers.RoundDamage(
-            weapon.Damage * parameters.Get("waveDamagePercent", 30f) / 100f);
-
-        WeaponDefinition wave = ProjectileSpawner.DerivedWeapon(
-            weapon, damage, speed, lifetime: range / Mathf.Max(0.1f, speed));
-
-        var waveContext = new DeliveryContext(
-            context.Host,
-            context.Owner,
-            context.Origin,
-            context.Direction,
-            new WeaponLoadout(wave, context.Loadout.Delivery, context.Loadout.Effects),
-            tuning: null,
-            context.Runner);
-
-        ProjectileSpawner.Spawn(
-            waveContext, context.Origin + context.Direction * 0.5f, context.Direction);
-    }
-}
+// 검기(blade_wave)는 궤도가 아니라 효과다 — Effects/Actions/BladeWaveAction.cs.
+// 효과라서 어떤 근접 궤도와도 조합된다 (회전 베기 + 검기 등).

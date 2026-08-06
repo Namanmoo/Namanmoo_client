@@ -21,7 +21,7 @@ public static class WeaponForgeSceneBuilder
     public const string ScenePath = "Assets/Scenes/WeaponForge.unity";
 
     private const string BackgroundPath = "Assets/UI/WeaponForge.png";
-    private const string FontPath = "Assets/Fonts/Gaegu-Regular.ttf";
+    private const string FontPath = "Assets/Resources/Fonts/Gaegu-Regular.ttf";
     private static readonly Vector2 ReferenceResolution = new Vector2(1920f, 1080f);
 
     // ── 목업에서 측정한 영역 (xMin, yMin, xMax, yMax — 좌상단 원점) ──
@@ -103,14 +103,20 @@ public static class WeaponForgeSceneBuilder
 
         (Slider stageSlider, Text stageLabel) = CreateStageSlider(frame, font);
         Image[] strokeHighlights = CreateToolButtons(frame, controller);
-        (Image[] colorHighlights, Image fillHighlight, Image gripHighlight) =
+        (Image[] colorHighlights, Image fillHighlight,
+         Image gripHighlight, Image centerHighlight, Image tipHighlight) =
             CreateColorButtons(frame, font, controller);
-        RectTransform gripMarker = CreateGripMarker(frame);
-        // 연필·크레용·지우개 + 채우기 + 그립 — SelectTool의 인덱스 순서와 같아야 한다
+        RectTransform gripMarker = CreatePointMarker(
+            frame, "Grip Marker", new Color(0.98f, 0.35f, 0.1f, 0.85f));
+        RectTransform centerMarker = CreatePointMarker(
+            frame, "Center Marker", new Color(0.15f, 0.5f, 0.95f, 0.85f));
+        RectTransform tipMarker = CreatePointMarker(
+            frame, "Tip Marker", new Color(0.1f, 0.75f, 0.3f, 0.85f));
+        // 연필·크레용·지우개 + 채우기 + 그립·중심·끝 — SelectTool의 인덱스 순서와 같아야 한다
         var toolHighlights = new[]
         {
             strokeHighlights[0], strokeHighlights[1], strokeHighlights[2],
-            fillHighlight, gripHighlight
+            fillHighlight, gripHighlight, centerHighlight, tipHighlight
         };
         // 결과 화면은 그림에 얹는 게 아니라 화면 전체를 덮으므로 캔버스 바로 아래에 둔다
         ResultPanelParts result = CreateResultPanel(canvas.transform, font, controller);
@@ -124,7 +130,8 @@ public static class WeaponForgeSceneBuilder
 
         WireController(
             controller, drawing, note, preview, forgeButton, status,
-            stageSlider, stageLabel, toolHighlights, colorHighlights, result, gripMarker);
+            stageSlider, stageLabel, toolHighlights, colorHighlights, result,
+            gripMarker, centerMarker, tipMarker);
 
         EditorSceneManager.SaveScene(scene, ScenePath);
         AddSceneToBuildSettings();
@@ -358,7 +365,8 @@ public static class WeaponForgeSceneBuilder
     /// 채우기 버튼도 여기서 만든다 — 목업 도구바에 빈 자리가 없어 팔레트 줄의
     /// 맨 앞 칸을 쓴다. 색 조각과 구분되게 회색 라벨 버튼으로 둔다.
     /// </summary>
-    private static (Image[] colorHighlights, Image fillHighlight, Image gripHighlight)
+    private static (Image[] colorHighlights, Image fillHighlight,
+        Image gripHighlight, Image centerHighlight, Image tipHighlight)
         CreateColorButtons(Transform parent, Font font, WeaponForgeController controller)
     {
         Color32[] colors = WeaponForgeController.PaletteColors;
@@ -377,28 +385,33 @@ public static class WeaponForgeSceneBuilder
         }
 
         // 확장 팔레트 — 목업에 없으므로 조각과 밑줄을 전부 그린다.
-        // 맨 앞 두 칸은 색 채우기·그립 버튼이 쓴다.
-        const int reservedSlots = 2;
+        // 맨 앞 네 칸은 색 채우기·그립·중심·끝 버튼이 쓴다.
+        const int reservedSlots = 4;
         int extendedCount = colors.Length - extendedStart;
         int slots = extendedCount + reservedSlots;
         float slotWidth = (PaletteRight - PaletteLeft) / slots;
         float gap = slotWidth * 0.18f;
 
-        Image fillHighlight = CreateFillButton(
-            parent,
-            font,
-            controller,
-            Rect.MinMaxRect(
-                PaletteLeft + gap * 0.5f, PaletteTop,
-                PaletteLeft + slotWidth - gap * 0.5f, PaletteBottom));
+        Rect SlotArea(int slot) => Rect.MinMaxRect(
+            PaletteLeft + slotWidth * slot + gap * 0.5f, PaletteTop,
+            PaletteLeft + slotWidth * (slot + 1) - gap * 0.5f, PaletteBottom);
 
-        Image gripHighlight = CreateGripButton(
-            parent,
-            font,
-            controller,
-            Rect.MinMaxRect(
-                PaletteLeft + slotWidth + gap * 0.5f, PaletteTop,
-                PaletteLeft + slotWidth * 2f - gap * 0.5f, PaletteBottom));
+        Image fillHighlight = CreateFillButton(parent, font, controller, SlotArea(0));
+
+        Image gripHighlight = CreatePointToolButton(
+            parent, font, controller, "Grip", "손잡이",
+            WeaponForgeController.GripToolIndex,
+            new Color(0.55f, 0.35f, 0.15f, 1f), SlotArea(1));
+
+        Image centerHighlight = CreatePointToolButton(
+            parent, font, controller, "Center", "중심",
+            WeaponForgeController.CenterToolIndex,
+            new Color(0.15f, 0.4f, 0.7f, 1f), SlotArea(2));
+
+        Image tipHighlight = CreatePointToolButton(
+            parent, font, controller, "Tip", "끝",
+            WeaponForgeController.TipToolIndex,
+            new Color(0.1f, 0.55f, 0.25f, 1f), SlotArea(3));
 
         for (int offset = 0; offset < extendedCount; offset++)
         {
@@ -439,33 +452,39 @@ public static class WeaponForgeSceneBuilder
             highlights[index] = underline;
         }
 
-        return (highlights, fillHighlight, gripHighlight);
+        return (highlights, fillHighlight, gripHighlight, centerHighlight, tipHighlight);
     }
 
-    /// <summary>그립 도구 버튼과 그 선택 표시.</summary>
-    private static Image CreateGripButton(
-        Transform parent, Font font, WeaponForgeController controller, Rect area)
+    /// <summary>기준점(그립·중심·끝) 도구 버튼과 그 선택 표시.</summary>
+    private static Image CreatePointToolButton(
+        Transform parent,
+        Font font,
+        WeaponForgeController controller,
+        string name,
+        string label,
+        int toolIndex,
+        Color buttonColor,
+        Rect area)
     {
         Button button = CreateLabeledButton(
-            parent, font, "Grip Button", "손잡이", area,
-            new Color(0.55f, 0.35f, 0.15f, 1f), fontSize: 20);
+            parent, font, $"{name} Button", label, area, buttonColor, fontSize: 20);
         UnityEditor.Events.UnityEventTools.AddIntPersistentListener(
-            button.onClick, controller.SelectTool, WeaponForgeController.GripToolIndex);
+            button.onClick, controller.SelectTool, toolIndex);
 
         Rect underlineArea = Rect.MinMaxRect(
             area.xMin, PaletteBottom + 0.005f, area.xMax, PaletteBottom + 0.016f);
-        Image underline = CreateSolid(parent, "Grip Selected", underlineArea, HighlightColor);
+        Image underline = CreateSolid(parent, $"{name} Selected", underlineArea, HighlightColor);
         underline.enabled = false;
         return underline;
     }
 
     /// <summary>
-    /// 캔버스 위에 떠서 잡는 자리를 알려 주는 표시.
+    /// 캔버스 위에 떠서 기준점 자리를 알려 주는 표시.
     /// 캔버스와 같은 부모에 두고 앵커만 옮긴다 — 자식으로 넣으면 그리기 입력을 가로챈다.
     /// </summary>
-    private static RectTransform CreateGripMarker(Transform parent)
+    private static RectTransform CreatePointMarker(Transform parent, string name, Color color)
     {
-        var markerObject = new GameObject("Grip Marker", typeof(RectTransform), typeof(Image));
+        var markerObject = new GameObject(name, typeof(RectTransform), typeof(Image));
         markerObject.transform.SetParent(parent, false);
 
         var rect = (RectTransform)markerObject.transform;
@@ -480,8 +499,8 @@ public static class WeaponForgeSceneBuilder
         rect.sizeDelta = new Vector2(22f, 22f);
 
         Image image = markerObject.GetComponent<Image>();
-        image.color = new Color(0.98f, 0.35f, 0.1f, 0.85f);
-        // 표시일 뿐이다 — 눌러도 캔버스가 받아야 그립을 옮길 수 있다
+        image.color = color;
+        // 표시일 뿐이다 — 눌러도 캔버스가 받아야 점을 옮길 수 있다
         image.raycastTarget = false;
         return rect;
     }
@@ -604,10 +623,14 @@ public static class WeaponForgeSceneBuilder
         Image[] toolHighlights,
         Image[] colorHighlights,
         ResultPanelParts result,
-        RectTransform gripMarker)
+        RectTransform gripMarker,
+        RectTransform centerMarker,
+        RectTransform tipMarker)
     {
         var serialized = new SerializedObject(controller);
         serialized.FindProperty("gripMarker").objectReferenceValue = gripMarker;
+        serialized.FindProperty("centerMarker").objectReferenceValue = centerMarker;
+        serialized.FindProperty("tipMarker").objectReferenceValue = tipMarker;
         serialized.FindProperty("drawingCanvas").objectReferenceValue = drawing;
         serialized.FindProperty("noteInput").objectReferenceValue = note;
         serialized.FindProperty("previewImage").objectReferenceValue = preview;

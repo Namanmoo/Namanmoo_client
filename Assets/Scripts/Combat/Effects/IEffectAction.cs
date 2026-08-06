@@ -11,13 +11,15 @@ public readonly struct EffectContext
         Vector2 origin,
         Vector2 direction,
         EnemyHealth target,
-        int weaponDamage)
+        int weaponDamage,
+        WeaponDefinition weapon = null)
     {
         Owner = owner;
         Origin = origin;
         Direction = direction;
         Target = target;
         WeaponDamage = weaponDamage;
+        Weapon = weapon;
     }
 
     /// <summary>공격을 한 쪽. 자기 자신을 때리지 않으려면 필요하다.</summary>
@@ -35,8 +37,11 @@ public readonly struct EffectContext
     /// <summary>무기의 기본 공격력. 비율로 계산하는 효과가 쓴다.</summary>
     public int WeaponDamage { get; }
 
+    /// <summary>발동시킨 무기 정의 — 그림·테마색이 필요한 효과(검기)가 쓴다. null일 수 있다.</summary>
+    public WeaponDefinition Weapon { get; }
+
     public EffectContext WithTarget(EnemyHealth target) =>
-        new EffectContext(Owner, Origin, Direction, target, WeaponDamage);
+        new EffectContext(Owner, Origin, Direction, target, WeaponDamage, Weapon);
 }
 
 /// <summary>
