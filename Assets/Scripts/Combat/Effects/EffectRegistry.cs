@@ -138,6 +138,7 @@ public sealed class EffectRegistry
         // 근접 전용
         registry.Register(new ShockwaveAction());
         registry.Register(new LifestealAction());
+        registry.Register(new BladeWaveAction());
 
         // 원거리 전용 — 발사체 거동을 바꾼다
         registry.Register(new PierceModifier());

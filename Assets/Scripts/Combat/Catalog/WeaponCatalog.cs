@@ -103,6 +103,11 @@ public sealed class WeaponCatalog
     public IEnumerable<CatalogEntry> DeliveriesFor(string categoryId) =>
         deliveries.Values.Where(d => d.Allows(categoryId));
 
+    /// <summary>무기 종류와 1:1로 짝인 궤도. 검=swing, 도끼=spin, 창=thrust 식이다.</summary>
+    public CatalogEntry DeliveryForType(WeaponType type) =>
+        deliveries.Values.FirstOrDefault(
+            d => string.Equals(d.weaponType, type.ToString(), StringComparison.Ordinal));
+
     public IEnumerable<CatalogEntry> EffectsFor(string categoryId) =>
         effects.Values.Where(e => e.Allows(categoryId));
 }
@@ -182,6 +187,9 @@ public sealed class CatalogEntry
     public float baseCost;
     public string[] categories;
     public CatalogParam[] @params;
+
+    /// <summary>궤도 전용 — 이 궤도와 1:1로 짝인 무기 종류. 비어 있으면 짝이 없어 뽑히지 않는다.</summary>
+    public string weaponType;
 
     /// <summary>categories가 비어 있으면 분류를 가리지 않는다 (트리거가 그렇다).</summary>
     public bool Allows(string categoryId)

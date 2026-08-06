@@ -7,8 +7,8 @@ public sealed class WeaponDefinitionTests
     [TestCase(WeaponCategory.Melee, WeaponType.Sword, true)]
     [TestCase(WeaponCategory.Melee, WeaponType.Axe, true)]
     [TestCase(WeaponCategory.Ranged, WeaponType.Projectile, true)]
-    [TestCase(WeaponCategory.Ranged, WeaponType.Gun, true)]
-    [TestCase(WeaponCategory.Melee, WeaponType.Gun, false)]
+    [TestCase(WeaponCategory.Ranged, WeaponType.Missile, true)]
+    [TestCase(WeaponCategory.Melee, WeaponType.Missile, false)]
     [TestCase(WeaponCategory.Ranged, WeaponType.Axe, false)]
     public void CategoryAndTypePairing_RecognizesSupportedFamilies(
         WeaponCategory category,
@@ -64,13 +64,13 @@ public sealed class WeaponDefinitionTests
         try
         {
             weapon.Configure(
-                "sample-gun", "Sample Gun", WeaponCategory.Ranged, WeaponType.Gun,
+                "sample-missile", "Sample Missile", WeaponCategory.Ranged, WeaponType.Missile,
                 3, 0.2f, 0f, 0.15f, 0f, 14f, 2f, null, null, Color.yellow);
 
             var item = new ItemData(weapon);
 
-            Assert.That(item.Id, Is.EqualTo("sample-gun"));
-            Assert.That(item.DisplayName, Is.EqualTo("Sample Gun"));
+            Assert.That(item.Id, Is.EqualTo("sample-missile"));
+            Assert.That(item.DisplayName, Is.EqualTo("Sample Missile"));
             Assert.That(item.Kind, Is.EqualTo(ItemKind.Weapon));
             Assert.That(item.Weapon, Is.SameAs(weapon));
         }

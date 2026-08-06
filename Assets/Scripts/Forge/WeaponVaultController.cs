@@ -33,12 +33,27 @@ public sealed class WeaponVaultController : MonoBehaviour
     [SerializeField] private Button[] equipButtons = new Button[CardCount];
     [SerializeField] private Button[] deleteButtons = new Button[CardCount];
 
+    [Header("기준점 수정 (씬 빌더가 채운다)")]
+    [SerializeField] private GameObject editPanel;
+    [SerializeField] private RawImage editImage;
+    [SerializeField] private WeaponPointPicker editPicker;
+    [SerializeField] private Text editTitle;
+    /// <summary>그립·중심·끝 마커 — <see cref="WeaponPointKind"/> 순서.</summary>
+    [SerializeField] private RectTransform[] editMarkers = new RectTransform[3];
+    /// <summary>어느 점을 옮기는 중인지 표시 — <see cref="WeaponPointKind"/> 순서.</summary>
+    [SerializeField] private Image[] editPointHighlights = new Image[3];
+
     private static readonly string[] StageNames = { "그대로", "조금 멋있게", "완전 멋있게" };
 
     private readonly List<SavedWeaponDto> weapons = new();
     private readonly Dictionary<string, Texture2D> textures = new();
     private WeaponVaultClient client;
     private bool busy;
+
+    // 기준점 수정 상태 — 저장 전까지는 화면에만 들고 있는다
+    private int editIndex = -1;
+    private WeaponPointKind editingPoint = WeaponPointKind.Grip;
+    private readonly Vector2[] editPoints = new Vector2[3];
 
     /// <summary>지금 화면에 올라온 무기 수 — 테스트에서 확인하기 쉽게 열어 둔다.</summary>
     public int LoadedCount => weapons.Count;
@@ -47,10 +62,20 @@ public sealed class WeaponVaultController : MonoBehaviour
     {
         client = new WeaponVaultClient(backendBaseUrl);
         HideAllCards();
+
+        if (editPanel != null)
+        {
+            editPanel.SetActive(false);
+        }
     }
 
     private void Start()
     {
+        if (editPicker != null)
+        {
+            editPicker.Picked += MoveEditingPoint;
+        }
+
         StartCoroutine(Refresh());
     }
 
@@ -99,20 +124,170 @@ public sealed class WeaponVaultController : MonoBehaviour
         Sprite sprite = Sprite.Create(
             texture,
             new Rect(0f, 0f, texture.width, texture.height),
-            new Vector2(0.5f, 0.5f),
+            // 저장해 둔 그립이 곧 잡는 자리다 — 기준점 없이 저장된 옛 무기는 가운데
+            weapon.Grip01,
             WeaponSpriteFactory.PixelsPerUnit);
         sprite.name = weapon.name;
 
         // 씬을 넘어가는 동안 텍스처가 지워지지 않게 소유권을 넘긴다
         textures.Remove(weapon.id);
 
-        ForgedWeapon.Set(
-            sprite,
-            ForgeWeaponAssembler.FromDto(weapon.weapon, sprite, weapon.name),
-            weapon.weapon,
-            weapon.name,
-            weapon.stage);
+        WeaponLoadout loadout = ForgeWeaponAssembler.FromDto(weapon.weapon, sprite, weapon.name);
+        if (loadout.Definition != null)
+        {
+            // 그린 축(그립→끝)이 위에서 벗어난 만큼 손에 들 때 되돌린다
+            loadout.Definition.SpriteAxisDegrees =
+                WeaponDefinition.AxisDegrees(weapon.Grip01, weapon.Tip01);
+        }
+
+        ForgedWeapon.Set(sprite, loadout, weapon.weapon, weapon.name, weapon.stage);
         SceneManager.LoadScene(PlayScenePath);
+    }
+
+    // ── 기준점 수정 ────────────────────────────────────────
+
+    /// <summary>카드의 "수정" — 그림 위에서 그립·중심·끝을 다시 찍는다.</summary>
+    public void BeginEdit(int index)
+    {
+        if (busy || index < 0 || index >= weapons.Count || editPanel == null)
+        {
+            return;
+        }
+
+        SavedWeaponDto weapon = weapons[index];
+        if (!textures.TryGetValue(weapon.id, out Texture2D texture) || texture == null)
+        {
+            SetStatus("그림을 아직 받지 못했습니다. 잠시 후 다시 눌러 주세요.");
+            return;
+        }
+
+        editIndex = index;
+        editPoints[(int)WeaponPointKind.Grip] = weapon.Grip01;
+        editPoints[(int)WeaponPointKind.Center] = weapon.Center01;
+        editPoints[(int)WeaponPointKind.Tip] = weapon.Tip01;
+
+        if (editImage != null)
+        {
+            editImage.texture = texture;
+        }
+
+        if (editTitle != null)
+        {
+            editTitle.text = $"{weapon.name} — 기준점 수정";
+        }
+
+        editPanel.SetActive(true);
+        SelectEditPoint((int)WeaponPointKind.Grip);
+        RefreshEditMarkers();
+    }
+
+    /// <summary>수정 화면의 점 고르기 버튼 — <see cref="WeaponPointKind"/> 값.</summary>
+    public void SelectEditPoint(int kind)
+    {
+        if (kind < 0 || kind >= editPoints.Length)
+        {
+            return;
+        }
+
+        editingPoint = (WeaponPointKind)kind;
+
+        if (editPointHighlights == null)
+        {
+            return;
+        }
+
+        for (int index = 0; index < editPointHighlights.Length; index++)
+        {
+            if (editPointHighlights[index] != null)
+            {
+                editPointHighlights[index].enabled = index == kind;
+            }
+        }
+    }
+
+    /// <summary>수정 화면의 "저장" — 서버에 기준점만 고쳐 넣는다.</summary>
+    public void SaveEdit()
+    {
+        if (busy || editIndex < 0 || editIndex >= weapons.Count)
+        {
+            return;
+        }
+
+        StartCoroutine(SaveEditRoutine());
+    }
+
+    /// <summary>수정 화면의 "취소".</summary>
+    public void CancelEdit()
+    {
+        editIndex = -1;
+        if (editPanel != null)
+        {
+            editPanel.SetActive(false);
+        }
+    }
+
+    private void MoveEditingPoint(Vector2 normalized)
+    {
+        if (editIndex < 0)
+        {
+            return;
+        }
+
+        editPoints[(int)editingPoint] = normalized;
+        RefreshEditMarkers();
+    }
+
+    /// <summary>마커를 그림 위 찍은 자리에 맞춘다 — 그림 영역 안에서 앵커만 움직인다.</summary>
+    private void RefreshEditMarkers()
+    {
+        if (editMarkers == null)
+        {
+            return;
+        }
+
+        for (int index = 0; index < editMarkers.Length && index < editPoints.Length; index++)
+        {
+            RectTransform marker = editMarkers[index];
+            if (marker == null)
+            {
+                continue;
+            }
+
+            marker.anchorMin = editPoints[index];
+            marker.anchorMax = editPoints[index];
+            marker.anchoredPosition = Vector2.zero;
+        }
+    }
+
+    private IEnumerator SaveEditRoutine()
+    {
+        busy = true;
+        SetStatus("기준점을 저장하는 중…");
+
+        SavedWeaponDto weapon = weapons[editIndex];
+        SavedWeaponDto updated = null;
+        string failure = null;
+
+        yield return client.UpdatePoints(
+            weapon.id,
+            editPoints[(int)WeaponPointKind.Grip],
+            editPoints[(int)WeaponPointKind.Center],
+            editPoints[(int)WeaponPointKind.Tip],
+            result => updated = result,
+            error => failure = error);
+
+        busy = false;
+
+        if (updated == null)
+        {
+            SetStatus(failure ?? "기준점을 저장하지 못했습니다.");
+            yield break;
+        }
+
+        // 서버가 확정한 값으로 목록을 맞춘다 — 다음 장착부터 바로 쓰인다
+        weapons[editIndex] = updated;
+        SetStatus($"{updated.name} 기준점을 저장했습니다.");
+        CancelEdit();
     }
 
     /// <summary>카드의 "삭제".</summary>

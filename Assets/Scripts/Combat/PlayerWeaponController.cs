@@ -25,6 +25,15 @@ public sealed class PlayerWeaponController : MonoBehaviour
     /// <summary>스윙 한 번이 걸리는 시간의 상한 — 이보다 길면 늘어져 보인다.</summary>
     public const float MaxSwingSeconds = 0.18f;
 
+    private void Awake()
+    {
+        // 개발 빌드에서만 — 9/0 키로 궤도·효과를 즉석 교체하는 디버그 도구
+        if (Debug.isDebugBuild && GetComponent<WeaponDebugSwitcher>() == null)
+        {
+            gameObject.AddComponent<WeaponDebugSwitcher>();
+        }
+    }
+
     private void Update()
     {
         ProcessInput(Keyboard.current, Time.time);

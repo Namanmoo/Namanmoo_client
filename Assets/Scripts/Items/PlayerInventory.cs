@@ -84,6 +84,28 @@ public sealed class PlayerInventory
         return result;
     }
 
+    /// <summary>
+    /// 슬롯 내용을 무조건 바꿔치운다 — 장착 중이면 장착도 갱신된다.
+    /// <see cref="EnsureUniqueItemInSlot"/>은 같은 id·같은 스탯이면 손대지 않아,
+    /// 로드아웃(궤도·효과)만 다른 교체가 무시된다. 디버그 스위처가 그 경우다.
+    /// </summary>
+    public bool ReplaceSlot(int slotIndex, ItemData item)
+    {
+        if (slotIndex < 0 || slotIndex >= SlotCount || item == null || !item.IsValid)
+        {
+            return false;
+        }
+
+        slots[slotIndex] = item;
+        if (SelectedSlotIndex == slotIndex)
+        {
+            SetEquippedItem(item);
+        }
+
+        StateChanged?.Invoke();
+        return true;
+    }
+
     public bool EnsureUniqueItemInSlot(int slotIndex, ItemData requiredItem)
     {
         if (slotIndex < 0 ||

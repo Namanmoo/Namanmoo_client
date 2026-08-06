@@ -3,6 +3,17 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
+/// 그림 위에 찍는 무기 기준점. 손잡이는 잡는 자리(스프라이트 pivot),
+/// 끝은 칼끝 — 손잡이→끝이 무기의 축이 된다. 중심은 무기 몸통의 가운데다.
+/// </summary>
+public enum WeaponPointKind
+{
+    Grip,
+    Center,
+    Tip
+}
+
+/// <summary>
 /// 그리기 캔버스. Texture2D에 직접 칠하고 RawImage로 보여 준다.
 ///
 /// 텍스처는 <em>투명 배경</em>으로 시작한다. 목업의 캔버스 자리를 가리는 흰 바탕은
@@ -32,14 +43,22 @@ public sealed class DrawingCanvas : MonoBehaviour,
 
     private BrushKind tool = BrushKind.Pen;
     private Color32 color = new Color32(30, 30, 30, 255);
-    private bool gripMode;
+    private WeaponPointKind? pointMode;
     private Vector2 grip = DefaultGrip;
+    private Vector2 weaponCenter = DefaultCenter;
+    private Vector2 tip = DefaultTip;
     private bool hasLastPoint;
     private int lastX;
     private int lastY;
 
     /// <summary>아무것도 정하지 않았으면 그림 한가운데를 잡는다.</summary>
     public static readonly Vector2 DefaultGrip = new Vector2(0.5f, 0.5f);
+
+    /// <summary>기본 축은 "위로 뻗은" 그림 — 끝은 위쪽 가장자리 가운데다.</summary>
+    public static readonly Vector2 DefaultTip = new Vector2(0.5f, 1f);
+
+    /// <summary>기본 중심은 손잡이와 끝의 가운데.</summary>
+    public static readonly Vector2 DefaultCenter = new Vector2(0.5f, 0.75f);
 
     public Texture2D Texture => texture;
     public BrushKind Tool => tool;
@@ -48,10 +67,13 @@ public sealed class DrawingCanvas : MonoBehaviour,
     public bool CanRedo => history != null && history.CanRedo;
 
     /// <summary>
-    /// 그립을 찍는 중인가. 이 동안에는 캔버스를 눌러도 칠하지 않는다 —
-    /// 그림을 망치지 않고 잡을 자리만 옮길 수 있어야 한다.
+    /// 기준점을 찍는 중인가(무엇을 찍는 중인지). 이 동안에는 캔버스를 눌러도
+    /// 칠하지 않는다 — 그림을 망치지 않고 자리만 옮길 수 있어야 한다.
     /// </summary>
-    public bool GripMode => gripMode;
+    public WeaponPointKind? PointMode => pointMode;
+
+    /// <summary>그립을 찍는 중인가 — 예전 이름을 쓰는 코드를 위한 준말.</summary>
+    public bool GripMode => pointMode == WeaponPointKind.Grip;
 
     /// <summary>
     /// 무기를 잡는 자리. 그림 기준 정규화 좌표(0~1)이고 원점은 왼쪽 아래다 —
@@ -59,11 +81,25 @@ public sealed class DrawingCanvas : MonoBehaviour,
     /// </summary>
     public Vector2 Grip => grip;
 
+    /// <summary>무기 몸통의 가운데 (정규화 0~1).</summary>
+    public Vector2 WeaponCenter => weaponCenter;
+
+    /// <summary>칼끝 — 손잡이→끝이 무기의 축이다 (정규화 0~1).</summary>
+    public Vector2 Tip => tip;
+
+    /// <summary>종류로 기준점을 읽는다.</summary>
+    public Vector2 Point(WeaponPointKind kind) => kind switch
+    {
+        WeaponPointKind.Center => weaponCenter,
+        WeaponPointKind.Tip => tip,
+        _ => grip
+    };
+
     /// <summary>그림이 바뀔 때마다 — 미리보기 갱신·버튼 활성화에 쓴다.</summary>
     public event System.Action Changed;
 
-    /// <summary>그립이 움직일 때마다 — 화면의 그립 표시를 따라 옮기는 데 쓴다.</summary>
-    public event System.Action GripChanged;
+    /// <summary>기준점이 움직일 때마다 — 화면의 표시를 따라 옮기는 데 쓴다.</summary>
+    public event System.Action<WeaponPointKind> PointChanged;
 
     private void Awake()
     {
@@ -102,15 +138,18 @@ public sealed class DrawingCanvas : MonoBehaviour,
     {
         EnsureInitialized();
         tool = newTool;
-        // 붓을 집으면 그립 찍기는 끝난다 — 안 그러면 연필을 눌러도 계속 그립만 옮긴다
-        gripMode = false;
+        // 붓을 집으면 기준점 찍기는 끝난다 — 안 그러면 연필을 눌러도 계속 점만 옮긴다
+        pointMode = null;
     }
 
     /// <summary>"그립" 도구 — 다음 클릭·드래그가 잡는 자리를 옮긴다.</summary>
-    public void EnterGripMode()
+    public void EnterGripMode() => EnterPointMode(WeaponPointKind.Grip);
+
+    /// <summary>기준점 도구 — 다음 클릭·드래그가 해당 점을 옮긴다.</summary>
+    public void EnterPointMode(WeaponPointKind kind)
     {
         EnsureInitialized();
-        gripMode = true;
+        pointMode = kind;
         hasLastPoint = false;
     }
 
@@ -125,23 +164,32 @@ public sealed class DrawingCanvas : MonoBehaviour,
             tool = BrushKind.Pen;
         }
 
-        // 색을 고르는 것은 그리려는 뜻이다 — 그립 찍기에서도 빠져나온다
-        gripMode = false;
+        // 색을 고르는 것은 그리려는 뜻이다 — 기준점 찍기에서도 빠져나온다
+        pointMode = null;
     }
 
     /// <summary>정규화 좌표(0~1, 왼쪽 아래 원점)로 그립을 옮긴다. 범위 밖은 잘라 넣는다.</summary>
-    public void SetGrip(Vector2 normalized)
+    public void SetGrip(Vector2 normalized) => SetPoint(WeaponPointKind.Grip, normalized);
+
+    /// <summary>정규화 좌표(0~1, 왼쪽 아래 원점)로 기준점을 옮긴다. 범위 밖은 잘라 넣는다.</summary>
+    public void SetPoint(WeaponPointKind kind, Vector2 normalized)
     {
         EnsureInitialized();
         var clamped = new Vector2(
             Mathf.Clamp01(normalized.x), Mathf.Clamp01(normalized.y));
-        if (clamped == grip)
+        if (clamped == Point(kind))
         {
             return;
         }
 
-        grip = clamped;
-        GripChanged?.Invoke();
+        switch (kind)
+        {
+            case WeaponPointKind.Center: weaponCenter = clamped; break;
+            case WeaponPointKind.Tip: tip = clamped; break;
+            default: grip = clamped; break;
+        }
+
+        PointChanged?.Invoke(kind);
     }
 
     public void Clear()
@@ -205,9 +253,9 @@ public sealed class DrawingCanvas : MonoBehaviour,
     public void OnPointerDown(PointerEventData eventData)
     {
         EnsureInitialized();
-        if (gripMode)
+        if (pointMode.HasValue)
         {
-            TryMoveGrip(eventData);
+            TryMovePoint(eventData);
             return;
         }
 
@@ -240,10 +288,10 @@ public sealed class DrawingCanvas : MonoBehaviour,
     public void OnDrag(PointerEventData eventData)
     {
         EnsureInitialized();
-        if (gripMode)
+        if (pointMode.HasValue)
         {
             // 끌어서 자리를 맞출 수 있어야 한다 — 한 번에 정확히 찍기는 어렵다
-            TryMoveGrip(eventData);
+            TryMovePoint(eventData);
             return;
         }
 
@@ -293,14 +341,15 @@ public sealed class DrawingCanvas : MonoBehaviour,
     }
 
     /// <summary>
-    /// 그립을 포인터 자리로. 캔버스 밖으로 끌어도 가장자리에 붙여 둔다 —
-    /// 칠하기와 달리 중간에 끊기면 그립이 어디 있는지 알 수 없어진다.
+    /// 찍는 중인 기준점을 포인터 자리로. 캔버스 밖으로 끌어도 가장자리에 붙여 둔다 —
+    /// 칠하기와 달리 중간에 끊기면 점이 어디 있는지 알 수 없어진다.
     /// </summary>
-    private void TryMoveGrip(PointerEventData eventData)
+    private void TryMovePoint(PointerEventData eventData)
     {
-        if (TryGetNormalized(eventData, out Vector2 normalized, clampOutside: true))
+        if (pointMode.HasValue
+            && TryGetNormalized(eventData, out Vector2 normalized, clampOutside: true))
         {
-            SetGrip(normalized);
+            SetPoint(pointMode.Value, normalized);
         }
     }
 
