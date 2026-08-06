@@ -11,7 +11,8 @@ public static class DungeonEnemyAssetBuilder
     public const string ProjectilePath = "Assets/Enemies/TemporaryBlueProjectile.png";
 
     private const string KrabSpritePath = "Assets/Enemies/enemy_krab.png";
-    private const string SquirrelSpritePath = "Assets/Enemies/enemy_squirrel.png";
+    private const string SquirrelSpritePath =
+        "Assets/Enemies/Squirrel/Idle/Right/Frames/squirrel_idle_right0000.png";
     private const string SquirrelProjectilePath = "Assets/Enemies/Nuts.png";
     private const string SquirrelProjectileName = "Nuts_1";
     private const string WoodTowerSpritePath =

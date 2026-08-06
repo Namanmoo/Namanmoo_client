@@ -10,6 +10,8 @@ public static class PlayerFactory
     public const float VisualHeight = 4f;
     public const float ColliderRadius = 1f;
 
+    private const string AnimatorResourcePath = "Player/PlayerVisual";
+
     /// <summary>
     /// 플레이어와 딸린 UI(핫바·체력)를 만든다.
     /// <paramref name="uiParent"/>가 null이면 UI는 씬 루트에 붙는다.
@@ -48,6 +50,19 @@ public static class PlayerFactory
         renderer.color = Color.white;
         renderer.sortingOrder = 4;
 
+        // 클립이 m_Sprite를 빈 경로로 바인딩하므로 Animator는 SpriteRenderer와 같은
+        // 오브젝트에 있어야 한다.
+        var controller = Resources.Load<RuntimeAnimatorController>(AnimatorResourcePath);
+        if (controller == null)
+        {
+            throw new System.InvalidOperationException(
+                $"Missing player animator controller at Resources/{AnimatorResourcePath}");
+        }
+
+        Animator animator = visualObject.AddComponent<Animator>();
+        animator.runtimeAnimatorController = controller;
+        animator.applyRootMotion = false;
+
         Rigidbody2D body = playerObject.AddComponent<Rigidbody2D>();
         body.gravityScale = 0f;
         body.interpolation = RigidbodyInterpolation2D.Interpolate;
@@ -58,6 +73,7 @@ public static class PlayerFactory
         collider.radius = ColliderRadius;
 
         playerObject.AddComponent<PlayerMovement>();
+        playerObject.AddComponent<PlayerAnimator>();
         PlayerSwordShooter shooter = playerObject.AddComponent<PlayerSwordShooter>();
         shooter.SwordSprite = swordSprite;
         PlayerAxeAttacker axeAttacker = playerObject.AddComponent<PlayerAxeAttacker>();

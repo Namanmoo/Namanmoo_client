@@ -78,6 +78,7 @@ public sealed class PlayerAxeAttacker : MonoBehaviour
 
         SpawnSwing(direction);
         nextAttackTime = currentTime + attackInterval;
+        GetComponent<PlayerAnimator>()?.PlayAttack(direction, attackInterval);
     }
 
     private void SpawnSwing(Vector2 direction)

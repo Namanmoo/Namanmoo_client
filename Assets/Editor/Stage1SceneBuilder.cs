@@ -16,7 +16,7 @@ public static class Stage1SceneBuilder
     private const string GateOutlineMaterialPath = AssetFolder + "/GateOutline.mat";
     private const string GateFillMaterialPath = AssetFolder + "/GateFill.mat";
     private const string PlayerSpritePath =
-        "Assets/Player/Animation/Sword/Idle/Down/Frames/프레임0000.png";
+        "Assets/Player/Animation/Sword/Idle/Right/Frames/player_idle0000.png";
     private const string ItemHotbarBackgroundPath = "Assets/UI/ItemUIBackground.png";
     private const string PlayerHealthHeartPath = "Assets/UI/HP_heart.png";
     private const string SwordSpritePath = "Assets/Weapons/sword.png";
