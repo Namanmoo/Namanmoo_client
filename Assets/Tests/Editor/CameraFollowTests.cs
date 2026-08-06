@@ -186,4 +186,75 @@ public sealed class CameraFollowTests
             Object.DestroyImmediate(cameraObject);
         }
     }
+
+    [Test]
+    public void SmoothMovesPartwayTowardTheGoal()
+    {
+        Vector2 velocity = Vector2.zero;
+
+        Vector2 result = CameraFollow.Smooth(
+            Vector2.zero, new Vector2(10f, 0f), ref velocity, smoothTime: 1f, deltaTime: 0.1f);
+
+        Assert.That(result.x, Is.GreaterThan(0f));
+        Assert.That(result.x, Is.LessThan(10f));
+    }
+
+    [Test]
+    public void SmoothConvergesToTheGoalOverManySteps()
+    {
+        Vector2 velocity = Vector2.zero;
+        Vector2 current = Vector2.zero;
+        Vector2 goal = new Vector2(10f, -5f);
+
+        for (int i = 0; i < 200; i++)
+        {
+            current = CameraFollow.Smooth(current, goal, ref velocity, smoothTime: 0.18f, deltaTime: 0.02f);
+        }
+
+        Assert.That(current.x, Is.EqualTo(goal.x).Within(0.01f));
+        Assert.That(current.y, Is.EqualTo(goal.y).Within(0.01f));
+    }
+
+    [Test]
+    public void FollowAddsTheActiveShakeOffsetOnTopOfTheSmoothedPosition()
+    {
+        var cameraObject = new GameObject(
+            "Shake Composition Test", typeof(Camera), typeof(CameraFollow), typeof(CameraShake));
+        try
+        {
+            var target = new GameObject("Target");
+            target.transform.position = new Vector3(5f, 2f, -10f);
+
+            CameraFollow follow = cameraObject.GetComponent<CameraFollow>();
+            follow.Bounds = Rect.MinMaxRect(-10000f, -10000f, 10000f, 10000f);
+            follow.Target = target.transform;
+            follow.SnapToTarget();
+
+            CameraShake shake = cameraObject.GetComponent<CameraShake>();
+            shake.Trigger(intensity: 5f, duration: 1f);
+            shake.Tick(0.1f);
+            Vector2 offset = shake.CurrentOffset;
+
+            // 목표가 그대로인 상태에서 프레임을 한 번 더 굴려도, 순수 추적 위치는 목표에서
+            // 벗어나지 않아야 한다 — 흔들림 오프셋을 빼면 정확히 목표로 돌아와야 한다.
+            InvokeLateUpdate(follow);
+            Vector3 position = cameraObject.transform.position;
+
+            Assert.That(position.x - offset.x, Is.EqualTo(target.transform.position.x).Within(0.0001f));
+            Assert.That(position.y - offset.y, Is.EqualTo(target.transform.position.y).Within(0.0001f));
+
+            Object.DestroyImmediate(target);
+        }
+        finally
+        {
+            Object.DestroyImmediate(cameraObject);
+        }
+    }
+
+    private static void InvokeLateUpdate(CameraFollow follow)
+    {
+        typeof(CameraFollow)
+            .GetMethod("LateUpdate", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .Invoke(follow, null);
+    }
 }

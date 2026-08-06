@@ -3232,6 +3232,7 @@ GameObject:
   - component: {fileID: 1277628461}
   - component: {fileID: 1277628460}
   - component: {fileID: 1277628459}
+  - component: {fileID: 1277628464}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3260,6 +3261,18 @@ MonoBehaviour:
     width: 44
     height: 30
   overscan: 2.5
+--- !u!114 &1277628464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277628458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3cacf6fefea3d47966dbc33726be00, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: NaManMoo.Runtime::CameraShake
 --- !u!114 &1277628460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4706,12 +4719,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b99d10438244cc4794cf9a64ebf5e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NaManMoo.Runtime::PlayerDash
-  duration: 0.6
-  speedMultiplier: 3
+  duration: 0.2
+  speedMultiplier: 5
   maxCharges: 2
   rechargeDuration: 5
-  afterimageInterval: 0.08
-  afterimageLifetime: 0.25
+  afterimageInterval: 0.04
+  afterimageLifetime: 0.12
 --- !u!114 &1613528774
 MonoBehaviour:
   m_ObjectHideFlags: 0

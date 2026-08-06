@@ -19,7 +19,7 @@ MonoBehaviour:
   behaviorType: 1
   animatorController: {fileID: 0}
   visualHeight: 2
-  bodyCollisionRadius: 0.7
+  bodyCollisionRadius: 0.8
   maxHealth: 5
   moveSpeed: 4
   attackDamage: 2

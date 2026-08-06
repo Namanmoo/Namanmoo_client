@@ -26,7 +26,11 @@ public sealed class CameraFollow : MonoBehaviour
     [SerializeField, Min(0f)] private float overscan = 2.5f;
 
     private Camera followCamera;
+    private CameraShake shake;
     private Vector2 velocity;
+
+    /// <summary>흔들림과 합성되기 전의, 매끄럽게 따라가는 순수 목표 위치.</summary>
+    private Vector2 currentPosition;
 
     public Transform Target
     {
@@ -102,7 +106,8 @@ public sealed class CameraFollow : MonoBehaviour
         }
 
         velocity = Vector2.zero;
-        Move(Desired());
+        currentPosition = Desired();
+        Move(ApplyShake(currentPosition));
     }
 
     private void LateUpdate()
@@ -115,14 +120,36 @@ public sealed class CameraFollow : MonoBehaviour
 
         Vector2 goal = Desired();
 
-        if (smoothTime <= 0f)
+        // transform.position을 되읽지 않는다 — 흔들림 오프셋이 얹힌 값을 다시 읽으면
+        // 다음 프레임 보간이 그 오프셋을 목표 이탈로 착각해 흔들림이 끝난 뒤에도
+        // 잔여 드리프트가 남는다. 순수 추적 위치는 이 필드로만 들고 다닌다.
+        currentPosition = smoothTime <= 0f
+            ? goal
+            : Smooth(currentPosition, goal, ref velocity, smoothTime, Time.deltaTime);
+
+        Move(ApplyShake(currentPosition));
+    }
+
+    /// <summary>
+    /// SmoothDamp을 감싼 순수 함수. deltaTime을 인자로 받아 EditMode에서도 결정적으로
+    /// 테스트할 수 있다 (Time.deltaTime은 씬 실행 중이 아니면 값이 불안정하다).
+    /// </summary>
+    public static Vector2 Smooth(
+        Vector2 current, Vector2 goal, ref Vector2 velocity, float smoothTime, float deltaTime)
+    {
+        return Vector2.SmoothDamp(current, goal, ref velocity, smoothTime, Mathf.Infinity, deltaTime);
+    }
+
+    private Vector2 ApplyShake(Vector2 position)
+    {
+        // Awake 시점엔 같은 GameObject에 CameraShake가 아직 안 붙어 있을 수 있어(구성 순서
+        // 문제) 여기서 지연 조회한다. GetComponent 결과가 없으면(=붙은 적 없으면) 계속 null.
+        if (shake == null)
         {
-            Move(goal);
-            return;
+            shake = GetComponent<CameraShake>();
         }
 
-        Vector2 current = new Vector2(transform.position.x, transform.position.y);
-        Move(Vector2.SmoothDamp(current, goal, ref velocity, smoothTime));
+        return shake != null ? position + shake.CurrentOffset : position;
     }
 
     private Vector2 Desired()

@@ -39,7 +39,7 @@
 
 ### Step 1: 실패하는 테스트 작성
 
-`Assets/Tests/Editor/EnemyStatusTests.cs`의 `StaggerStopsMovementCompletely` 테스트 아래에 다음 다섯 테스트를 추가한다.
+`Assets/Tests/Editor/EnemyStatusTests.cs`의 `StaggerStopsMovementCompletely` 테스트 아래에 다음 네 테스트를 추가한다.
 
 ```csharp
     [Test]
@@ -530,7 +530,7 @@ git commit -m "feat: 근접 타격에 넉백 연결"
 ### Step 2: 테스트가 실패하는지 확인
 
 ```powershell
-& 'C:\Program Files\Unity\Hub\Editor\6000.5.5f1\Editor\Unity.exe' -batchmode -nographics -projectPath 'C:\Users\myong\NaManMoo\Namanmoo_client' -runTests -testPlatform PlayMode -testFilter 'SwordProjectileTests' -testResults 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\swordprojectile-knockback-red.xml' -logFile 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\swordprojectile-knockback-red.log'
+& 'C:\Program Files\Unity\Hub\Editor\6000.5.5f1\Editor\Unity.exe' -batchmode -nographics -projectPath 'C:\Users\myong\NaManMoo\Namanmoo_client' -runTests -testPlatform EditMode -testFilter 'SwordProjectileTests' -testResults 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\swordprojectile-knockback-red.xml' -logFile 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\swordprojectile-knockback-red.log'
 ```
 Expected: `status`가 null이라 새 테스트만 FAIL, 기존 테스트는 PASS.
 
@@ -548,7 +548,7 @@ Expected: `status`가 null이라 새 테스트만 FAIL, 기존 테스트는 PASS
 ### Step 4: 테스트 통과 확인
 
 ```powershell
-& 'C:\Program Files\Unity\Hub\Editor\6000.5.5f1\Editor\Unity.exe' -batchmode -nographics -projectPath 'C:\Users\myong\NaManMoo\Namanmoo_client' -runTests -testPlatform PlayMode -testFilter 'SwordProjectileTests' -testResults 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\swordprojectile-knockback-green.xml' -logFile 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\swordprojectile-knockback-green.log'
+& 'C:\Program Files\Unity\Hub\Editor\6000.5.5f1\Editor\Unity.exe' -batchmode -nographics -projectPath 'C:\Users\myong\NaManMoo\Namanmoo_client' -runTests -testPlatform EditMode -testFilter 'SwordProjectileTests' -testResults 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\swordprojectile-knockback-green.xml' -logFile 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\swordprojectile-knockback-green.log'
 ```
 Expected: 전체 PASS.
 
@@ -673,7 +673,7 @@ git commit -m "feat: 일반 무기 발사체 타격에 넉백 연결"
 ### Step 2: 테스트가 실패하는지 확인
 
 ```powershell
-& 'C:\Program Files\Unity\Hub\Editor\6000.5.5f1\Editor\Unity.exe' -batchmode -nographics -projectPath 'C:\Users\myong\NaManMoo\Namanmoo_client' -runTests -testPlatform PlayMode -testFilter 'AxeSwingTests' -testResults 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\axeswing-knockback-red.xml' -logFile 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\axeswing-knockback-red.log'
+& 'C:\Program Files\Unity\Hub\Editor\6000.5.5f1\Editor\Unity.exe' -batchmode -nographics -projectPath 'C:\Users\myong\NaManMoo\Namanmoo_client' -runTests -testPlatform EditMode -testFilter 'AxeSwingTests' -testResults 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\axeswing-knockback-red.xml' -logFile 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\axeswing-knockback-red.log'
 ```
 Expected: `Initialize`가 4-인자를 받지 않아 컴파일 에러로 FAIL.
 
@@ -723,7 +723,7 @@ Expected: `Initialize`가 4-인자를 받지 않아 컴파일 에러로 FAIL.
 ### Step 4: 테스트 통과 확인
 
 ```powershell
-& 'C:\Program Files\Unity\Hub\Editor\6000.5.5f1\Editor\Unity.exe' -batchmode -nographics -projectPath 'C:\Users\myong\NaManMoo\Namanmoo_client' -runTests -testPlatform PlayMode -testFilter 'AxeSwingTests' -testResults 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\axeswing-knockback-green.xml' -logFile 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\axeswing-knockback-green.log'
+& 'C:\Program Files\Unity\Hub\Editor\6000.5.5f1\Editor\Unity.exe' -batchmode -nographics -projectPath 'C:\Users\myong\NaManMoo\Namanmoo_client' -runTests -testPlatform EditMode -testFilter 'AxeSwingTests' -testResults 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\axeswing-knockback-green.xml' -logFile 'C:\Users\myong\NaManMoo\Namanmoo_client\Artifacts\axeswing-knockback-green.log'
 ```
 Expected: 전체 PASS(기존 3-인자 `Initialize` 호출 테스트 포함).
 

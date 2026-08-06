@@ -184,6 +184,19 @@ public sealed class DungeonScenePlayModeTests
     }
 
     [UnityTest]
+    public IEnumerator TheCameraCanShake()
+    {
+        // 술탄 보스의 FallArcPattern이 Camera.main에서 CameraShake를 찾아 Trigger를
+        // 호출한다. 씬의 메인 카메라에 CameraShake가 붙어 있지 않으면 GetComponent가
+        // null을 돌려주고, ?. 연산자가 조용히 삼켜서 흔들림이 아예 일어나지 않는다.
+        yield return LoadScene();
+
+        Camera camera = Camera.main;
+        Assert.That(camera, Is.Not.Null);
+        Assert.That(camera.GetComponent<CameraShake>(), Is.Not.Null, "메인 카메라에 CameraShake가 없다");
+    }
+
+    [UnityTest]
     public IEnumerator EachRunGeneratesADifferentFloor()
     {
         // 시드가 씬에 구워져 있으면 매번 같은 층이 나온다

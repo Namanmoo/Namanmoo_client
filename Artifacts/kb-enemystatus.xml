@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="13" result="Passed" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.0411017">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="492" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.041102" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1587" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="492" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.033916" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="25776" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1172" name="EnemyStatusTests" fullname="EnemyStatusTests" classname="EnemyStatusTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.028248" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1173" name="BurnDealsItsDamageOverTheDuration" fullname="EnemyStatusTests.BurnDealsItsDamageOverTheDuration" methodname="BurnDealsItsDamageOverTheDuration" classname="EnemyStatusTests" runstate="Runnable" seed="1343483673" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.011736" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1184" name="ChillExpiresAfterItsDuration" fullname="EnemyStatusTests.ChillExpiresAfterItsDuration" methodname="ChillExpiresAfterItsDuration" classname="EnemyStatusTests" runstate="Runnable" seed="1098065089" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.000780" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1178" name="ChillNeverStopsAnEnemyOutright" fullname="EnemyStatusTests.ChillNeverStopsAnEnemyOutright" methodname="ChillNeverStopsAnEnemyOutright" classname="EnemyStatusTests" runstate="Runnable" seed="758327671" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.000350" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1177" name="ChillSlowsBySlowPercent" fullname="EnemyStatusTests.ChillSlowsBySlowPercent" methodname="ChillSlowsBySlowPercent" classname="EnemyStatusTests" runstate="Runnable" seed="1706405444" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.000159" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1180" name="KnockbackExposesVelocityForTheDurationThenClears" fullname="EnemyStatusTests.KnockbackExposesVelocityForTheDurationThenClears" methodname="KnockbackExposesVelocityForTheDurationThenClears" classname="EnemyStatusTests" runstate="Runnable" seed="484046593" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.001393" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1181" name="KnockbackStopsMovementWhileActive" fullname="EnemyStatusTests.KnockbackStopsMovementWhileActive" methodname="KnockbackStopsMovementWhileActive" classname="EnemyStatusTests" runstate="Runnable" seed="926132481" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.000189" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1185" name="NoStatusMeansFullSpeed" fullname="EnemyStatusTests.NoStatusMeansFullSpeed" methodname="NoStatusMeansFullSpeed" classname="EnemyStatusTests" runstate="Runnable" seed="959345322" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.000437" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1175" name="PoisonStacksIncreaseTheDamage" fullname="EnemyStatusTests.PoisonStacksIncreaseTheDamage" methodname="PoisonStacksIncreaseTheDamage" classname="EnemyStatusTests" runstate="Runnable" seed="1187608275" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.000242" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1176" name="PoisonStacksRespectTheCap" fullname="EnemyStatusTests.PoisonStacksRespectTheCap" methodname="PoisonStacksRespectTheCap" classname="EnemyStatusTests" runstate="Runnable" seed="1745836714" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.000159" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1183" name="ReapplyingKnockbackOverwritesThePreviousVelocity" fullname="EnemyStatusTests.ReapplyingKnockbackOverwritesThePreviousVelocity" methodname="ReapplyingKnockbackOverwritesThePreviousVelocity" classname="EnemyStatusTests" runstate="Runnable" seed="1996293950" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.000193" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1179" name="StaggerStopsMovementCompletely" fullname="EnemyStatusTests.StaggerStopsMovementCompletely" methodname="StaggerStopsMovementCompletely" classname="EnemyStatusTests" runstate="Runnable" seed="584613444" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.000188" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1174" name="WeakBurnStillLandsEventually" fullname="EnemyStatusTests.WeakBurnStillLandsEventually" methodname="WeakBurnStillLandsEventually" classname="EnemyStatusTests" runstate="Runnable" seed="2097802657" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.000143" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1182" name="ZeroDirectionKnockbackIsIgnored" fullname="EnemyStatusTests.ZeroDirectionKnockbackIsIgnored" methodname="ZeroDirectionKnockbackIsIgnored" classname="EnemyStatusTests" runstate="Runnable" seed="1414546473" result="Passed" start-time="2026-08-05 17:15:01Z" end-time="2026-08-05 17:15:01Z" duration="0.000141" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

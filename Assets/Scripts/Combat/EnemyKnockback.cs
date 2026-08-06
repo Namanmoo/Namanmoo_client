@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public static class EnemyKnockback
 {
-    private const float Distance = 0.3f;
+    private const float Distance = 0.5f;
     private const float Duration = 0.12f;
 
     public static void Apply(EnemyHealth target, Vector2 attackDirection)

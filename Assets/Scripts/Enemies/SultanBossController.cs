@@ -358,8 +358,12 @@ public sealed class SultanBossController : MonoBehaviour
         transform.position = marker.transform.position;
         Destroy(marker.gameObject);
 
+        Camera.main?.GetComponent<CameraShake>()?.Trigger(
+            definition.LandingShakeIntensity, definition.LandingShakeDuration);
         visual.enabled = true;
         health.SetInvulnerable(false);
+        Camera.main?.GetComponent<CameraShake>()?.Trigger(
+            definition.LandingShakeIntensity, definition.LandingShakeDuration);
 
         FireArc(Vector2.right);
         FireArc(Vector2.down);

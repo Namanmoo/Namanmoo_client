@@ -50,6 +50,10 @@ public sealed class SultanBossDefinition : ScriptableObject
     [SerializeField, Min(0.01f)] private float chargeDuration = 0.7f;
     [SerializeField, Min(1f)] private float chargeSpeedMultiplier = 2f;
 
+    [Header("Landing Camera Shake")]
+    [SerializeField, Min(0f)] private float landingShakeIntensity = 0.2f;
+    [SerializeField, Min(0f)] private float landingShakeDuration = 0.25f;
+
     public Sprite Phase1Sprite => phase1Sprite;
     public Sprite Phase2Sprite => phase2Sprite;
     public Sprite FallMarkerSprite => fallMarkerSprite;
@@ -85,6 +89,9 @@ public sealed class SultanBossDefinition : ScriptableObject
     public float ChargeWindup => chargeWindup;
     public float ChargeDuration => chargeDuration;
     public float ChargeSpeedMultiplier => chargeSpeedMultiplier;
+
+    public float LandingShakeIntensity => landingShakeIntensity;
+    public float LandingShakeDuration => landingShakeDuration;
 
     public void ConfigureSprites(
         Sprite phase1, Sprite phase2, Sprite fallMarker, Sprite arcProjectile)
