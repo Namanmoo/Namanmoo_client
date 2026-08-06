@@ -154,7 +154,7 @@ public class Stage1SceneBuilderTests
         Assert.That(inventory.Slots[1].Weapon.Type, Is.EqualTo(WeaponType.Projectile));
         Assert.That(inventory.Slots[2].Weapon.Type, Is.EqualTo(WeaponType.Spear));
         Assert.That(inventory.Slots[3].Weapon.Type, Is.EqualTo(WeaponType.Sword));
-        Assert.That(inventory.Slots[4].Weapon.Type, Is.EqualTo(WeaponType.Gun));
+        Assert.That(inventory.Slots[4].Weapon.Type, Is.EqualTo(WeaponType.Missile));
         Assert.That(inventory.Slots[5], Is.Null);
         Assert.That(inventory.SelectedSlotIndex, Is.EqualTo(0));
         Assert.That(inventory.EquippedItem, Is.SameAs(inventory.Slots[0]));
@@ -418,7 +418,7 @@ public class Stage1SceneBuilderTests
             Assert.That(inventory.Slots[1].Weapon.Type, Is.EqualTo(WeaponType.Projectile));
             Assert.That(inventory.Slots[2].Weapon.Type, Is.EqualTo(WeaponType.Spear));
             Assert.That(inventory.Slots[3].Weapon.Type, Is.EqualTo(WeaponType.Sword));
-            Assert.That(inventory.Slots[4].Weapon.Type, Is.EqualTo(WeaponType.Gun));
+            Assert.That(inventory.Slots[4].Weapon.Type, Is.EqualTo(WeaponType.Missile));
             Assert.That(inventory.SelectedSlotIndex, Is.EqualTo(0));
             Assert.That(
                 GetPrivateField<PlayerInventory>(weaponController, "inventory"),

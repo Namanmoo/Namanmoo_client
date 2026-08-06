@@ -17,8 +17,8 @@ public static class SampleWeaponFactory
             CreateWeapon("sample-projectile", "Sample Projectile", WeaponCategory.Ranged,
                 WeaponType.Projectile, 5, 0.8f, 0f, 0.6f, 0f, 6f, 4f,
                 projectileSprite, new Color(0.25f, 0.7f, 1f)),
-            CreateWeapon("sample-gun", "Sample Gun", WeaponCategory.Ranged, WeaponType.Gun,
-                3, 0.2f, 0f, 0.15f, 0f, 14f, 2f, projectileSprite,
+            CreateWeapon("sample-missile", "Sample Missile", WeaponCategory.Ranged,
+                WeaponType.Missile, 3, 0.2f, 0f, 0.15f, 0f, 14f, 2f, projectileSprite,
                 new Color(1f, 0.85f, 0.15f))
         };
     }

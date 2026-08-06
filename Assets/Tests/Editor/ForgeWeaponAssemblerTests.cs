@@ -22,12 +22,13 @@ public sealed class ForgeWeaponAssemblerTests
     private static ForgeWeaponDto RangedDto(
         string delivery = "straight",
         ForgeEffectDto[] effects = null,
-        ParamPairDto[] stats = null)
+        ParamPairDto[] stats = null,
+        string type = "Projectile")
     {
         return new ForgeWeaponDto
         {
             category = "ranged",
-            weaponType = "Projectile",
+            weaponType = type,
             stats = stats ?? Pairs(
                 ("damage", 12f),
                 ("shotsPerSecond", 4f),
@@ -85,11 +86,11 @@ public sealed class ForgeWeaponAssemblerTests
     [Test]
     public void WeaponTypeThatContradictsTheCategoryIsCorrected()
     {
-        // Gun은 원거리 전용 — 그대로 두면 IsValid가 false가 되어 무기가 공격하지 않는다
+        // Missile은 원거리 전용 — 그대로 두면 IsValid가 false가 되어 무기가 공격하지 않는다
         var dto = new ForgeWeaponDto
         {
             category = "melee",
-            weaponType = "Gun",
+            weaponType = "Missile",
             stats = Pairs(("damage", 10f)),
             delivery = new ForgeDeliveryDto { deliveryId = "swing" }
         };
@@ -119,106 +120,64 @@ public sealed class ForgeWeaponAssemblerTests
     }
 
     [Test]
-    public void UnknownDeliveryFallsBackToTheDefault()
+    public void UnknownDeliveryFallsBackToTheTypesPairedDelivery()
     {
-        WeaponLoadout loadout =
-            ForgeWeaponAssembler.FromDto(RangedDto(delivery: "워프"), null, "무기");
+        // Missile의 짝은 homing이다 — 서버가 이상한 궤도를 보내도 짝을 쓴다
+        WeaponLoadout loadout = ForgeWeaponAssembler.FromDto(
+            RangedDto(delivery: "워프", type: "Missile"), null, "무기");
 
-        Assert.That(loadout.Delivery.DeliveryId, Is.EqualTo("straight"));
+        Assert.That(loadout.Delivery.DeliveryId, Is.EqualTo("homing"));
     }
 
+    /// <summary>궤도는 무기 종류와 1:1이다 — 서버 응답이 뭐라 하든 짝으로 강제된다.</summary>
     [Test]
-    public void EffectsOutsideTheCatalogAreDropped()
+    public void DeliveryIsForcedToMatchTheWeaponTypeOneToOne()
+    {
+        var pairs = new (string category, string type, string expected)[]
+        {
+            ("melee", "Sword", "swing"),
+            ("melee", "Axe", "spin"),
+            ("melee", "Spear", "thrust"),
+            ("ranged", "Projectile", "straight"),
+            ("ranged", "Missile", "homing"),
+            ("ranged", "Boomerang", "boomerang"),
+        };
+
+        foreach ((string category, string type, string expected) in pairs)
+        {
+            var dto = new ForgeWeaponDto
+            {
+                category = category,
+                weaponType = type,
+                stats = Pairs(("damage", 10f)),
+                // 일부러 전부 엉뚱한 궤도를 보낸다
+                delivery = new ForgeDeliveryDto { deliveryId = "rain" }
+            };
+
+            WeaponLoadout loadout = ForgeWeaponAssembler.FromDto(dto, null, "무기");
+
+            Assert.That(loadout.Delivery.DeliveryId, Is.EqualTo(expected), type);
+        }
+    }
+
+    /// <summary>
+    /// 효과 시스템 개편 전까지 조립기는 효과를 붙이지 않는다.
+    /// 서버가 멀쩡한 효과를 보내도 버린다 — 되살리면 이 테스트를 지우고
+    /// 효과 해석 테스트들을 git 히스토리에서 복원한다.
+    /// </summary>
+    [Test]
+    public void ServerSentEffectsAreDetachedForNow()
     {
         var effects = new[]
         {
-            new ForgeEffectDto { effectId = "시간정지", triggerId = "on_hit" },
-            new ForgeEffectDto { effectId = "fire_dot", triggerId = "on_full_moon" },
-            new ForgeEffectDto { effectId = "pierce", triggerId = "on_hit" }
+            new ForgeEffectDto { effectId = "pierce", triggerId = "on_hit" },
+            new ForgeEffectDto { effectId = "fire_dot", triggerId = "on_hit" }
         };
-
-        WeaponLoadout loadout =
-            ForgeWeaponAssembler.FromDto(RangedDto(effects: effects), null, "무기");
-
-        Assert.That(loadout.Effects.Count, Is.EqualTo(1));
-        Assert.That(loadout.Effects[0].EffectId, Is.EqualTo("pierce"));
-    }
-
-    [Test]
-    public void MeleeOnlyEffectsAreDroppedFromARangedWeapon()
-    {
-        var effects = new[] { new ForgeEffectDto { effectId = "lifesteal", triggerId = "on_hit" } };
 
         WeaponLoadout loadout =
             ForgeWeaponAssembler.FromDto(RangedDto(effects: effects), null, "무기");
 
         Assert.That(loadout.Effects, Is.Empty);
-    }
-
-    [Test]
-    public void EffectParametersAreClampedToTheCatalogRange()
-    {
-        var effects = new[]
-        {
-            new ForgeEffectDto
-            {
-                effectId = "pierce",
-                triggerId = "on_hit",
-                @params = Pairs(("maxPierceCount", 9999f))
-            }
-        };
-
-        WeaponLoadout loadout =
-            ForgeWeaponAssembler.FromDto(RangedDto(effects: effects), null, "무기");
-
-        Assert.That(loadout.Effects[0].Params.GetInt("maxPierceCount"), Is.EqualTo(5));
-    }
-
-    [Test]
-    public void MissingEffectParametersFallBackToTheCatalogMinimum()
-    {
-        var effects = new[] { new ForgeEffectDto { effectId = "pierce", triggerId = "on_hit" } };
-
-        WeaponLoadout loadout =
-            ForgeWeaponAssembler.FromDto(RangedDto(effects: effects), null, "무기");
-
-        Assert.That(loadout.Effects[0].Params.GetInt("maxPierceCount"), Is.EqualTo(1));
-    }
-
-    [Test]
-    public void TriggerParametersRideAlongWithTheEffect()
-    {
-        var effects = new[]
-        {
-            new ForgeEffectDto
-            {
-                effectId = "fire_dot",
-                triggerId = "after_seconds",
-                @params = Pairs(("delaySeconds", 2f), ("dotDamagePerSecond", 4f))
-            }
-        };
-
-        WeaponLoadout loadout =
-            ForgeWeaponAssembler.FromDto(RangedDto(effects: effects), null, "무기");
-
-        ParamSet parameters = loadout.Effects[0].Params;
-        Assert.That(parameters.Get("delaySeconds"), Is.EqualTo(2f).Within(0.001f));
-        Assert.That(parameters.Get("dotDamagePerSecond"), Is.EqualTo(4f).Within(0.001f));
-    }
-
-    [Test]
-    public void DuplicateEffectAndTriggerPairsCollapseToOne()
-    {
-        var effects = new[]
-        {
-            new ForgeEffectDto { effectId = "pierce", triggerId = "on_hit" },
-            new ForgeEffectDto { effectId = "pierce", triggerId = "on_hit" }
-        };
-
-        WeaponLoadout loadout =
-            ForgeWeaponAssembler.FromDto(RangedDto(effects: effects), null, "무기");
-
-        Assert.That(loadout.Effects.Count, Is.EqualTo(1));
     }
 
     [Test]
@@ -246,20 +205,16 @@ public sealed class ForgeWeaponAssemblerTests
     }
 
     [Test]
-    public void SummaryMentionsCategoryDeliveryAndEffects()
+    public void SummaryMentionsCategoryAndDelivery()
     {
-        var effects = new[] { new ForgeEffectDto { effectId = "pierce", triggerId = "on_hit" } };
-        WeaponLoadout loadout =
-            ForgeWeaponAssembler.FromDto(RangedDto(delivery: "homing", effects: effects), null, "무기");
+        WeaponLoadout loadout = ForgeWeaponAssembler.FromDto(
+            RangedDto(delivery: "homing", type: "Missile"), null, "무기");
 
         string described = WeaponSummary.Describe(loadout);
 
         Assert.That(described, Does.Contain("원거리"));
-        Assert.That(described, Does.Contain("유도"));
-        Assert.That(described, Does.Contain("관통"));
-        // 이름만이 아니라 뭘 하는지도 말해야 한다 — 궤도·트리거·효과 설명
+        Assert.That(described, Does.Contain("유도탄"));
+        // 이름만이 아니라 뭘 하는지도 말해야 한다 — 궤도 설명
         Assert.That(described, Does.Contain("가장 가까운 적"));
-        Assert.That(described, Does.Contain("명중 시"));
-        Assert.That(described, Does.Contain("뚫고 계속 날아간다"));
     }
 }

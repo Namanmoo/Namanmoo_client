@@ -42,7 +42,7 @@ public sealed class EffectRunner : MonoBehaviour
     public bool HasWork =>
         loadout != null && loadout.Effects.Count > 0;
 
-    /// <summary>공격이 나갔다 — after_seconds 예약.</summary>
+    /// <summary>공격이 나갔다 — on_attack 즉시 발화, after_seconds 예약.</summary>
     public void NotifyAttack(Vector2 origin, Vector2 direction, float currentTime)
     {
         if (!HasWork)
@@ -52,6 +52,12 @@ public sealed class EffectRunner : MonoBehaviour
 
         foreach (EffectSpec spec in loadout.Effects)
         {
+            if (spec.TriggerId == "on_attack")
+            {
+                Fire(spec, origin, direction, target: null);
+                continue;
+            }
+
             if (spec.TriggerId != "after_seconds")
             {
                 continue;
@@ -166,7 +172,8 @@ public sealed class EffectRunner : MonoBehaviour
         }
 
         action.Execute(
-            new EffectContext(gameObject, origin, direction, target, weaponDamage),
+            new EffectContext(
+                gameObject, origin, direction, target, weaponDamage, loadout.Definition),
             spec.Params);
     }
 
