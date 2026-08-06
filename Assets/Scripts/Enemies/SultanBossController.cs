@@ -321,9 +321,7 @@ public sealed class SultanBossController : MonoBehaviour
             return;
         }
 
-        float angle;
-        bool flipX;
-        GetProjectileOrientation(direction, out angle, out flipX);
+        float angle = GetProjectileRotationAngle(direction);
 
         var projectileObject = new GameObject("Sultan Bullet");
         projectileObject.transform.position = transform.position;
@@ -338,29 +336,15 @@ public sealed class SultanBossController : MonoBehaviour
             source.ProjectileRadius,
             0f,
             angle);
-
-        SpriteRenderer projectileVisual = projectileObject.GetComponent<SpriteRenderer>();
-        if (projectileVisual != null)
-        {
-            projectileVisual.flipX = flipX;
-        }
     }
 
     /// <summary>
-    /// 탄환 스프라이트는 오른쪽을 기본으로 그려져 있다. 왼쪽으로 갈 때는 좌우 반전,
-    /// 위/아래로 갈 때는 회전으로 방향을 맞춘다.
+    /// 탄환 스프라이트는 0도일 때 오른쪽을 바라본다. 방향 벡터의 각도를 그대로
+    /// 회전에 적용해, flipX 반전 없이 실제 방향을 향하도록 한다.
     /// </summary>
-    private static void GetProjectileOrientation(Vector2 direction, out float angle, out bool flipX)
+    private static float GetProjectileRotationAngle(Vector2 direction)
     {
-        if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x))
-        {
-            angle = direction.y > 0f ? 90f : -90f;
-            flipX = false;
-            return;
-        }
-
-        angle = 0f;
-        flipX = direction.x < 0f;
+        return Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
     }
 
     // --- Phase 2 Pattern: 낙하 및 포물선 투사체 ---
