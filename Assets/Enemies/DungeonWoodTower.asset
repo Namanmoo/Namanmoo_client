@@ -27,4 +27,4 @@ MonoBehaviour:
   attackInterval: 1.5
   projectileSpeed: 8
   projectileLifetime: 5
-  projectileRadius: 0.5
+  projectileRadius: 0.3
