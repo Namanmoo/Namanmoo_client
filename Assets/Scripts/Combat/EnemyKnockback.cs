@@ -9,6 +9,9 @@ public static class EnemyKnockback
 {
     private const float Distance = 0.5f;
     private const float Duration = 0.12f;
+    // 추가: 넉백이 끝난 뒤 멈춰 있는 시간
+    private const float StaggerDuration = 0.15f;
+
 
     public static void Apply(EnemyHealth target, Vector2 attackDirection)
     {
@@ -23,6 +26,10 @@ public static class EnemyKnockback
         }
 
         EnemyStatus.EnsureOn(target).ApplyKnockback(attackDirection, Distance, Duration);
+
+        EnemyStatus.EnsureOn(target).ApplyStagger(
+            Duration + StaggerDuration);
+        
     }
 
     private static bool IsEligible(GameObject enemy)
