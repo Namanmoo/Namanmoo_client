@@ -10,12 +10,14 @@ public sealed class AxeSwing : MonoBehaviour
     private float elapsedTime;
     private bool initialized;
     private bool completed;
+    private Vector2 attackDirection;
 
-    public void Initialize(GameObject newOwner, int newDamage, float newDuration)
+    public void Initialize(GameObject newOwner, int newDamage, float newDuration, Vector2 newDirection = default)
     {
         owner = newOwner;
         damage = Mathf.Max(0, newDamage);
         duration = Mathf.Max(0.0001f, newDuration);
+        attackDirection = newDirection;
         elapsedTime = 0f;
         completed = false;
         initialized = true;
@@ -69,6 +71,7 @@ public sealed class AxeSwing : MonoBehaviour
 
         damagedEnemies.Add(enemyHealth);
         enemyHealth.TakeDamage(damage);
+        EnemyKnockback.Apply(enemyHealth, attackDirection);
         return true;
     }
 

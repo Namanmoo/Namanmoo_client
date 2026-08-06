@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Failed(Child)" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-05 15:56:13Z" end-time="2026-08-05 15:56:13Z" duration="0.0438611">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="491" result="Failed" site="Child" start-time="2026-08-05 15:56:13Z" end-time="2026-08-05 15:56:13Z" duration="0.043861" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1586" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="491" result="Failed" site="Child" start-time="2026-08-05 15:56:13Z" end-time="2026-08-05 15:56:13Z" duration="0.036076" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="4792" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1572" name="WeaponProjectilePierceTests" fullname="WeaponProjectilePierceTests" classname="WeaponProjectilePierceTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-08-05 15:56:13Z" end-time="2026-08-05 15:56:13Z" duration="0.031522" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1577" name="BoomerangReturnsInsteadOfExpiringOnHit" fullname="WeaponProjectilePierceTests.BoomerangReturnsInsteadOfExpiringOnHit" methodname="BoomerangReturnsInsteadOfExpiringOnHit" classname="WeaponProjectilePierceTests" runstate="Runnable" seed="390065534" result="Passed" start-time="2026-08-05 15:56:13Z" end-time="2026-08-05 15:56:13Z" duration="0.014002" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[projectile: Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently
+]]></output>
+        </test-case>
+        <test-case id="1574" name="HittingAChaseEnemyAppliesKnockbackOppositeTheTravelDirection" fullname="WeaponProjectilePierceTests.HittingAChaseEnemyAppliesKnockbackOppositeTheTravelDirection" methodname="HittingAChaseEnemyAppliesKnockbackOppositeTheTravelDirection" classname="WeaponProjectilePierceTests" runstate="Runnable" seed="114617545" result="Failed" start-time="2026-08-05 15:56:13Z" end-time="2026-08-05 15:56:13Z" duration="0.005153" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at WeaponProjectilePierceTests.HittingAChaseEnemyAppliesKnockbackOppositeTheTravelDirection () [0x00049] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\WeaponProjectilePierceTests.cs:101
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[projectile: Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently
+]]></output>
+        </test-case>
+        <test-case id="1576" name="PierceHitsTheSameEnemyOnlyOnce" fullname="WeaponProjectilePierceTests.PierceHitsTheSameEnemyOnlyOnce" methodname="PierceHitsTheSameEnemyOnlyOnce" classname="WeaponProjectilePierceTests" runstate="Runnable" seed="1343550852" result="Passed" start-time="2026-08-05 15:56:13Z" end-time="2026-08-05 15:56:13Z" duration="0.000478" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1575" name="PierceLetsTheProjectileHitSeveralEnemies" fullname="WeaponProjectilePierceTests.PierceLetsTheProjectileHitSeveralEnemies" methodname="PierceLetsTheProjectileHitSeveralEnemies" classname="WeaponProjectilePierceTests" runstate="Runnable" seed="1001781548" result="Passed" start-time="2026-08-05 15:56:13Z" end-time="2026-08-05 15:56:13Z" duration="0.000788" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[projectile: Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently
+]]></output>
+        </test-case>
+        <test-case id="1573" name="PlainProjectileStopsAtTheFirstHit" fullname="WeaponProjectilePierceTests.PlainProjectileStopsAtTheFirstHit" methodname="PlainProjectileStopsAtTheFirstHit" classname="WeaponProjectilePierceTests" runstate="Runnable" seed="1941321683" result="Passed" start-time="2026-08-05 15:56:13Z" end-time="2026-08-05 15:56:13Z" duration="0.000653" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[projectile: Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently
+Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

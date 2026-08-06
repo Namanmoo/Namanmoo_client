@@ -44,9 +44,11 @@ public sealed class KrabEnemy : MonoBehaviour
 
         Vector2 velocity = CalculateVelocity(body.position, target.position, moveSpeed);
         // 냉기·경직 배율 — 상태이상이 없으면 1이라 원래 속도 그대로다
+        Vector2 knockback = EnemyStatus.KnockbackVelocityOf(gameObject);
         body.MovePosition(
             body.position
-                + velocity * EnemyStatus.SpeedMultiplierOf(gameObject) * Time.fixedDeltaTime);
+                + velocity * EnemyStatus.SpeedMultiplierOf(gameObject) * Time.fixedDeltaTime
+                + knockback * Time.fixedDeltaTime);
     }
 
     public static Vector2 CalculateVelocity(

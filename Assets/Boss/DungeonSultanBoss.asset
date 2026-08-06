@@ -30,16 +30,18 @@ MonoBehaviour:
   maxSummonedWoodTowers: 2
   summonOffsetDistance: 4
   roomEdgeInset: 5
-  summonWindup: 1
+  summonWindup: 2
   hiddenDuration: 2
-  markerSpeed: 2.5
-  markerVisualHeight: 2
+  markerSpeed: 4
+  markerVisualHeight: 3
   arcProjectileDamage: 3
-  arcProjectileVisualHeight: 0.8
-  arcProjectileRadius: 0.4
+  arcProjectileVisualHeight: 1.5
+  arcProjectileRadius: 0.75
   arcDistance: 6
   arcDuration: 1
   arcHeight: 1.5
   chargeWindup: 0.5
-  chargeDuration: 0.7
-  chargeSpeedMultiplier: 2
+  chargeDuration: 0.3
+  chargeSpeedMultiplier: 5
+  landingShakeIntensity: 0.2
+  landingShakeDuration: 0.25

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-05 17:18:15Z" end-time="2026-08-05 17:18:15Z" duration="0.1228015">
+  <test-suite type="TestSuite" id="1059" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="42" result="Failed" site="Child" start-time="2026-08-05 17:18:15Z" end-time="2026-08-05 17:18:15Z" duration="0.122802" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1055" name="NaManMoo.PlayModeTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.PlayModeTests.dll" runstate="Runnable" testcasecount="42" result="Failed" site="Child" start-time="2026-08-05 17:18:15Z" end-time="2026-08-05 17:18:15Z" duration="0.117603" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="23876" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1033" name="EnemyKnockbackPhysicsPlayModeTests" fullname="EnemyKnockbackPhysicsPlayModeTests" classname="EnemyKnockbackPhysicsPlayModeTests" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2026-08-05 17:18:15Z" end-time="2026-08-05 17:18:15Z" duration="0.115647" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1034" name="Knockback_MovesARealChaseEnemyAwayFromTheAttacker" fullname="EnemyKnockbackPhysicsPlayModeTests.Knockback_MovesARealChaseEnemyAwayFromTheAttacker" methodname="Knockback_MovesARealChaseEnemyAwayFromTheAttacker" classname="EnemyKnockbackPhysicsPlayModeTests" runstate="Runnable" seed="1853219164" result="Failed" start-time="2026-08-05 17:18:15Z" end-time="2026-08-05 17:18:15Z" duration="0.105699" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  공격 방향이 오른쪽이었으므로 적은 공격자 반대인 오른쪽으로 밀려나야 한다
+  Expected: greater than 4567.0498f
+  But was:  4566.75098f
+]]></message>
+            <stack-trace><![CDATA[at EnemyKnockbackPhysicsPlayModeTests+<Knockback_MovesARealChaseEnemyAwayFromTheAttacker>d__4.MoveNext () [0x001a6] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\PlayMode\EnemyKnockbackPhysicsPlayModeTests.cs:71
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

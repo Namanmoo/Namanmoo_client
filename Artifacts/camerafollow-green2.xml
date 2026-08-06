@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="16" result="Failed(Child)" total="16" passed="15" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.0403394">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="502" result="Failed" site="Child" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.040339" total="16" passed="15" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1598" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="502" result="Failed" site="Child" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.033292" total="16" passed="15" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="9480" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1026" name="CameraFollowTests" fullname="CameraFollowTests" classname="CameraFollowTests" runstate="Runnable" testcasecount="16" result="Failed" site="Child" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.029265" total="16" passed="15" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1030" name="AnAxisWiderThanTheMapCentresInstead" fullname="CameraFollowTests.AnAxisWiderThanTheMapCentresInstead" methodname="AnAxisWiderThanTheMapCentresInstead" classname="CameraFollowTests" runstate="Runnable" seed="762241299" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.008920" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1036" name="AWideViewStillCentresEvenWithOverscan" fullname="CameraFollowTests.AWideViewStillCentresEvenWithOverscan" methodname="AWideViewStillCentresEvenWithOverscan" classname="CameraFollowTests" runstate="Runnable" seed="1724923894" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.000175" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1029" name="AxesAreClampedIndependently" fullname="CameraFollowTests.AxesAreClampedIndependently" methodname="AxesAreClampedIndependently" classname="CameraFollowTests" runstate="Runnable" seed="1834274644" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.000737" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1027" name="CameraFollowsFreelyInTheMiddle" fullname="CameraFollowTests.CameraFollowsFreelyInTheMiddle" methodname="CameraFollowsFreelyInTheMiddle" classname="CameraFollowTests" runstate="Runnable" seed="788305082" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.000104" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1028" name="CameraStopsBeforeShowingPastTheMapEdges" fullname="CameraFollowTests.CameraStopsBeforeShowingPastTheMapEdges" methodname="CameraStopsBeforeShowingPastTheMapEdges" classname="CameraFollowTests" runstate="Runnable" seed="610807887" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.000147" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1042" name="FollowAddsTheActiveShakeOffsetOnTopOfTheSmoothedPosition" fullname="CameraFollowTests.FollowAddsTheActiveShakeOffsetOnTopOfTheSmoothedPosition" methodname="FollowAddsTheActiveShakeOffsetOnTopOfTheSmoothedPosition" classname="CameraFollowTests" runstate="Runnable" seed="1402165773" result="Failed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.005247" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: 5.0f +/- 9.99999975E-05f
+  But was:  4.34595871f
+]]></message>
+            <stack-trace><![CDATA[at CameraFollowTests.FollowAddsTheActiveShakeOffsetOnTopOfTheSmoothedPosition () [0x000d0] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\CameraFollowTests.cs:243
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1039" name="FollowComponentKeepsTheCameraDepth" fullname="CameraFollowTests.FollowComponentKeepsTheCameraDepth" methodname="FollowComponentKeepsTheCameraDepth" classname="CameraFollowTests" runstate="Runnable" seed="819987614" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.000419" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1038" name="MapBoundsMatchTheGeneratedOutline" fullname="CameraFollowTests.MapBoundsMatchTheGeneratedOutline" methodname="MapBoundsMatchTheGeneratedOutline" classname="CameraFollowTests" runstate="Runnable" seed="2133773323" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.002645" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1035" name="NegativeOverscanIsTreatedAsNone" fullname="CameraFollowTests.NegativeOverscanIsTreatedAsNone" methodname="NegativeOverscanIsTreatedAsNone" classname="CameraFollowTests" runstate="Runnable" seed="1681355313" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.000118" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1033" name="OverscanAppliesToEverySide" fullname="CameraFollowTests.OverscanAppliesToEverySide" methodname="OverscanAppliesToEverySide" classname="CameraFollowTests" runstate="Runnable" seed="970075247" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.000165" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1034" name="OverscanDoesNotMoveTheCameraInTheMiddle" fullname="CameraFollowTests.OverscanDoesNotMoveTheCameraInTheMiddle" methodname="OverscanDoesNotMoveTheCameraInTheMiddle" classname="CameraFollowTests" runstate="Runnable" seed="870571369" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.000087" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1032" name="OverscanLetsTheCameraShowPastTheEdge" fullname="CameraFollowTests.OverscanLetsTheCameraShowPastTheEdge" methodname="OverscanLetsTheCameraShowPastTheEdge" classname="CameraFollowTests" runstate="Runnable" seed="993951197" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.000085" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1041" name="SmoothConvergesToTheGoalOverManySteps" fullname="CameraFollowTests.SmoothConvergesToTheGoalOverManySteps" methodname="SmoothConvergesToTheGoalOverManySteps" classname="CameraFollowTests" runstate="Runnable" seed="656716857" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.000163" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1040" name="SmoothMovesPartwayTowardTheGoal" fullname="CameraFollowTests.SmoothMovesPartwayTowardTheGoal" methodname="SmoothMovesPartwayTowardTheGoal" classname="CameraFollowTests" runstate="Runnable" seed="1895929833" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.000160" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1037" name="TheComponentDefaultsToShowingALittlePastTheEdge" fullname="CameraFollowTests.TheComponentDefaultsToShowingALittlePastTheEdge" methodname="TheComponentDefaultsToShowingALittlePastTheEdge" classname="CameraFollowTests" runstate="Runnable" seed="1635268144" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.000299" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1031" name="ViewExactlyMatchingTheMapCentres" fullname="CameraFollowTests.ViewExactlyMatchingTheMapCentres" methodname="ViewExactlyMatchingTheMapCentres" classname="CameraFollowTests" runstate="Runnable" seed="1403299285" result="Passed" start-time="2026-08-05 17:59:25Z" end-time="2026-08-05 17:59:25Z" duration="0.000119" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

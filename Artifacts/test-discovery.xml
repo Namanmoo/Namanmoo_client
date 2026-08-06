@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="41" result="Failed(Child)" total="41" passed="38" failed="3" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-05 15:31:46Z" end-time="2026-08-05 15:31:52Z" duration="5.4621497">
+  <test-suite type="TestSuite" id="1057" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="41" result="Failed" site="Child" start-time="2026-08-05 15:31:46Z" end-time="2026-08-05 15:31:52Z" duration="5.462150" total="41" passed="38" failed="3" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1053" name="NaManMoo.PlayModeTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.PlayModeTests.dll" runstate="Runnable" testcasecount="41" result="Failed" site="Child" start-time="2026-08-05 15:31:46Z" end-time="2026-08-05 15:31:52Z" duration="5.457584" total="41" passed="38" failed="3" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="30372" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1001" name="AxeSwingPhysicsPlayModeTests" fullname="AxeSwingPhysicsPlayModeTests" classname="AxeSwingPhysicsPlayModeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-05 15:31:46Z" end-time="2026-08-05 15:31:46Z" duration="0.056897" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1002" name="RealBladeTriggerDealsExactlyTenDamageOnce" fullname="AxeSwingPhysicsPlayModeTests.RealBladeTriggerDealsExactlyTenDamageOnce" methodname="RealBladeTriggerDealsExactlyTenDamageOnce" classname="AxeSwingPhysicsPlayModeTests" runstate="Runnable" seed="525935991" result="Passed" start-time="2026-08-05 15:31:46Z" end-time="2026-08-05 15:31:46Z" duration="0.047264" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1003" name="DungeonBossPlayModeTests" fullname="DungeonBossPlayModeTests" classname="DungeonBossPlayModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-08-05 15:31:46Z" end-time="2026-08-05 15:31:48Z" duration="1.811748" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1005" name="KillingTheBossOpensTheDoors" fullname="DungeonBossPlayModeTests.KillingTheBossOpensTheDoors" methodname="KillingTheBossOpensTheDoors" classname="DungeonBossPlayModeTests" runstate="Runnable" seed="1444179566" result="Passed" start-time="2026-08-05 15:31:46Z" end-time="2026-08-05 15:31:48Z" duration="1.791126" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1007" name="OrdinaryRoomsStillGetKrabsNotABoss" fullname="DungeonBossPlayModeTests.OrdinaryRoomsStillGetKrabsNotABoss" methodname="OrdinaryRoomsStillGetKrabsNotABoss" classname="DungeonBossPlayModeTests" runstate="Runnable" seed="395591001" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.003624" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1004" name="TheBossAppearsInTheBossRoomAndLocksTheDoors" fullname="DungeonBossPlayModeTests.TheBossAppearsInTheBossRoomAndLocksTheDoors" methodname="TheBossAppearsInTheBossRoomAndLocksTheDoors" classname="DungeonBossPlayModeTests" runstate="Runnable" seed="1708498595" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.006642" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1006" name="TheBossStandsAwayFromEveryDoorway" fullname="DungeonBossPlayModeTests.TheBossStandsAwayFromEveryDoorway" methodname="TheBossStandsAwayFromEveryDoorway" classname="DungeonBossPlayModeTests" runstate="Runnable" seed="492626425" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.009101" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1008" name="DungeonRunnerPlayModeTests" fullname="DungeonRunnerPlayModeTests" classname="DungeonRunnerPlayModeTests" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.143512" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1022" name="AClearedRoomDoesNotSpawnEnemiesAgain" fullname="DungeonRunnerPlayModeTests.AClearedRoomDoesNotSpawnEnemiesAgain" methodname="AClearedRoomDoesNotSpawnEnemiesAgain" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="1162214776" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.004304" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1014" name="ArrivingDoesNotImmediatelyBounceBack" fullname="DungeonRunnerPlayModeTests.ArrivingDoesNotImmediatelyBounceBack" methodname="ArrivingDoesNotImmediatelyBounceBack" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="1025159269" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.114543" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1013" name="ArrivingPlacesThePlayerInsideTheDoorItCameThrough" fullname="DungeonRunnerPlayModeTests.ArrivingPlacesThePlayerInsideTheDoorItCameThrough" methodname="ArrivingPlacesThePlayerInsideTheDoorItCameThrough" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="1492539591" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.002025" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1015" name="CameraBoundsFollowTheCurrentRoom" fullname="DungeonRunnerPlayModeTests.CameraBoundsFollowTheCurrentRoom" methodname="CameraBoundsFollowTheCurrentRoom" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="1079402253" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.001806" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1012" name="ChangingRoomsDestroysAllActiveAndInactiveProjectiles" fullname="DungeonRunnerPlayModeTests.ChangingRoomsDestroysAllActiveAndInactiveProjectiles" methodname="ChangingRoomsDestroysAllActiveAndInactiveProjectiles" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="1798168284" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.002200" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1020" name="CurrentStateIsReadableWithoutHavingHeardTheEvent" fullname="DungeonRunnerPlayModeTests.CurrentStateIsReadableWithoutHavingHeardTheEvent" methodname="CurrentStateIsReadableWithoutHavingHeardTheEvent" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="89923094" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.001460" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1016" name="DoorsAreOpenWhenThereIsNothingToFight" fullname="DungeonRunnerPlayModeTests.DoorsAreOpenWhenThereIsNothingToFight" methodname="DoorsAreOpenWhenThereIsNothingToFight" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="441080545" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.001078" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1021" name="DoorsStayLockedUntilTheRoomIsCleared" fullname="DungeonRunnerPlayModeTests.DoorsStayLockedUntilTheRoomIsCleared" methodname="DoorsStayLockedUntilTheRoomIsCleared" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="84065072" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.003374" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1017" name="EveryDoorLeadsToARoomThatExists" fullname="DungeonRunnerPlayModeTests.EveryDoorLeadsToARoomThatExists" methodname="EveryDoorLeadsToARoomThatExists" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="506288987" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.000995" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1010" name="OnlyOneRoomExistsAtATime" fullname="DungeonRunnerPlayModeTests.OnlyOneRoomExistsAtATime" methodname="OnlyOneRoomExistsAtATime" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="961126035" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.002793" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1018" name="ReturningToAClearedRoomKeepsItCleared" fullname="DungeonRunnerPlayModeTests.ReturningToAClearedRoomKeepsItCleared" methodname="ReturningToAClearedRoomKeepsItCleared" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="203694476" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.001610" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1019" name="RoomChangedFiresOnceForEachMove" fullname="DungeonRunnerPlayModeTests.RoomChangedFiresOnceForEachMove" methodname="RoomChangedFiresOnceForEachMove" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="557301823" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.001501" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1023" name="SafeRoomsAreOpenImmediately" fullname="DungeonRunnerPlayModeTests.SafeRoomsAreOpenImmediately" methodname="SafeRoomsAreOpenImmediately" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="175285171" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.001324" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1009" name="StartsInTheStartRoomWithThePlayerAtItsCentre" fullname="DungeonRunnerPlayModeTests.StartsInTheStartRoomWithThePlayerAtItsCentre" methodname="StartsInTheStartRoomWithThePlayerAtItsCentre" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="636470696" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.000975" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1011" name="WalkingThroughADoorMovesToTheNeighbouringCell" fullname="DungeonRunnerPlayModeTests.WalkingThroughADoorMovesToTheNeighbouringCell" methodname="WalkingThroughADoorMovesToTheNeighbouringCell" classname="DungeonRunnerPlayModeTests" runstate="Runnable" seed="639110594" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:48Z" duration="0.001619" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1024" name="DungeonScenePlayModeTests" fullname="DungeonScenePlayModeTests" classname="DungeonScenePlayModeTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:50Z" duration="1.768842" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1030" name="EachRunGeneratesADifferentFloor" fullname="DungeonScenePlayModeTests.EachRunGeneratesADifferentFloor" methodname="EachRunGeneratesADifferentFloor" classname="DungeonScenePlayModeTests" runstate="Runnable" seed="520514704" result="Passed" start-time="2026-08-05 15:31:48Z" end-time="2026-08-05 15:31:49Z" duration="0.594532" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1029" name="TheCameraStaysInsideTheRoom" fullname="DungeonScenePlayModeTests.TheCameraStaysInsideTheRoom" methodname="TheCameraStaysInsideTheRoom" classname="DungeonScenePlayModeTests" runstate="Runnable" seed="445975256" result="Passed" start-time="2026-08-05 15:31:49Z" end-time="2026-08-05 15:31:49Z" duration="0.229614" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1027" name="TheEncounterSurvivesSceneSerialisation" fullname="DungeonScenePlayModeTests.TheEncounterSurvivesSceneSerialisation" methodname="TheEncounterSurvivesSceneSerialisation" classname="DungeonScenePlayModeTests" runstate="Runnable" seed="1767220721" result="Passed" start-time="2026-08-05 15:31:49Z" end-time="2026-08-05 15:31:49Z" duration="0.234599" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1028" name="TheMinimapSurvivesSceneSerialisationAndDrawsCells" fullname="DungeonScenePlayModeTests.TheMinimapSurvivesSceneSerialisationAndDrawsCells" methodname="TheMinimapSurvivesSceneSerialisationAndDrawsCells" classname="DungeonScenePlayModeTests" runstate="Runnable" seed="176502615" result="Passed" start-time="2026-08-05 15:31:49Z" end-time="2026-08-05 15:31:49Z" duration="0.237731" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1026" name="TheRoomUsesOutdoorGroundAndInvisibleBoundaries" fullname="DungeonScenePlayModeTests.TheRoomUsesOutdoorGroundAndInvisibleBoundaries" methodname="TheRoomUsesOutdoorGroundAndInvisibleBoundaries" classname="DungeonScenePlayModeTests" runstate="Runnable" seed="854098709" result="Passed" start-time="2026-08-05 15:31:49Z" end-time="2026-08-05 15:31:50Z" duration="0.233738" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1025" name="TheSceneBuildsARoomAroundThePlayer" fullname="DungeonScenePlayModeTests.TheSceneBuildsARoomAroundThePlayer" methodname="TheSceneBuildsARoomAroundThePlayer" classname="DungeonScenePlayModeTests" runstate="Runnable" seed="868220591" result="Passed" start-time="2026-08-05 15:31:50Z" end-time="2026-08-05 15:31:50Z" duration="0.237571" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1031" name="EnemyDamageFlashPlayModeTests" fullname="EnemyDamageFlashPlayModeTests" classname="EnemyDamageFlashPlayModeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-05 15:31:50Z" end-time="2026-08-05 15:31:50Z" duration="0.002914" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1032" name="TakeDamage_FlashesSpriteRendererRed" fullname="EnemyDamageFlashPlayModeTests.TakeDamage_FlashesSpriteRendererRed" methodname="TakeDamage_FlashesSpriteRendererRed" classname="EnemyDamageFlashPlayModeTests" runstate="Runnable" seed="1566557416" result="Passed" start-time="2026-08-05 15:31:50Z" end-time="2026-08-05 15:31:50Z" duration="0.002301" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1033" name="ItemHotbarPlayModeTests" fullname="ItemHotbarPlayModeTests" classname="ItemHotbarPlayModeTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-08-05 15:31:50Z" end-time="2026-08-05 15:31:50Z" duration="0.054788" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1036" name="ArrowHeld_ProjectileSlotFiresAndReselectionKeepsCooldown" fullname="ItemHotbarPlayModeTests.ArrowHeld_ProjectileSlotFiresAndReselectionKeepsCooldown" methodname="ArrowHeld_ProjectileSlotFiresAndReselectionKeepsCooldown" classname="ItemHotbarPlayModeTests" runstate="Runnable" seed="1218566513" result="Failed" start-time="2026-08-05 15:31:50Z" end-time="2026-08-05 15:31:50Z" duration="0.045778" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: 1
+  But was:  0
+]]></message>
+            <stack-trace><![CDATA[at ItemHotbarPlayModeTests+<ArrowHeld_ProjectileSlotFiresAndReselectionKeepsCooldown>d__14.MoveNext () [0x0005a] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\PlayMode\ItemHotbarPlayModeTests.cs:155
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1035" name="EmptyAndOccupiedSelection_UpdatesEquipmentAndMovesOutline" fullname="ItemHotbarPlayModeTests.EmptyAndOccupiedSelection_UpdatesEquipmentAndMovesOutline" methodname="EmptyAndOccupiedSelection_UpdatesEquipmentAndMovesOutline" classname="ItemHotbarPlayModeTests" runstate="Runnable" seed="660487339" result="Passed" start-time="2026-08-05 15:31:50Z" end-time="2026-08-05 15:31:50Z" duration="0.004384" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1034" name="RuntimeInitialization_LoadsFiveSampleWeaponsAndShowsAxeFirst" fullname="ItemHotbarPlayModeTests.RuntimeInitialization_LoadsFiveSampleWeaponsAndShowsAxeFirst" methodname="RuntimeInitialization_LoadsFiveSampleWeaponsAndShowsAxeFirst" classname="ItemHotbarPlayModeTests" runstate="Runnable" seed="547823726" result="Failed" start-time="2026-08-05 15:31:50Z" end-time="2026-08-05 15:31:50Z" duration="0.003928" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: Axe
+  But was:  Sword
+]]></message>
+            <stack-trace><![CDATA[at ItemHotbarPlayModeTests+<RuntimeInitialization_LoadsFiveSampleWeaponsAndShowsAxeFirst>d__12.MoveNext () [0x00141] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\PlayMode\ItemHotbarPlayModeTests.cs:103
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+          </failure>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1037" name="KrabContactHealthUIPlayModeTests" fullname="KrabContactHealthUIPlayModeTests" classname="KrabContactHealthUIPlayModeTests" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2026-08-05 15:31:50Z" end-time="2026-08-05 15:31:50Z" duration="0.005895" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1038" name="TriggerOverlap_DamagesPlayerAndUpdatesHealthNumberAndGauge" fullname="KrabContactHealthUIPlayModeTests.TriggerOverlap_DamagesPlayerAndUpdatesHealthNumberAndGauge" methodname="TriggerOverlap_DamagesPlayerAndUpdatesHealthNumberAndGauge" classname="KrabContactHealthUIPlayModeTests" runstate="Runnable" seed="330113669" result="Failed" start-time="2026-08-05 15:31:50Z" end-time="2026-08-05 15:31:50Z" duration="0.005393" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: property Length equal to 5
+  But was:  0
+]]></message>
+            <stack-trace><![CDATA[at KrabContactHealthUIPlayModeTests+<TriggerOverlap_DamagesPlayerAndUpdatesHealthNumberAndGauge>d__0.MoveNext () [0x00185] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\PlayMode\KrabContactHealthUIPlayModeTests.cs:34
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+          </failure>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1039" name="PlayerDeathScreenPlayModeTests" fullname="PlayerDeathScreenPlayModeTests" classname="PlayerDeathScreenPlayModeTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-08-05 15:31:50Z" end-time="2026-08-05 15:31:51Z" duration="1.060692" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1041" name="Death_AfterOneRealtimeSecondShowsOpaqueMenu" fullname="PlayerDeathScreenPlayModeTests.Death_AfterOneRealtimeSecondShowsOpaqueMenu" methodname="Death_AfterOneRealtimeSecondShowsOpaqueMenu" classname="PlayerDeathScreenPlayModeTests" runstate="Runnable" seed="1168576164" result="Passed" start-time="2026-08-05 15:31:50Z" end-time="2026-08-05 15:31:51Z" duration="1.052530" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1040" name="Death_ImmediatelyHidesPlayerPausesGameAndKeepsMenuHidden" fullname="PlayerDeathScreenPlayModeTests.Death_ImmediatelyHidesPlayerPausesGameAndKeepsMenuHidden" methodname="Death_ImmediatelyHidesPlayerPausesGameAndKeepsMenuHidden" classname="PlayerDeathScreenPlayModeTests" runstate="Runnable" seed="1825255205" result="Passed" start-time="2026-08-05 15:31:51Z" end-time="2026-08-05 15:31:51Z" duration="0.002185" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1043" name="RestartButton_RestoresTimeAndReloadsActiveScene" fullname="PlayerDeathScreenPlayModeTests.RestartButton_RestoresTimeAndReloadsActiveScene" methodname="RestartButton_RestoresTimeAndReloadsActiveScene" classname="PlayerDeathScreenPlayModeTests" runstate="Runnable" seed="15955501" result="Passed" start-time="2026-08-05 15:31:51Z" end-time="2026-08-05 15:31:51Z" duration="0.002005" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1044" name="TaggedPlayerWithoutConfiguredScreen_CreatesOneAtRuntime" fullname="PlayerDeathScreenPlayModeTests.TaggedPlayerWithoutConfiguredScreen_CreatesOneAtRuntime" methodname="TaggedPlayerWithoutConfiguredScreen_CreatesOneAtRuntime" classname="PlayerDeathScreenPlayModeTests" runstate="Runnable" seed="560210505" result="Passed" start-time="2026-08-05 15:31:51Z" end-time="2026-08-05 15:31:51Z" duration="0.001138" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1042" name="TitleButton_RestoresTimeAndLoadsTitleScene" fullname="PlayerDeathScreenPlayModeTests.TitleButton_RestoresTimeAndLoadsTitleScene" methodname="TitleButton_RestoresTimeAndLoadsTitleScene" classname="PlayerDeathScreenPlayModeTests" runstate="Runnable" seed="2097067025" result="Passed" start-time="2026-08-05 15:31:51Z" end-time="2026-08-05 15:31:51Z" duration="0.001575" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1045" name="PlayerHealthBarOrderPlayModeTests" fullname="PlayerHealthBarOrderPlayModeTests" classname="PlayerHealthBarOrderPlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-08-05 15:31:51Z" end-time="2026-08-05 15:31:51Z" duration="0.004024" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1047" name="TheBarShowsFullHealthWhenItConnectsAfterAwakeRuns" fullname="PlayerHealthBarOrderPlayModeTests.TheBarShowsFullHealthWhenItConnectsAfterAwakeRuns" methodname="TheBarShowsFullHealthWhenItConnectsAfterAwakeRuns" classname="PlayerHealthBarOrderPlayModeTests" runstate="Runnable" seed="966490747" result="Passed" start-time="2026-08-05 15:31:51Z" end-time="2026-08-05 15:31:51Z" duration="0.001336" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1046" name="TheBarShowsFullHealthWhenItConnectsBeforeAwakeRuns" fullname="PlayerHealthBarOrderPlayModeTests.TheBarShowsFullHealthWhenItConnectsBeforeAwakeRuns" methodname="TheBarShowsFullHealthWhenItConnectsBeforeAwakeRuns" classname="PlayerHealthBarOrderPlayModeTests" runstate="Runnable" seed="322239863" result="Passed" start-time="2026-08-05 15:31:51Z" end-time="2026-08-05 15:31:51Z" duration="0.000967" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1048" name="TheBarStillFollowsDamage" fullname="PlayerHealthBarOrderPlayModeTests.TheBarStillFollowsDamage" methodname="TheBarStillFollowsDamage" classname="PlayerHealthBarOrderPlayModeTests" runstate="Runnable" seed="1393815779" result="Passed" start-time="2026-08-05 15:31:51Z" end-time="2026-08-05 15:31:51Z" duration="0.001102" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1049" name="SwordProjectilePhysicsPlayModeTests" fullname="SwordProjectilePhysicsPlayModeTests" classname="SwordProjectilePhysicsPlayModeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-05 15:31:51Z" end-time="2026-08-05 15:31:51Z" duration="0.014019" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1050" name="OnTriggerEnter2D_RealPhysicsOverlapDealsExactlyFiveDamageAndDestroysSword" fullname="SwordProjectilePhysicsPlayModeTests.OnTriggerEnter2D_RealPhysicsOverlapDealsExactlyFiveDamageAndDestroysSword" methodname="OnTriggerEnter2D_RealPhysicsOverlapDealsExactlyFiveDamageAndDestroysSword" classname="SwordProjectilePhysicsPlayModeTests" runstate="Runnable" seed="151432597" result="Passed" start-time="2026-08-05 15:31:51Z" end-time="2026-08-05 15:31:51Z" duration="0.013449" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+      </test-suite>
+      <test-suite type="TestFixture" id="1051" name="TitleScreenPlayModeTests" fullname="TitleScreenPlayModeTests" classname="TitleScreenPlayModeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-05 15:31:51Z" end-time="2026-08-05 15:31:52Z" duration="0.532354" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1052" name="GameStartButton_LoadsWeaponForgeScene" fullname="TitleScreenPlayModeTests.GameStartButton_LoadsWeaponForgeScene" methodname="GameStartButton_LoadsWeaponForgeScene" classname="TitleScreenPlayModeTests" runstate="Runnable" seed="667833388" result="Passed" start-time="2026-08-05 15:31:51Z" end-time="2026-08-05 15:31:52Z" duration="0.531924" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[There are 2 event systems in the scene. Please ensure there is always exactly one event system in the scene
+Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

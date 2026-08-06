@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Passed" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-05 15:57:50Z" end-time="2026-08-05 15:57:50Z" duration="0.0405451">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="491" result="Passed" start-time="2026-08-05 15:57:50Z" end-time="2026-08-05 15:57:50Z" duration="0.040545" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1586" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="491" result="Passed" start-time="2026-08-05 15:57:50Z" end-time="2026-08-05 15:57:50Z" duration="0.032257" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="29748" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1572" name="WeaponProjectilePierceTests" fullname="WeaponProjectilePierceTests" classname="WeaponProjectilePierceTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-08-05 15:57:50Z" end-time="2026-08-05 15:57:50Z" duration="0.028502" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1577" name="BoomerangReturnsInsteadOfExpiringOnHit" fullname="WeaponProjectilePierceTests.BoomerangReturnsInsteadOfExpiringOnHit" methodname="BoomerangReturnsInsteadOfExpiringOnHit" classname="WeaponProjectilePierceTests" runstate="Runnable" seed="850041592" result="Passed" start-time="2026-08-05 15:57:50Z" end-time="2026-08-05 15:57:50Z" duration="0.015171" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[projectile: Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently
+]]></output>
+        </test-case>
+        <test-case id="1574" name="HittingAChaseEnemyAppliesKnockbackOppositeTheTravelDirection" fullname="WeaponProjectilePierceTests.HittingAChaseEnemyAppliesKnockbackOppositeTheTravelDirection" methodname="HittingAChaseEnemyAppliesKnockbackOppositeTheTravelDirection" classname="WeaponProjectilePierceTests" runstate="Runnable" seed="2127131382" result="Passed" start-time="2026-08-05 15:57:50Z" end-time="2026-08-05 15:57:50Z" duration="0.002107" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[projectile: Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently
+]]></output>
+        </test-case>
+        <test-case id="1576" name="PierceHitsTheSameEnemyOnlyOnce" fullname="WeaponProjectilePierceTests.PierceHitsTheSameEnemyOnlyOnce" methodname="PierceHitsTheSameEnemyOnlyOnce" classname="WeaponProjectilePierceTests" runstate="Runnable" seed="1399867205" result="Passed" start-time="2026-08-05 15:57:50Z" end-time="2026-08-05 15:57:50Z" duration="0.000458" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1575" name="PierceLetsTheProjectileHitSeveralEnemies" fullname="WeaponProjectilePierceTests.PierceLetsTheProjectileHitSeveralEnemies" methodname="PierceLetsTheProjectileHitSeveralEnemies" classname="WeaponProjectilePierceTests" runstate="Runnable" seed="1574346887" result="Passed" start-time="2026-08-05 15:57:50Z" end-time="2026-08-05 15:57:50Z" duration="0.000752" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[projectile: Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently
+]]></output>
+        </test-case>
+        <test-case id="1573" name="PlainProjectileStopsAtTheFirstHit" fullname="WeaponProjectilePierceTests.PlainProjectileStopsAtTheFirstHit" methodname="PlainProjectileStopsAtTheFirstHit" classname="WeaponProjectilePierceTests" runstate="Runnable" seed="418686824" result="Passed" start-time="2026-08-05 15:57:50Z" end-time="2026-08-05 15:57:50Z" duration="0.000667" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[projectile: Destroy may not be called from edit mode! Use DestroyImmediate instead.
+Destroying an object in edit mode destroys it permanently
+Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

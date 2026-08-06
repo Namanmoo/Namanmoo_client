@@ -49,9 +49,11 @@ public sealed class ApproachAndShootEnemyController : MonoBehaviour
         Vector2 offsetToTarget = (Vector2)target.position - body.position;
         Vector2 velocity = CalculateVelocity(offsetToTarget);
         // 냉기·경직 배율 — 상태이상이 없으면 1이라 원래 속도 그대로다
+        Vector2 knockback = EnemyStatus.KnockbackVelocityOf(gameObject);
         body.MovePosition(
             body.position
-                + velocity * EnemyStatus.SpeedMultiplierOf(gameObject) * Time.fixedDeltaTime);
+                + velocity * EnemyStatus.SpeedMultiplierOf(gameObject) * Time.fixedDeltaTime
+                + knockback * Time.fixedDeltaTime);
         if (velocity == Vector2.zero)
         {
             TryAttack(Time.time);
