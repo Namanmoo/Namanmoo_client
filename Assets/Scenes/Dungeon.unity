@@ -1442,7 +1442,7 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: -2
-      type: {class: '', ns: '', asm: ''}
+      type: {class: , ns: , asm: }
     - rid: 4860450646259138560
       type: {class: Light2DProviderSources, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data:
@@ -3261,18 +3261,6 @@ MonoBehaviour:
     width: 44
     height: 30
   overscan: 2.5
---- !u!114 &1277628464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1277628458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a3cacf6fefea3d47966dbc33726be00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: NaManMoo.Runtime::CameraShake
 --- !u!114 &1277628460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3391,6 +3379,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1277628464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277628458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3cacf6fefea3d47966dbc33726be00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NaManMoo.Runtime::CameraShake
 --- !u!1 &1294612283
 GameObject:
   m_ObjectHideFlags: 0
@@ -4837,7 +4837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: NaManMoo.Runtime::PlayerSwordShooter
   damage: 5
   shotsPerSecond: 2
-  projectileSpeed: 15
+  projectileSpeed: 18
   spinSpeed: 720
   projectileLifetime: 4
   spawnOffset: 0.8

@@ -120,7 +120,7 @@ public static class ForgeWeaponAssembler
             reach: 1f,
             radius: ProjectileRadius,
             arc: 90f,
-            speed: 8f,
+            speed: 12f,
             lifetime: 4f,
             sprite,
             Color.white);
