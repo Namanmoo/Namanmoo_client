@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace NaManMoo.Dungeon
@@ -20,6 +21,68 @@ namespace NaManMoo.Dungeon
             root.transform.SetParent(parent, false);
 
             PlaceCorners(root.transform, shape.Bounds);
+            PlaceEdges(root.transform, shape);
+        }
+
+        private static void PlaceEdges(Transform parent, RoomShape shape)
+        {
+            for (int i = 0; i < shape.Walls.Count; i++)
+            {
+                IReadOnlyList<Vector2> wall = shape.Walls[i];
+                Doors side = shape.WallSides[i];
+                Sprite edgeSprite = LoadSprite(EdgeSpriteIndex(side));
+                bool horizontal = side is Doors.North or Doors.South;
+
+                for (int p = 0; p < wall.Count - 1; p++)
+                {
+                    PlaceSegment(parent, wall[p], wall[p + 1], edgeSprite, horizontal);
+                }
+            }
+        }
+
+        private static void PlaceSegment(
+            Transform parent,
+            Vector2 from,
+            Vector2 to,
+            Sprite sprite,
+            bool horizontal)
+        {
+            Vector2 delta = to - from;
+            float length = delta.magnitude;
+            if (length < 0.0001f)
+            {
+                return;
+            }
+
+            Vector2 spriteSize = sprite.bounds.size;
+            float tileSize = horizontal ? spriteSize.x : spriteSize.y;
+            int count = Mathf.Max(1, Mathf.RoundToInt(length / tileSize));
+            float slot = length / count;
+            float fitScale = slot / tileSize;
+            float angle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;
+            Vector2 direction = delta / length;
+
+            for (int i = 0; i < count; i++)
+            {
+                Vector2 center = from + direction * (slot * (i + 0.5f));
+                Vector2 scale = horizontal
+                    ? new Vector2(fitScale, 1f)
+                    : new Vector2(1f, fitScale);
+
+                PlaceTile(parent, $"Edge {i}", sprite, center, scale, angle);
+            }
+        }
+
+        private static int EdgeSpriteIndex(Doors side)
+        {
+            return side switch
+            {
+                Doors.North => 1,
+                Doors.South => 7,
+                Doors.East => 5,
+                Doors.West => 3,
+                _ => 4
+            };
         }
 
         private static void PlaceCorners(Transform parent, Rect bounds)
