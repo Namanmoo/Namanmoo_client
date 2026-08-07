@@ -93,6 +93,48 @@ public sealed class WallForestDecoratorTests
     }
 
     [Test]
+    public void EastEdgeTilesCoverTheWallLengthWithoutGapsOrOverlap()
+    {
+        var root = new GameObject("Test Room Root");
+
+        try
+        {
+            RoomShape shape = RoomShape.Build(1, Doors.None);
+            WallForestDecorator.Decorate(root.transform, shape, roomSeed: 1);
+
+            Transform forest = root.transform.Find("Wall Forest");
+            Sprite eastSprite = LoadWallSprite("wall_forest_5");
+
+            // North 테스트와 동일한 이유로 로컬 스케일 기준 폭을 합산한다. East/West처럼 벽이
+            // 세로 방향인 변도 회전 후에는 로컬 X축이 벽을 따라가는 방향이 되므로(PlaceSegment의
+            // 회전 공식은 side와 무관하게 항상 로컬 X를 벽 방향에 맞춘다), North와 동일하게
+            // localScale.x 기준으로 합산해야 한다.
+            float totalWidth = 0f;
+            int tileCount = 0;
+            foreach (Transform child in forest)
+            {
+                SpriteRenderer renderer = child.GetComponent<SpriteRenderer>();
+                if (renderer.sprite != eastSprite)
+                {
+                    continue;
+                }
+
+                totalWidth += Mathf.Abs(child.localScale.x) * eastSprite.bounds.size.x;
+                tileCount++;
+            }
+
+            float eastWallLength = WallLength(shape, Doors.East);
+
+            Assert.That(tileCount, Is.GreaterThan(0));
+            Assert.That(totalWidth, Is.EqualTo(eastWallLength).Within(0.01f));
+        }
+        finally
+        {
+            Object.DestroyImmediate(root);
+        }
+    }
+
+    [Test]
     public void EdgeTilesUseTheSpriteMatchingTheirSide()
     {
         var root = new GameObject("Test Room Root");

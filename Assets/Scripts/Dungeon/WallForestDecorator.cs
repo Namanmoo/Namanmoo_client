@@ -31,11 +31,10 @@ namespace NaManMoo.Dungeon
                 IReadOnlyList<Vector2> wall = shape.Walls[i];
                 Doors side = shape.WallSides[i];
                 Sprite edgeSprite = LoadSprite(EdgeSpriteIndex(side));
-                bool horizontal = side is Doors.North or Doors.South;
 
                 for (int p = 0; p < wall.Count - 1; p++)
                 {
-                    PlaceSegment(parent, wall[p], wall[p + 1], edgeSprite, horizontal);
+                    PlaceSegment(parent, wall[p], wall[p + 1], edgeSprite);
                 }
             }
         }
@@ -44,8 +43,7 @@ namespace NaManMoo.Dungeon
             Transform parent,
             Vector2 from,
             Vector2 to,
-            Sprite sprite,
-            bool horizontal)
+            Sprite sprite)
         {
             Vector2 delta = to - from;
             float length = delta.magnitude;
@@ -54,8 +52,15 @@ namespace NaManMoo.Dungeon
                 return;
             }
 
+            // PlaceTile은 tile.transform.localRotation = Quaternion.Euler(0, 0, angle)로
+            // angle = Atan2(delta.y, delta.x)만큼 회전시킨다. 이 회전 공식에서는 side(동서남북)와
+            // 무관하게 로컬 X축이 항상 delta 방향(벽을 따라가는 방향)과 정확히 일치하게 된다 —
+            // 로컬 Y축은 항상 벽에 수직인 두께 방향이 된다. 그래서 타일링(구간에 꽉 채우기) 크기는
+            // side에 따라 분기하지 않고 항상 스프라이트의 X축 크기(spriteSize.x) 기준으로 계산하고,
+            // fitScale도 항상 로컬 X(scale.x)에 곱한다. 예전에는 side가 East/West일 때 Y축 기준으로
+            // 계산했는데, 그 축은 회전 후 벽과 나란해지지 않아 빈틈/겹침이 생겼다(Task 3 리뷰에서 발견).
             Vector2 spriteSize = sprite.bounds.size;
-            float tileSize = horizontal ? spriteSize.x : spriteSize.y;
+            float tileSize = spriteSize.x;
             int count = Mathf.Max(1, Mathf.RoundToInt(length / tileSize));
             float slot = length / count;
             float fitScale = slot / tileSize;
@@ -65,9 +70,7 @@ namespace NaManMoo.Dungeon
             for (int i = 0; i < count; i++)
             {
                 Vector2 center = from + direction * (slot * (i + 0.5f));
-                Vector2 scale = horizontal
-                    ? new Vector2(fitScale, 1f)
-                    : new Vector2(1f, fitScale);
+                Vector2 scale = new Vector2(fitScale, 1f);
 
                 PlaceTile(parent, $"Edge {i}", sprite, center, scale, angle);
             }
@@ -81,7 +84,8 @@ namespace NaManMoo.Dungeon
                 Doors.South => 7,
                 Doors.East => 5,
                 Doors.West => 3,
-                _ => 4
+                _ => throw new InvalidOperationException(
+                    $"Unexpected wall side for edge sprite lookup: {side}")
             };
         }
 
