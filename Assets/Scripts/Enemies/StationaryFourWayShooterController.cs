@@ -26,6 +26,9 @@ public sealed class StationaryFourWayShooterController : MonoBehaviour
     private EnemyVisualController visualController;
     private float nextAttackTime;
 
+    /// <summary>사방으로 쏘지만 그림은 플레이어 쪽을 봐야 해서 타겟을 들고 있는다.</summary>
+    private Transform target;
+
     private void Awake()
     {
         CacheComponents();
@@ -37,6 +40,7 @@ public sealed class StationaryFourWayShooterController : MonoBehaviour
         float spawnTime)
     {
         definition = newDefinition;
+        target = newTarget;
         nextAttackTime = spawnTime + definition.AttackInterval;
         CacheComponents();
         if (body != null)
@@ -57,9 +61,16 @@ public sealed class StationaryFourWayShooterController : MonoBehaviour
             return false;
         }
 
-        visualController?.PlayAttack();
         Vector2 origin =
             body != null ? body.position : (Vector2)transform.position;
+
+        // 쏘는 순간 플레이어 쪽을 본다. 좌우 Idle 모션이 있는 컨트롤러에서만 반영된다.
+        if (target != null)
+        {
+            visualController?.FaceTowards((Vector2)target.position - origin);
+        }
+
+        visualController?.PlayAttack();
 
         for (int i = 0; i < Directions.Length; i++)
         {

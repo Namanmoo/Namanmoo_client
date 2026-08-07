@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: NaManMoo.Runtime::EnemyDefinition
   enemyId: wood_tower
   displayName: Wood Tower
-  bodySprite: {fileID: 21300000, guid: 685b298f6e7c38649bdb861e5160a4d6, type: 3}
-  projectileSprite: {fileID: 21300000, guid: 1d2620497d0dd0648837852268aeec9b, type: 3}
+  bodySprite: {fileID: 21300000, guid: 4a14fb618d932fc42825a08f464b3ed1, type: 3}
+  projectileSprite: {fileID: 21300000, guid: 3de16801357f2de449b9147a58c1e6e7, type: 3}
   behaviorType: 2
-  animatorController: {fileID: 0}
+  animatorController: {fileID: 9100000, guid: b799746e40fda054d827b7c63469368b, type: 2}
   visualHeight: 5
-  bodyCollisionRadius: 2.2
+  bodyCollisionRadius: 1.55
   maxHealth: 10
   moveSpeed: 0
   attackDamage: 2
