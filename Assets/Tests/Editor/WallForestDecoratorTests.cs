@@ -226,4 +226,106 @@ public sealed class WallForestDecoratorTests
 
         return length;
     }
+
+    [Test]
+    public void SameRoomSeedProducesTheSameForestLayout()
+    {
+        var rootA = new GameObject("A");
+        var rootB = new GameObject("B");
+
+        try
+        {
+            RoomShape shape = RoomShape.Build(4, Doors.North | Doors.East);
+            WallForestDecorator.Decorate(rootA.transform, shape, roomSeed: 99);
+            WallForestDecorator.Decorate(rootB.transform, shape, roomSeed: 99);
+
+            Transform forestA = rootA.transform.Find("Wall Forest");
+            Transform forestB = rootB.transform.Find("Wall Forest");
+
+            Assert.That(forestA.childCount, Is.EqualTo(forestB.childCount));
+
+            for (int i = 0; i < forestA.childCount; i++)
+            {
+                Transform childA = forestA.GetChild(i);
+                Transform childB = forestB.GetChild(i);
+
+                Assert.That(childA.localPosition, Is.EqualTo(childB.localPosition));
+                Assert.That(childA.localScale, Is.EqualTo(childB.localScale));
+            }
+        }
+        finally
+        {
+            Object.DestroyImmediate(rootA);
+            Object.DestroyImmediate(rootB);
+        }
+    }
+
+    [Test]
+    public void EdgeTileHeightsVaryInsteadOfBeingPerfectlyUniform()
+    {
+        var root = new GameObject("Test Room Root");
+
+        try
+        {
+            RoomShape shape = RoomShape.Build(1, Doors.None);
+            WallForestDecorator.Decorate(root.transform, shape, roomSeed: 5);
+
+            // 북쪽 변 하나로 좁힌다 — 문이 없는 방에서 북쪽 벽은 한 폴리라인 안에서
+            // 구간 길이가 전부 같아 지터가 없으면 높이 배율이 항상 1.0으로 똑같다.
+            // 다른 변까지 섞어서 보면 변마다 다른 fitScale 때문에 지터 없이도
+            // "값이 2개 이상"으로 보여 테스트가 아무 의미 없이 통과해 버린다.
+            Transform forest = root.transform.Find("Wall Forest");
+            Sprite northSprite = LoadWallSprite("wall_forest_1");
+            var heightScales = new HashSet<float>();
+
+            foreach (Transform child in forest)
+            {
+                SpriteRenderer renderer = child.GetComponent<SpriteRenderer>();
+                if (renderer.sprite == northSprite)
+                {
+                    heightScales.Add(child.localScale.y);
+                }
+            }
+
+            Assert.That(
+                heightScales.Count, Is.GreaterThan(1),
+                "북쪽 타일들의 높이 배율이 전부 같다 — 변화가 적용되지 않았다");
+        }
+        finally
+        {
+            Object.DestroyImmediate(root);
+        }
+    }
+
+    [Test]
+    public void NorthEdgeTilesStillCoverTheWallLengthAfterVariationIsApplied()
+    {
+        var root = new GameObject("Test Room Root");
+
+        try
+        {
+            RoomShape shape = RoomShape.Build(1, Doors.None);
+            WallForestDecorator.Decorate(root.transform, shape, roomSeed: 5);
+
+            Transform forest = root.transform.Find("Wall Forest");
+            Sprite northSprite = LoadWallSprite("wall_forest_1");
+
+            // Task 3의 이유와 동일하게 renderer.bounds가 아니라 로컬 스케일로 폭을 잰다.
+            float totalWidth = 0f;
+            foreach (Transform child in forest)
+            {
+                SpriteRenderer renderer = child.GetComponent<SpriteRenderer>();
+                if (renderer.sprite == northSprite)
+                {
+                    totalWidth += Mathf.Abs(child.localScale.x) * northSprite.bounds.size.x;
+                }
+            }
+
+            Assert.That(totalWidth, Is.EqualTo(WallLength(shape, Doors.North)).Within(0.01f));
+        }
+        finally
+        {
+            Object.DestroyImmediate(root);
+        }
+    }
 }
