@@ -15,7 +15,7 @@ public sealed class RoomBuilderOutdoorTests
             RoomShape shape = RoomShape.Build(17, Doors.North | Doors.East);
 
             List<DungeonDoor> doors = RoomBuilder.Build(
-                root.transform, shape, RoomKind.Normal);
+                root.transform, shape, RoomKind.Normal, roomSeed: 17);
 
             Transform groundObject = root.transform.Find("Room Ground");
             Assert.That(groundObject, Is.Not.Null);
@@ -106,14 +106,21 @@ public sealed class RoomBuilderOutdoorTests
                 Assert.That(door.GetComponentInChildren<Renderer>(), Is.Null);
             }
 
-            SpriteRenderer[] renderers =
-                root.GetComponentsInChildren<SpriteRenderer>(includeInactive: true);
-            Assert.That(renderers, Has.Length.EqualTo(5));
-            Assert.That(renderers, Does.Contain(ground));
-            Assert.That(renderers, Does.Contain(northRenderer));
-            Assert.That(renderers, Does.Contain(eastRenderer));
-            Assert.That(renderers, Does.Contain(northOuterRenderer));
-            Assert.That(renderers, Does.Contain(eastOuterRenderer));
+            Transform forestRoot = root.transform.Find("Wall Forest");
+            Assert.That(forestRoot, Is.Not.Null);
+            Assert.That(
+                forestRoot.GetComponentsInChildren<SpriteRenderer>(),
+                Has.Length.GreaterThan(0));
+
+            SpriteRenderer[] nonForestRenderers = System.Array.FindAll(
+                root.GetComponentsInChildren<SpriteRenderer>(includeInactive: true),
+                r => !r.transform.IsChildOf(forestRoot));
+            Assert.That(nonForestRenderers, Has.Length.EqualTo(5));
+            Assert.That(nonForestRenderers, Does.Contain(ground));
+            Assert.That(nonForestRenderers, Does.Contain(northRenderer));
+            Assert.That(nonForestRenderers, Does.Contain(eastRenderer));
+            Assert.That(nonForestRenderers, Does.Contain(northOuterRenderer));
+            Assert.That(nonForestRenderers, Does.Contain(eastOuterRenderer));
         }
         finally
         {

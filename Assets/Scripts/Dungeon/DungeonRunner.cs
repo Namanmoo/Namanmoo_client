@@ -115,13 +115,13 @@ namespace NaManMoo.Dungeon
             Teardown();
 
             CurrentCell = cell;
-            CurrentShape = RoomShape.Build(
-                DungeonNavigation.RoomSeed(seed, floor, cell), room.Doors);
+            int roomSeed = DungeonNavigation.RoomSeed(seed, floor, cell);
+            CurrentShape = RoomShape.Build(roomSeed, room.Doors);
 
             roomRoot = new GameObject(RoomRootName);
             roomRoot.transform.SetParent(transform, false);
 
-            doors.AddRange(RoomBuilder.Build(roomRoot.transform, CurrentShape, room.Kind));
+            doors.AddRange(RoomBuilder.Build(roomRoot.transform, CurrentShape, room.Kind, roomSeed));
             foreach (DungeonDoor door in doors)
             {
                 door.Passed += OnDoorPassed;
