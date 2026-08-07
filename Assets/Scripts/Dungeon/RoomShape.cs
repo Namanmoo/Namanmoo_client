@@ -54,11 +54,13 @@ namespace NaManMoo.Dungeon
             Rect bounds,
             IReadOnlyList<Vector2> floorOutline,
             IReadOnlyList<IReadOnlyList<Vector2>> walls,
+            IReadOnlyList<Doors> wallSides,
             IReadOnlyList<DoorOpening> doors)
         {
             Bounds = bounds;
             FloorOutline = floorOutline;
             Walls = walls;
+            WallSides = wallSides;
             DoorOpenings = doors;
         }
 
@@ -70,6 +72,9 @@ namespace NaManMoo.Dungeon
 
         /// <summary>벽 폴리라인들. 문 구간에서 끊긴다.</summary>
         public IReadOnlyList<IReadOnlyList<Vector2>> Walls { get; }
+
+        /// <summary>Walls[i]가 어느 변에 속하는지. Walls와 인덱스가 1:1로 대응한다.</summary>
+        public IReadOnlyList<Doors> WallSides { get; }
 
         public IReadOnlyList<DoorOpening> DoorOpenings { get; }
 
@@ -116,18 +121,20 @@ namespace NaManMoo.Dungeon
 
             var openings = new List<DoorOpening>();
             var walls = new List<IReadOnlyList<Vector2>>();
+            var wallSides = new List<Doors>();
 
             // 네 변을 각각 훑는다. 문이 있으면 그 구간을 비우고 양쪽으로 벽을 나눈다.
-            AddSide(walls, openings, bounds, doors, Doors.South, ref rng);
-            AddSide(walls, openings, bounds, doors, Doors.East, ref rng);
-            AddSide(walls, openings, bounds, doors, Doors.North, ref rng);
-            AddSide(walls, openings, bounds, doors, Doors.West, ref rng);
+            AddSide(walls, wallSides, openings, bounds, doors, Doors.South, ref rng);
+            AddSide(walls, wallSides, openings, bounds, doors, Doors.East, ref rng);
+            AddSide(walls, wallSides, openings, bounds, doors, Doors.North, ref rng);
+            AddSide(walls, wallSides, openings, bounds, doors, Doors.West, ref rng);
 
-            return new RoomShape(bounds, floor, walls, openings);
+            return new RoomShape(bounds, floor, walls, wallSides, openings);
         }
 
         private static void AddSide(
             List<IReadOnlyList<Vector2>> walls,
+            List<Doors> wallSides,
             List<DoorOpening> openings,
             Rect bounds,
             Doors doors,
@@ -180,11 +187,14 @@ namespace NaManMoo.Dungeon
                 openings.Add(new DoorOpening(side, start + along * middle, from, to));
 
                 walls.Add(WobbleWall(start, along, inward, 0f, gapFrom, middle, ref rng));
+                wallSides.Add(side);
                 walls.Add(WobbleWall(start, along, inward, gapTo, length, middle, ref rng));
+                wallSides.Add(side);
             }
             else
             {
                 walls.Add(WobbleWall(start, along, inward, 0f, length, middle, ref rng));
+                wallSides.Add(side);
             }
         }
 
