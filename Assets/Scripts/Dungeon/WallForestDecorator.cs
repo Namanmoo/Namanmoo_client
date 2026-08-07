@@ -12,7 +12,7 @@ namespace NaManMoo.Dungeon
     {
         private const string RootName = "Wall Forest";
         private const int ForestOrder = 2;
-        private const string SpritePathPrefix = "Stage1/Wall/wall_forest_";
+        private const string SpriteSheetPath = "Stage1/Wall/wall_forest";
 
         public static void Decorate(Transform parent, RoomShape shape, int roomSeed)
         {
@@ -56,8 +56,7 @@ namespace NaManMoo.Dungeon
         private static Sprite LoadSprite(int index)
         {
             // Load all sub-sprites from the sprite sheet
-            string basePath = "Stage1/Wall/wall_forest";
-            Sprite[] allSprites = Resources.LoadAll<Sprite>(basePath);
+            Sprite[] allSprites = Resources.LoadAll<Sprite>(SpriteSheetPath);
 
             string targetName = "wall_forest_" + index;
             Sprite sprite = System.Array.Find(allSprites, s => s.name == targetName);

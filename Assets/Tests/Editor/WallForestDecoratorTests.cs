@@ -38,7 +38,16 @@ public sealed class WallForestDecoratorTests
         Assert.That(renderer, Is.Not.Null);
         Assert.That(
             renderer.sprite,
-            Is.SameAs(Resources.Load<Sprite>("Stage1/Wall/" + spriteName)));
+            Is.SameAs(LoadWallSprite(spriteName)));
         Assert.That(corner.localPosition, Is.EqualTo(new Vector3(x, y, 0f)));
+    }
+
+    // wall_forest.png는 Sprite Mode: Multiple로 슬라이스된 시트라 서브 스프라이트를
+    // Resources.Load<Sprite>("경로/이름")로 직접 로드할 수 없다(항상 null). LoadAll로
+    // 시트 전체를 불러온 뒤 이름으로 찾는다 — WallForestDecorator.LoadSprite와 동일한 방식.
+    private static Sprite LoadWallSprite(string spriteName)
+    {
+        Sprite[] allSprites = Resources.LoadAll<Sprite>("Stage1/Wall/wall_forest");
+        return System.Array.Find(allSprites, s => s.name == spriteName);
     }
 }
