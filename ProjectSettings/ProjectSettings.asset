@@ -782,7 +782,8 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Standalone: SENTIS_ANALYTICS_ENABLED;APP_UI_EDITOR_ONLY
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -883,11 +884,11 @@ PlayerSettings:
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
   enableDirectStorage: 0
-  cloudProjectId: bb177da9-4f19-4f58-a4e6-bbcb993c1afb
+  cloudProjectId: 2186ffba-6e57-48fc-a136-448a28105ecc
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: NaManMoo 2026-07-27_22-50-37
-  organizationId: newbie98
+  projectName: namanmoo
+  organizationId: dkscogh1
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

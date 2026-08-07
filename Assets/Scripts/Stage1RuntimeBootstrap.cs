@@ -8,7 +8,7 @@ public class Stage1RuntimeBootstrap : MonoBehaviour
     private const string ItemHotbarBackgroundPath = "Assets/UI/ItemUIBackground.png";
     private const string PlayerHealthHeartPath = "Assets/UI/HP_heart.png";
     private const string PlayerSpritePath =
-        "Assets/Player/Animation/Sword/Idle/Down/Frames/프레임0000.png";
+        "Assets/Player/Animation/Sword/Idle/Right/Frames/player_idle0000.png";
     private const string SwordSpritePath = "Assets/Weapons/sword.png";
     private const string AxeSpritePath = "Assets/Weapons/weapon_axe.png";
     private const string KrabSpritePath = "Assets/Enemies/enemy_krab.png";

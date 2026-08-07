@@ -98,6 +98,7 @@ public sealed class PlayerSwordShooter : MonoBehaviour
         {
             SpawnProjectile(direction, equipped);
             nextShotTime = currentTime + (1f / shotsPerSecond);
+            GetComponent<PlayerAnimator>()?.PlayAttack(direction, 1f / shotsPerSecond);
         }
     }
 

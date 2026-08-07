@@ -90,6 +90,7 @@ public sealed class PlayerWeaponController : MonoBehaviour
 
         Attack(loadout, direction, currentTime);
         nextAttackTime = currentTime + weapon.AttackInterval;
+        GetComponent<PlayerAnimator>()?.PlayAttack(direction, weapon.AttackInterval);
     }
 
     /// <summary>무기를 바꿔 들었으면 발동기·발사체 설정을 그 무기 기준으로 다시 만든다.</summary>
