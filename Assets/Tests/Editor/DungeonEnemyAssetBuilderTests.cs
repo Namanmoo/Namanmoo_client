@@ -11,14 +11,14 @@ public sealed class DungeonEnemyAssetBuilderTests
         EnemyDefinition[] definitions = DungeonEnemyAssetBuilder.BuildDefinitions();
 
         Assert.That(definitions.Select(definition => definition.Id),
-            Is.EquivalentTo(new[] { "krab", "squirrel", "wood_tower" }));
+            Is.EquivalentTo(new[] { "mushroom", "squirrel", "wood_tower" }));
 
         EnemyDefinition squirrel = definitions.Single(
             definition => definition.Id == "squirrel");
-        EnemyDefinition krab = definitions.Single(
-            definition => definition.Id == "krab");
-        Assert.That(krab.VisualHeight, Is.EqualTo(2f));
-        Assert.That(krab.BodyCollisionRadius, Is.EqualTo(0.7f));
+        EnemyDefinition mushroom = definitions.Single(
+            definition => definition.Id == "mushroom");
+        Assert.That(mushroom.VisualHeight, Is.EqualTo(4f));
+        Assert.That(mushroom.BodyCollisionRadius, Is.EqualTo(1.4f));
         Assert.That(squirrel.DisplayName, Is.EqualTo("Squirrel"));
         Assert.That(squirrel.BehaviorType,
             Is.EqualTo(EnemyBehaviorType.ApproachAndShoot));
@@ -33,10 +33,10 @@ public sealed class DungeonEnemyAssetBuilderTests
         Assert.That(squirrel.ProjectileSpeed, Is.EqualTo(6f));
         Assert.That(squirrel.ProjectileLifetime, Is.EqualTo(3f));
         Assert.That(squirrel.ProjectileRadius, Is.EqualTo(0.2f));
-        Assert.That(squirrel.VisualHeight, Is.EqualTo(2f));
+        Assert.That(squirrel.VisualHeight, Is.EqualTo(4f));
         Assert.That(squirrel.BodyCollisionRadius, Is.EqualTo(0.7f));
 
-        Assert.That(squirrel.ProjectileSprite.name, Is.EqualTo("Nuts_1"));
+        Assert.That(squirrel.ProjectileSprite.name, Is.EqualTo("nuts"));
 
         EnemyDefinition woodTower = definitions.Single(
             definition => definition.Id == "wood_tower");
@@ -44,11 +44,11 @@ public sealed class DungeonEnemyAssetBuilderTests
         Assert.That(woodTower.BehaviorType,
             Is.EqualTo(EnemyBehaviorType.StationaryFourWayShoot));
         Assert.That(woodTower.BodySprite, Is.Not.Null);
-        Assert.That(woodTower.BodySprite.name, Is.EqualTo("enemy_woodtower"));
+        Assert.That(woodTower.BodySprite.name, Is.EqualTo("tower_idle_right0000"));
         Assert.That(woodTower.ProjectileSprite, Is.Not.Null);
         Assert.That(
             woodTower.ProjectileSprite.name,
-            Is.EqualTo("enemy_woodtower_bullet"));
+            Is.EqualTo("tower_bullet"));
         Assert.That(woodTower.MaxHealth, Is.EqualTo(10));
         Assert.That(woodTower.MoveSpeed, Is.Zero);
         Assert.That(woodTower.AttackDamage, Is.EqualTo(2));
@@ -57,12 +57,12 @@ public sealed class DungeonEnemyAssetBuilderTests
         Assert.That(woodTower.ProjectileLifetime, Is.EqualTo(5f));
         Assert.That(woodTower.ProjectileRadius, Is.EqualTo(0.5f));
         Assert.That(woodTower.VisualHeight, Is.EqualTo(3f));
-        Assert.That(woodTower.BodyCollisionRadius, Is.EqualTo(1.1f));
+        Assert.That(woodTower.BodyCollisionRadius, Is.EqualTo(1.55f));
 
         var bodyImporter = AssetImporter.GetAtPath(
-            "Assets/Enemies/enemy_woodtower.png") as TextureImporter;
+            "Assets/Enemies/Tower/Idle/Right/Frames/tower_idle_right0000.png") as TextureImporter;
         var projectileImporter = AssetImporter.GetAtPath(
-            "Assets/Enemies/enemy_woodtower_bullet.png") as TextureImporter;
+            "Assets/Enemies/Tower/tower_bullet.png") as TextureImporter;
         Assert.That(bodyImporter, Is.Not.Null);
         Assert.That(projectileImporter, Is.Not.Null);
         Assert.That(

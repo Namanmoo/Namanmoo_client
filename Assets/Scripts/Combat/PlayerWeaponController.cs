@@ -1,3 +1,4 @@
+using NaManMoo.Audio;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -88,9 +89,11 @@ public sealed class PlayerWeaponController : MonoBehaviour
             return;
         }
 
+        // 스윙이 이 값을 참조하므로 Attack보다 먼저 불러야 한 박자 밀리지 않는다.
+        GetComponent<PlayerAnimator>()?.PlayAttack(direction, weapon.AttackInterval);
+
         Attack(loadout, direction, currentTime);
         nextAttackTime = currentTime + weapon.AttackInterval;
-        GetComponent<PlayerAnimator>()?.PlayAttack(direction, weapon.AttackInterval);
     }
 
     /// <summary>무기를 바꿔 들었으면 발동기·발사체 설정을 그 무기 기준으로 다시 만든다.</summary>
@@ -143,7 +146,20 @@ public sealed class PlayerWeaponController : MonoBehaviour
         }
 
         AnimateMeleeSwing(loadout, deliveryId, direction);
+        PlayAttackSound(loadout.Definition);
         runner?.NotifyAttack(transform.position, direction, currentTime);
+    }
+
+    /// <summary>
+    /// 휘두르는 소리. 동작은 화면에 보이는 무기 타입을, 무게는 스탯을, 재질은
+    /// 백엔드 판정을 따른다(Assets/Audio/Weapon/NAMING.md). 재생기가 없으면 무음.
+    /// </summary>
+    private static void PlayAttackSound(WeaponDefinition weapon)
+    {
+        SfxPlayer.Instance?.Play(SfxNames.AttackCandidates(
+            SfxNames.MotionOf(weapon.Type),
+            SfxNames.WeightOf(weapon.Damage, weapon.AttackInterval),
+            SfxNames.MaterialNameOf(weapon.Material)));
     }
 
     /// <summary>근접 공격이면 손에 든 무기를 판정 부채꼴만큼 휘두른다 — 판정과 그림을 맞춘다.</summary>
@@ -164,7 +180,13 @@ public sealed class PlayerWeaponController : MonoBehaviour
             }
         }
 
-        visual.PlaySwing(direction, SwingArcFor(deliveryId, weapon), SwingSecondsFor(weapon));
+        // 공격 모션이 있으면 그 길이에 맞춘다. 없으면(테스트 등) 예전처럼 무기 연사 기준.
+        PlayerAnimator body = GetComponent<PlayerAnimator>();
+        float seconds = body != null && body.LastAttackSeconds > 0f
+            ? body.LastAttackSeconds
+            : SwingSecondsFor(weapon);
+
+        visual.PlaySwing(direction, SwingArcFor(deliveryId, weapon), seconds);
     }
 
     /// <summary>

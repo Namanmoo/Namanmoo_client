@@ -4,25 +4,23 @@ using UnityEngine;
 
 public static class DungeonEnemyAssetBuilder
 {
-    public const string KrabDefinitionPath = "Assets/Enemies/DungeonKrab.asset";
+    public const string MushroomDefinitionPath = "Assets/Enemies/DungeonMushroom.asset";
     public const string SquirrelDefinitionPath = "Assets/Enemies/DungeonSquirrel.asset";
     public const string WoodTowerDefinitionPath =
         "Assets/Enemies/DungeonWoodTower.asset";
     public const string ProjectilePath = "Assets/Enemies/TemporaryBlueProjectile.png";
 
-    private const string KrabSpritePath = "Assets/Enemies/enemy_krab.png";
+    private const string MushroomSpritePath = "Assets/Enemies/Mushroom/Idle/Right/Frames/mushroom_idle_right0000.png";
     private const string SquirrelSpritePath =
         "Assets/Enemies/Squirrel/Idle/Right/Frames/squirrel_idle_right0000.png";
-    private const string SquirrelProjectilePath = "Assets/Enemies/Nuts.png";
-    private const string SquirrelProjectileName = "Nuts_1";
     private const string WoodTowerSpritePath =
-        "Assets/Enemies/enemy_woodtower.png";
+        "Assets/Enemies/Tower/Idle/Right/Frames/tower_idle_right0000.png";
     private const string WoodTowerProjectilePath =
-        "Assets/Enemies/enemy_woodtower_bullet.png";
+        "Assets/Enemies/Tower/tower_bullet.png";
 
     public static EnemyDefinition[] BuildDefinitions()
     {
-        EnemyDefinition krab = RequireDefinition(KrabDefinitionPath);
+        EnemyDefinition mushroom = RequireDefinition(MushroomDefinitionPath);
         EnemyDefinition squirrel = RequireDefinition(SquirrelDefinitionPath);
 
         ConfigureWoodTowerImporter(WoodTowerSpritePath);
@@ -54,7 +52,25 @@ public static class DungeonEnemyAssetBuilder
             AssetDatabase.CreateAsset(woodTower, WoodTowerDefinitionPath);
             AssetDatabase.SaveAssets();
         }
-        return new[] { krab, squirrel, woodTower };
+
+        // 타격음의 대상 재질(Impact/NAMING.md). 기존 애셋에도 매번 다시 찍는다 —
+        // 애셋을 손으로 만들었어도 재질이 비는 일이 없게.
+        TagSurfaceMaterial(mushroom, "plant");
+        TagSurfaceMaterial(squirrel, "flesh");
+        TagSurfaceMaterial(woodTower, "wood");
+
+        return new[] { mushroom, squirrel, woodTower };
+    }
+
+    private static void TagSurfaceMaterial(EnemyDefinition definition, string material)
+    {
+        if (definition.SurfaceMaterial == material)
+        {
+            return;
+        }
+
+        definition.ConfigureSurfaceMaterial(material);
+        EditorUtility.SetDirty(definition);
     }
 
     private static Sprite GetOrCreateProjectileSprite()
@@ -120,6 +136,11 @@ public static class DungeonEnemyAssetBuilder
         importer.SaveAndReimport();
     }
 
+    /// <summary>
+    /// 나무탑 그림·총알의 임포트 설정을 맞춘다. 손으로 그린 연필 그림이라
+    /// 다른 적들과 같은 Bilinear를 쓴다 — Point로 두면 이 둘만 계단처럼 보인다.
+    /// PPU와 pivot은 건드리지 않는다. 총알은 그림 중심에 맞춘 커스텀 pivot을 쓴다.
+    /// </summary>
     private static void ConfigureWoodTowerImporter(string path)
     {
         var importer = AssetImporter.GetAtPath(path) as TextureImporter;
@@ -132,7 +153,7 @@ public static class DungeonEnemyAssetBuilder
         bool needsReimport = importer.textureType != TextureImporterType.Sprite
             || importer.spriteImportMode != SpriteImportMode.Single
             || importer.mipmapEnabled
-            || importer.filterMode != FilterMode.Point
+            || importer.filterMode != FilterMode.Bilinear
             || importer.wrapMode != TextureWrapMode.Clamp
             || !importer.alphaIsTransparency;
         if (!needsReimport)
@@ -143,7 +164,7 @@ public static class DungeonEnemyAssetBuilder
         importer.textureType = TextureImporterType.Sprite;
         importer.spriteImportMode = SpriteImportMode.Single;
         importer.mipmapEnabled = false;
-        importer.filterMode = FilterMode.Point;
+        importer.filterMode = FilterMode.Bilinear;
         importer.wrapMode = TextureWrapMode.Clamp;
         importer.alphaIsTransparency = true;
         importer.SaveAndReimport();

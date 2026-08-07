@@ -36,6 +36,6 @@ public static class EnemyKnockback
     {
         return enemy.GetComponent<ChaseContactEnemyController>() != null
             || enemy.GetComponent<ApproachAndShootEnemyController>() != null
-            || enemy.GetComponent<KrabEnemy>() != null;
+            || enemy.GetComponent<MushroomEnemy>() != null;
     }
 }

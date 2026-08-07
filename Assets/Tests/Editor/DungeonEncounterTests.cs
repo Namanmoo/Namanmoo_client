@@ -8,25 +8,25 @@ public sealed class DungeonEncounterTests
     [Test]
     public void SelectDefinitions_ReturnsDeterministicMixedSelection()
     {
-        EnemyDefinition krab = ScriptableObject.CreateInstance<EnemyDefinition>();
+        EnemyDefinition mushroom = ScriptableObject.CreateInstance<EnemyDefinition>();
         EnemyDefinition squirrel = ScriptableObject.CreateInstance<EnemyDefinition>();
 
         try
         {
             EnemyDefinition[] selected = DungeonEncounter.SelectDefinitions(
-                new[] { krab, squirrel }, count: 6, seed: 1234);
+                new[] { mushroom, squirrel }, count: 6, seed: 1234);
 
             Assert.That(selected, Has.Length.EqualTo(6));
-            Assert.That(selected, Does.Contain(krab));
+            Assert.That(selected, Does.Contain(mushroom));
             Assert.That(selected, Does.Contain(squirrel));
             Assert.That(
                 DungeonEncounter.SelectDefinitions(
-                    new[] { krab, squirrel }, 6, 1234),
+                    new[] { mushroom, squirrel }, 6, 1234),
                 Is.EqualTo(selected));
         }
         finally
         {
-            Object.DestroyImmediate(krab);
+            Object.DestroyImmediate(mushroom);
             Object.DestroyImmediate(squirrel);
         }
     }
@@ -34,21 +34,21 @@ public sealed class DungeonEncounterTests
     [Test]
     public void SelectDefinitions_CountEqualsDefinitionsReturnsOneOfEach()
     {
-        EnemyDefinition krab = ScriptableObject.CreateInstance<EnemyDefinition>();
+        EnemyDefinition mushroom = ScriptableObject.CreateInstance<EnemyDefinition>();
         EnemyDefinition squirrel = ScriptableObject.CreateInstance<EnemyDefinition>();
 
         try
         {
             EnemyDefinition[] selected = DungeonEncounter.SelectDefinitions(
-                new[] { krab, squirrel }, 2, 99);
+                new[] { mushroom, squirrel }, 2, 99);
 
             Assert.That(selected, Has.Length.EqualTo(2));
-            Assert.That(selected, Does.Contain(krab));
+            Assert.That(selected, Does.Contain(mushroom));
             Assert.That(selected, Does.Contain(squirrel));
         }
         finally
         {
-            Object.DestroyImmediate(krab);
+            Object.DestroyImmediate(mushroom);
             Object.DestroyImmediate(squirrel);
         }
     }
@@ -56,49 +56,49 @@ public sealed class DungeonEncounterTests
     [Test]
     public void SelectDefinitions_FiltersNullDefinitions()
     {
-        EnemyDefinition krab = ScriptableObject.CreateInstance<EnemyDefinition>();
+        EnemyDefinition mushroom = ScriptableObject.CreateInstance<EnemyDefinition>();
 
         try
         {
             EnemyDefinition[] selected = DungeonEncounter.SelectDefinitions(
-                new EnemyDefinition[] { null, krab, null }, 4, 99);
+                new EnemyDefinition[] { null, mushroom, null }, 4, 99);
 
             Assert.That(selected, Has.Length.EqualTo(4));
-            Assert.That(selected, Is.All.SameAs(krab));
+            Assert.That(selected, Is.All.SameAs(mushroom));
         }
         finally
         {
-            Object.DestroyImmediate(krab);
+            Object.DestroyImmediate(mushroom);
         }
     }
 
     [Test]
     public void SelectDefinitions_OneValidDefinitionFillsEverySlot()
     {
-        EnemyDefinition krab = ScriptableObject.CreateInstance<EnemyDefinition>();
+        EnemyDefinition mushroom = ScriptableObject.CreateInstance<EnemyDefinition>();
 
         try
         {
             EnemyDefinition[] selected = DungeonEncounter.SelectDefinitions(
-                new[] { krab }, 6, 1234);
+                new[] { mushroom }, 6, 1234);
 
             Assert.That(selected, Has.Length.EqualTo(6));
-            Assert.That(selected, Is.All.SameAs(krab));
+            Assert.That(selected, Is.All.SameAs(mushroom));
         }
         finally
         {
-            Object.DestroyImmediate(krab);
+            Object.DestroyImmediate(mushroom);
         }
     }
 
     [Test]
     public void SelectDefinitions_ZeroCountOrNoValidDefinitionsReturnsEmpty()
     {
-        EnemyDefinition krab = ScriptableObject.CreateInstance<EnemyDefinition>();
+        EnemyDefinition mushroom = ScriptableObject.CreateInstance<EnemyDefinition>();
 
         try
         {
-            Assert.That(DungeonEncounter.SelectDefinitions(new[] { krab }, 0, 1234), Is.Empty);
+            Assert.That(DungeonEncounter.SelectDefinitions(new[] { mushroom }, 0, 1234), Is.Empty);
             Assert.That(
                 DungeonEncounter.SelectDefinitions(
                     new EnemyDefinition[] { null }, 6, 1234),
@@ -106,16 +106,16 @@ public sealed class DungeonEncounterTests
         }
         finally
         {
-            Object.DestroyImmediate(krab);
+            Object.DestroyImmediate(mushroom);
         }
     }
 
     [Test]
     public void SelectDefinitions_RemainingSlotsUseBothDefinitionsAcrossFixedSeeds()
     {
-        EnemyDefinition krab = ScriptableObject.CreateInstance<EnemyDefinition>();
+        EnemyDefinition mushroom = ScriptableObject.CreateInstance<EnemyDefinition>();
         EnemyDefinition squirrel = ScriptableObject.CreateInstance<EnemyDefinition>();
-        bool extraKrab = false;
+        bool extraMushroom = false;
         bool extraSquirrel = false;
 
         try
@@ -123,24 +123,24 @@ public sealed class DungeonEncounterTests
             for (int seed = 1; seed <= 20; seed++)
             {
                 EnemyDefinition[] selected = DungeonEncounter.SelectDefinitions(
-                    new[] { krab, squirrel }, 3, seed);
-                int krabCount = System.Array.FindAll(
-                    selected, definition => definition == krab).Length;
+                    new[] { mushroom, squirrel }, 3, seed);
+                int mushroomCount = System.Array.FindAll(
+                    selected, definition => definition == mushroom).Length;
                 int squirrelCount = System.Array.FindAll(
                     selected, definition => definition == squirrel).Length;
 
-                Assert.That(krabCount, Is.GreaterThanOrEqualTo(1));
+                Assert.That(mushroomCount, Is.GreaterThanOrEqualTo(1));
                 Assert.That(squirrelCount, Is.GreaterThanOrEqualTo(1));
-                extraKrab |= krabCount == 2;
+                extraMushroom |= mushroomCount == 2;
                 extraSquirrel |= squirrelCount == 2;
             }
 
-            Assert.That(extraKrab, Is.True);
+            Assert.That(extraMushroom, Is.True);
             Assert.That(extraSquirrel, Is.True);
         }
         finally
         {
-            Object.DestroyImmediate(krab);
+            Object.DestroyImmediate(mushroom);
             Object.DestroyImmediate(squirrel);
         }
     }
@@ -172,8 +172,8 @@ public sealed class DungeonEncounterTests
         try
         {
             contact.Configure(
-                "dungeon-krab",
-                "Dungeon Krab",
+                "dungeon-mushroom",
+                "Dungeon Mushroom",
                 contactSprite,
                 null,
                 EnemyBehaviorType.ChaseContact,
@@ -258,19 +258,19 @@ public sealed class DungeonEncounterTests
         var encounterObject = new GameObject(nameof(DungeonEncounter));
         var roomRootObject = new GameObject(nameof(DungeonRoom));
         var playerObject = new GameObject(nameof(PlayerHealth));
-        EnemyDefinition krab = AssetDatabase.LoadAssetAtPath<EnemyDefinition>(
-            DungeonEnemyAssetBuilder.KrabDefinitionPath);
+        EnemyDefinition mushroom = AssetDatabase.LoadAssetAtPath<EnemyDefinition>(
+            DungeonEnemyAssetBuilder.MushroomDefinitionPath);
         EnemyDefinition squirrel = AssetDatabase.LoadAssetAtPath<EnemyDefinition>(
             DungeonEnemyAssetBuilder.SquirrelDefinitionPath);
 
         try
         {
-            Assert.That(krab, Is.Not.Null);
+            Assert.That(mushroom, Is.Not.Null);
             Assert.That(squirrel, Is.Not.Null);
 
             DungeonEncounter encounter =
                 encounterObject.AddComponent<DungeonEncounter>();
-            encounter.Configure(new[] { krab, squirrel }, null);
+            encounter.Configure(new[] { mushroom, squirrel }, null);
 
             RoomShape shape = RoomShape.Build(
                 101,

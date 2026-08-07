@@ -25,7 +25,9 @@ public sealed class SultanBossDefinition : ScriptableObject
     [SerializeField, Range(0.01f, 1f)] private float phaseTwoHealthRatio = 0.5f;
 
     [Header("Summon References (기존 던전 스폰 시스템 재사용)")]
-    [SerializeField] private EnemyDefinition krabDefinition;
+    // krab -> mushroom으로 이름을 바꿨다. 이미 저장된 보스 에셋이 참조를 잃지 않게 옛 이름을 남긴다.
+    [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("krabDefinition")]
+    private EnemyDefinition mushroomDefinition;
     [SerializeField] private EnemyDefinition squirrelDefinition;
     [SerializeField] private EnemyDefinition woodTowerDefinition;
     [SerializeField, Min(1)] private int maxSummonedMonsters = 5;
@@ -67,7 +69,7 @@ public sealed class SultanBossDefinition : ScriptableObject
     public float ContactRadius => contactRadius;
     public float PhaseTwoHealthRatio => phaseTwoHealthRatio;
 
-    public EnemyDefinition KrabDefinition => krabDefinition;
+    public EnemyDefinition MushroomDefinition => mushroomDefinition;
     public EnemyDefinition SquirrelDefinition => squirrelDefinition;
     public EnemyDefinition WoodTowerDefinition => woodTowerDefinition;
     public int MaxSummonedMonsters => maxSummonedMonsters;
@@ -103,9 +105,9 @@ public sealed class SultanBossDefinition : ScriptableObject
     }
 
     public void ConfigureSummonReferences(
-        EnemyDefinition krab, EnemyDefinition squirrel, EnemyDefinition woodTower)
+        EnemyDefinition mushroom, EnemyDefinition squirrel, EnemyDefinition woodTower)
     {
-        krabDefinition = krab;
+        mushroomDefinition = mushroom;
         squirrelDefinition = squirrel;
         woodTowerDefinition = woodTower;
     }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NaManMoo.Audio;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -21,8 +22,14 @@ public static class Stage1SceneBuilder
     private const string PlayerHealthHeartPath = "Assets/UI/HP_heart.png";
     private const string SwordSpritePath = "Assets/Weapons/sword.png";
     private const string AxeSpritePath = "Assets/Weapons/weapon_axe.png";
-    private const string KrabSpritePath = "Assets/Enemies/enemy_krab.png";
+    private const string MushroomSpritePath = "Assets/Enemies/Mushroom/Idle/Right/Frames/mushroom_idle_right0000.png";
     private const string BossRobotSpritePath = "Assets/boss_robot.png";
+
+    /// <summary>
+    /// Stage1 야외 배경음. 설계상 이 씬을 위해 쓴 곡이다(<c>MUSIC_DESIGN.md</c> 3-2).
+    /// 이름 규칙은 <c>Assets/Audio/README.md</c>.
+    /// </summary>
+    private const string BgmPath = "Assets/Audio/Bgm/stage1.ogg";
 
     [MenuItem("Tools/NaManMoo/Build Stage 1")]
     public static void Build()
@@ -36,7 +43,7 @@ public static class Stage1SceneBuilder
 
         Sprite playerHealthHeart = LoadRequiredSingleSprite(PlayerHealthHeartPath);
         Sprite axeSprite = LoadRequiredAxeSprite();
-        Sprite krabSprite = LoadRequiredSingleSprite(KrabSpritePath);
+        Sprite mushroomSprite = LoadRequiredSingleSprite(MushroomSpritePath);
         Sprite bossRobotSprite = LoadRequiredSingleSprite(BossRobotSpritePath);
 
         EnsureFolder("Assets", "Stage1");
@@ -47,16 +54,18 @@ public static class Stage1SceneBuilder
 
         Camera camera = CreateCamera();
         CreateGlobalLight();
+        CreateBgm();
+        SfxSceneBuilder.Create();
         CreateStageMap();
         CreateBoundary();
         GameObject player = CreatePlayer(swordSprite, axeSprite, playerHealthHeart);
         camera.transform.SetParent(player.transform, false);
         camera.transform.localPosition = new Vector3(0f, 0f, -10f);
         camera.GetComponent<CameraFollow>().Target = player.transform;
-        Stage1EncounterGate gate = Stage1KrabEncounterSetup.Create(
+        Stage1EncounterGate gate = Stage1MushroomEncounterSetup.Create(
             null,
             player.transform,
-            krabSprite,
+            mushroomSprite,
             GetOrCreateMaterial(GateOutlineMaterialPath, new Color(0.22f, 0.06f, 0.04f, 1f)),
             GetOrCreateMaterial(GateFillMaterialPath, new Color(0.85f, 0.15f, 0.08f, 1f)));
         Stage1BossEncounterSetup.Create(
@@ -97,6 +106,20 @@ public static class Stage1SceneBuilder
         Light2D light = lightObject.AddComponent<Light2D>();
         light.lightType = Light2D.LightType.Global;
         light.intensity = 1f;
+    }
+
+    private static void CreateBgm()
+    {
+        AudioClip clip = AssetDatabase.LoadAssetAtPath<AudioClip>(BgmPath);
+        if (clip == null)
+        {
+            // 소리가 없어도 스테이지는 돌아간다. 씬 만들기를 막지 않는다.
+            Debug.LogWarning($"Stage1 BGM을 찾지 못했습니다: {BgmPath}. 소리 없이 만듭니다.");
+            return;
+        }
+
+        var bgmObject = new GameObject("BGM");
+        bgmObject.AddComponent<BgmPlayer>().Configure(clip);
     }
 
     private static void CreateStageMap()

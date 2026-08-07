@@ -115,6 +115,13 @@ public sealed class EnemyStatus : MonoBehaviour
             return;
         }
 
+        // 소리는 새로 붙는 순간만 — 지속 중 갱신마다 울리면 공격마다 시작음이 튄다
+        if (burnRemaining <= 0f)
+        {
+            NaManMoo.Audio.SfxPlayer.Instance?.Play(
+                NaManMoo.Audio.SfxNames.EffectCandidates("self", "burn", "start"));
+        }
+
         burnDamagePerSecond = Mathf.Max(burnDamagePerSecond, damagePerSecond);
         burnRemaining = Mathf.Max(burnRemaining, duration);
     }
@@ -125,6 +132,12 @@ public sealed class EnemyStatus : MonoBehaviour
         if (damagePerStackPerSecond <= 0f || maxStacks <= 0 || duration <= 0f)
         {
             return;
+        }
+
+        if (poisonRemaining <= 0f)
+        {
+            NaManMoo.Audio.SfxPlayer.Instance?.Play(
+                NaManMoo.Audio.SfxNames.EffectCandidates("self", "poison", "start"));
         }
 
         poisonDamagePerStackPerSecond = damagePerStackPerSecond;
@@ -138,6 +151,12 @@ public sealed class EnemyStatus : MonoBehaviour
         if (slowPercent <= 0f || duration <= 0f)
         {
             return;
+        }
+
+        if (chillRemaining <= 0f)
+        {
+            NaManMoo.Audio.SfxPlayer.Instance?.Play(
+                NaManMoo.Audio.SfxNames.EffectCandidates("any", "slow", "start"));
         }
 
         if (slowPercent >= chillSlowPercent || chillRemaining <= 0f)

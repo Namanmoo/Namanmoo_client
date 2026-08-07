@@ -20,6 +20,12 @@ public sealed class EnemyDefinition : ScriptableObject
     [SerializeField, Min(0.01f)] private float projectileLifetime = 0.01f;
     [SerializeField, Min(0.01f)] private float projectileRadius = 0.01f;
 
+    /// <summary>
+    /// 타격음의 대상 재질 축(Impact/NAMING.md 어휘: shell·flesh·wood·metal…).
+    /// 소리에만 쓰이므로 비워 두면 any로 굴러간다.
+    /// </summary>
+    [SerializeField] private string surfaceMaterial = "any";
+
     public string Id => enemyId;
     public string DisplayName => displayName;
     public Sprite BodySprite => bodySprite;
@@ -33,6 +39,15 @@ public sealed class EnemyDefinition : ScriptableObject
     public int AttackDamage => attackDamage;
     public float AttackRange => attackRange;
     public float AttackInterval => attackInterval;
+
+    public string SurfaceMaterial =>
+        string.IsNullOrEmpty(surfaceMaterial) ? "any" : surfaceMaterial;
+
+    /// <summary>재질은 소리 전용이라 본 Configure와 별도로 정한다.</summary>
+    public void ConfigureSurfaceMaterial(string newSurfaceMaterial)
+    {
+        surfaceMaterial = newSurfaceMaterial;
+    }
     public float ProjectileSpeed => projectileSpeed;
     public float ProjectileLifetime => projectileLifetime;
     public float ProjectileRadius => projectileRadius;

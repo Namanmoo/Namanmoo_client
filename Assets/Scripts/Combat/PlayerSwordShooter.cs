@@ -98,7 +98,16 @@ public sealed class PlayerSwordShooter : MonoBehaviour
         {
             SpawnProjectile(direction, equipped);
             nextShotTime = currentTime + (1f / shotsPerSecond);
-            GetComponent<PlayerAnimator>()?.PlayAttack(direction, 1f / shotsPerSecond);
+            PlayerAnimator body = GetComponent<PlayerAnimator>();
+            body?.PlayAttack(direction, 1f / shotsPerSecond);
+
+            // 발사체 무기라도 손에 든 검은 공격 모션과 같이 휘둘러야 따로 놀지 않는다.
+            GetComponent<PlayerWeaponVisual>()?.PlaySwing(
+                direction,
+                PlayerWeaponController.SwingArcFor(null, null),
+                body != null && body.LastAttackSeconds > 0f
+                    ? body.LastAttackSeconds
+                    : 1f / shotsPerSecond);
         }
     }
 
