@@ -7,6 +7,10 @@ public sealed class WeaponDefinition : ScriptableObject
     [SerializeField] private string displayName;
     [SerializeField] private WeaponCategory category;
     [SerializeField] private WeaponType weaponType;
+
+    /// <summary>효과음을 고르는 데만 쓴다. 전투 계산에는 영향이 없다.</summary>
+    [SerializeField] private WeaponMaterial material = WeaponMaterial.Any;
+
     [SerializeField, Min(0)] private int damage;
     [SerializeField, Min(0.01f)] private float attackInterval = 1f;
     [SerializeField, Min(0f)] private float reach = 1f;
@@ -22,6 +26,7 @@ public sealed class WeaponDefinition : ScriptableObject
     public string DisplayName => displayName;
     public WeaponCategory Category => category;
     public WeaponType Type => weaponType;
+    public WeaponMaterial Material => material;
     public int Damage => damage;
     public float AttackInterval => attackInterval;
     public float Reach => reach;
@@ -79,12 +84,16 @@ public sealed class WeaponDefinition : ScriptableObject
         float projectileLifetime,
         Sprite icon,
         Sprite worldSprite,
-        Color displayColor)
+        Color displayColor,
+        // 재질을 넘기지 않으면 Any — 효과음이 동작만 보고 정해진다.
+        // 소리에만 쓰이므로 빠뜨려도 전투는 그대로 돌아간다.
+        WeaponMaterial material = WeaponMaterial.Any)
     {
         weaponId = id;
         displayName = newDisplayName;
         category = newCategory;
         weaponType = newType;
+        this.material = material;
         this.damage = damage;
         this.attackInterval = attackInterval;
         this.reach = reach;

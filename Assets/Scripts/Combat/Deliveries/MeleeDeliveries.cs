@@ -16,16 +16,21 @@ public static class MeleeStrike
             return 0;
         }
 
-        float reach = reachOverride > 0f ? reachOverride : weapon.Reach;
+        // 근접은 스탯이 아니라 화면에 들린 무기 길이가 범위다.
+        float reach = reachOverride > 0f
+            ? reachOverride
+            : WeaponAttackGeometry.VisualReach(weapon);
         float arc = arcOverride > 0f ? arcOverride : weapon.AttackArc;
         int hits = 0;
 
         foreach (EnemyHealth enemy in EffectHelpers.EnemiesInRadius(
             context.Origin, reach + weapon.CollisionRadius, context.Owner))
         {
+            // 회전은 방향이 없으므로 탐색 원(사거리+무기 두께, 콜라이더 겹침)이 찾은
+            // 것이 곧 명중이다. 중심 거리로 다시 재면 안 된다 — 플레이어와 적의 몸통
+            // 반지름 합(≈1.7)보다 사거리가 짧은 무기는 닿아 보여도 영영 안 맞는다.
             bool hit = arc >= 360f
-                ? Vector2.Distance(context.Origin, enemy.transform.position) <= reach
-                : WeaponAttackGeometry.IsMeleeHit(
+                || WeaponAttackGeometry.IsMeleeHit(
                     weapon.Type,
                     context.Origin,
                     context.Direction,
@@ -40,6 +45,17 @@ public static class MeleeStrike
             }
 
             hits++;
+            if (hits == 1)
+            {
+                // 한 번 휘둘러 여럿을 맞혀도 타격음은 한 번 — 겹치면 소리만 커진다
+                NaManMoo.Audio.SfxPlayer.Instance?.Play(
+                    NaManMoo.Audio.SfxNames.ImpactCandidates(
+                        NaManMoo.Audio.SfxNames.MaterialNameOf(weapon.Material),
+                        NaManMoo.Audio.SfxNames.WeightOf(
+                            weapon.Damage, weapon.AttackInterval),
+                        enemy.SurfaceMaterial));
+            }
+
             enemy.TakeDamage(weapon.Damage);
             EnemyKnockback.Apply(enemy, context.Direction);
             // 죽음 판정은 피해 적용 후 — on_kill이 여기서 갈린다
@@ -71,7 +87,9 @@ public sealed class ThrustDelivery : IDeliveryBehavior
 
     public void Execute(DeliveryContext context, ParamSet parameters)
     {
-        float reach = (context.Weapon != null ? context.Weapon.Reach : 1f)
+        float reach = (context.Weapon != null
+                ? WeaponAttackGeometry.VisualReach(context.Weapon)
+                : 1f)
             + parameters.Get("reachBonus", 0.5f);
         MeleeStrike.Execute(context, reachOverride: reach, arcOverride: ThrustArc);
     }

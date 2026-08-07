@@ -70,6 +70,10 @@ public sealed class AxeSwing : MonoBehaviour
         }
 
         damagedEnemies.Add(enemyHealth);
+        // 회전 판정에는 무기 정보가 없다 — 무기 축을 any로 두고 대상 재질만 살린다
+        NaManMoo.Audio.SfxPlayer.Instance?.Play(
+            NaManMoo.Audio.SfxNames.ImpactCandidates(
+                "any", "any", enemyHealth.SurfaceMaterial));
         enemyHealth.TakeDamage(damage);
         EnemyKnockback.Apply(enemyHealth, attackDirection);
         return true;

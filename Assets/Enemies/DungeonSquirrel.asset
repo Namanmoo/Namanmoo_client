@@ -28,3 +28,4 @@ MonoBehaviour:
   projectileSpeed: 7
   projectileLifetime: 3
   projectileRadius: 0.2
+  surfaceMaterial: flesh

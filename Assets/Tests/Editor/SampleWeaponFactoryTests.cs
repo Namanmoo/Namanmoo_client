@@ -1,3 +1,4 @@
+using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -41,6 +42,49 @@ public sealed class SampleWeaponFactoryTests
             Object.DestroyImmediate(sprite);
             Object.DestroyImmediate(texture);
         }
+    }
+
+    [Test]
+    public void Create_TagsEverySampleWeaponWithAMaterial()
+    {
+        var texture = new Texture2D(2, 2);
+        Sprite sprite = Sprite.Create(
+            texture, new Rect(0f, 0f, 2f, 2f), Vector2.one * 0.5f);
+        try
+        {
+            WeaponDefinition[] weapons = SampleWeaponFactory.Create(sprite, sprite);
+
+            Assert.That(MaterialOf(weapons, "sample-sword"), Is.EqualTo(WeaponMaterial.Metal));
+            Assert.That(MaterialOf(weapons, "sample-spear"), Is.EqualTo(WeaponMaterial.Wood));
+            Assert.That(MaterialOf(weapons, "sample-axe"), Is.EqualTo(WeaponMaterial.Metal));
+            Assert.That(MaterialOf(weapons, "sample-projectile"), Is.EqualTo(WeaponMaterial.Stone));
+            Assert.That(MaterialOf(weapons, "sample-missile"), Is.EqualTo(WeaponMaterial.Metal));
+
+            // 표본이 한 재질로 쏠리면 재질별 효과음을 시험해 볼 수가 없다
+            Assert.That(
+                weapons.Select(weapon => weapon.Material).Distinct().ToArray(),
+                Has.Length.EqualTo(3));
+
+            foreach (WeaponDefinition weapon in weapons)
+            {
+                Assert.That(weapon.Material, Is.Not.EqualTo(WeaponMaterial.Any));
+                Object.DestroyImmediate(weapon);
+            }
+        }
+        finally
+        {
+            Object.DestroyImmediate(sprite);
+            Object.DestroyImmediate(texture);
+        }
+    }
+
+    /// <summary>
+    /// 재질은 목록에 놓인 순서와 무관하다. 순서로 짚으면 표본을 다시 늘어놓을 때마다
+    /// 재질과 상관없는 이유로 시험이 깨진다.
+    /// </summary>
+    private static WeaponMaterial MaterialOf(WeaponDefinition[] weapons, string id)
+    {
+        return weapons.Single(weapon => weapon.Id == id).Material;
     }
 
     [Test]

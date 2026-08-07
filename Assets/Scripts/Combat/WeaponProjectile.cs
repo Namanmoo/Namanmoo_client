@@ -227,6 +227,12 @@ public sealed class WeaponProjectile : MonoBehaviour
             return false; // 관통 통과 중 같은 적 — 한 번만 때린다
         }
 
+        NaManMoo.Audio.SfxPlayer.Instance?.Play(
+            NaManMoo.Audio.SfxNames.ImpactCandidates(
+                NaManMoo.Audio.SfxNames.MaterialNameOf(definition.Material),
+                NaManMoo.Audio.SfxNames.WeightOf(
+                    definition.Damage, definition.AttackInterval),
+                health.SurfaceMaterial));
         health.TakeDamage(definition.Damage);
         EnemyKnockback.Apply(health, direction);
         // 죽음 판정은 피해 적용 후 — on_kill이 여기서 갈린다
