@@ -11,7 +11,7 @@ public class Stage1RuntimeBootstrap : MonoBehaviour
         "Assets/Player/Animation/Sword/Idle/Right/Frames/player_idle0000.png";
     private const string SwordSpritePath = "Assets/Weapons/sword.png";
     private const string AxeSpritePath = "Assets/Weapons/weapon_axe.png";
-    private const string KrabSpritePath = "Assets/Enemies/enemy_krab.png";
+    private const string MushroomSpritePath = "Assets/Enemies/Mushroom/Idle/Right/Frames/mushroom_idle_right0000.png";
     private const string BossRobotSpritePath = "Assets/boss_robot.png";
 
     [SerializeField] private Sprite itemHotbarBackground;
@@ -19,7 +19,7 @@ public class Stage1RuntimeBootstrap : MonoBehaviour
     [SerializeField] private Sprite playerSprite;
     [SerializeField] private Sprite swordSprite;
     [SerializeField] private Sprite axeSprite;
-    [SerializeField] private Sprite krabSprite;
+    [SerializeField] private Sprite mushroomSprite;
     [SerializeField] private Sprite bossRobotSprite;
 
 #if UNITY_EDITOR
@@ -91,25 +91,25 @@ public class Stage1RuntimeBootstrap : MonoBehaviour
 
         axeSprite = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>(AxeSpritePath);
 
-        UnityEditor.TextureImporter krabImporter =
-            UnityEditor.AssetImporter.GetAtPath(KrabSpritePath)
+        UnityEditor.TextureImporter mushroomImporter =
+            UnityEditor.AssetImporter.GetAtPath(MushroomSpritePath)
                 as UnityEditor.TextureImporter;
-        if (krabImporter != null &&
-            (krabImporter.textureType != UnityEditor.TextureImporterType.Sprite ||
-             krabImporter.spriteImportMode != UnityEditor.SpriteImportMode.Single ||
-             krabImporter.wrapMode != TextureWrapMode.Clamp ||
-             krabImporter.mipmapEnabled ||
-             !krabImporter.alphaIsTransparency))
+        if (mushroomImporter != null &&
+            (mushroomImporter.textureType != UnityEditor.TextureImporterType.Sprite ||
+             mushroomImporter.spriteImportMode != UnityEditor.SpriteImportMode.Single ||
+             mushroomImporter.wrapMode != TextureWrapMode.Clamp ||
+             mushroomImporter.mipmapEnabled ||
+             !mushroomImporter.alphaIsTransparency))
         {
-            krabImporter.textureType = UnityEditor.TextureImporterType.Sprite;
-            krabImporter.spriteImportMode = UnityEditor.SpriteImportMode.Single;
-            krabImporter.wrapMode = TextureWrapMode.Clamp;
-            krabImporter.mipmapEnabled = false;
-            krabImporter.alphaIsTransparency = true;
-            krabImporter.SaveAndReimport();
+            mushroomImporter.textureType = UnityEditor.TextureImporterType.Sprite;
+            mushroomImporter.spriteImportMode = UnityEditor.SpriteImportMode.Single;
+            mushroomImporter.wrapMode = TextureWrapMode.Clamp;
+            mushroomImporter.mipmapEnabled = false;
+            mushroomImporter.alphaIsTransparency = true;
+            mushroomImporter.SaveAndReimport();
         }
 
-        krabSprite = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>(KrabSpritePath);
+        mushroomSprite = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>(MushroomSpritePath);
 
         UnityEditor.TextureImporter bossImporter =
             UnityEditor.AssetImporter.GetAtPath(BossRobotSpritePath)
@@ -178,11 +178,11 @@ public class Stage1RuntimeBootstrap : MonoBehaviour
                     ". Assign it in the inspector before enabling this component.");
             }
 
-            if (krabSprite == null)
+            if (mushroomSprite == null)
             {
                 throw new System.InvalidOperationException(
-                    "Stage1RuntimeBootstrap requires the krab Sprite at " +
-                    KrabSpritePath +
+                    "Stage1RuntimeBootstrap requires the mushroom Sprite at " +
+                    MushroomSpritePath +
                     ". Assign it in the inspector before enabling this component.");
             }
 
@@ -208,7 +208,7 @@ public class Stage1RuntimeBootstrap : MonoBehaviour
         Transform player = CreatePlayer(root.transform);
         AttachCameraFollow(player);
         Stage1EncounterGate gate =
-            Stage1KrabEncounterSetup.Create(root.transform, player, krabSprite);
+            Stage1MushroomEncounterSetup.Create(root.transform, player, mushroomSprite);
         Stage1BossEncounterSetup.Create(
             root.transform,
             player,

@@ -62,8 +62,8 @@ public sealed class DungeonBossPlayModeTests
         contactDefinition =
             ScriptableObject.CreateInstance<EnemyDefinition>();
         contactDefinition.Configure(
-            "test-krab",
-            "Test Krab",
+            "test-mushroom",
+            "Test Mushroom",
             sprite,
             null,
             EnemyBehaviorType.ChaseContact,
@@ -237,7 +237,7 @@ public sealed class DungeonBossPlayModeTests
     }
 
     [UnityTest]
-    public IEnumerator OrdinaryRoomsStillGetKrabsNotABoss()
+    public IEnumerator OrdinaryRoomsStillGetMushroomsNotABoss()
     {
         runner.Configure(7, 2, player.transform);
         runner.Begin();

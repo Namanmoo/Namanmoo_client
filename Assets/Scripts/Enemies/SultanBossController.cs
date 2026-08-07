@@ -230,7 +230,7 @@ public sealed class SultanBossController : MonoBehaviour
 
     private bool CanSummonMonsters() =>
         summonedMonsters.Count < definition.MaxSummonedMonsters &&
-        definition.KrabDefinition != null &&
+        definition.MushroomDefinition != null &&
         definition.SquirrelDefinition != null;
 
     private bool CanSummonWoodTowers() =>
@@ -247,7 +247,7 @@ public sealed class SultanBossController : MonoBehaviour
         foreach (Vector2 direction in SummonDirections)
         {
             EnemyDefinition chosen = Random.value < 0.5f
-                ? definition.KrabDefinition
+                ? definition.MushroomDefinition
                 : definition.SquirrelDefinition;
             Vector2 spawnPosition = (Vector2)transform.position + direction * definition.SummonOffsetDistance;
             EnemyHealth spawned = EnemyFactory.Create(
@@ -288,12 +288,14 @@ public sealed class SultanBossController : MonoBehaviour
     // --- Pattern 3: 조준 탄환 / Pattern 4: 8방향 탄환 (Phase 1·2 공용) ---
     private IEnumerator AimedShotPattern()
     {
+        yield return new WaitForSeconds(0.75f);
         FireEnemyProjectile(GetDirectionToPlayer());
         yield break;
     }
 
     private IEnumerator EightWayShotPattern()
     {
+        yield return new WaitForSeconds(0.75f);
         foreach (Vector2 direction in EightShotDirections)
         {
             FireEnemyProjectile(direction);

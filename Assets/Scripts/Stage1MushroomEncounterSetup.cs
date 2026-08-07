@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Stage1KrabEncounterSetup
+public static class Stage1MushroomEncounterSetup
 {
     private static readonly Vector2[] SpawnPositions =
     {
@@ -15,7 +15,7 @@ public static class Stage1KrabEncounterSetup
     public static Stage1EncounterGate Create(
         Transform parent,
         Transform player,
-        Sprite krabSprite,
+        Sprite mushroomSprite,
         Material gateOutlineMaterial = null,
         Material gateFillMaterial = null)
     {
@@ -24,16 +24,16 @@ public static class Stage1KrabEncounterSetup
             throw new System.ArgumentNullException(nameof(player));
         }
 
-        if (krabSprite == null)
+        if (mushroomSprite == null)
         {
-            throw new System.ArgumentNullException(nameof(krabSprite));
+            throw new System.ArgumentNullException(nameof(mushroomSprite));
         }
 
         var enemies = new List<EnemyHealth>(SpawnPositions.Length);
         for (int index = 0; index < SpawnPositions.Length; index++)
         {
-            enemies.Add(KrabFactory.Create(
-                parent, player, krabSprite, SpawnPositions[index], "Krab " + (index + 1)));
+            enemies.Add(MushroomFactory.Create(
+                parent, player, mushroomSprite, SpawnPositions[index], "Mushroom " + (index + 1)));
         }
 
         var gateObject = new GameObject("Middle Passage Gate");

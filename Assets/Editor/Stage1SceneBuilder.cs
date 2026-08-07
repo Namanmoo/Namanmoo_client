@@ -21,7 +21,7 @@ public static class Stage1SceneBuilder
     private const string PlayerHealthHeartPath = "Assets/UI/HP_heart.png";
     private const string SwordSpritePath = "Assets/Weapons/sword.png";
     private const string AxeSpritePath = "Assets/Weapons/weapon_axe.png";
-    private const string KrabSpritePath = "Assets/Enemies/enemy_krab.png";
+    private const string MushroomSpritePath = "Assets/Enemies/Mushroom/Idle/Right/Frames/mushroom_idle_right0000.png";
     private const string BossRobotSpritePath = "Assets/boss_robot.png";
 
     [MenuItem("Tools/NaManMoo/Build Stage 1")]
@@ -36,7 +36,7 @@ public static class Stage1SceneBuilder
 
         Sprite playerHealthHeart = LoadRequiredSingleSprite(PlayerHealthHeartPath);
         Sprite axeSprite = LoadRequiredAxeSprite();
-        Sprite krabSprite = LoadRequiredSingleSprite(KrabSpritePath);
+        Sprite mushroomSprite = LoadRequiredSingleSprite(MushroomSpritePath);
         Sprite bossRobotSprite = LoadRequiredSingleSprite(BossRobotSpritePath);
 
         EnsureFolder("Assets", "Stage1");
@@ -53,10 +53,10 @@ public static class Stage1SceneBuilder
         camera.transform.SetParent(player.transform, false);
         camera.transform.localPosition = new Vector3(0f, 0f, -10f);
         camera.GetComponent<CameraFollow>().Target = player.transform;
-        Stage1EncounterGate gate = Stage1KrabEncounterSetup.Create(
+        Stage1EncounterGate gate = Stage1MushroomEncounterSetup.Create(
             null,
             player.transform,
-            krabSprite,
+            mushroomSprite,
             GetOrCreateMaterial(GateOutlineMaterialPath, new Color(0.22f, 0.06f, 0.04f, 1f)),
             GetOrCreateMaterial(GateFillMaterialPath, new Color(0.85f, 0.15f, 0.08f, 1f)));
         Stage1BossEncounterSetup.Create(

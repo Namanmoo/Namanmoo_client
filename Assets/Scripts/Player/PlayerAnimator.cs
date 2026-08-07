@@ -106,8 +106,15 @@ public sealed class PlayerAnimator : MonoBehaviour
         }
 
         attackUntil = Time.time + duration;
+        LastAttackSeconds = duration;
         currentState = null;   // 같은 클립을 다시 처음부터 돌리려면 비워야 한다
     }
+
+    /// <summary>
+    /// 마지막 공격 모션이 실제로 재생되는 시간(초). 손에 든 무기 스윙을 여기 맞춘다 —
+    /// 무기가 먼저 끝나고 몸만 계속 휘두르면 따로 노는 게 보인다.
+    /// </summary>
+    public float LastAttackSeconds { get; private set; }
 
     private void Update()
     {

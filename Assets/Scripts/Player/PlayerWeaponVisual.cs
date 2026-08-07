@@ -15,10 +15,13 @@ using UnityEngine.InputSystem;
 public sealed class PlayerWeaponVisual : MonoBehaviour
 {
     /// <summary>손 자리(플레이어 기준). 정면을 본 그림의 오른손 — 에디터에서 눈으로 맞춘 값.</summary>
-    public static readonly Vector3 DefaultHandOffset = new Vector3(-0.947f, -0.469f, 0f);
+    public static readonly Vector3 DefaultHandOffset = new Vector3(-0.5f, -1.3f, 0f);
 
-    /// <summary>쉬는 자세에서 칼끝이 향하는 방향 — 몸에서 벗어난 왼쪽 위 대각선.</summary>
-    public static readonly Vector2 RestTipDirection = new Vector2(-1f, 1f);
+    /// <summary>
+    /// 쉬는 자세에서 칼끝이 향하는 방향 — 에디터에서 눈으로 맞춘 값이고,
+    /// <see cref="AngleFor"/>를 거치면 z 70도가 된다.
+    /// </summary>
+    public static readonly Vector2 RestTipDirection = new Vector2(-0.9397f, 0.342f);
 
     /// <summary>플레이어 그림보다 앞에 와야 손에 든 것으로 보인다.</summary>
     public const int SortingOrder = 5;
