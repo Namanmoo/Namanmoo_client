@@ -1,3 +1,4 @@
+using NaManMoo.Audio;
 using NaManMoo.Dungeon;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -25,6 +26,20 @@ public static class DungeonSceneBuilder
     private const string SwordSpritePath = "Assets/Weapons/sword.png";
     private const string AxeSpritePath = "Assets/Weapons/weapon_axe.png";
 
+    /// <summary>
+    /// 던전 배경음. 장조판을 쓴다 — 나란한조라 멜로디는 단조판과 같은 음들이고,
+    /// 화음의 무게중심만 미♭에 있다. 이름 규칙은 <c>Assets/Audio/README.md</c>.
+    /// </summary>
+    private const string BgmPath = "Assets/Audio/Bgm/dungeon_major.ogg";
+
+    /// <summary>
+    /// 보스방 곡. 장조판 던전과 리듬·화성이 같은 형제 곡이라(<c>MUSIC_DESIGN.md</c> 부록)
+    /// 크로스페이드로 이어도 같은 노래가 이어지는 것처럼 들린다.
+    /// 1페이즈 재즈 → 2페이즈 락 전환은 <see cref="DungeonBgmDirector"/>가 맡는다.
+    /// </summary>
+    private const string BossPhase1BgmPath = "Assets/Audio/Bgm/boss_p1.ogg";
+    private const string BossPhase2BgmPath = "Assets/Audio/Bgm/boss_p2.ogg";
+
     /// <summary>미니맵을 화면 우상단에서 띄우는 여백.</summary>
     private const float MinimapMargin = 16f;
 
@@ -49,6 +64,8 @@ public static class DungeonSceneBuilder
 
         CreateCamera();
         CreateGlobalLight();
+        BgmPlayer bgm = CreateBgm();
+        SfxSceneBuilder.Create();
 
         GameObject player = PlayerFactory.Create(
             null,
@@ -67,6 +84,7 @@ public static class DungeonSceneBuilder
             normalEnemyDefinitions,
             sultanBossDefinition);
         CreateMinimap(runner);
+        CreateBgmDirector(bgm, runner);
 
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene, ScenePath);
@@ -95,6 +113,44 @@ public static class DungeonSceneBuilder
         follow.Bounds = new Rect(
             -RoomShape.Size.x * 0.5f, -RoomShape.Size.y * 0.5f,
             RoomShape.Size.x, RoomShape.Size.y);
+    }
+
+    private static BgmPlayer CreateBgm()
+    {
+        var clip = AssetDatabase.LoadAssetAtPath<AudioClip>(BgmPath);
+        if (clip == null)
+        {
+            // 소리가 없어도 던전은 돌아간다. 씬 만들기를 막지 않는다.
+            Debug.LogWarning($"던전 BGM을 찾지 못했습니다: {BgmPath}. 소리 없이 만듭니다.");
+            return null;
+        }
+
+        var bgmObject = new GameObject("BGM");
+        BgmPlayer player = bgmObject.AddComponent<BgmPlayer>();
+        player.Configure(clip);
+        return player;
+    }
+
+    private static void CreateBgmDirector(BgmPlayer bgm, DungeonRunner runner)
+    {
+        if (bgm == null)
+        {
+            return;
+        }
+
+        var phase1 = AssetDatabase.LoadAssetAtPath<AudioClip>(BossPhase1BgmPath);
+        var phase2 = AssetDatabase.LoadAssetAtPath<AudioClip>(BossPhase2BgmPath);
+        if (phase1 == null || phase2 == null)
+        {
+            // 보스 곡이 없으면 던전 곡이 그대로 이어진다. 씬 만들기를 막지 않는다.
+            Debug.LogWarning(
+                $"보스 BGM을 찾지 못했습니다: {BossPhase1BgmPath}, {BossPhase2BgmPath}. "
+                + "던전 곡만으로 만듭니다.");
+            return;
+        }
+
+        DungeonBgmDirector director = bgm.gameObject.AddComponent<DungeonBgmDirector>();
+        director.Configure(bgm, runner, bgm.LoopClip, phase1, phase2);
     }
 
     private static void CreateGlobalLight()

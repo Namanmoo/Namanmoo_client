@@ -28,3 +28,4 @@ MonoBehaviour:
   projectileSpeed: 0
   projectileLifetime: 0.01
   projectileRadius: 0.01
+  surfaceMaterial: plant

@@ -58,7 +58,7 @@ public sealed class SampleWeaponFactoryTests
             Assert.That(MaterialOf(weapons, "sample-spear"), Is.EqualTo(WeaponMaterial.Wood));
             Assert.That(MaterialOf(weapons, "sample-axe"), Is.EqualTo(WeaponMaterial.Metal));
             Assert.That(MaterialOf(weapons, "sample-projectile"), Is.EqualTo(WeaponMaterial.Stone));
-            Assert.That(MaterialOf(weapons, "sample-gun"), Is.EqualTo(WeaponMaterial.Metal));
+            Assert.That(MaterialOf(weapons, "sample-missile"), Is.EqualTo(WeaponMaterial.Metal));
 
             // 표본이 한 재질로 쏠리면 재질별 효과음을 시험해 볼 수가 없다
             Assert.That(

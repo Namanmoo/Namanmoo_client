@@ -1,3 +1,4 @@
+using NaManMoo.Audio;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -145,7 +146,20 @@ public sealed class PlayerWeaponController : MonoBehaviour
         }
 
         AnimateMeleeSwing(loadout, deliveryId, direction);
+        PlayAttackSound(loadout.Definition);
         runner?.NotifyAttack(transform.position, direction, currentTime);
+    }
+
+    /// <summary>
+    /// 휘두르는 소리. 동작은 화면에 보이는 무기 타입을, 무게는 스탯을, 재질은
+    /// 백엔드 판정을 따른다(Assets/Audio/Weapon/NAMING.md). 재생기가 없으면 무음.
+    /// </summary>
+    private static void PlayAttackSound(WeaponDefinition weapon)
+    {
+        SfxPlayer.Instance?.Play(SfxNames.AttackCandidates(
+            SfxNames.MotionOf(weapon.Type),
+            SfxNames.WeightOf(weapon.Damage, weapon.AttackInterval),
+            SfxNames.MaterialNameOf(weapon.Material)));
     }
 
     /// <summary>근접 공격이면 손에 든 무기를 판정 부채꼴만큼 휘두른다 — 판정과 그림을 맞춘다.</summary>

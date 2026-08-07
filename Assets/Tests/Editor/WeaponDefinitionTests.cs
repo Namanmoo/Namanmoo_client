@@ -87,11 +87,11 @@ public sealed class WeaponDefinitionTests
         {
             // 쇠몽둥이가 총처럼 발사되는 조합 — 타입과 재질은 서로를 구속하지 않는다
             weapon.Configure(
-                "iron-gun", "Iron Gun", WeaponCategory.Ranged, WeaponType.Gun,
+                "iron-gun", "Iron Gun", WeaponCategory.Ranged, WeaponType.Missile,
                 3, 0.2f, 0f, 0.15f, 0f, 14f, 2f, null, null, Color.white,
                 WeaponMaterial.Metal);
 
-            Assert.That(weapon.Type, Is.EqualTo(WeaponType.Gun));
+            Assert.That(weapon.Type, Is.EqualTo(WeaponType.Missile));
             Assert.That(weapon.Material, Is.EqualTo(WeaponMaterial.Metal));
             Assert.That(weapon.IsValid, Is.True);
         }

@@ -70,6 +70,7 @@ public static class BossFactory
 
         EnemyHealth health = boss.AddComponent<EnemyHealth>();
         health.Configure(Hitpoints);
+        health.SurfaceMaterial = "metal";
 
         var bulletPool = new GameObject("Boss Bullet Pool");
         bulletPool.transform.SetParent(worldParent, false);

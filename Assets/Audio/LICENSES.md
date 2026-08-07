@@ -46,8 +46,25 @@ CC0 / Public Domain은 표기 의무가 없다. 그래도 표에는 적어라 �
 | `Effect/zone_burn_loop.ogg` | Torch.wav | DanielVega | https://freesound.org/people/DanielVega/sounds/479338/ | CC0 1.0 | 모노 변환, 22050Hz, 32bit float→16bit, 이음매 크로스페이드로 루프화, 노멀라이즈 -1dBFS | ❌ |
 | `Impact/hit_any_any_any.ogg` | punch.wav | Ekokubza123 | https://freesound.org/people/Ekokubza123/sounds/104183/ | CC0 1.0 | 모노 변환, 22050Hz, 앞 무음 완전 제거, 1초 이내 트리밍, 노멀라이즈 -1dBFS | ❌ |
 | `Impact/hit_metal_light_metal.ogg` | Anvil Hit 1 | michorvath | https://freesound.org/people/michorvath/sounds/270589/ | CC0 1.0 | 22050Hz, 트리밍, 노멀라이즈 -1dBFS | ❌ |
+| `Bgm/title.ogg` | 여백 (Blank Margin) | Namanmoo 프로젝트 | 자작 — `tools/bgm/` | **프로젝트 소유** | 전곡 합성 생성 | ❌ |
+| `Bgm/stage1.ogg` | 여백 — 걷는 속도 | Namanmoo 프로젝트 | 자작 — `tools/bgm/` | **프로젝트 소유** | 전곡 합성 생성 | ❌ |
+| `Bgm/dungeon.ogg` | 여백 — 나란한조 | Namanmoo 프로젝트 | 자작 — `tools/bgm/` | **프로젝트 소유** | 전곡 합성 생성 | ❌ |
+| `Bgm/boss.ogg` | 여백 — 평행단조 | Namanmoo 프로젝트 | 자작 — `tools/bgm/` | **프로젝트 소유** | 전곡 합성 생성 | ❌ |
+| `Bgm/dungeon_major.ogg` `Bgm/boss_major.ogg` | 여백 — 장조판 | Namanmoo 프로젝트 | 자작 — `tools/bgm/` | **프로젝트 소유** | 전곡 합성 생성 | ❌ |
+| `Bgm/boss_p1.ogg` `Bgm/boss_p2.ogg` | 여백 — 보스 1·2페이즈 (재즈/락) | Namanmoo 프로젝트 | 자작 — `tools/bgm/` | **프로젝트 소유** | 전곡 합성 생성 | ❌ |
+| `Bgm/intro.ogg` `Bgm/title_intro.ogg` `Bgm/boss_intro.ogg` | 여백 — 전주 및 전주 결합판 | Namanmoo 프로젝트 | 자작 — `tools/bgm/` | **프로젝트 소유** | 전곡 합성 생성 | ❌ |
+| `Bgm/field.ogg` | field — 필드 (감독 스케치 멜로디) | Namanmoo 프로젝트 | 자작 — 감독 멜로디 + `tools/bgm/` 편곡 | **프로젝트 소유** | 전곡 합성 생성 | ❌ |
+
+> **BGM은 전부 받아온 소재가 없다.** 멜로디·편곡·음색 합성까지 전부 이 저장소 안에서
+> 만들었고([`tools/bgm/`](../../tools/bgm/), 설계는 [`Bgm/MUSIC_DESIGN.md`](Bgm/MUSIC_DESIGN.md)),
+> 샘플·사운드폰트·루프팩을 일절 쓰지 않았다. 그래서 **표기 의무가 없고, 이 4곡 때문에
+> 크레딧 화면이 필요해지지도 않는다.** `Bgm/midi~/`의 MIDI가 원본이다.
 
 **아직 내보내지 않은 것**
+
+> **임시 상태 (2026-08-07 갱신):** `Weapon/`은 손질한 `*_fixed` 판(wav, m4a는 wav로
+> 변환)으로 교체했다. `Impact/`·`Enemy/`·`Effect/`는 아직 원본을 가공 없이 복사해 둔
+> 상태다 (`die_metal`만 GSM→PCM 디코드). 정식 내보내기를 하면 교체하고 이 표에서 지운다.
 
 원본만 `unfixed~/`에 있고 게임용 파일이 아직 없는 항목이다. 내보내면 이 목록에서 지운다.
 원본 파일명은 내보낼 이름 + `_unfixed`이므로 여기 이름만 보면 원본을 찾을 수 있다.

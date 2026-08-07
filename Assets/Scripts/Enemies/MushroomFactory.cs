@@ -47,6 +47,8 @@ public static class MushroomFactory
             0.01f,
             0.01f);
         definition.ConfigurePresentation(VisualHeight, BodyCollisionRadius);
+        // 타격음의 대상 재질 — 버섯은 식물이다. plant 타격음이 없으면 폴백으로 굴러간다.
+        definition.ConfigureSurfaceMaterial("plant");
 
         return EnemyFactory.Create(
             definition,
