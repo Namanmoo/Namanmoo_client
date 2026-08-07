@@ -4861,7 +4861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: NaManMoo.Runtime::PlayerSwordShooter
   damage: 5
   shotsPerSecond: 2
-  projectileSpeed: 15
+  projectileSpeed: 18
   spinSpeed: 720
   projectileLifetime: 4
   spawnOffset: 0.8

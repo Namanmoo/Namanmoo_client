@@ -288,12 +288,14 @@ public sealed class SultanBossController : MonoBehaviour
     // --- Pattern 3: 조준 탄환 / Pattern 4: 8방향 탄환 (Phase 1·2 공용) ---
     private IEnumerator AimedShotPattern()
     {
+        yield return new WaitForSeconds(0.75f);
         FireEnemyProjectile(GetDirectionToPlayer());
         yield break;
     }
 
     private IEnumerator EightWayShotPattern()
     {
+        yield return new WaitForSeconds(0.75f);
         foreach (Vector2 direction in EightShotDirections)
         {
             FireEnemyProjectile(direction);
