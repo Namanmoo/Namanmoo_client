@@ -12,6 +12,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public sealed class SultanBossController : MonoBehaviour
 {
+    /// <summary>
+    /// 2페이즈로 넘어간 순간. 보스는 팩토리 안에서 실행 중에 태어나므로 연출(BGM 등)이
+    /// 인스턴스를 미리 잡아 둘 수 없다 — 그래서 정적 이벤트로 알린다.
+    /// </summary>
+    public static event System.Action PhaseTwoStarted;
+
     private const float PlayerInvulnerabilityDuration = 1f;
 
     private enum MovementState
@@ -139,6 +145,7 @@ public sealed class SultanBossController : MonoBehaviour
         {
             isPhase2 = true;
             visual.sprite = definition.Phase2Sprite;
+            PhaseTwoStarted?.Invoke();
         }
     }
 

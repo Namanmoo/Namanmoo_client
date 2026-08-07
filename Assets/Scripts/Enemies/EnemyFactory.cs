@@ -28,6 +28,7 @@ public static class EnemyFactory
         root.AddComponent<EnemyDamageFlash>();
         EnemyHealth health = root.AddComponent<EnemyHealth>();
         health.Configure(definition.MaxHealth);
+        health.SurfaceMaterial = definition.SurfaceMaterial;
 
         switch (definition.BehaviorType)
         {

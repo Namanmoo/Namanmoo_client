@@ -55,6 +55,10 @@ public sealed class ShockAction : IEffectAction
             return;
         }
 
+        // 전격은 지속 상태가 아니라 순간 방전이다 — start 한 번이 소리의 전부다
+        NaManMoo.Audio.SfxPlayer.Instance?.Play(
+            NaManMoo.Audio.SfxNames.EffectCandidates("any", "shock", "start"));
+
         context.Target.TakeDamage(
             EffectHelpers.RoundDamage(parameters.Get("bonusDamage", 2f)));
 

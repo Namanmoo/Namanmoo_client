@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NaManMoo.Audio;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -24,6 +25,12 @@ public static class Stage1SceneBuilder
     private const string MushroomSpritePath = "Assets/Enemies/Mushroom/Idle/Right/Frames/mushroom_idle_right0000.png";
     private const string BossRobotSpritePath = "Assets/boss_robot.png";
 
+    /// <summary>
+    /// Stage1 야외 배경음. 설계상 이 씬을 위해 쓴 곡이다(<c>MUSIC_DESIGN.md</c> 3-2).
+    /// 이름 규칙은 <c>Assets/Audio/README.md</c>.
+    /// </summary>
+    private const string BgmPath = "Assets/Audio/Bgm/stage1.ogg";
+
     [MenuItem("Tools/NaManMoo/Build Stage 1")]
     public static void Build()
     {
@@ -47,6 +54,8 @@ public static class Stage1SceneBuilder
 
         Camera camera = CreateCamera();
         CreateGlobalLight();
+        CreateBgm();
+        SfxSceneBuilder.Create();
         CreateStageMap();
         CreateBoundary();
         GameObject player = CreatePlayer(swordSprite, axeSprite, playerHealthHeart);
@@ -97,6 +106,20 @@ public static class Stage1SceneBuilder
         Light2D light = lightObject.AddComponent<Light2D>();
         light.lightType = Light2D.LightType.Global;
         light.intensity = 1f;
+    }
+
+    private static void CreateBgm()
+    {
+        AudioClip clip = AssetDatabase.LoadAssetAtPath<AudioClip>(BgmPath);
+        if (clip == null)
+        {
+            // 소리가 없어도 스테이지는 돌아간다. 씬 만들기를 막지 않는다.
+            Debug.LogWarning($"Stage1 BGM을 찾지 못했습니다: {BgmPath}. 소리 없이 만듭니다.");
+            return;
+        }
+
+        var bgmObject = new GameObject("BGM");
+        bgmObject.AddComponent<BgmPlayer>().Configure(clip);
     }
 
     private static void CreateStageMap()

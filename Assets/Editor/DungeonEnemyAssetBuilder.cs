@@ -52,7 +52,25 @@ public static class DungeonEnemyAssetBuilder
             AssetDatabase.CreateAsset(woodTower, WoodTowerDefinitionPath);
             AssetDatabase.SaveAssets();
         }
+
+        // 타격음의 대상 재질(Impact/NAMING.md). 기존 애셋에도 매번 다시 찍는다 —
+        // 애셋을 손으로 만들었어도 재질이 비는 일이 없게.
+        TagSurfaceMaterial(mushroom, "plant");
+        TagSurfaceMaterial(squirrel, "flesh");
+        TagSurfaceMaterial(woodTower, "wood");
+
         return new[] { mushroom, squirrel, woodTower };
+    }
+
+    private static void TagSurfaceMaterial(EnemyDefinition definition, string material)
+    {
+        if (definition.SurfaceMaterial == material)
+        {
+            return;
+        }
+
+        definition.ConfigureSurfaceMaterial(material);
+        EditorUtility.SetDirty(definition);
     }
 
     private static Sprite GetOrCreateProjectileSprite()

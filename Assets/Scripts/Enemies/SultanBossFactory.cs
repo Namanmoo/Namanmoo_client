@@ -35,6 +35,7 @@ public sealed class SultanBossFactory : BossFactoryBase
             boss.transform, "Sultan Boss Visual", definition.Phase1Sprite, definition.VisualHeight);
 
         EnemyHealth health = CreateHealth(boss, definition.MaxHealth, uiParent);
+        health.SurfaceMaterial = "flesh";
 
         var projectilePool = new GameObject("Sultan Projectile Pool");
         projectilePool.transform.SetParent(worldParent, false);

@@ -1,3 +1,4 @@
+using NaManMoo.Audio;
 using UnityEditor;
 using UnityEditor.Events;
 using UnityEditor.SceneManagement;
@@ -11,6 +12,14 @@ public static class TitleSceneBuilder
 {
     public const string ScenePath = "Assets/Scenes/Title.unity";
     private const string TitleSpritePath = "Assets/UI/Title.png";
+
+    /// <summary>
+    /// 타이틀은 전주를 한 번 틀고 본곡 루프로 넘어간다. 결합판(<c>title_intro.ogg</c>)을
+    /// 통째로 루프하면 전주가 매 바퀴 다시 나오므로 두 파일을 따로 잇는다.
+    /// 이름 규칙은 <c>Assets/Audio/README.md</c>.
+    /// </summary>
+    private const string BgmIntroPath = "Assets/Audio/Bgm/intro.ogg";
+    private const string BgmLoopPath = "Assets/Audio/Bgm/title.ogg";
     private static readonly Vector2 ReferenceResolution = new Vector2(1920f, 1080f);
 
     [MenuItem("Tools/NaManMoo/Build Title Screen")]
@@ -45,6 +54,7 @@ public static class TitleSceneBuilder
             new Vector2(0.64f, 0.222f));
 
         CreateEventSystem();
+        CreateBgm();
 
         EditorSceneManager.MarkSceneDirty(scene);
         EditorSceneManager.SaveScene(scene, ScenePath);
@@ -186,6 +196,28 @@ public static class TitleSceneBuilder
             "EventSystem",
             typeof(EventSystem),
             typeof(InputSystemUIInputModule));
+    }
+
+    private static void CreateBgm()
+    {
+        AudioClip loop = AssetDatabase.LoadAssetAtPath<AudioClip>(BgmLoopPath);
+        if (loop == null)
+        {
+            // 소리가 없어도 타이틀은 돌아간다. 씬 만들기를 막지 않는다.
+            Debug.LogWarning($"타이틀 BGM을 찾지 못했습니다: {BgmLoopPath}. 소리 없이 만듭니다.");
+            return;
+        }
+
+        AudioClip intro = AssetDatabase.LoadAssetAtPath<AudioClip>(BgmIntroPath);
+        if (intro == null)
+        {
+            Debug.LogWarning($"타이틀 전주를 찾지 못했습니다: {BgmIntroPath}. 본곡만 틉니다.");
+        }
+
+        var bgmObject = new GameObject("BGM");
+        // 타이틀은 카메라가 없는 오버레이 씬이라 리스너도 여기 얹는다.
+        bgmObject.AddComponent<AudioListener>();
+        bgmObject.AddComponent<BgmPlayer>().Configure(loop, intro);
     }
 
     private static void Stretch(RectTransform rect)

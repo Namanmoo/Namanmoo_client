@@ -27,6 +27,7 @@ public sealed class SlimeBossFactory : BossFactoryBase
             boss.transform, "Slime Boss Visual", definition.BodySprite, definition.VisualHeight);
 
         EnemyHealth health = CreateHealth(boss, definition.MaxHealth, uiParent);
+        health.SurfaceMaterial = "slime";
 
         var projectilePool = new GameObject("Slime Projectile Pool");
         projectilePool.transform.SetParent(worldParent, false);
