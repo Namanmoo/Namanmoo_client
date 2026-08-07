@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 
 public sealed class DungeonSceneBuilderTests
 {
-    private const string KrabDefinitionPath =
-        "Assets/Enemies/DungeonKrab.asset";
+    private const string MushroomDefinitionPath =
+        "Assets/Enemies/DungeonMushroom.asset";
     private const string SquirrelDefinitionPath =
         "Assets/Enemies/DungeonSquirrel.asset";
     private const string WoodTowerDefinitionPath =
@@ -51,13 +51,13 @@ public sealed class DungeonSceneBuilderTests
     [Test]
     public void Scene_AssignsAllPersistentEnemyDefinitionsToEncounter()
     {
-        EnemyDefinition krab =
-            AssetDatabase.LoadAssetAtPath<EnemyDefinition>(KrabDefinitionPath);
+        EnemyDefinition mushroom =
+            AssetDatabase.LoadAssetAtPath<EnemyDefinition>(MushroomDefinitionPath);
         EnemyDefinition squirrel =
             AssetDatabase.LoadAssetAtPath<EnemyDefinition>(SquirrelDefinitionPath);
         EnemyDefinition woodTower =
             AssetDatabase.LoadAssetAtPath<EnemyDefinition>(WoodTowerDefinitionPath);
-        Assert.That(krab, Is.Not.Null);
+        Assert.That(mushroom, Is.Not.Null);
         Assert.That(squirrel, Is.Not.Null);
         Assert.That(woodTower, Is.Not.Null);
 
@@ -76,13 +76,13 @@ public sealed class DungeonSceneBuilderTests
         Assert.That(definitions.arraySize, Is.EqualTo(3));
         Assert.That(
             definitions.GetArrayElementAtIndex(0).objectReferenceValue,
-            Is.SameAs(krab));
+            Is.SameAs(mushroom));
         Assert.That(
             definitions.GetArrayElementAtIndex(1).objectReferenceValue,
             Is.SameAs(squirrel));
         Assert.That(
             definitions.GetArrayElementAtIndex(2).objectReferenceValue,
             Is.SameAs(woodTower));
-        Assert.That(serialized.FindProperty("krabSprite"), Is.Null);
+        Assert.That(serialized.FindProperty("mushroomSprite"), Is.Null);
     }
 }

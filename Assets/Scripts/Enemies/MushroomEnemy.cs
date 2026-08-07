@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public sealed class KrabEnemy : MonoBehaviour
+public sealed class MushroomEnemy : MonoBehaviour
 {
     [SerializeField, Min(0f)]
     private float moveSpeed = 2.5f;

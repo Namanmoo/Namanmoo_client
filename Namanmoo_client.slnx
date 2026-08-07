@@ -1,6 +1,6 @@
 ﻿<Solution>
   <Project Path="NaManMoo.EditorTests.csproj" />
   <Project Path="NaManMoo.Runtime.csproj" />
-  <Project Path="NaManMoo.Editor.csproj" />
   <Project Path="NaManMoo.PlayModeTests.csproj" />
+  <Project Path="NaManMoo.Editor.csproj" />
 </Solution>

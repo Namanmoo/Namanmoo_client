@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
 
-public sealed class KrabContactHealthUIPlayModeTests
+public sealed class MushroomContactHealthUIPlayModeTests
 {
     [UnityTest]
     public IEnumerator TriggerOverlap_DamagesPlayerAndUpdatesHealthNumberAndGauge()
     {
-        var root = new GameObject("Krab Contact Test");
+        var root = new GameObject("Mushroom Contact Test");
         var player = new GameObject("Player");
         player.transform.SetParent(root.transform);
         player.transform.position = new Vector3(0f, -5f, 0f);
@@ -29,14 +29,14 @@ public sealed class KrabContactHealthUIPlayModeTests
         PlayerHealthBarView view =
             PlayerHealthBarUIFactory.Create(uiRoot.transform, health, heart);
 
-        Stage1KrabEncounterSetup.Create(root.transform, player.transform, heart);
-        KrabEnemy[] krabs = root.GetComponentsInChildren<KrabEnemy>();
-        Assert.That(krabs, Has.Length.EqualTo(5));
+        Stage1MushroomEncounterSetup.Create(root.transform, player.transform, heart);
+        MushroomEnemy[] mushrooms = root.GetComponentsInChildren<MushroomEnemy>();
+        Assert.That(mushrooms, Has.Length.EqualTo(5));
 
-        KrabEnemy krab = krabs[0];
-        CircleCollider2D bodyCollider = krab.GetComponent<CircleCollider2D>();
-        CircleCollider2D sensor = krab.transform
-            .Find("Krab Contact Sensor")
+        MushroomEnemy mushroom = mushrooms[0];
+        CircleCollider2D bodyCollider = mushroom.GetComponent<CircleCollider2D>();
+        CircleCollider2D sensor = mushroom.transform
+            .Find("Mushroom Contact Sensor")
             .GetComponent<CircleCollider2D>();
         Assert.That(bodyCollider.isTrigger, Is.False);
         Assert.That(sensor.isTrigger, Is.True);
@@ -44,7 +44,7 @@ public sealed class KrabContactHealthUIPlayModeTests
             Physics2D.GetIgnoreCollision(bodyCollider, playerCollider),
             Is.True);
 
-        krab.transform.position = player.transform.position;
+        mushroom.transform.position = player.transform.position;
         yield return new WaitForFixedUpdate();
         yield return new WaitForFixedUpdate();
 
@@ -54,7 +54,7 @@ public sealed class KrabContactHealthUIPlayModeTests
         Assert.That(label.text, Is.EqualTo("18/20"));
         Assert.That(fill.fillAmount, Is.EqualTo(0.9f).Within(0.001f));
         Assert.That(
-            Vector2.Distance(krab.transform.position, player.transform.position),
+            Vector2.Distance(mushroom.transform.position, player.transform.position),
             Is.LessThan(0.2f));
 
         Object.Destroy(root);

@@ -93,7 +93,7 @@ public class Stage1EncounterGateTests
         var enemies = new List<EnemyHealth>(count);
         for (int index = 0; index < count; index++)
         {
-            var enemyObject = new GameObject("Krab " + (index + 1));
+            var enemyObject = new GameObject("Mushroom " + (index + 1));
             EnemyHealth health = enemyObject.AddComponent<EnemyHealth>();
             health.Configure(5);
             enemies.Add(health);

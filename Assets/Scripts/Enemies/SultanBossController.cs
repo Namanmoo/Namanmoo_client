@@ -230,7 +230,7 @@ public sealed class SultanBossController : MonoBehaviour
 
     private bool CanSummonMonsters() =>
         summonedMonsters.Count < definition.MaxSummonedMonsters &&
-        definition.KrabDefinition != null &&
+        definition.MushroomDefinition != null &&
         definition.SquirrelDefinition != null;
 
     private bool CanSummonWoodTowers() =>
@@ -247,7 +247,7 @@ public sealed class SultanBossController : MonoBehaviour
         foreach (Vector2 direction in SummonDirections)
         {
             EnemyDefinition chosen = Random.value < 0.5f
-                ? definition.KrabDefinition
+                ? definition.MushroomDefinition
                 : definition.SquirrelDefinition;
             Vector2 spawnPosition = (Vector2)transform.position + direction * definition.SummonOffsetDistance;
             EnemyHealth spawned = EnemyFactory.Create(

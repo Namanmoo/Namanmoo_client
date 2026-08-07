@@ -78,7 +78,14 @@ public sealed class PlayerAxeAttacker : MonoBehaviour
 
         SpawnSwing(direction);
         nextAttackTime = currentTime + attackInterval;
-        GetComponent<PlayerAnimator>()?.PlayAttack(direction, attackInterval);
+        PlayerAnimator body = GetComponent<PlayerAnimator>();
+        body?.PlayAttack(direction, attackInterval);
+
+        // 손에 든 도끼도 공격 모션과 같이 휘두른다 — Axe Swing 판정 오브젝트와는 별개다.
+        GetComponent<PlayerWeaponVisual>()?.PlaySwing(
+            direction,
+            PlayerWeaponController.SwingArcFor(null, null),
+            body != null && body.LastAttackSeconds > 0f ? body.LastAttackSeconds : attackInterval);
     }
 
     private void SpawnSwing(Vector2 direction)

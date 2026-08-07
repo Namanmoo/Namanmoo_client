@@ -3,13 +3,13 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class KrabEnemyTests
+public class MushroomEnemyTests
 {
     [UnityTest]
     public IEnumerator ConfigureHealth_SetsFiveAndEmitsDeathOnlyOnce()
     {
         yield return new EnterPlayMode();
-        var enemyObject = new GameObject("Krab");
+        var enemyObject = new GameObject("Mushroom");
         EnemyHealth health = enemyObject.AddComponent<EnemyHealth>();
         int deathCount = 0;
         health.Died += _ => deathCount++;
@@ -30,7 +30,7 @@ public class KrabEnemyTests
     [Test]
     public void CalculateVelocity_MovesTowardTargetAtHalfPlayerSpeed()
     {
-        Vector2 velocity = KrabEnemy.CalculateVelocity(
+        Vector2 velocity = MushroomEnemy.CalculateVelocity(
             new Vector2(1f, 1f),
             new Vector2(4f, 5f),
             2.5f);
@@ -38,7 +38,7 @@ public class KrabEnemyTests
         Assert.That(velocity.magnitude, Is.EqualTo(2.5f).Within(0.0001f));
         Assert.That(velocity.normalized, Is.EqualTo(new Vector2(0.6f, 0.8f)));
         Assert.That(
-            KrabEnemy.CalculateVelocity(Vector2.zero, Vector2.zero, 2.5f),
+            MushroomEnemy.CalculateVelocity(Vector2.zero, Vector2.zero, 2.5f),
             Is.EqualTo(Vector2.zero));
     }
 
@@ -49,16 +49,16 @@ public class KrabEnemyTests
         var player = new GameObject("Player");
         Collider2D playerCollider = player.AddComponent<CircleCollider2D>();
         PlayerHealth playerHealth = player.AddComponent<PlayerHealth>();
-        var firstEnemy = new GameObject("First Krab");
-        KrabEnemy firstKrab = firstEnemy.AddComponent<KrabEnemy>();
-        var secondEnemy = new GameObject("Second Krab");
-        KrabEnemy secondKrab = secondEnemy.AddComponent<KrabEnemy>();
+        var firstEnemy = new GameObject("First Mushroom");
+        MushroomEnemy firstMushroom = firstEnemy.AddComponent<MushroomEnemy>();
+        var secondEnemy = new GameObject("Second Mushroom");
+        MushroomEnemy secondMushroom = secondEnemy.AddComponent<MushroomEnemy>();
 
-        Assert.That(firstKrab.TryDamagePlayer(playerCollider, 0f), Is.True);
+        Assert.That(firstMushroom.TryDamagePlayer(playerCollider, 0f), Is.True);
         Assert.That(playerHealth.CurrentHealth, Is.EqualTo(18));
-        Assert.That(secondKrab.TryDamagePlayer(playerCollider, 0.5f), Is.False);
+        Assert.That(secondMushroom.TryDamagePlayer(playerCollider, 0.5f), Is.False);
         Assert.That(playerHealth.CurrentHealth, Is.EqualTo(18));
-        Assert.That(secondKrab.TryDamagePlayer(playerCollider, 1f), Is.True);
+        Assert.That(secondMushroom.TryDamagePlayer(playerCollider, 1f), Is.True);
         Assert.That(playerHealth.CurrentHealth, Is.EqualTo(16));
 
         Object.Destroy(player);
@@ -72,10 +72,10 @@ public class KrabEnemyTests
     {
         var scenery = new GameObject("Scenery");
         Collider2D collider = scenery.AddComponent<BoxCollider2D>();
-        var enemy = new GameObject("Krab");
-        KrabEnemy krab = enemy.AddComponent<KrabEnemy>();
+        var enemy = new GameObject("Mushroom");
+        MushroomEnemy mushroom = enemy.AddComponent<MushroomEnemy>();
 
-        Assert.That(krab.TryDamagePlayer(collider, 0f), Is.False);
+        Assert.That(mushroom.TryDamagePlayer(collider, 0f), Is.False);
 
         Object.DestroyImmediate(enemy);
         Object.DestroyImmediate(scenery);

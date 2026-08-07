@@ -4,17 +4,15 @@ using UnityEngine;
 
 public static class DungeonEnemyAssetBuilder
 {
-    public const string KrabDefinitionPath = "Assets/Enemies/DungeonKrab.asset";
+    public const string MushroomDefinitionPath = "Assets/Enemies/DungeonMushroom.asset";
     public const string SquirrelDefinitionPath = "Assets/Enemies/DungeonSquirrel.asset";
     public const string WoodTowerDefinitionPath =
         "Assets/Enemies/DungeonWoodTower.asset";
     public const string ProjectilePath = "Assets/Enemies/TemporaryBlueProjectile.png";
 
-    private const string KrabSpritePath = "Assets/Enemies/enemy_krab.png";
+    private const string MushroomSpritePath = "Assets/Enemies/Mushroom/Idle/Right/Frames/mushroom_idle_right0000.png";
     private const string SquirrelSpritePath =
         "Assets/Enemies/Squirrel/Idle/Right/Frames/squirrel_idle_right0000.png";
-    private const string SquirrelProjectilePath = "Assets/Enemies/Nuts.png";
-    private const string SquirrelProjectileName = "Nuts_1";
     private const string WoodTowerSpritePath =
         "Assets/Enemies/enemy_woodtower.png";
     private const string WoodTowerProjectilePath =
@@ -22,7 +20,7 @@ public static class DungeonEnemyAssetBuilder
 
     public static EnemyDefinition[] BuildDefinitions()
     {
-        EnemyDefinition krab = RequireDefinition(KrabDefinitionPath);
+        EnemyDefinition mushroom = RequireDefinition(MushroomDefinitionPath);
         EnemyDefinition squirrel = RequireDefinition(SquirrelDefinitionPath);
 
         ConfigureWoodTowerImporter(WoodTowerSpritePath);
@@ -54,7 +52,7 @@ public static class DungeonEnemyAssetBuilder
             AssetDatabase.CreateAsset(woodTower, WoodTowerDefinitionPath);
             AssetDatabase.SaveAssets();
         }
-        return new[] { krab, squirrel, woodTower };
+        return new[] { mushroom, squirrel, woodTower };
     }
 
     private static Sprite GetOrCreateProjectileSprite()

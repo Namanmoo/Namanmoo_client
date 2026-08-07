@@ -200,7 +200,7 @@ public sealed class RoomSpawnPointsTests
     }
 
     [Test]
-    public void BossRoomsGetNoKrabs()
+    public void BossRoomsGetNoMushrooms()
     {
         // 보스방에는 보스 하나만 나온다. 잡몹을 섞으면 보스 패턴을 읽을 수 없다.
         for (int difficulty = 0; difficulty < 12; difficulty++)
