@@ -23,11 +23,13 @@ namespace NaManMoo.Dungeon
         /// 방 하나를 <paramref name="parent"/> 아래에 만들고 연결된 방향의 출구를 돌려준다.
         /// 방 종류는 후속 장식 단계에서 사용하며 현재 지형 계약에는 영향을 주지 않는다.
         /// </summary>
-        public static List<DungeonDoor> Build(Transform parent, RoomShape shape, RoomKind kind)
+        public static List<DungeonDoor> Build(
+            Transform parent, RoomShape shape, RoomKind kind, int roomSeed)
         {
             CreateGround(parent, shape);
             CreateDoorPaths(parent, shape);
             CreateSafetyBoundary(parent, shape);
+            WallForestDecorator.Decorate(parent, shape, roomSeed);
             return CreateDoors(parent, shape);
         }
 

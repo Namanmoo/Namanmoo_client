@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="14" result="Passed" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:46Z" duration="0.862203">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="571" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:46Z" duration="0.862203" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1675" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="571" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:46Z" duration="0.844216" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="2592" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1585" name="WallForestDecoratorTests" fullname="WallForestDecoratorTests" classname="WallForestDecoratorTests" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:46Z" duration="0.835175" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1586" name="AllFourTreeSpritesAppearAlongTheNorthWall" fullname="WallForestDecoratorTests.AllFourTreeSpritesAppearAlongTheNorthWall" methodname="AllFourTreeSpritesAppearAlongTheNorthWall" classname="WallForestDecoratorTests" runstate="Runnable" seed="2021088845" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:45Z" duration="0.094550" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1599" name="EastWallDoorCapsBelowWithTree0AndAboveWithTree2ThenTree3" fullname="WallForestDecoratorTests.EastWallDoorCapsBelowWithTree0AndAboveWithTree2ThenTree3" methodname="EastWallDoorCapsBelowWithTree0AndAboveWithTree2ThenTree3" classname="WallForestDecoratorTests" runstate="Runnable" seed="1601952832" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:45Z" duration="0.053241" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1596" name="EastWallTilesFormAStraightLineWithNoWobble" fullname="WallForestDecoratorTests.EastWallTilesFormAStraightLineWithNoWobble" methodname="EastWallTilesFormAStraightLineWithNoWobble" classname="WallForestDecoratorTests" runstate="Runnable" seed="943363121" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:45Z" duration="0.050661" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1591" name="EastWallTilesRenderAboveNorthWallTiles" fullname="WallForestDecoratorTests.EastWallTilesRenderAboveNorthWallTiles" methodname="EastWallTilesRenderAboveNorthWallTiles" classname="WallForestDecoratorTests" runstate="Runnable" seed="823089402" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:45Z" duration="0.046757" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1598" name="EastWallWithoutADoorHasFourDepthCopiesOneUnitApart" fullname="WallForestDecoratorTests.EastWallWithoutADoorHasFourDepthCopiesOneUnitApart" methodname="EastWallWithoutADoorHasFourDepthCopiesOneUnitApart" classname="WallForestDecoratorTests" runstate="Runnable" seed="1107560684" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:45Z" duration="0.054839" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1597" name="EastWallWithoutADoorUsesOnlyTree1" fullname="WallForestDecoratorTests.EastWallWithoutADoorUsesOnlyTree1" methodname="EastWallWithoutADoorUsesOnlyTree1" classname="WallForestDecoratorTests" runstate="Runnable" seed="121772638" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:45Z" duration="0.053680" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1595" name="NorthWallTilesFormAStraightLineWithNoWobble" fullname="WallForestDecoratorTests.NorthWallTilesFormAStraightLineWithNoWobble" methodname="NorthWallTilesFormAStraightLineWithNoWobble" classname="WallForestDecoratorTests" runstate="Runnable" seed="2134110241" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:45Z" duration="0.054378" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1593" name="NoTileIsRotatedOrScaled" fullname="WallForestDecoratorTests.NoTileIsRotatedOrScaled" methodname="NoTileIsRotatedOrScaled" classname="WallForestDecoratorTests" runstate="Runnable" seed="1728802712" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:45Z" duration="0.065579" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1594" name="NoTileSitsInsideADoorGap" fullname="WallForestDecoratorTests.NoTileSitsInsideADoorGap" methodname="NoTileSitsInsideADoorGap" classname="WallForestDecoratorTests" runstate="Runnable" seed="1953026766" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:45Z" duration="0.049108" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1592" name="OnlyTreeZeroThroughTwoHaveStaticColliders" fullname="WallForestDecoratorTests.OnlyTreeZeroThroughTwoHaveStaticColliders" methodname="OnlyTreeZeroThroughTwoHaveStaticColliders" classname="WallForestDecoratorTests" runstate="Runnable" seed="1262422608" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:45Z" duration="0.047844" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1587" name="TreeLayersStepOneUnitInwardPerLayerAlongTheNorthWall" fullname="WallForestDecoratorTests.TreeLayersStepOneUnitInwardPerLayerAlongTheNorthWall" methodname="TreeLayersStepOneUnitInwardPerLayerAlongTheNorthWall" classname="WallForestDecoratorTests" runstate="Runnable" seed="640432924" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:45Z" duration="0.084773" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1588" name="TreeLayersStepOneUnitInwardPerLayerAlongTheSouthWallJustLikeNorth" fullname="WallForestDecoratorTests.TreeLayersStepOneUnitInwardPerLayerAlongTheSouthWallJustLikeNorth" methodname="TreeLayersStepOneUnitInwardPerLayerAlongTheSouthWallJustLikeNorth" classname="WallForestDecoratorTests" runstate="Runnable" seed="898009549" result="Passed" start-time="2026-08-07 19:24:45Z" end-time="2026-08-07 19:24:46Z" duration="0.060966" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1589" name="UnreachableAreaBeyondTheNorthWallIsFilledWithTree0AndTree1" fullname="WallForestDecoratorTests.UnreachableAreaBeyondTheNorthWallIsFilledWithTree0AndTree1" methodname="UnreachableAreaBeyondTheNorthWallIsFilledWithTree0AndTree1" classname="WallForestDecoratorTests" runstate="Runnable" seed="1683450913" result="Passed" start-time="2026-08-07 19:24:46Z" end-time="2026-08-07 19:24:46Z" duration="0.051938" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1590" name="UnreachableAreaBeyondTheSouthWallIsFilledWithTree0AndTree1Too" fullname="WallForestDecoratorTests.UnreachableAreaBeyondTheSouthWallIsFilledWithTree0AndTree1Too" methodname="UnreachableAreaBeyondTheSouthWallIsFilledWithTree0AndTree1Too" classname="WallForestDecoratorTests" runstate="Runnable" seed="850944277" result="Passed" start-time="2026-08-07 19:24:46Z" end-time="2026-08-07 19:24:46Z" duration="0.046203" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

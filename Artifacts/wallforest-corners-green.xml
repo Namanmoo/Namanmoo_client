@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-07 14:10:19Z" end-time="2026-08-07 14:10:19Z" duration="0.0717794">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="547" result="Failed" site="Child" start-time="2026-08-07 14:10:19Z" end-time="2026-08-07 14:10:19Z" duration="0.071779" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1650" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="547" result="Failed" site="Child" start-time="2026-08-07 14:10:19Z" end-time="2026-08-07 14:10:19Z" duration="0.054336" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="14236" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1575" name="WallForestDecoratorTests" fullname="WallForestDecoratorTests" classname="WallForestDecoratorTests" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2026-08-07 14:10:19Z" end-time="2026-08-07 14:10:19Z" duration="0.046570" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1576" name="PlacesACornerSpriteAtEachOfTheFourRoomCorners" fullname="WallForestDecoratorTests.PlacesACornerSpriteAtEachOfTheFourRoomCorners" methodname="PlacesACornerSpriteAtEachOfTheFourRoomCorners" classname="WallForestDecoratorTests" runstate="Runnable" seed="1977275491" result="Failed" label="Error" start-time="2026-08-07 14:10:19Z" end-time="2026-08-07 14:10:19Z" duration="0.028887" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[System.InvalidOperationException : Missing wall forest sprite at Resources/Stage1/Wall/wall_forest_0]]></message>
+            <stack-trace><![CDATA[  at NaManMoo.Dungeon.WallForestDecorator.LoadSprite (System.Int32 index) [0x00032] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Scripts\Dungeon\WallForestDecorator.cs:66 
+  at NaManMoo.Dungeon.WallForestDecorator.PlaceCorners (UnityEngine.Transform parent, UnityEngine.Rect bounds) [0x00000] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Scripts\Dungeon\WallForestDecorator.cs:27 
+  at NaManMoo.Dungeon.WallForestDecorator.Decorate (UnityEngine.Transform parent, NaManMoo.Dungeon.RoomShape shape, System.Int32 roomSeed) [0x00017] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Scripts\Dungeon\WallForestDecorator.cs:22 
+  at WallForestDecoratorTests.PlacesACornerSpriteAtEachOfTheFourRoomCorners () [0x00013] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\WallForestDecoratorTests.cs:15 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <816f70bc2a9c4332b0bd119906a8d40e>:0 ]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

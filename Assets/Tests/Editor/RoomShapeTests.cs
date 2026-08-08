@@ -281,6 +281,29 @@ public sealed class RoomShapeTests
     }
 
     [Test]
+    public void WallSidesAlignOneToOneWithWallsWhenNoDoorsExist()
+    {
+        RoomShape shape = RoomShape.Build(1, Doors.None);
+
+        Assert.That(shape.WallSides.Count, Is.EqualTo(shape.Walls.Count));
+        Assert.That(shape.WallSides, Is.EqualTo(new[]
+        {
+            Doors.South, Doors.East, Doors.North, Doors.West
+        }));
+    }
+
+    [Test]
+    public void WallSidesSplitAlongsideTheirWallWhenThatSideHasADoor()
+    {
+        RoomShape shape = RoomShape.Build(1, Doors.North);
+
+        Assert.That(shape.WallSides, Is.EqualTo(new[]
+        {
+            Doors.South, Doors.East, Doors.North, Doors.North, Doors.West
+        }));
+    }
+
+    [Test]
     public void OppositeMapsEachSideToItsCounterpart()
     {
         Assert.That(RoomShape.Opposite(Doors.North), Is.EqualTo(Doors.South));
