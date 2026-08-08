@@ -47,6 +47,9 @@ namespace NaManMoo.Dungeon
         /// <summary>방이 바뀌었을 때. 미니맵이 여기에 붙는다.</summary>
         public event System.Action<Vector2Int> RoomChanged;
 
+        /// <summary>보스방을 처음 클리어했을 때. Stage Clear 화면이 여기에 붙는다.</summary>
+        public event System.Action BossDefeated;
+
         public bool IsCleared(Vector2Int cell) => cleared.Contains(cell);
 
         public IReadOnlyCollection<Vector2Int> ClearedRooms => cleared;
@@ -173,9 +176,14 @@ namespace NaManMoo.Dungeon
 
         private void MarkClearedAndOpen()
         {
-            cleared.Add(CurrentCell);
+            bool firstClear = cleared.Add(CurrentCell);
             gate = null;
             SetDoorsOpen(true);
+
+            if (firstClear && Layout.RoomAt(CurrentCell).Kind == RoomKind.Boss)
+            {
+                BossDefeated?.Invoke();
+            }
         }
 
         private void SetDoorsOpen(bool open)

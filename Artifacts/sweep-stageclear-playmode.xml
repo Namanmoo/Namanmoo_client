@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Passed" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-08 08:49:08Z" end-time="2026-08-08 08:49:10Z" duration="1.7968177">
+  <test-suite type="TestSuite" id="1067" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="49" result="Passed" start-time="2026-08-08 08:49:08Z" end-time="2026-08-08 08:49:10Z" duration="1.796818" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1063" name="NaManMoo.PlayModeTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.PlayModeTests.dll" runstate="Runnable" testcasecount="49" result="Passed" start-time="2026-08-08 08:49:08Z" end-time="2026-08-08 08:49:10Z" duration="1.791994" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="12760" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1055" name="StageClearScreenPlayModeTests" fullname="StageClearScreenPlayModeTests" classname="StageClearScreenPlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-08-08 08:49:08Z" end-time="2026-08-08 08:49:10Z" duration="1.790470" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1057" name="BossDefeat_AfterOneRealtimeSecondShowsOpaqueMenu" fullname="StageClearScreenPlayModeTests.BossDefeat_AfterOneRealtimeSecondShowsOpaqueMenu" methodname="BossDefeat_AfterOneRealtimeSecondShowsOpaqueMenu" classname="StageClearScreenPlayModeTests" runstate="Runnable" seed="477101233" result="Passed" start-time="2026-08-08 08:49:08Z" end-time="2026-08-08 08:49:10Z" duration="1.379623" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1056" name="BossDefeat_ImmediatelyPausesGameKeepsPlayerActiveAndMenuHidden" fullname="StageClearScreenPlayModeTests.BossDefeat_ImmediatelyPausesGameKeepsPlayerActiveAndMenuHidden" methodname="BossDefeat_ImmediatelyPausesGameKeepsPlayerActiveAndMenuHidden" classname="StageClearScreenPlayModeTests" runstate="Runnable" seed="1245753305" result="Passed" start-time="2026-08-08 08:49:10Z" end-time="2026-08-08 08:49:10Z" duration="0.211496" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1058" name="TitleButton_RestoresTimeAndLoadsTitleScene" fullname="StageClearScreenPlayModeTests.TitleButton_RestoresTimeAndLoadsTitleScene" methodname="TitleButton_RestoresTimeAndLoadsTitleScene" classname="StageClearScreenPlayModeTests" runstate="Runnable" seed="805891253" result="Passed" start-time="2026-08-08 08:49:10Z" end-time="2026-08-08 08:49:10Z" duration="0.190412" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,17 @@
+﻿=== START sweep-playerdeath-uifactory (EditMode / PlayerDeathScreenUIFactoryTests) ===
+=== END sweep-playerdeath-uifactory exit=0 ===
+=== START sweep-stageclear-uifactory (EditMode / StageClearScreenUIFactoryTests) ===
+=== END sweep-stageclear-uifactory exit=0 ===
+=== START sweep-dungeonscenebuilder (EditMode / DungeonSceneBuilderTests) ===
+=== END sweep-dungeonscenebuilder exit=0 ===
+=== START sweep-stageclear-sceneregress (EditMode / StageClearExistingSceneRegressionTests) ===
+=== END sweep-stageclear-sceneregress exit=2 ===
+=== START sweep-playerdeath-playmode (PlayMode / PlayerDeathScreenPlayModeTests) ===
+=== END sweep-playerdeath-playmode exit=0 ===
+=== START sweep-stageclear-playmode (PlayMode / StageClearScreenPlayModeTests) ===
+=== END sweep-stageclear-playmode exit=0 ===
+=== START sweep-dungeonboss-playmode (PlayMode / DungeonBossPlayModeTests) ===
+=== END sweep-dungeonboss-playmode exit=0 ===
+=== START sweep-dungeonrunner-playmode (PlayMode / DungeonRunnerPlayModeTests) ===
+=== END sweep-dungeonrunner-playmode exit=0 ===
+SWEEP_COMPLETE

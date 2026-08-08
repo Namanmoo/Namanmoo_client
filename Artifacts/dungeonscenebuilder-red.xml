@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Failed(Child)" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-08 07:45:45Z" end-time="2026-08-08 07:45:46Z" duration="1.4224498">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="574" result="Failed" site="Child" start-time="2026-08-08 07:45:45Z" end-time="2026-08-08 07:45:46Z" duration="1.422450" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1679" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="574" result="Failed" site="Child" start-time="2026-08-08 07:45:45Z" end-time="2026-08-08 07:45:46Z" duration="1.412539" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="19960" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1128" name="DungeonSceneBuilderTests" fullname="DungeonSceneBuilderTests" classname="DungeonSceneBuilderTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-08-08 07:45:45Z" end-time="2026-08-08 07:45:46Z" duration="1.406015" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1131" name="Scene_AssignsAllPersistentEnemyDefinitionsToEncounter" fullname="DungeonSceneBuilderTests.Scene_AssignsAllPersistentEnemyDefinitionsToEncounter" methodname="Scene_AssignsAllPersistentEnemyDefinitionsToEncounter" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="144675384" result="Passed" start-time="2026-08-08 07:45:45Z" end-time="2026-08-08 07:45:45Z" duration="0.412242" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1132" name="Scene_HasStageClearScreenWiredToRunner" fullname="DungeonSceneBuilderTests.Scene_HasStageClearScreenWiredToRunner" methodname="Scene_HasStageClearScreenWiredToRunner" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="2051606285" result="Failed" start-time="2026-08-08 07:45:45Z" end-time="2026-08-08 07:45:46Z" duration="0.335856" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at DungeonSceneBuilderTests.Scene_HasStageClearScreenWiredToRunner () [0x00040] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\DungeonSceneBuilderTests.cs:100
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1129" name="Scene_PlayerHasDashComponent" fullname="DungeonSceneBuilderTests.Scene_PlayerHasDashComponent" methodname="Scene_PlayerHasDashComponent" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="2003729176" result="Passed" start-time="2026-08-08 07:45:46Z" end-time="2026-08-08 07:45:46Z" duration="0.317642" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1130" name="Scene_WiresDamageFlashToPlayerBody" fullname="DungeonSceneBuilderTests.Scene_WiresDamageFlashToPlayerBody" methodname="Scene_WiresDamageFlashToPlayerBody" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="184896797" result="Passed" start-time="2026-08-08 07:45:46Z" end-time="2026-08-08 07:45:46Z" duration="0.329169" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -85,4 +85,23 @@ public sealed class DungeonSceneBuilderTests
             Is.SameAs(woodTower));
         Assert.That(serialized.FindProperty("mushroomSprite"), Is.Null);
     }
+
+    [Test]
+    public void Scene_HasStageClearScreenWiredToRunner()
+    {
+        Scene scene = EditorSceneManager.OpenScene(
+            DungeonSceneBuilder.ScenePath,
+            OpenSceneMode.Single);
+        Assert.That(scene.IsValid, Is.True);
+
+        DungeonRunner runner = Object.FindAnyObjectByType<DungeonRunner>();
+        StageClearScreen screen = Object.FindAnyObjectByType<StageClearScreen>();
+        Assert.That(runner, Is.Not.Null);
+        Assert.That(screen, Is.Not.Null);
+
+        var serialized = new SerializedObject(screen);
+        Assert.That(
+            serialized.FindProperty("runner").objectReferenceValue,
+            Is.SameAs(runner));
+    }
 }

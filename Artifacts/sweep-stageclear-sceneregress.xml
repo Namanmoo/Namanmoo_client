@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-08 08:48:35Z" end-time="2026-08-08 08:48:35Z" duration="0.1700106">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="575" result="Failed" site="Child" start-time="2026-08-08 08:48:35Z" end-time="2026-08-08 08:48:35Z" duration="0.170011" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1681" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="575" result="Failed" site="Child" start-time="2026-08-08 08:48:35Z" end-time="2026-08-08 08:48:35Z" duration="0.053294" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="10404" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1563" name="StageClearExistingSceneRegressionTests" fullname="StageClearExistingSceneRegressionTests" classname="StageClearExistingSceneRegressionTests" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2026-08-08 08:48:35Z" end-time="2026-08-08 08:48:35Z" duration="0.046240" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1564" name="ExistingScene_BossDefeatPausesGameAndShowsStageClearMenu" fullname="StageClearExistingSceneRegressionTests.ExistingScene_BossDefeatPausesGameAndShowsStageClearMenu" methodname="ExistingScene_BossDefeatPausesGameAndShowsStageClearMenu" classname="StageClearExistingSceneRegressionTests" runstate="Runnable" seed="62749829" result="Failed" start-time="2026-08-08 08:48:27Z" end-time="2026-08-08 08:48:35Z" duration="7.726063" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  씬에서 살아난 StageClearScreen이 BossDefeated를 구독하지 않았다
+  Expected: not null
+  But was:  null
+]]></message>
+            <stack-trace><![CDATA[at StageClearExistingSceneRegressionTests+<ExistingScene_BossDefeatPausesGameAndShowsStageClearMenu>d__1.MoveNext () [0x0013c] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\StageClearExistingSceneRegressionTests.cs:47
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@1405238725ab\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+          </failure>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
