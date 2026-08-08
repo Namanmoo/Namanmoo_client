@@ -1626,7 +1626,7 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 48
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -5058,7 +5058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3bde2e5f3a26d4aa5a0dba40f1705f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NaManMoo.Runtime::PlayerMovement
-  moveSpeed: 5
+  moveSpeed: 8
 --- !u!58 &1749900233
 CircleCollider2D:
   m_ObjectHideFlags: 0
