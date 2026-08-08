@@ -66,12 +66,13 @@ public sealed class PlayerWeaponVisualTests
             Assert.That(visual.Renderer.enabled, Is.True);
             // 플레이어 그림보다 앞에 와야 손에 든 것으로 보인다
             Assert.That(visual.Renderer.sortingOrder, Is.EqualTo(PlayerWeaponVisual.SortingOrder));
+            // 그립 위치·크기는 렌더러가 아니라 축(Weapon Hand)이 든다
             Assert.That(
-                visual.Renderer.transform.localPosition,
+                visual.Hand.localPosition,
                 Is.EqualTo(PlayerWeaponVisual.DefaultHandOffset));
             // 원본 스프라이트보다 키워 그린다
             Assert.That(
-                visual.Renderer.transform.localScale,
+                visual.Hand.localScale,
                 Is.EqualTo(new Vector3(
                     PlayerWeaponVisual.WeaponScale, PlayerWeaponVisual.WeaponScale, 1f)));
         }
@@ -128,19 +129,6 @@ public sealed class PlayerWeaponVisualTests
         }
     }
 
-    [Test]
-    public void OrbitPositionAt_PutsTheGripOnTheCircleAroundThePlayer()
-    {
-        // 0도(위)면 머리 위, -90도(오른쪽)면 오른편 — AngleFor 와 같은 기준이다
-        Vector3 up = PlayerWeaponVisual.OrbitPositionAt(0f, 2f);
-        Assert.That(up.x, Is.EqualTo(0f).Within(0.001f));
-        Assert.That(up.y, Is.EqualTo(2f).Within(0.001f));
-
-        Vector3 right = PlayerWeaponVisual.OrbitPositionAt(-90f, 2f);
-        Assert.That(right.x, Is.EqualTo(2f).Within(0.001f));
-        Assert.That(right.y, Is.EqualTo(0f).Within(0.001f));
-    }
-
     /// <summary>쉬는 자세 — 칼끝이 몸에서 벗어난 왼쪽 위 대각선을 향해야 한다.</summary>
     [Test]
     public void Refresh_PointsTheBladeUpLeftAtRest()
@@ -150,7 +138,8 @@ public sealed class PlayerWeaponVisualTests
         {
             visual.InitializeInventory(new PlayerInventory());
 
-            Vector3 tipDirection = visual.Renderer.transform.localRotation * Vector3.up;
+            // 칼끝 방향은 축(Weapon Hand)의 회전이 든다
+            Vector3 tipDirection = visual.Hand.localRotation * Vector3.up;
             Vector3 expected = ((Vector3)PlayerWeaponVisual.RestTipDirection).normalized;
             Assert.That(tipDirection.x, Is.EqualTo(expected.x).Within(0.001f));
             Assert.That(tipDirection.y, Is.EqualTo(expected.y).Within(0.001f));
@@ -161,27 +150,25 @@ public sealed class PlayerWeaponVisualTests
         }
     }
 
-    /// <summary>스윙은 그립 축 회전이 아니라 플레이어 중심 둘레의 호여야 한다.</summary>
+    /// <summary>
+    /// 스윙도 손을 코드로 움직이지 않는다 — 공격 클립의 "Weapon Hand" 커브가
+    /// 맡는다. 코드가 덮어쓰면 리그에서 찍은 공격 모션이 전부 가려진다.
+    /// </summary>
     [Test]
-    public void PlaySwing_SweepsTheGripAroundThePlayerCenter()
+    public void PlaySwing_DoesNotMoveTheHand_TheAttackCurvesOwnIt()
     {
         PlayerWeaponVisual visual = CreateVisual(out GameObject player);
         try
         {
             visual.InitializeInventory(new PlayerInventory());
+            Vector3 positionBefore = visual.Hand.localPosition;
+            Quaternion rotationBefore = visual.Hand.localRotation;
+
             visual.PlaySwing(Vector2.down, arcDegrees: 90f, durationSeconds: 60f);
             visual.Refresh();
 
-            Transform hand = visual.Renderer.transform;
-            // 그립은 손 반지름만큼 떨어진 궤도 위에 있다
-            Assert.That(
-                hand.localPosition.magnitude,
-                Is.EqualTo(PlayerWeaponVisual.DefaultHandOffset.magnitude).Within(0.001f));
-            // 칼끝은 늘 바깥을 향한다
-            Vector3 tipDirection = hand.localRotation * Vector3.up;
-            Vector3 outward = hand.localPosition.normalized;
-            Assert.That(tipDirection.x, Is.EqualTo(outward.x).Within(0.001f));
-            Assert.That(tipDirection.y, Is.EqualTo(outward.y).Within(0.001f));
+            Assert.That(visual.Hand.localPosition, Is.EqualTo(positionBefore));
+            Assert.That(visual.Hand.localRotation, Is.EqualTo(rotationBefore));
         }
         finally
         {
@@ -225,11 +212,12 @@ public sealed class PlayerWeaponVisualTests
             inventory.SelectSlot(0);
             visual.InitializeInventory(inventory);
 
+            // 축(칼끝 방향) × 렌더러(무기별 보정)를 합친 회전이 기울기를 되돌린다
             float expected =
                 PlayerWeaponVisual.AngleFor(PlayerWeaponVisual.RestTipDirection) + 90f;
             Assert.That(
                 Quaternion.Angle(
-                    visual.Renderer.transform.localRotation,
+                    visual.Hand.localRotation * visual.Renderer.transform.localRotation,
                     Quaternion.Euler(0f, 0f, expected)),
                 Is.LessThan(0.1f));
         }
@@ -239,39 +227,6 @@ public sealed class PlayerWeaponVisualTests
             DestroySprite(sprite);
             Object.DestroyImmediate(player);
         }
-    }
-
-    [Test]
-    public void SwingAngleAt_SweepsFromHalfArcAboveToHalfArcBelowTheAim()
-    {
-        // 오른손 베기 — 부채꼴 위쪽 끝에서 시작해 아래쪽 끝에서 멈춘다
-        Assert.That(
-            PlayerWeaponVisual.SwingAngleAt(0f, baseAngle: -90f, arcDegrees: 90f),
-            Is.EqualTo(-45f).Within(0.01f));
-        Assert.That(
-            PlayerWeaponVisual.SwingAngleAt(0.5f, baseAngle: -90f, arcDegrees: 90f),
-            Is.EqualTo(-90f).Within(0.01f));
-        Assert.That(
-            PlayerWeaponVisual.SwingAngleAt(1f, baseAngle: -90f, arcDegrees: 90f),
-            Is.EqualTo(-135f).Within(0.01f));
-    }
-
-    [Test]
-    public void SwingAngleAt_SpinsAFullCircleWhenTheArcIs360()
-    {
-        float start = PlayerWeaponVisual.SwingAngleAt(0f, 0f, 360f);
-        float end = PlayerWeaponVisual.SwingAngleAt(1f, 0f, 360f);
-
-        Assert.That(start - end, Is.EqualTo(360f).Within(0.01f));
-    }
-
-    [Test]
-    public void SwingAngleAt_ClampsProgressOutsideTheSwingWindow()
-    {
-        // 스윙이 끝난 뒤에도 각도가 부채꼴 밖으로 튀면 안 된다
-        Assert.That(
-            PlayerWeaponVisual.SwingAngleAt(1.7f, 0f, 90f),
-            Is.EqualTo(-45f).Within(0.01f));
     }
 
     private static PlayerWeaponVisual CreateVisual(out GameObject player)

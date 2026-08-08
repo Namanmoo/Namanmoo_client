@@ -400,10 +400,10 @@ public sealed class WeaponForgeController : MonoBehaviour
         var vault = new WeaponVaultClient(backendBaseUrl);
         string failure = null;
 
-        // 그립은 스프라이트 pivot에 구워져 있다 — 정규화해 무기고에도 실어 보낸다
-        Vector2 grip = new Vector2(
-            resultSprite.pivot.x / resultSprite.rect.width,
-            resultSprite.pivot.y / resultSprite.rect.height);
+        // 그립은 캔버스에서 찍은 좌표 그대로 싣는다. 저장 PNG는 전체 그림인데
+        // 스프라이트는 투명 여백이 잘려 있어서, 잘린 pivot을 역산해 보내면
+        // 무기고에서 꺼낼 때 좌표계가 어긋난다.
+        Vector2 grip = drawingCanvas != null ? drawingCanvas.Grip : DrawingCanvas.DefaultGrip;
 
         yield return vault.Save(
             resultSprite.texture.EncodeToPNG(),

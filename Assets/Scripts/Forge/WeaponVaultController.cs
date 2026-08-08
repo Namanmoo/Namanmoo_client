@@ -121,13 +121,9 @@ public sealed class WeaponVaultController : MonoBehaviour
             return;
         }
 
-        Sprite sprite = Sprite.Create(
-            texture,
-            new Rect(0f, 0f, texture.width, texture.height),
-            // 저장해 둔 그립이 곧 잡는 자리다 — 기준점 없이 저장된 옛 무기는 가운데
-            weapon.Grip01,
-            WeaponSpriteFactory.PixelsPerUnit);
-        sprite.name = weapon.name;
+        // 저장해 둔 그립이 곧 잡는 자리다 — 기준점 없이 저장된 옛 무기는 가운데.
+        // 투명 여백은 잘려 나가서 스프라이트 경계 = 보이는 무기다.
+        Sprite sprite = WeaponSpriteFactory.FromTexture(texture, weapon.name, weapon.Grip01);
 
         // 씬을 넘어가는 동안 텍스처가 지워지지 않게 소유권을 넘긴다
         textures.Remove(weapon.id);
