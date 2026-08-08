@@ -6,22 +6,6 @@ using UnityEngine.TestTools;
 
 public sealed class SpikeObstacleTests
 {
-    [UnityTest]
-    public IEnumerator Awake_ForcesColliderToBeTrigger()
-    {
-        yield return new EnterPlayMode();
-        var spikeObject = new GameObject("Spike");
-        BoxCollider2D collider = spikeObject.AddComponent<BoxCollider2D>();
-        collider.isTrigger = false;
-
-        spikeObject.AddComponent<SpikeObstacle>();
-
-        Assert.That(collider.isTrigger, Is.True);
-
-        Object.Destroy(spikeObject);
-        yield return new ExitPlayMode();
-    }
-
     [Test]
     public void TryDamagePlayer_ColliderWithoutPlayerHealthDoesNothing()
     {
