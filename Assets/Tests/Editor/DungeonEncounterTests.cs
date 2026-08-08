@@ -184,11 +184,120 @@ public sealed class DungeonEncounterTests
     }
 
     [Test]
+    public void Spawn_NormalRoomUsesConfiguredTemplateMarkerPositions()
+    {
+        var encounterObject = new GameObject("Encounter");
+        var roomRootObject = new GameObject("Room");
+        var playerObject = new GameObject("Player");
+        var templateObject = new GameObject("Template");
+        Sprite sprite = Sprite.Create(
+            Texture2D.whiteTexture,
+            new Rect(0f, 0f, 1f, 1f),
+            new Vector2(0.5f, 0.5f),
+            1f);
+        EnemyDefinition mushroom = ScriptableObject.CreateInstance<EnemyDefinition>();
+
+        try
+        {
+            mushroom.Configure(
+                "dungeon-mushroom",
+                "Dungeon Mushroom",
+                sprite,
+                null,
+                EnemyBehaviorType.ChaseContact,
+                5,
+                3.5f,
+                6,
+                0.75f,
+                1f,
+                0f,
+                0.01f,
+                0.01f);
+
+            RoomContentTemplate template = templateObject.AddComponent<RoomContentTemplate>();
+            var markerA = new GameObject("MarkerA");
+            markerA.transform.SetParent(templateObject.transform, false);
+            markerA.transform.localPosition = new Vector3(3f, 4f, 0f);
+            markerA.AddComponent<EnemySpawnMarker>();
+            var markerB = new GameObject("MarkerB");
+            markerB.transform.SetParent(templateObject.transform, false);
+            markerB.transform.localPosition = new Vector3(-3f, -2f, 0f);
+            markerB.AddComponent<EnemySpawnMarker>();
+
+            DungeonEncounter encounter = encounterObject.AddComponent<DungeonEncounter>();
+            encounter.Configure(mushroom, null);
+            encounter.ConfigureRoomTemplates(new[] { template });
+
+            RoomShape shape = RoomShape.Build(101, Doors.North | Doors.South);
+            var room = new DungeonRoom(
+                Vector2Int.zero, RoomKind.Normal, Doors.North | Doors.South, 2);
+
+            Stage1EncounterGate gate = encounter.Spawn(
+                roomRootObject.transform, playerObject.transform, shape, room, 202);
+
+            Assert.That(gate, Is.Not.Null);
+            EnemyHealth[] enemies = roomRootObject.GetComponentsInChildren<EnemyHealth>();
+            Assert.That(enemies, Has.Length.EqualTo(2));
+
+            var positions = new Vector2[enemies.Length];
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                positions[i] = enemies[i].transform.position;
+            }
+
+            Assert.That(positions, Does.Contain(new Vector2(3f, 4f)));
+            Assert.That(positions, Does.Contain(new Vector2(-3f, -2f)));
+        }
+        finally
+        {
+            Object.DestroyImmediate(encounterObject);
+            Object.DestroyImmediate(roomRootObject);
+            Object.DestroyImmediate(playerObject);
+            Object.DestroyImmediate(templateObject);
+            Object.DestroyImmediate(mushroom);
+            Object.DestroyImmediate(sprite);
+        }
+    }
+
+    [Test]
+    public void Spawn_NormalRoomWithNoConfiguredTemplateReturnsNull()
+    {
+        var encounterObject = new GameObject("Encounter");
+        var roomRootObject = new GameObject("Room");
+        var playerObject = new GameObject("Player");
+        EnemyDefinition mushroom = ScriptableObject.CreateInstance<EnemyDefinition>();
+
+        try
+        {
+            DungeonEncounter encounter = encounterObject.AddComponent<DungeonEncounter>();
+            encounter.Configure(mushroom, null);
+
+            RoomShape shape = RoomShape.Build(101, Doors.North | Doors.South);
+            var room = new DungeonRoom(
+                Vector2Int.zero, RoomKind.Normal, Doors.North | Doors.South, 2);
+
+            Stage1EncounterGate gate = encounter.Spawn(
+                roomRootObject.transform, playerObject.transform, shape, room, 202);
+
+            Assert.That(gate, Is.Null);
+            Assert.That(roomRootObject.GetComponentsInChildren<EnemyHealth>(), Is.Empty);
+        }
+        finally
+        {
+            Object.DestroyImmediate(encounterObject);
+            Object.DestroyImmediate(roomRootObject);
+            Object.DestroyImmediate(playerObject);
+            Object.DestroyImmediate(mushroom);
+        }
+    }
+
+    [Test]
     public void Spawn_NormalRoomBuildsGuaranteedContactAndRangedEnemies()
     {
         var encounterObject = new GameObject("Encounter");
         var roomRootObject = new GameObject("Room");
         var playerObject = new GameObject("Player");
+        var templateObject = new GameObject("Template");
         Sprite contactSprite = Sprite.Create(
             Texture2D.whiteTexture,
             new Rect(0f, 0f, 1f, 1f),
@@ -242,6 +351,16 @@ public sealed class DungeonEncounterTests
                 encounterObject.AddComponent<DungeonEncounter>();
             encounter.Configure(new[] { contact, ranged }, null);
 
+            RoomContentTemplate template = templateObject.AddComponent<RoomContentTemplate>();
+            for (int i = 0; i < 4; i++)
+            {
+                var marker = new GameObject($"Marker{i}");
+                marker.transform.SetParent(templateObject.transform, false);
+                marker.transform.localPosition = new Vector3(i, 0f, 0f);
+                marker.AddComponent<EnemySpawnMarker>();
+            }
+            encounter.ConfigureRoomTemplates(new[] { template });
+
             RoomShape shape = RoomShape.Build(
                 101,
                 Doors.North | Doors.South);
@@ -282,6 +401,7 @@ public sealed class DungeonEncounterTests
             Object.DestroyImmediate(encounterObject);
             Object.DestroyImmediate(roomRootObject);
             Object.DestroyImmediate(playerObject);
+            Object.DestroyImmediate(templateObject);
             Object.DestroyImmediate(contact);
             Object.DestroyImmediate(ranged);
             Object.DestroyImmediate(contactSprite);
@@ -296,6 +416,7 @@ public sealed class DungeonEncounterTests
         var encounterObject = new GameObject(nameof(DungeonEncounter));
         var roomRootObject = new GameObject(nameof(DungeonRoom));
         var playerObject = new GameObject(nameof(PlayerHealth));
+        var templateObject = new GameObject("Template");
         EnemyDefinition mushroom = AssetDatabase.LoadAssetAtPath<EnemyDefinition>(
             DungeonEnemyAssetBuilder.MushroomDefinitionPath);
         EnemyDefinition squirrel = AssetDatabase.LoadAssetAtPath<EnemyDefinition>(
@@ -309,6 +430,16 @@ public sealed class DungeonEncounterTests
             DungeonEncounter encounter =
                 encounterObject.AddComponent<DungeonEncounter>();
             encounter.Configure(new[] { mushroom, squirrel }, null);
+
+            RoomContentTemplate template = templateObject.AddComponent<RoomContentTemplate>();
+            for (int i = 0; i < 4; i++)
+            {
+                var marker = new GameObject($"Marker{i}");
+                marker.transform.SetParent(templateObject.transform, false);
+                marker.transform.localPosition = new Vector3(i, 0f, 0f);
+                marker.AddComponent<EnemySpawnMarker>();
+            }
+            encounter.ConfigureRoomTemplates(new[] { template });
 
             RoomShape shape = RoomShape.Build(
                 101,
@@ -359,6 +490,7 @@ public sealed class DungeonEncounterTests
             Object.DestroyImmediate(encounterObject);
             Object.DestroyImmediate(roomRootObject);
             Object.DestroyImmediate(playerObject);
+            Object.DestroyImmediate(templateObject);
         }
     }
 }

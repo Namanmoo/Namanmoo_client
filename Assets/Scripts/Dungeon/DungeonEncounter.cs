@@ -19,6 +19,7 @@ namespace NaManMoo.Dungeon
         [SerializeField] private EnemyDefinition[] normalEnemyDefinitions;
         [SerializeField] private Sprite bossSprite;
         [SerializeField] private SultanBossDefinition sultanBossDefinition;
+        [SerializeField] private RoomContentTemplate[] normalRoomTemplates;
 
         public void ConfigureSultanBoss(
             EnemyDefinition[] normalEnemies, SultanBossDefinition sultanBoss)
@@ -39,6 +40,11 @@ namespace NaManMoo.Dungeon
             Configure(
                 normalEnemy == null ? new EnemyDefinition[0] : new[] { normalEnemy },
                 boss);
+        }
+
+        public void ConfigureRoomTemplates(RoomContentTemplate[] templates)
+        {
+            normalRoomTemplates = templates;
         }
 
         public static EnemyDefinition[] SelectDefinitions(
@@ -178,14 +184,17 @@ namespace NaManMoo.Dungeon
             DungeonRoom room,
             int roomSeed)
         {
-            int count = RoomSpawnPoints.EnemyCount(room.Kind, room.DistanceFromStart);
-            if (count <= 0)
+            RoomContentTemplate template = SelectTemplate(normalRoomTemplates, roomSeed);
+            if (template == null)
             {
                 return null;
             }
 
-            // 방 기하와 같은 시드를 쓴다 — 되돌아왔을 때 벽도 배치도 그대로여야 한다
-            List<Vector2> spots = RoomSpawnPoints.Inside(shape, count, roomSeed);
+            // 방 기하와 같은 시드를 쓴다 — 되돌아왔을 때 고른 템플릿도 그대로여야 한다
+            RoomContentTemplate instance = Instantiate(template, roomRoot);
+            instance.transform.localPosition = Vector3.zero;
+
+            List<Vector2> spots = instance.SpawnMarkerPositions();
             EnemyDefinition[] definitions = SelectDefinitions(
                 normalEnemyDefinitions,
                 spots.Count,
