@@ -30,6 +30,7 @@ public sealed class DungeonBossRoomHarness
         Player = new GameObject("Player") { tag = "Player" };
         Player.AddComponent<Rigidbody2D>().gravityScale = 0f;
         Player.AddComponent<CircleCollider2D>().radius = 0.5f;
+        Player.AddComponent<PlayerHealth>();
 
         Root = new GameObject("Dungeon");
         Runner = Root.AddComponent<DungeonRunner>();
