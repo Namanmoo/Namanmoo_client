@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: NaManMoo.Runtime::SultanBossDefinition
   phase1Sprite: {fileID: 21300000, guid: 951d15d9fe2a270468ea360cf10024ec, type: 3}
   phase2Sprite: {fileID: 21300000, guid: 34fc666f94b399045aad0886de8af705, type: 3}
-  fallMarkerSprite: {fileID: 21300000, guid: 245110764531b57489da1a93d8ab1081, type: 3}
-  arcProjectileSprite: {fileID: 21300000, guid: 7cbe8597b878eeb418496ec9428a12a8, type: 3}
+  fallMarkerSprite: {fileID: 21300000, guid: 58b33e7b8cdffa642831c8346ee758c9, type: 3}
+  arcProjectileSprite: {fileID: 21300000, guid: 7bad053b940d3b14e94b3aca4ecc195b, type: 3}
   maxHealth: 100
   moveSpeed: 5
   patternInterval: 1.5
@@ -23,7 +23,10 @@ MonoBehaviour:
   visualHeight: 6
   contactRadius: 1.2
   phaseTwoHealthRatio: 0.5
-  krabDefinition: {fileID: 11400000, guid: 480d85c7f96528b4eac26d867e3d0f77, type: 2}
+  phaseTransitionSeconds: 2
+  phase1AnimatorController: {fileID: 9100000, guid: 36c9f4f3beac2044180f22d6bf63d773, type: 2}
+  phase2AnimatorController: {fileID: 9100000, guid: 118117031a68b3f4ba3072e06d18563f, type: 2}
+  mushroomDefinition: {fileID: 11400000, guid: 480d85c7f96528b4eac26d867e3d0f77, type: 2}
   squirrelDefinition: {fileID: 11400000, guid: 86680c1233948db43a0bfd910df1aa01, type: 2}
   woodTowerDefinition: {fileID: 11400000, guid: efcd27d40245a1f48ba6ac1b1d773c11, type: 2}
   maxSummonedMonsters: 1
@@ -40,8 +43,8 @@ MonoBehaviour:
   arcDistance: 6
   arcDuration: 1
   arcHeight: 1.5
-  chargeWindup: 0.5
-  chargeDuration: 0.3
-  chargeSpeedMultiplier: 5
+  chargeWindup: 1
+  chargeDuration: 0.5
+  chargeSpeedMultiplier: 7
   landingShakeIntensity: 0.2
   landingShakeDuration: 0.25

@@ -24,6 +24,21 @@ public sealed class SultanBossDefinition : ScriptableObject
     [SerializeField, Min(0.01f)] private float contactRadius = 1.2f;
     [SerializeField, Range(0.01f, 1f)] private float phaseTwoHealthRatio = 0.5f;
 
+    /// <summary>2페이즈로 변신하는 연출 길이. 이 동안 보스는 무적이고 움직이지 않는다.</summary>
+    [SerializeField, Min(0f)] private float phaseTransitionSeconds = 2f;
+
+    /// <summary>
+    /// 1페이즈 좌우 모션 컨트롤러(Idle_Left/Right, Move_Left/Right).
+    /// 비워 두면 <see cref="phase1Sprite"/> 한 장이 그대로 쓰인다 — 예전 동작.
+    /// </summary>
+    [SerializeField] private RuntimeAnimatorController phase1AnimatorController;
+
+    /// <summary>
+    /// 2페이즈 좌우 모션 컨트롤러. 비워 두면 변신 뒤 <see cref="phase2Sprite"/> 한 장으로
+    /// 굳는다 — 모션을 아직 안 그린 보스도 그대로 돌아간다.
+    /// </summary>
+    [SerializeField] private RuntimeAnimatorController phase2AnimatorController;
+
     [Header("Summon References (기존 던전 스폰 시스템 재사용)")]
     // krab -> mushroom으로 이름을 바꿨다. 이미 저장된 보스 에셋이 참조를 잃지 않게 옛 이름을 남긴다.
     [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("krabDefinition")]
@@ -68,6 +83,9 @@ public sealed class SultanBossDefinition : ScriptableObject
     public float VisualHeight => visualHeight;
     public float ContactRadius => contactRadius;
     public float PhaseTwoHealthRatio => phaseTwoHealthRatio;
+    public float PhaseTransitionSeconds => phaseTransitionSeconds;
+    public RuntimeAnimatorController Phase1AnimatorController => phase1AnimatorController;
+    public RuntimeAnimatorController Phase2AnimatorController => phase2AnimatorController;
 
     public EnemyDefinition MushroomDefinition => mushroomDefinition;
     public EnemyDefinition SquirrelDefinition => squirrelDefinition;

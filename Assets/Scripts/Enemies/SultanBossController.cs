@@ -70,6 +70,13 @@ public sealed class SultanBossController : MonoBehaviour
     private readonly List<EnemyHealth> summonedWoodTowers = new List<EnemyHealth>();
 
     private bool isPhase2;
+
+    /// <summary>
+    /// 체력이 절반을 넘어간 순간 서는 깃발. 실제 변신은 패턴 루프가 현재 패턴을
+    /// 끝낸 뒤에 처리한다 — 돌진이나 낙하 도중에 끊으면 어색하다.
+    /// </summary>
+    private bool phaseTransitionRequested;
+
     private MovementState movementState = MovementState.Chase;
     private Vector2 dashDirection;
 
@@ -136,16 +143,15 @@ public sealed class SultanBossController : MonoBehaviour
 
     private void OnHealthChanged(int current, int maximum)
     {
-        if (isPhase2 || maximum <= 0)
+        if (isPhase2 || phaseTransitionRequested || maximum <= 0)
         {
             return;
         }
 
         if (current <= maximum * definition.PhaseTwoHealthRatio)
         {
-            isPhase2 = true;
-            visual.sprite = definition.Phase2Sprite;
-            PhaseTwoStarted?.Invoke();
+            // 깃발만 세운다. 진행 중인 패턴을 끊지 않으려고 실제 전환은 패턴 루프가 맡는다.
+            phaseTransitionRequested = true;
         }
     }
 
@@ -155,8 +161,81 @@ public sealed class SultanBossController : MonoBehaviour
         {
             movementState = MovementState.Stationary;
             yield return RunNextPattern();
+
+            if (phaseTransitionRequested && !isPhase2)
+            {
+                yield return PhaseTransition();
+            }
+
             movementState = MovementState.Chase;
             yield return new WaitForSeconds(definition.PatternInterval);
+        }
+    }
+
+    /// <summary>
+    /// 2페이즈 변신. 소환수를 싹 정리하고, 연출이 끝날 때까지 무적으로 버틴다.
+    /// 무적을 거는 건 변신 도중에 얻어맞고 죽는 걸 막기 위해서다.
+    /// </summary>
+    private IEnumerator PhaseTransition()
+    {
+        movementState = MovementState.Stationary;
+        health.SetInvulnerable(true);
+        ClearSummons();
+
+        yield return new WaitForSeconds(definition.PhaseTransitionSeconds);
+
+        isPhase2 = true;
+        SwitchToPhase2Visual();
+        health.SetInvulnerable(false);
+        PhaseTwoStarted?.Invoke();
+    }
+
+    /// <summary>
+    /// 보이는 모습을 2페이즈로 바꾼다. 2페이즈 모션이 있으면 컨트롤러만 갈아끼우고,
+    /// 없으면 Animator를 꺼서 정지 그림 한 장으로 굳힌다 — Animator가 살아 있으면
+    /// 매 프레임 1페이즈 그림으로 덮어써서 2페이즈 그림이 화면에 남지 않는다.
+    /// </summary>
+    private void SwitchToPhase2Visual()
+    {
+        EnemyVisualController phaseVisual = GetComponentInChildren<EnemyVisualController>();
+
+        if (phaseVisual != null && definition.Phase2AnimatorController != null)
+        {
+            phaseVisual.Configure(definition.Phase2Sprite, definition.Phase2AnimatorController);
+            return;
+        }
+
+        if (phaseVisual != null)
+        {
+            phaseVisual.enabled = false;
+        }
+
+        Animator animator = GetComponentInChildren<Animator>();
+        if (animator != null)
+        {
+            animator.enabled = false;
+        }
+
+        visual.sprite = definition.Phase2Sprite;
+    }
+
+    /// <summary>
+    /// 1페이즈에서 부른 소환수를 전부 없앤다. Died 이벤트를 태우지 않고 지우므로
+    /// 죽음 연출·전리품이 나오지 않는다 — 쓸어버리는 연출이라 그게 맞다.
+    /// </summary>
+    private void ClearSummons()
+    {
+        foreach (List<EnemyHealth> list in new[] { summonedMonsters, summonedWoodTowers })
+        {
+            foreach (EnemyHealth summon in list.ToArray())
+            {
+                if (summon != null)
+                {
+                    Destroy(summon.gameObject);
+                }
+            }
+
+            list.Clear();
         }
     }
 
@@ -429,7 +508,16 @@ public sealed class SultanBossController : MonoBehaviour
     private IEnumerator ChargePattern()
     {
         dashDirection = GetDirectionToPlayer();
+        EnemyVisualController bossVisual = GetComponentInChildren<EnemyVisualController>();
+
+        // 준비 자세는 돌진할 방향을 보고, 클립이 끝나면 남은 시간은 마지막 프레임으로 버틴다.
+        // 모션이 없는 보스(슬라임 등)에서는 조용히 false를 돌려주고 넘어간다.
+        bossVisual?.PlayOverride("ChargeWindup", dashDirection, definition.ChargeWindup);
+
         yield return new WaitForSeconds(definition.ChargeWindup);
+
+        // 돌진 중에는 걷기 모션이 나오면 안 된다 — 속도가 5배라 발이 심하게 미끄러진다.
+        bossVisual?.PlayOverride("Charge", dashDirection, definition.ChargeDuration);
 
         movementState = MovementState.Dash;
         yield return new WaitForSeconds(definition.ChargeDuration);
