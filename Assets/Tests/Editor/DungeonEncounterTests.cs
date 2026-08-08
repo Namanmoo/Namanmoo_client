@@ -146,6 +146,44 @@ public sealed class DungeonEncounterTests
     }
 
     [Test]
+    public void SelectTemplate_PicksDeterministicallyFromSeed()
+    {
+        var templateAObject = new GameObject("TemplateA");
+        var templateBObject = new GameObject("TemplateB");
+        RoomContentTemplate templateA = templateAObject.AddComponent<RoomContentTemplate>();
+        RoomContentTemplate templateB = templateBObject.AddComponent<RoomContentTemplate>();
+
+        try
+        {
+            RoomContentTemplate[] pool = { templateA, templateB };
+
+            RoomContentTemplate first = DungeonEncounter.SelectTemplate(pool, 42);
+            RoomContentTemplate second = DungeonEncounter.SelectTemplate(pool, 42);
+
+            Assert.That(first, Is.Not.Null);
+            Assert.That(first, Is.SameAs(second));
+            Assert.That(pool, Does.Contain(first));
+        }
+        finally
+        {
+            Object.DestroyImmediate(templateAObject);
+            Object.DestroyImmediate(templateBObject);
+        }
+    }
+
+    [Test]
+    public void SelectTemplate_EmptyOrNullPoolReturnsNull()
+    {
+        Assert.That(DungeonEncounter.SelectTemplate(null, 1), Is.Null);
+        Assert.That(
+            DungeonEncounter.SelectTemplate(new RoomContentTemplate[0], 1),
+            Is.Null);
+        Assert.That(
+            DungeonEncounter.SelectTemplate(new RoomContentTemplate[] { null }, 1),
+            Is.Null);
+    }
+
+    [Test]
     public void Spawn_NormalRoomBuildsGuaranteedContactAndRangedEnemies()
     {
         var encounterObject = new GameObject("Encounter");

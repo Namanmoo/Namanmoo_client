@@ -86,6 +86,30 @@ namespace NaManMoo.Dungeon
             return selected;
         }
 
+        public static RoomContentTemplate SelectTemplate(
+            RoomContentTemplate[] templates, int seed)
+        {
+            var valid = new List<RoomContentTemplate>();
+            if (templates != null)
+            {
+                foreach (RoomContentTemplate template in templates)
+                {
+                    if (template != null)
+                    {
+                        valid.Add(template);
+                    }
+                }
+            }
+
+            if (valid.Count == 0)
+            {
+                return null;
+            }
+
+            var rng = new DeterministicRandom(seed);
+            return valid[rng.Next(valid.Count)];
+        }
+
         public Stage1EncounterGate Spawn(
             Transform roomRoot,
             Transform player,
