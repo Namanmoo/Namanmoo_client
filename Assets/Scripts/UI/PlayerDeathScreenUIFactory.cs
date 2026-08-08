@@ -8,26 +8,13 @@ public static class PlayerDeathScreenUIFactory
 
     public static PlayerDeathScreenView Create(Transform parent)
     {
-        var canvasObject = new GameObject(
-            "Player Death Canvas",
-            typeof(RectTransform),
-            typeof(Canvas),
-            typeof(CanvasScaler),
-            typeof(GraphicRaycaster),
-            typeof(PlayerDeathScreenView));
-        if (parent != null)
-        {
-            canvasObject.transform.SetParent(parent, false);
-        }
-
-        Canvas canvas = canvasObject.GetComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = SortingOrder;
-
-        CanvasScaler scaler = canvasObject.GetComponent<CanvasScaler>();
-        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = ReferenceResolution;
-        scaler.matchWidthOrHeight = 0.5f;
+        PlayerDeathScreenView view =
+            RuntimeMenuUIFactory.CreateOverlayCanvas<PlayerDeathScreenView>(
+                parent,
+                "Player Death Canvas",
+                ReferenceResolution,
+                SortingOrder);
+        GameObject canvasObject = view.gameObject;
 
         Image overlay = RuntimeMenuUIFactory.CreateImage(
             canvasObject.transform,
@@ -63,8 +50,6 @@ public static class PlayerDeathScreenUIFactory
             "처음부터 다시하기",
             new Vector2(0f, -105f));
 
-        PlayerDeathScreenView view =
-            canvasObject.GetComponent<PlayerDeathScreenView>();
         view.Initialize(overlay, menu, titleButton, restartButton);
         menu.SetActive(false);
 

@@ -8,26 +8,13 @@ public static class StageClearScreenUIFactory
 
     public static StageClearScreenView Create(Transform parent)
     {
-        var canvasObject = new GameObject(
-            "Stage Clear Canvas",
-            typeof(RectTransform),
-            typeof(Canvas),
-            typeof(CanvasScaler),
-            typeof(GraphicRaycaster),
-            typeof(StageClearScreenView));
-        if (parent != null)
-        {
-            canvasObject.transform.SetParent(parent, false);
-        }
-
-        Canvas canvas = canvasObject.GetComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = SortingOrder;
-
-        CanvasScaler scaler = canvasObject.GetComponent<CanvasScaler>();
-        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = ReferenceResolution;
-        scaler.matchWidthOrHeight = 0.5f;
+        StageClearScreenView view =
+            RuntimeMenuUIFactory.CreateOverlayCanvas<StageClearScreenView>(
+                parent,
+                "Stage Clear Canvas",
+                ReferenceResolution,
+                SortingOrder);
+        GameObject canvasObject = view.gameObject;
 
         Image overlay = RuntimeMenuUIFactory.CreateImage(
             canvasObject.transform,
@@ -56,8 +43,6 @@ public static class StageClearScreenUIFactory
             "타이틀화면으로 돌아가기",
             new Vector2(0f, -40f));
 
-        StageClearScreenView view =
-            canvasObject.GetComponent<StageClearScreenView>();
         view.Initialize(overlay, menu, titleButton);
         menu.SetActive(false);
 

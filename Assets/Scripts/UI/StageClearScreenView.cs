@@ -3,18 +3,25 @@ using UnityEngine.UI;
 
 public sealed class StageClearScreenView : MonoBehaviour, IFadeOverlay
 {
-    public Image FadeOverlay { get; private set; }
-    public GameObject Menu { get; private set; }
-    public Button TitleButton { get; private set; }
+    // 씬 빌더가 에디터에서 Initialize로 채우고 씬에 저장된다. 자동 프로퍼티로 두면
+    // 백킹 필드가 직렬화되지 않아, 저장된 씬을 실행할 때 전부 null이 되고
+    // Stage Clear 화면이 조용히 사라진다.
+    [SerializeField] private Image fadeOverlay;
+    [SerializeField] private GameObject menu;
+    [SerializeField] private Button titleButton;
+
+    public Image FadeOverlay => fadeOverlay;
+    public GameObject Menu => menu;
+    public Button TitleButton => titleButton;
 
     public void Initialize(
-        Image fadeOverlay,
-        GameObject menu,
-        Button titleButton)
+        Image newFadeOverlay,
+        GameObject newMenu,
+        Button newTitleButton)
     {
-        FadeOverlay = fadeOverlay;
-        Menu = menu;
-        TitleButton = titleButton;
+        fadeOverlay = newFadeOverlay;
+        menu = newMenu;
+        titleButton = newTitleButton;
 
         if (FadeOverlay != null)
         {

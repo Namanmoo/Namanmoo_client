@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Passed" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-08 08:48:48Z" end-time="2026-08-08 08:48:49Z" duration="1.108693">
+  <test-suite type="TestSuite" id="1067" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="49" result="Passed" start-time="2026-08-08 08:48:48Z" end-time="2026-08-08 08:48:49Z" duration="1.108693" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1063" name="NaManMoo.PlayModeTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.PlayModeTests.dll" runstate="Runnable" testcasecount="49" result="Passed" start-time="2026-08-08 08:48:48Z" end-time="2026-08-08 08:48:49Z" duration="1.103968" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="29040" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1045" name="PlayerDeathScreenPlayModeTests" fullname="PlayerDeathScreenPlayModeTests" classname="PlayerDeathScreenPlayModeTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-08-08 08:48:48Z" end-time="2026-08-08 08:48:49Z" duration="1.102721" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1047" name="Death_AfterOneRealtimeSecondShowsOpaqueMenu" fullname="PlayerDeathScreenPlayModeTests.Death_AfterOneRealtimeSecondShowsOpaqueMenu" methodname="Death_AfterOneRealtimeSecondShowsOpaqueMenu" classname="PlayerDeathScreenPlayModeTests" runstate="Runnable" seed="1761603543" result="Passed" start-time="2026-08-08 08:48:48Z" end-time="2026-08-08 08:48:49Z" duration="1.085153" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1046" name="Death_ImmediatelyHidesPlayerPausesGameAndKeepsMenuHidden" fullname="PlayerDeathScreenPlayModeTests.Death_ImmediatelyHidesPlayerPausesGameAndKeepsMenuHidden" methodname="Death_ImmediatelyHidesPlayerPausesGameAndKeepsMenuHidden" classname="PlayerDeathScreenPlayModeTests" runstate="Runnable" seed="878379157" result="Passed" start-time="2026-08-08 08:48:49Z" end-time="2026-08-08 08:48:49Z" duration="0.003239" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1049" name="RestartButton_RestoresTimeAndReloadsActiveScene" fullname="PlayerDeathScreenPlayModeTests.RestartButton_RestoresTimeAndReloadsActiveScene" methodname="RestartButton_RestoresTimeAndReloadsActiveScene" classname="PlayerDeathScreenPlayModeTests" runstate="Runnable" seed="884689264" result="Passed" start-time="2026-08-08 08:48:49Z" end-time="2026-08-08 08:48:49Z" duration="0.002128" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1050" name="TaggedPlayerWithoutConfiguredScreen_CreatesOneAtRuntime" fullname="PlayerDeathScreenPlayModeTests.TaggedPlayerWithoutConfiguredScreen_CreatesOneAtRuntime" methodname="TaggedPlayerWithoutConfiguredScreen_CreatesOneAtRuntime" classname="PlayerDeathScreenPlayModeTests" runstate="Runnable" seed="2073311472" result="Passed" start-time="2026-08-08 08:48:49Z" end-time="2026-08-08 08:48:49Z" duration="0.002629" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1048" name="TitleButton_RestoresTimeAndLoadsTitleScene" fullname="PlayerDeathScreenPlayModeTests.TitleButton_RestoresTimeAndLoadsTitleScene" methodname="TitleButton_RestoresTimeAndLoadsTitleScene" classname="PlayerDeathScreenPlayModeTests" runstate="Runnable" seed="2022696172" result="Passed" start-time="2026-08-08 08:48:49Z" end-time="2026-08-08 08:48:49Z" duration="0.001363" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

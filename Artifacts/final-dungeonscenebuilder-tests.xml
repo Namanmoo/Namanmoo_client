@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Passed" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-08 08:09:15Z" end-time="2026-08-08 08:09:17Z" duration="1.9306752">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="574" result="Passed" start-time="2026-08-08 08:09:15Z" end-time="2026-08-08 08:09:17Z" duration="1.930675" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1679" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="574" result="Passed" start-time="2026-08-08 08:09:15Z" end-time="2026-08-08 08:09:17Z" duration="1.913621" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="7160" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1128" name="DungeonSceneBuilderTests" fullname="DungeonSceneBuilderTests" classname="DungeonSceneBuilderTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-08-08 08:09:15Z" end-time="2026-08-08 08:09:17Z" duration="1.904675" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1131" name="Scene_AssignsAllPersistentEnemyDefinitionsToEncounter" fullname="DungeonSceneBuilderTests.Scene_AssignsAllPersistentEnemyDefinitionsToEncounter" methodname="Scene_AssignsAllPersistentEnemyDefinitionsToEncounter" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="1881913533" result="Passed" start-time="2026-08-08 08:09:15Z" end-time="2026-08-08 08:09:15Z" duration="0.595162" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1132" name="Scene_HasStageClearScreenWiredToRunner" fullname="DungeonSceneBuilderTests.Scene_HasStageClearScreenWiredToRunner" methodname="Scene_HasStageClearScreenWiredToRunner" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="2049615610" result="Passed" start-time="2026-08-08 08:09:15Z" end-time="2026-08-08 08:09:16Z" duration="0.485033" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1129" name="Scene_PlayerHasDashComponent" fullname="DungeonSceneBuilderTests.Scene_PlayerHasDashComponent" methodname="Scene_PlayerHasDashComponent" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="1844030229" result="Passed" start-time="2026-08-08 08:09:16Z" end-time="2026-08-08 08:09:16Z" duration="0.410320" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1130" name="Scene_WiresDamageFlashToPlayerBody" fullname="DungeonSceneBuilderTests.Scene_WiresDamageFlashToPlayerBody" methodname="Scene_WiresDamageFlashToPlayerBody" classname="DungeonSceneBuilderTests" runstate="Runnable" seed="1689128015" result="Passed" start-time="2026-08-08 08:09:16Z" end-time="2026-08-08 08:09:17Z" duration="0.396200" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

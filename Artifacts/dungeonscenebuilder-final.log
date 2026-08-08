@@ -1,0 +1,27 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.5/staging' branch; Version is '6000.5.5f1 (d16e074b49fd) revision 13725191'; Using compiler version '194234433'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) Professional' Language: 'ko' Physical Memory: 32372 MB
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-myong" at "2026-08-08T07:52:22.1917031Z"
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-08-08T07:52:22Z
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\6000.5.5f1\Editor\Unity.exe
+-batchmode
+-nographics
+-projectPath
+.
+-runTests
+-testPlatform
+EditMode
+-testFilter
+DungeonSceneBuilderTests
+-testResults
+Artifacts\dungeonscenebuilder-final.xml
+-logFile
+Artifacts\dungeonscenebuilder-final.log
+Successfully changed project path to: C:/Users/myong/NaManMoo/Namanmoo_client
+C:/Users/myong/NaManMoo/Namanmoo_client
+Exiting without the bug reporter. Application will terminate with return code 1

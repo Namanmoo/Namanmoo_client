@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-08 07:33:02Z" end-time="2026-08-08 07:33:02Z" duration="0.078286">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="573" result="Passed" start-time="2026-08-08 07:33:02Z" end-time="2026-08-08 07:33:02Z" duration="0.078286" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1678" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="573" result="Passed" start-time="2026-08-08 07:33:02Z" end-time="2026-08-08 07:33:02Z" duration="0.067106" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="31252" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1562" name="StageClearScreenUIFactoryTests" fullname="StageClearScreenUIFactoryTests" classname="StageClearScreenUIFactoryTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-08-08 07:33:02Z" end-time="2026-08-08 07:33:02Z" duration="0.060059" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1563" name="Create_BuildsHiddenStageClearMenuAboveTransparentBlackOverlay" fullname="StageClearScreenUIFactoryTests.Create_BuildsHiddenStageClearMenuAboveTransparentBlackOverlay" methodname="Create_BuildsHiddenStageClearMenuAboveTransparentBlackOverlay" classname="StageClearScreenUIFactoryTests" runstate="Runnable" seed="217127338" result="Passed" start-time="2026-08-08 07:33:02Z" end-time="2026-08-08 07:33:02Z" duration="0.049650" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

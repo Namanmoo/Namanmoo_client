@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Passed" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-08 06:57:15Z" end-time="2026-08-08 06:57:16Z" duration="0.8681522">
+  <test-suite type="TestSuite" id="1060" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="43" result="Passed" start-time="2026-08-08 06:57:15Z" end-time="2026-08-08 06:57:16Z" duration="0.868152" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1056" name="NaManMoo.PlayModeTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.PlayModeTests.dll" runstate="Runnable" testcasecount="43" result="Passed" start-time="2026-08-08 06:57:15Z" end-time="2026-08-08 06:57:16Z" duration="0.863667" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="22828" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestFixture" id="1003" name="DungeonBossPlayModeTests" fullname="DungeonBossPlayModeTests" classname="DungeonBossPlayModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-08-08 06:57:15Z" end-time="2026-08-08 06:57:16Z" duration="0.862303" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1005" name="KillingTheBossOpensTheDoors" fullname="DungeonBossPlayModeTests.KillingTheBossOpensTheDoors" methodname="KillingTheBossOpensTheDoors" classname="DungeonBossPlayModeTests" runstate="Runnable" seed="636761604" result="Passed" start-time="2026-08-08 06:57:15Z" end-time="2026-08-08 06:57:16Z" duration="0.369233" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1007" name="OrdinaryRoomsStillGetMushroomsNotABoss" fullname="DungeonBossPlayModeTests.OrdinaryRoomsStillGetMushroomsNotABoss" methodname="OrdinaryRoomsStillGetMushroomsNotABoss" classname="DungeonBossPlayModeTests" runstate="Runnable" seed="846873041" result="Passed" start-time="2026-08-08 06:57:16Z" end-time="2026-08-08 06:57:16Z" duration="0.076414" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1004" name="TheBossAppearsInTheBossRoomAndLocksTheDoors" fullname="DungeonBossPlayModeTests.TheBossAppearsInTheBossRoomAndLocksTheDoors" methodname="TheBossAppearsInTheBossRoomAndLocksTheDoors" classname="DungeonBossPlayModeTests" runstate="Runnable" seed="1281710247" result="Passed" start-time="2026-08-08 06:57:16Z" end-time="2026-08-08 06:57:16Z" duration="0.199724" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1006" name="TheBossStandsAwayFromEveryDoorway" fullname="DungeonBossPlayModeTests.TheBossStandsAwayFromEveryDoorway" methodname="TheBossStandsAwayFromEveryDoorway" classname="DungeonBossPlayModeTests" runstate="Runnable" seed="774849217" result="Passed" start-time="2026-08-08 06:57:16Z" end-time="2026-08-08 06:57:16Z" duration="0.207629" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
