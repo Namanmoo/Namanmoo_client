@@ -1,13 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
-public interface ISceneLoader
-{
-    string ActiveScenePath { get; }
-    void Load(string scenePath);
-}
 
 public sealed class PlayerDeathScreen : MonoBehaviour
 {
@@ -17,8 +10,8 @@ public sealed class PlayerDeathScreen : MonoBehaviour
     private PlayerHealth health;
     private PlayerDeathScreenView view;
     private ISceneLoader sceneLoader;
+    private readonly SceneTransitionGuard sceneTransition = new SceneTransitionGuard();
     private bool deathStarted;
-    private bool sceneLoading;
 
     public bool IsTransitioning { get; private set; }
 
@@ -105,48 +98,17 @@ public sealed class PlayerDeathScreen : MonoBehaviour
 
     public void ReturnToTitle()
     {
-        LoadScene(GameScenes.Title);
+        sceneTransition.Load(sceneLoader, GameScenes.Title);
     }
 
     public void RestartCurrentScene()
     {
-        LoadScene(sceneLoader.ActiveScenePath);
-    }
-
-    private void LoadScene(string scenePath)
-    {
-        if (sceneLoading || string.IsNullOrEmpty(scenePath))
-        {
-            return;
-        }
-
-        sceneLoading = true;
-        Time.timeScale = 1f;
-        sceneLoader.Load(scenePath);
+        sceneTransition.Load(sceneLoader, sceneLoader.ActiveScenePath);
     }
 
     private IEnumerator FadeToBlack()
     {
-        float elapsed = 0f;
-        while (elapsed < FadeDuration)
-        {
-            elapsed += Time.unscaledDeltaTime;
-            view.SetFadeAlpha(elapsed / FadeDuration);
-            yield return null;
-        }
-
-        view.SetFadeAlpha(1f);
-        view.ShowMenu();
+        yield return ScreenFade.Run(view, FadeDuration);
         IsTransitioning = false;
-    }
-
-    private sealed class UnitySceneLoader : ISceneLoader
-    {
-        public string ActiveScenePath => SceneManager.GetActiveScene().path;
-
-        public void Load(string scenePath)
-        {
-            SceneManager.LoadScene(scenePath);
-        }
     }
 }

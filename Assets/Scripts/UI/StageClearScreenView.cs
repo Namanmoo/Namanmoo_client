@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public sealed class StageClearScreenView : MonoBehaviour
+public sealed class StageClearScreenView : MonoBehaviour, IFadeOverlay
 {
     public Image FadeOverlay { get; private set; }
     public GameObject Menu { get; private set; }

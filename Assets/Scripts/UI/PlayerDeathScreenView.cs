@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public sealed class PlayerDeathScreenView : MonoBehaviour
+public sealed class PlayerDeathScreenView : MonoBehaviour, IFadeOverlay
 {
     public Image FadeOverlay { get; private set; }
     public GameObject Menu { get; private set; }
