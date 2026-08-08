@@ -149,6 +149,14 @@ public sealed class ItemHotbarController : MonoBehaviour
         if (weaponController != null)
         {
             weaponController.InitializeInventory(inventory);
+
+            // [프로토타입] 스페이스+화살표 임시 스킬 — 추후 제거 예정
+            PrototypeSkillController skill = GetComponent<PrototypeSkillController>();
+            if (skill == null)
+            {
+                skill = gameObject.AddComponent<PrototypeSkillController>();
+            }
+            skill.InitializeInventory(inventory);
         }
 
         // 손에 든 그림도 같은 인벤토리를 봐야 한다. 이 재연결이 없으면 씬을 저장했다

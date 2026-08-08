@@ -85,6 +85,14 @@ public static class Stage1ItemHotbarSetup
         }
         weaponController.InitializeInventory(inventory);
 
+        // [프로토타입] 스페이스+화살표 임시 스킬 — 추후 제거 예정
+        PrototypeSkillController skill = player.GetComponent<PrototypeSkillController>();
+        if (skill == null)
+        {
+            skill = player.AddComponent<PrototypeSkillController>();
+        }
+        skill.InitializeInventory(inventory);
+
         // 장착한 무기를 손에 그린다. 판정과 같은 인벤토리를 봐야 화면과 실제가 어긋나지 않는다.
         PlayerWeaponVisual weaponVisual = player.GetComponent<PlayerWeaponVisual>();
         if (weaponVisual == null)
