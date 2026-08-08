@@ -41,11 +41,7 @@ public static class PlayerDeathScreenUIFactory
         var menu = new GameObject("Death Menu", typeof(RectTransform));
         menu.transform.SetParent(canvasObject.transform, false);
         RectTransform menuRect = menu.GetComponent<RectTransform>();
-        menuRect.anchorMin = new Vector2(0.5f, 0.5f);
-        menuRect.anchorMax = new Vector2(0.5f, 0.5f);
-        menuRect.pivot = new Vector2(0.5f, 0.5f);
-        menuRect.anchoredPosition = Vector2.zero;
-        menuRect.sizeDelta = new Vector2(620f, 360f);
+        RuntimeMenuUIFactory.SetCenteredRect(menuRect, Vector2.zero, new Vector2(620f, 360f));
 
         Text message = RuntimeMenuUIFactory.CreateText(
             menu.transform,

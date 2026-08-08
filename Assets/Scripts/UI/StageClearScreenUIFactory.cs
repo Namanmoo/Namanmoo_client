@@ -39,11 +39,7 @@ public static class StageClearScreenUIFactory
         var menu = new GameObject("Stage Clear Menu", typeof(RectTransform));
         menu.transform.SetParent(canvasObject.transform, false);
         RectTransform menuRect = menu.GetComponent<RectTransform>();
-        menuRect.anchorMin = new Vector2(0.5f, 0.5f);
-        menuRect.anchorMax = new Vector2(0.5f, 0.5f);
-        menuRect.pivot = new Vector2(0.5f, 0.5f);
-        menuRect.anchoredPosition = Vector2.zero;
-        menuRect.sizeDelta = new Vector2(620f, 220f);
+        RuntimeMenuUIFactory.SetCenteredRect(menuRect, Vector2.zero, new Vector2(620f, 220f));
 
         Text message = RuntimeMenuUIFactory.CreateText(
             menu.transform,
