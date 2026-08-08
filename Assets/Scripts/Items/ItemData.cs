@@ -59,6 +59,12 @@ public sealed class ItemData
     public Sprite Icon { get; }
     public WeaponDefinition Weapon { get; }
 
+    /// <summary>
+    /// 그림 속 축(그립→끝)이 위에서 벗어난 각도. 정의 없이 그림만 든 무기
+    /// (시작 검 등)를 위한 자리다 — 정의가 있으면 정의의 값이 우선한다.
+    /// </summary>
+    public float SpriteAxisDegrees { get; set; }
+
     /// <summary>궤도·효과까지 포함한 무기 사양. 무기가 아닌 아이템이면 null.</summary>
     public WeaponLoadout Loadout { get; }
 

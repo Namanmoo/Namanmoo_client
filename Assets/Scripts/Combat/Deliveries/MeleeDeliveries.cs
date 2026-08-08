@@ -16,6 +16,20 @@ public static class MeleeStrike
             return 0;
         }
 
+        // 무기가 손에 그려져 있으면 즉발 원 판정 대신 접촉 판정 —
+        // 스윙 커브가 움직이는 무기가 적에 닿는 프레임에 때린다.
+        // 사거리·부채꼴은 이제 모션이 정하므로 override 값들은 이 길에서 안 쓴다.
+        PlayerWeaponVisual visual = context.Owner != null
+            ? context.Owner.GetComponent<PlayerWeaponVisual>()
+            : null;
+        if (visual != null && visual.Renderer != null
+            && visual.Renderer.sprite != null && visual.Renderer.enabled)
+        {
+            WeaponContactSweep.Begin(context, visual);
+            return 0;
+        }
+
+        // 무기를 손에 그리지 않는 구성(테스트 등)의 대비책 — 예전 즉발 판정.
         // 근접은 스탯이 아니라 화면에 들린 무기 길이가 범위다.
         float reach = reachOverride > 0f
             ? reachOverride

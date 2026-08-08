@@ -5,12 +5,17 @@ using UnityEngine.InputSystem;
 /// 장착한 무기를 캐릭터 손에 그린다.
 ///
 /// 무기 스프라이트의 pivot이 곧 잡는 자리다(그린 무기는 그리기 화면에서 찍은 그립이
-/// pivot으로 구워져 온다). 평소에는 오른손 자리(왼쪽 끝, 가운데 높이)에 들고,
-/// 칼끝은 몸에서 벗어난 왼쪽 위 대각선을 향한다.
+/// pivot으로 구워져 온다). 스프라이트는 "위로 뻗은" 그림을 기준으로 삼는다.
 ///
-/// 스윙은 그립을 축으로 도는 게 아니라 플레이어 중심을 축으로 호를 그린다.
-/// 그립이 중심 둘레 궤도를 따라 쓸고 지나가고, 칼끝은 늘 바깥을 향한다.
-/// 스프라이트는 "위로 뻗은" 그림을 기준으로 삼는다.
+/// 스윙도 손 위치를 코드가 그리지 않는다 — 공격 클립에 찍은 "Weapon Hand" 커브가
+/// 몸 프레임과 함께 손을 움직이고, 이 컴포넌트는 그 실제 포즈를 읽어 잔상만 남긴다.
+///
+/// Weapon Hand는 몸 애니메이터(Player Visual) 밑에 붙는 축이고, 실제 렌더러는
+/// 그 아래 "Weapon" 자식에 있다. 클립이 "Weapon Hand" 경로로 localPosition(그립
+/// 위치)과 localRotation(칼끝 방향) 커브를 걸면 몸 프레임과 같은 박자로 움직인다 —
+/// 스윙 중이 아닐 때 이 컴포넌트는 축을 건드리지 않고 애니메이터에게 맡긴다.
+/// 무기별 보정(그린 축 기울기)은 Weapon 자식이 맡아서 커브는 무기와 무관하다.
+/// 커브는 WeaponHandRigBuilder가 만드는 리그 프리팹에서 찍는다.
 /// </summary>
 public sealed class PlayerWeaponVisual : MonoBehaviour
 {
@@ -35,14 +40,19 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
     [SerializeField] private Vector3 handOffset = DefaultHandOffset;
 
     private PlayerInventory inventory;
+    private Animator bodyAnimator;
+    private Transform handTransform;
     private SpriteRenderer weaponRenderer;
     private Vector2 aim = DefaultAim;
 
-    // 스윙 중이면 조준 각도 대신 부채꼴을 쓸어 내려간다
+    /// <summary>
+    /// 부모(Player Visual)에 걸린 확대 배율. 오프셋·크기는 플레이어 루트 단위로
+    /// 정의돼 있어서, 커진 부모의 로컬 값으로 쓸 때는 이만큼 나눠야 화면 크기가 같다.
+    /// </summary>
+    private float parentScale = 1f;
+
+    // 잔상을 남기는 구간 — 이 시각까지가 스윙이다
     private float swingEndsAt = float.NegativeInfinity;
-    private float swingDuration;
-    private float swingArc;
-    private float swingBaseAngle;
 
     // 잔상 — 스윙이 쓸고 간 자리에 테마색 실루엣을 남긴다
     private float lastGhostAngle;
@@ -62,6 +72,12 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
 
     public SpriteRenderer Renderer => weaponRenderer;
 
+    /// <summary>스윙 구간인지 — 접촉 판정(WeaponContactSweep)이 이 창에 맞춰 잰다.</summary>
+    public bool IsSwinging => Time.time < swingEndsAt;
+
+    /// <summary>클립 커브가 움직이는 축 — 위치가 그립, 회전 z가 칼끝 방향이다.</summary>
+    public Transform Hand => handTransform;
+
     public Vector2 Aim => aim;
 
     public Vector3 HandOffset
@@ -70,9 +86,9 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
         set
         {
             handOffset = value;
-            if (weaponRenderer != null)
+            if (handTransform != null)
             {
-                weaponRenderer.transform.localPosition = handOffset;
+                handTransform.localPosition = handOffset / parentScale;
             }
         }
     }
@@ -95,13 +111,36 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
             return;
         }
 
-        var handObject = new GameObject("Weapon Hand");
-        handObject.transform.SetParent(transform, false);
-        handObject.transform.localPosition = handOffset;
-        handObject.transform.localScale = new Vector3(WeaponScale, WeaponScale, 1f);
+        // 몸 애니메이터(Player Visual)가 있으면 그 밑에 붙는다 — 클립이 "Weapon Hand"
+        // 경로로 localPosition 커브를 걸어 손 위치를 움직일 수 있는 자리는 거기뿐이다.
+        // 애니메이터 없는 구성(테스트 등)에서는 예전처럼 플레이어 루트에 붙는다.
+        bodyAnimator = GetComponentInChildren<Animator>();
+        Transform parent = bodyAnimator != null ? bodyAnimator.transform : transform;
+        parentScale = parent == transform ? 1f : parent.localScale.x;
 
-        weaponRenderer = handObject.AddComponent<SpriteRenderer>();
+        var handObject = new GameObject("Weapon Hand");
+        handObject.transform.SetParent(parent, false);
+        handObject.transform.localPosition = handOffset / parentScale;
+        handObject.transform.localRotation =
+            Quaternion.Euler(0f, 0f, AngleFor(RestTipDirection));
+        handObject.transform.localScale =
+            new Vector3(WeaponScale / parentScale, WeaponScale / parentScale, 1f);
+        handTransform = handObject.transform;
+
+        // 렌더러는 자식에 — 축(Weapon Hand)은 커브가 움직이고,
+        // 무기별 축 보정은 이 자식의 회전으로만 얹는다
+        var weaponObject = new GameObject("Weapon");
+        weaponObject.transform.SetParent(handTransform, false);
+        weaponRenderer = weaponObject.AddComponent<SpriteRenderer>();
         weaponRenderer.sortingOrder = SortingOrder;
+
+        // Weapon Hand는 애니메이터가 커브 대상을 이미 묶은 뒤에 생길 수 있다.
+        // 다시 묶지 않으면 클립의 "Weapon Hand" 커브가 허공에 떠서
+        // 손이 한 발짝도 움직이지 않는다 — 조용히 실패하는 종류의 버그다.
+        if (bodyAnimator != null)
+        {
+            bodyAnimator.Rebind();
+        }
     }
 
     private void LateUpdate()
@@ -124,8 +163,8 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
     }
 
     /// <summary>
-    /// 근접 공격 순간 무기를 부채꼴로 휘두른다. 그립(pivot)을 축으로
-    /// 조준 각도 ±arc/2 를 쓸어 내려간 뒤 원래 조준 각도로 돌아온다.
+    /// 근접 공격 순간을 알린다. 손의 움직임 자체는 공격 클립의 "Weapon Hand"
+    /// 커브가 맡고, 여기서는 잔상을 남길 구간만 연다.
     /// </summary>
     public void PlaySwing(Vector2 direction, float arcDegrees, float durationSeconds)
     {
@@ -135,12 +174,10 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
         }
 
         SetAim(direction);
-        swingBaseAngle = AngleFor(aim);
-        swingArc = arcDegrees;
-        swingDuration = durationSeconds;
+        EnsureRenderer();
         swingEndsAt = Time.time + durationSeconds;
 
-        lastGhostAngle = SwingAngleAt(0f, swingBaseAngle, swingArc);
+        lastGhostAngle = handTransform.localEulerAngles.z;
         ghostsThisSwing = 0;
     }
 
@@ -154,29 +191,33 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
         // 맨손이면 아무것도 안 보여야 한다
         weaponRenderer.enabled = sprite != null;
 
-        float angle;
-        if (Time.time < swingEndsAt)
+        // 그림 속 축(그립→끝)이 위에서 벗어난 무기는 그만큼 되돌려 끝을 바깥으로 —
+        // 무기별 보정이라 커브가 못 담고, 축이 아닌 렌더러 자식의 회전에 얹는다.
+        // 정의 없이 그림만 든 무기(시작 검 등)는 아이템에 실린 각도를 쓴다.
+        ItemData equipped = inventory?.EquippedItem;
+        WeaponDefinition definition = equipped?.Weapon;
+        float axisOffset = definition != null
+            ? definition.SpriteAxisDegrees
+            : equipped?.SpriteAxisDegrees ?? 0f;
+        weaponRenderer.transform.localRotation = Quaternion.Euler(0f, 0f, -axisOffset);
+
+        // 무기 타입에 맞는 몸 모션으로 갈아끼운다. 교체는 상태 머신을 처음부터
+        // 다시 시작시키므로 장착이 실제로 바뀌어 컨트롤러가 달라질 때만 건드린다.
+        if (bodyAnimator != null)
         {
-            // 그립이 플레이어 중심 둘레 궤도를 따라 호를 쓸어 내려간다
-            float progress = 1f - (swingEndsAt - Time.time) / swingDuration;
-            angle = SwingAngleAt(progress, swingBaseAngle, swingArc);
-            weaponRenderer.transform.localPosition = OrbitPositionAt(angle, handOffset.magnitude);
-        }
-        else
-        {
-            // 쉬는 자세 — 오른손 자리에 들고 칼끝은 왼쪽 위 대각선을 향한다
-            angle = AngleFor(RestTipDirection);
-            weaponRenderer.transform.localPosition = handOffset;
+            RuntimeAnimatorController motion = PlayerMotionLibrary.ControllerFor(definition);
+            if (motion != null && bodyAnimator.runtimeAnimatorController != motion)
+            {
+                bodyAnimator.runtimeAnimatorController = motion;
+            }
         }
 
-        // 그림 속 축(그립→끝)이 위에서 벗어난 무기는 그만큼 되돌려 끝을 바깥으로
-        WeaponDefinition definition = inventory?.EquippedItem?.Weapon;
-        float axisOffset = definition != null ? definition.SpriteAxisDegrees : 0f;
-        weaponRenderer.transform.localRotation = Quaternion.Euler(0f, 0f, angle - axisOffset);
-
+        // 손의 위치·칼끝 방향은 언제나 몸 클립의 "Weapon Hand" 커브가 맡는다.
+        // 여기는 LateUpdate라 애니메이터 평가 뒤이고, 덮어쓰면 찍어둔 키프레임이
+        // 무효화된다. 스윙 구간에는 커브가 만든 실제 포즈를 읽어 잔상만 남긴다.
         if (Time.time < swingEndsAt)
         {
-            MaybeLeaveGhost(angle);
+            MaybeLeaveGhost(handTransform.localEulerAngles.z);
         }
     }
 
@@ -256,24 +297,4 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
         return Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
     }
 
-    /// <summary>
-    /// 해당 각도일 때 그립이 놓이는 궤도 위 자리. 플레이어 중심에서 radius 만큼
-    /// 떨어진 원 위이고, 무기를 같은 각도로 돌리면 칼끝이 정확히 바깥을 향한다.
-    /// 씬 없이 계산만 하므로 EditMode 테스트로 덮는다.
-    /// </summary>
-    public static Vector3 OrbitPositionAt(float angleDegrees, float radius)
-    {
-        return Quaternion.Euler(0f, 0f, angleDegrees) * (Vector3.up * radius);
-    }
-
-    /// <summary>
-    /// 스윙 진행도(0~1)에 따른 각도. +arc/2 에서 -arc/2 로 쓸어 내려간다
-    /// (화면상 시계 방향 — 오른손 베기). 회전 베기는 arc 360으로 한 바퀴가 된다.
-    /// 씬 없이 계산만 하므로 EditMode 테스트로 덮는다.
-    /// </summary>
-    public static float SwingAngleAt(float progress01, float baseAngle, float arcDegrees)
-    {
-        float eased = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(progress01));
-        return baseAngle + arcDegrees * (0.5f - eased);
-    }
 }

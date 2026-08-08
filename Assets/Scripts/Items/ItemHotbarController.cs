@@ -166,7 +166,11 @@ public sealed class ItemHotbarController : MonoBehaviour
         if (startingSwordSprite != null)
         {
             inventory.EnsureUniqueItemInSlotZero(
-                new ItemData("sword", "Sword", ItemKind.Weapon, startingSwordSprite));
+                new ItemData("sword", "Sword", ItemKind.Weapon, startingSwordSprite)
+                {
+                    // 검 그림은 오른쪽으로 누워 있다 — 위(칼끝) 기준으로 -90도
+                    SpriteAxisDegrees = -90f,
+                });
         }
 
         if (startingAxeSprite != null)

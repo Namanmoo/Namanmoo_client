@@ -159,16 +159,19 @@
       }
 
       var buildUrl = "Build";
+      // 로컬 개발용 캐시 무력화 — 브라우저·UnityCache가 예전 빌드 조각을
+      // 물고 있으면 framework/wasm 짝이 어긋나 LinkError로 죽는다
+      var cacheBust = "?v=" + Date.now();
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
-        frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
-        codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+        dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}" + cacheBust,
+        frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}" + cacheBust,
+        codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}" + cacheBust,
 #if MEMORY_FILENAME
-        memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
+        memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}" + cacheBust,
 #endif
 #if SYMBOLS_FILENAME
-        symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
+        symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}" + cacheBust,
 #endif
         streamingAssetsUrl: "StreamingAssets",
         companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
@@ -182,7 +185,7 @@
       }
 
       var script = document.createElement("script");
-      script.src = buildUrl + "/{{{ LOADER_FILENAME }}}";
+      script.src = buildUrl + "/{{{ LOADER_FILENAME }}}" + cacheBust;
       script.onload = function () {
         createUnityInstance(canvas, config, function (progress) {
           var percent = Math.round(progress * 100);
