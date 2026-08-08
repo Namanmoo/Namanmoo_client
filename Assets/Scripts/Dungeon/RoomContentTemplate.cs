@@ -15,20 +15,6 @@ namespace NaManMoo.Dungeon
             return new List<EnemySpawnMarker>(markers);
         }
 
-        /// <summary>호환성 메서드 — Task 2에서 DungeonEncounter와 함께 제거됨.</summary>
-        [System.Obsolete("Use SpawnMarkers() instead")]
-        public List<Vector2> SpawnMarkerPositions()
-        {
-            EnemySpawnMarker[] markers = GetComponentsInChildren<EnemySpawnMarker>();
-            var positions = new List<Vector2>(markers.Length);
-            foreach (EnemySpawnMarker marker in markers)
-            {
-                positions.Add(marker.transform.position);
-            }
-
-            return positions;
-        }
-
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
