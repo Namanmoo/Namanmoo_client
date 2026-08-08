@@ -29,14 +29,6 @@ public static class MeleeStrike
             return 0;
         }
 
-        if (WeaponContactSweep.DebugLogs)
-        {
-            Debug.Log($"[sweep] 즉발 경로로 감 — visual={visual != null}"
-                + $" renderer={visual?.Renderer != null}"
-                + $" sprite={visual?.Renderer?.sprite?.name}"
-                + $" enabled={visual?.Renderer?.enabled}");
-        }
-
         // 무기를 손에 그리지 않는 구성(테스트 등)의 대비책 — 예전 즉발 판정.
         // 근접은 스탯이 아니라 화면에 들린 무기 길이가 범위다.
         float reach = reachOverride > 0f

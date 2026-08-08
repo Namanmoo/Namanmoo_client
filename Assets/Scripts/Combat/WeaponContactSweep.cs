@@ -21,9 +21,6 @@ public sealed class WeaponContactSweep : MonoBehaviour
     /// </summary>
     public const float EnemySearchPadding = 4f;
 
-    /// <summary>판정이 왜 안 뜨는지 쫓는 임시 스위치 — 원인 잡히면 끈다.</summary>
-    public const bool DebugLogs = true;
-
     private DeliveryContext context;
     private PlayerWeaponVisual visual;
     private readonly HashSet<EnemyHealth> struck = new HashSet<EnemyHealth>();
@@ -57,12 +54,6 @@ public sealed class WeaponContactSweep : MonoBehaviour
         sweep.sawSwing = false;
         sweep.startedAt = Time.time;
         sweep.enabled = true;
-
-        if (DebugLogs)
-        {
-            Debug.Log($"[sweep] Begin weapon={context.Weapon?.Id}"
-                + $" sprite={visual.Renderer?.sprite?.name}");
-        }
     }
 
     private void Awake()
@@ -85,11 +76,6 @@ public sealed class WeaponContactSweep : MonoBehaviour
             // 스윙 전이면 잠시 기다린다 — 궤도 실행이 PlaySwing보다 한발 앞선다
             if (sawSwing || Time.time > startedAt + StartGraceSeconds)
             {
-                if (DebugLogs)
-                {
-                    Debug.Log($"[sweep] 종료 sawSwing={sawSwing} struck={struck.Count}");
-                }
-
                 enabled = false;
             }
 
@@ -111,11 +97,6 @@ public sealed class WeaponContactSweep : MonoBehaviour
         WeaponDefinition weapon = context.Weapon;
         float searchRadius = reachFromGrip + weapon.CollisionRadius + EnemySearchPadding;
         var enemies = EffectHelpers.EnemiesInRadius(grip, searchRadius, context.Owner);
-        if (DebugLogs)
-        {
-            Debug.Log($"[sweep] frame shapes={worldShapes.Count} reach={reachFromGrip:F2}"
-                + $" search={searchRadius:F2} 후보={enemies.Count} grip={grip}");
-        }
 
         foreach (EnemyHealth enemy in enemies)
         {
@@ -124,30 +105,11 @@ public sealed class WeaponContactSweep : MonoBehaviour
                 continue;
             }
 
-            bool touched = TouchesEnemy(enemy, weapon);
-            if (DebugLogs)
-            {
-                Debug.Log($"[sweep] {enemy.name} 닿음={touched}"
-                    + $" 적외곽점={CountPoints(enemyShapes)}"
-                    + $" 허용={weapon.CollisionRadius + fallbackHalfWidth:F2}");
-            }
-
-            if (touched)
+            if (TouchesEnemy(enemy, weapon))
             {
                 Strike(enemy, weapon);
             }
         }
-    }
-
-    private static int CountPoints(List<List<Vector2>> shapes)
-    {
-        int count = 0;
-        foreach (List<Vector2> shape in shapes)
-        {
-            count += shape.Count;
-        }
-
-        return count;
     }
 
     /// <summary>
