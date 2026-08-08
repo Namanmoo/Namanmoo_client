@@ -292,6 +292,47 @@ public sealed class DungeonEncounterTests
     }
 
     [Test]
+    public void Spawn_NonNormalRoomWithConfiguredTemplateReturnsNull()
+    {
+        var encounterObject = new GameObject("Encounter");
+        var roomRootObject = new GameObject("Room");
+        var playerObject = new GameObject("Player");
+        var templateObject = new GameObject("Template");
+        EnemyDefinition mushroom = ScriptableObject.CreateInstance<EnemyDefinition>();
+
+        try
+        {
+            RoomContentTemplate template = templateObject.AddComponent<RoomContentTemplate>();
+            var marker = new GameObject("MarkerA");
+            marker.transform.SetParent(templateObject.transform, false);
+            marker.transform.localPosition = new Vector3(3f, 4f, 0f);
+            marker.AddComponent<EnemySpawnMarker>();
+
+            DungeonEncounter encounter = encounterObject.AddComponent<DungeonEncounter>();
+            encounter.Configure(mushroom, null);
+            encounter.ConfigureRoomTemplates(new[] { template });
+
+            RoomShape shape = RoomShape.Build(101, Doors.North | Doors.South);
+            var room = new DungeonRoom(
+                Vector2Int.zero, RoomKind.Treasure, Doors.North | Doors.South, 2);
+
+            Stage1EncounterGate gate = encounter.Spawn(
+                roomRootObject.transform, playerObject.transform, shape, room, 202);
+
+            Assert.That(gate, Is.Null);
+            Assert.That(roomRootObject.GetComponentsInChildren<EnemyHealth>(), Is.Empty);
+        }
+        finally
+        {
+            Object.DestroyImmediate(encounterObject);
+            Object.DestroyImmediate(roomRootObject);
+            Object.DestroyImmediate(playerObject);
+            Object.DestroyImmediate(templateObject);
+            Object.DestroyImmediate(mushroom);
+        }
+    }
+
+    [Test]
     public void Spawn_NormalRoomBuildsGuaranteedContactAndRangedEnemies()
     {
         var encounterObject = new GameObject("Encounter");

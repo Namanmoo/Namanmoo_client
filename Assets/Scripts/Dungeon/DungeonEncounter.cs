@@ -184,6 +184,11 @@ namespace NaManMoo.Dungeon
             DungeonRoom room,
             int roomSeed)
         {
+            if (room.Kind != RoomKind.Normal)
+            {
+                return null;
+            }
+
             RoomContentTemplate template = SelectTemplate(normalRoomTemplates, roomSeed);
             if (template == null)
             {
