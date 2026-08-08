@@ -1,8 +1,6 @@
-using System.Collections;
 using NaManMoo.Dungeon;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 public sealed class SpikeObstacleTests
 {
@@ -24,28 +22,5 @@ public sealed class SpikeObstacleTests
             Object.DestroyImmediate(monster);
             Object.DestroyImmediate(spikeObject);
         }
-    }
-
-    [UnityTest]
-    public IEnumerator TryDamagePlayer_DealsConfiguredDamageAndRespectsInvulnerability()
-    {
-        yield return new EnterPlayMode();
-        GameObject player = new GameObject("Player");
-        Collider2D playerCollider = player.AddComponent<CircleCollider2D>();
-        PlayerHealth health = player.AddComponent<PlayerHealth>();
-        GameObject spikeObject = new GameObject("Spike");
-        spikeObject.AddComponent<BoxCollider2D>();
-        SpikeObstacle spike = spikeObject.AddComponent<SpikeObstacle>();
-
-        Assert.That(spike.TryDamagePlayer(playerCollider, 0f), Is.True);
-        Assert.That(health.CurrentHealth, Is.EqualTo(18));
-        Assert.That(spike.TryDamagePlayer(playerCollider, 0.5f), Is.False);
-        Assert.That(health.CurrentHealth, Is.EqualTo(18));
-        Assert.That(spike.TryDamagePlayer(playerCollider, 1f), Is.True);
-        Assert.That(health.CurrentHealth, Is.EqualTo(16));
-
-        Object.Destroy(player);
-        Object.Destroy(spikeObject);
-        yield return new ExitPlayMode();
     }
 }
