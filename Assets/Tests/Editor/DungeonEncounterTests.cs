@@ -333,6 +333,201 @@ public sealed class DungeonEncounterTests
     }
 
     [Test]
+    public void Spawn_MarkerWithFixedDefinitionAlwaysSpawnsThatDefinition()
+    {
+        var encounterObject = new GameObject("Encounter");
+        var roomRootObject = new GameObject("Room");
+        var playerObject = new GameObject("Player");
+        var templateObject = new GameObject("Template");
+        Sprite pooledSprite = Sprite.Create(
+            Texture2D.whiteTexture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f), 1f);
+        Sprite fixedSprite = Sprite.Create(
+            Texture2D.blackTexture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f), 1f);
+        EnemyDefinition pooledMushroom = ScriptableObject.CreateInstance<EnemyDefinition>();
+        EnemyDefinition fixedEnemy = ScriptableObject.CreateInstance<EnemyDefinition>();
+
+        try
+        {
+            pooledMushroom.Configure(
+                "dungeon-mushroom", "Dungeon Mushroom", pooledSprite, null,
+                EnemyBehaviorType.ChaseContact, 5, 3.5f, 6, 0.75f, 1f, 0f, 0.01f, 0.01f);
+            fixedEnemy.Configure(
+                "dungeon-fixed", "Fixed Enemy", fixedSprite, null,
+                EnemyBehaviorType.ChaseContact, 9, 3.5f, 6, 0.75f, 1f, 0f, 0.01f, 0.01f);
+
+            RoomContentTemplate template = templateObject.AddComponent<RoomContentTemplate>();
+            var markerObject = new GameObject("FixedMarker");
+            markerObject.transform.SetParent(templateObject.transform, false);
+            markerObject.transform.localPosition = new Vector3(5f, 0f, 0f);
+            EnemySpawnMarker marker = markerObject.AddComponent<EnemySpawnMarker>();
+            marker.Configure(fixedEnemy);
+
+            DungeonEncounter encounter = encounterObject.AddComponent<DungeonEncounter>();
+            encounter.Configure(pooledMushroom, null);
+            encounter.ConfigureRoomTemplates(new[] { template });
+
+            RoomShape shape = RoomShape.Build(101, Doors.North | Doors.South);
+            var room = new DungeonRoom(
+                Vector2Int.zero, RoomKind.Normal, Doors.North | Doors.South, 2);
+
+            Stage1EncounterGate gate = encounter.Spawn(
+                roomRootObject.transform, playerObject.transform, shape, room, 202);
+
+            Assert.That(gate, Is.Not.Null);
+            EnemyHealth[] enemies = roomRootObject.GetComponentsInChildren<EnemyHealth>();
+            Assert.That(enemies, Has.Length.EqualTo(1));
+            Assert.That(enemies[0].MaxHealth, Is.EqualTo(9));
+            Assert.That(enemies[0].gameObject.name, Does.StartWith("Fixed Enemy"));
+        }
+        finally
+        {
+            Object.DestroyImmediate(encounterObject);
+            Object.DestroyImmediate(roomRootObject);
+            Object.DestroyImmediate(playerObject);
+            Object.DestroyImmediate(templateObject);
+            Object.DestroyImmediate(pooledMushroom);
+            Object.DestroyImmediate(fixedEnemy);
+            Object.DestroyImmediate(pooledSprite);
+            Object.DestroyImmediate(fixedSprite);
+        }
+    }
+
+    [Test]
+    public void Spawn_MixedFixedAndUnfixedMarkersEachResolveCorrectly()
+    {
+        var encounterObject = new GameObject("Encounter");
+        var roomRootObject = new GameObject("Room");
+        var playerObject = new GameObject("Player");
+        var templateObject = new GameObject("Template");
+        Sprite pooledSprite = Sprite.Create(
+            Texture2D.whiteTexture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f), 1f);
+        Sprite fixedSprite = Sprite.Create(
+            Texture2D.blackTexture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f), 1f);
+        EnemyDefinition pooledMushroom = ScriptableObject.CreateInstance<EnemyDefinition>();
+        EnemyDefinition fixedEnemy = ScriptableObject.CreateInstance<EnemyDefinition>();
+
+        try
+        {
+            pooledMushroom.Configure(
+                "dungeon-mushroom", "Dungeon Mushroom", pooledSprite, null,
+                EnemyBehaviorType.ChaseContact, 5, 3.5f, 6, 0.75f, 1f, 0f, 0.01f, 0.01f);
+            fixedEnemy.Configure(
+                "dungeon-fixed", "Fixed Enemy", fixedSprite, null,
+                EnemyBehaviorType.ChaseContact, 9, 3.5f, 6, 0.75f, 1f, 0f, 0.01f, 0.01f);
+
+            RoomContentTemplate template = templateObject.AddComponent<RoomContentTemplate>();
+            var fixedMarkerObject = new GameObject("FixedMarker");
+            fixedMarkerObject.transform.SetParent(templateObject.transform, false);
+            fixedMarkerObject.transform.localPosition = new Vector3(5f, 0f, 0f);
+            EnemySpawnMarker fixedMarker = fixedMarkerObject.AddComponent<EnemySpawnMarker>();
+            fixedMarker.Configure(fixedEnemy);
+
+            var randomMarkerObject = new GameObject("RandomMarker");
+            randomMarkerObject.transform.SetParent(templateObject.transform, false);
+            randomMarkerObject.transform.localPosition = new Vector3(-5f, 0f, 0f);
+            randomMarkerObject.AddComponent<EnemySpawnMarker>();
+
+            DungeonEncounter encounter = encounterObject.AddComponent<DungeonEncounter>();
+            encounter.Configure(pooledMushroom, null);
+            encounter.ConfigureRoomTemplates(new[] { template });
+
+            RoomShape shape = RoomShape.Build(101, Doors.North | Doors.South);
+            var room = new DungeonRoom(
+                Vector2Int.zero, RoomKind.Normal, Doors.North | Doors.South, 2);
+
+            Stage1EncounterGate gate = encounter.Spawn(
+                roomRootObject.transform, playerObject.transform, shape, room, 202);
+
+            Assert.That(gate, Is.Not.Null);
+            EnemyHealth[] enemies = roomRootObject.GetComponentsInChildren<EnemyHealth>();
+            Assert.That(enemies, Has.Length.EqualTo(2));
+            int fixedCount = 0;
+            int pooledCount = 0;
+            foreach (EnemyHealth enemy in enemies)
+            {
+                if (enemy.MaxHealth == 9)
+                {
+                    fixedCount++;
+                }
+                else if (enemy.MaxHealth == 5)
+                {
+                    pooledCount++;
+                }
+            }
+
+            Assert.That(fixedCount, Is.EqualTo(1));
+            Assert.That(pooledCount, Is.EqualTo(1));
+        }
+        finally
+        {
+            Object.DestroyImmediate(encounterObject);
+            Object.DestroyImmediate(roomRootObject);
+            Object.DestroyImmediate(playerObject);
+            Object.DestroyImmediate(templateObject);
+            Object.DestroyImmediate(pooledMushroom);
+            Object.DestroyImmediate(fixedEnemy);
+            Object.DestroyImmediate(pooledSprite);
+            Object.DestroyImmediate(fixedSprite);
+        }
+    }
+
+    [Test]
+    public void Spawn_UnfixedMarkerSkippedWhenPoolEmptyButFixedMarkerStillSpawns()
+    {
+        var encounterObject = new GameObject("Encounter");
+        var roomRootObject = new GameObject("Room");
+        var playerObject = new GameObject("Player");
+        var templateObject = new GameObject("Template");
+        Sprite fixedSprite = Sprite.Create(
+            Texture2D.blackTexture, new Rect(0f, 0f, 1f, 1f), new Vector2(0.5f, 0.5f), 1f);
+        EnemyDefinition fixedEnemy = ScriptableObject.CreateInstance<EnemyDefinition>();
+
+        try
+        {
+            fixedEnemy.Configure(
+                "dungeon-fixed", "Fixed Enemy", fixedSprite, null,
+                EnemyBehaviorType.ChaseContact, 9, 3.5f, 6, 0.75f, 1f, 0f, 0.01f, 0.01f);
+
+            RoomContentTemplate template = templateObject.AddComponent<RoomContentTemplate>();
+            var fixedMarkerObject = new GameObject("FixedMarker");
+            fixedMarkerObject.transform.SetParent(templateObject.transform, false);
+            fixedMarkerObject.transform.localPosition = new Vector3(5f, 0f, 0f);
+            EnemySpawnMarker fixedMarker = fixedMarkerObject.AddComponent<EnemySpawnMarker>();
+            fixedMarker.Configure(fixedEnemy);
+
+            var randomMarkerObject = new GameObject("RandomMarker");
+            randomMarkerObject.transform.SetParent(templateObject.transform, false);
+            randomMarkerObject.transform.localPosition = new Vector3(-5f, 0f, 0f);
+            randomMarkerObject.AddComponent<EnemySpawnMarker>();
+
+            DungeonEncounter encounter = encounterObject.AddComponent<DungeonEncounter>();
+            encounter.Configure(new EnemyDefinition[0], null);
+            encounter.ConfigureRoomTemplates(new[] { template });
+
+            RoomShape shape = RoomShape.Build(101, Doors.North | Doors.South);
+            var room = new DungeonRoom(
+                Vector2Int.zero, RoomKind.Normal, Doors.North | Doors.South, 2);
+
+            Stage1EncounterGate gate = encounter.Spawn(
+                roomRootObject.transform, playerObject.transform, shape, room, 202);
+
+            Assert.That(gate, Is.Not.Null);
+            EnemyHealth[] enemies = roomRootObject.GetComponentsInChildren<EnemyHealth>();
+            Assert.That(enemies, Has.Length.EqualTo(1));
+            Assert.That(enemies[0].MaxHealth, Is.EqualTo(9));
+        }
+        finally
+        {
+            Object.DestroyImmediate(encounterObject);
+            Object.DestroyImmediate(roomRootObject);
+            Object.DestroyImmediate(playerObject);
+            Object.DestroyImmediate(templateObject);
+            Object.DestroyImmediate(fixedEnemy);
+            Object.DestroyImmediate(fixedSprite);
+        }
+    }
+
+    [Test]
     public void Spawn_NormalRoomBuildsGuaranteedContactAndRangedEnemies()
     {
         var encounterObject = new GameObject("Encounter");

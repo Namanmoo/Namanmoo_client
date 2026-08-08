@@ -199,21 +199,39 @@ namespace NaManMoo.Dungeon
             RoomContentTemplate instance = Instantiate(template, roomRoot);
             instance.transform.localPosition = Vector3.zero;
 
-            List<Vector2> spots = instance.SpawnMarkerPositions();
-            EnemyDefinition[] definitions = SelectDefinitions(
-                normalEnemyDefinitions,
-                spots.Count,
-                roomSeed);
-            if (definitions.Length == 0)
+            List<EnemySpawnMarker> markers = instance.SpawnMarkers();
+
+            int randomCount = 0;
+            foreach (EnemySpawnMarker marker in markers)
             {
-                return null;
+                if (marker.FixedEnemyDefinition == null)
+                {
+                    randomCount++;
+                }
             }
 
-            var enemies = new List<EnemyHealth>(spots.Count);
+            EnemyDefinition[] randomDefinitions = SelectDefinitions(
+                normalEnemyDefinitions,
+                randomCount,
+                roomSeed);
+
+            var enemies = new List<EnemyHealth>(markers.Count);
             var instancesByDefinition = new Dictionary<string, int>();
-            for (int i = 0; i < spots.Count; i++)
+            int randomIndex = 0;
+            foreach (EnemySpawnMarker marker in markers)
             {
-                EnemyDefinition definition = definitions[i];
+                EnemyDefinition definition = marker.FixedEnemyDefinition;
+                if (definition == null)
+                {
+                    // 랜덤 풀이 모자라면 이 마커는 그냥 비운다 — 억지로 채우지 않는다
+                    if (randomIndex >= randomDefinitions.Length)
+                    {
+                        continue;
+                    }
+
+                    definition = randomDefinitions[randomIndex++];
+                }
+
                 string key = string.IsNullOrEmpty(definition.Id)
                     ? definition.DisplayName
                     : definition.Id;
@@ -229,11 +247,11 @@ namespace NaManMoo.Dungeon
                     new EnemySpawnRequest(
                         roomRoot,
                         player,
-                        spots[i],
+                        marker.transform.position,
                         $"{baseName} {nextCount}")));
             }
 
-            return enemies;
+            return enemies.Count > 0 ? enemies : null;
         }
     }
 }
