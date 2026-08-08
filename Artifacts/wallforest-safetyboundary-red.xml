@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="9" result="Failed(Child)" total="9" passed="7" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-07 16:26:35Z" end-time="2026-08-07 16:26:35Z" duration="0.0814419">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="555" result="Failed" site="Child" start-time="2026-08-07 16:26:35Z" end-time="2026-08-07 16:26:35Z" duration="0.081442" total="9" passed="7" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1658" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="555" result="Failed" site="Child" start-time="2026-08-07 16:26:35Z" end-time="2026-08-07 16:26:35Z" duration="0.070179" total="9" passed="7" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="25948" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestFixture" id="1575" name="WallForestDecoratorTests" fullname="WallForestDecoratorTests" classname="WallForestDecoratorTests" runstate="Runnable" testcasecount="9" result="Failed" site="Child" start-time="2026-08-07 16:26:35Z" end-time="2026-08-07 16:26:35Z" duration="0.063357" total="9" passed="7" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-case id="1579" name="EastEdgeTilesCoverTheWallLengthWithoutGapsOrOverlap" fullname="WallForestDecoratorTests.EastEdgeTilesCoverTheWallLengthWithoutGapsOrOverlap" methodname="EastEdgeTilesCoverTheWallLengthWithoutGapsOrOverlap" classname="WallForestDecoratorTests" runstate="Runnable" seed="1502174892" result="Passed" start-time="2026-08-07 16:26:35Z" end-time="2026-08-07 16:26:35Z" duration="0.035233" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1583" name="EdgeTileHeightsVaryInsteadOfBeingPerfectlyUniform" fullname="WallForestDecoratorTests.EdgeTileHeightsVaryInsteadOfBeingPerfectlyUniform" methodname="EdgeTileHeightsVaryInsteadOfBeingPerfectlyUniform" classname="WallForestDecoratorTests" runstate="Runnable" seed="1832847958" result="Passed" start-time="2026-08-07 16:26:35Z" end-time="2026-08-07 16:26:35Z" duration="0.002003" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1580" name="EdgeTilesUseTheSpriteMatchingTheirSide" fullname="WallForestDecoratorTests.EdgeTilesUseTheSpriteMatchingTheirSide" methodname="EdgeTilesUseTheSpriteMatchingTheirSide" classname="WallForestDecoratorTests" runstate="Runnable" seed="19383649" result="Passed" start-time="2026-08-07 16:26:35Z" end-time="2026-08-07 16:26:35Z" duration="0.001101" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1581" name="NoEdgeTileSitsInsideADoorGap" fullname="WallForestDecoratorTests.NoEdgeTileSitsInsideADoorGap" methodname="NoEdgeTileSitsInsideADoorGap" classname="WallForestDecoratorTests" runstate="Runnable" seed="95340720" result="Passed" start-time="2026-08-07 16:26:35Z" end-time="2026-08-07 16:26:35Z" duration="0.001430" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1578" name="NorthEdgeTilesAreOffsetOutwardToAlignWithTheSafetyBoundary" fullname="WallForestDecoratorTests.NorthEdgeTilesAreOffsetOutwardToAlignWithTheSafetyBoundary" methodname="NorthEdgeTilesAreOffsetOutwardToAlignWithTheSafetyBoundary" classname="WallForestDecoratorTests" runstate="Runnable" seed="28592896" result="Failed" start-time="2026-08-07 16:26:35Z" end-time="2026-08-07 16:26:35Z" duration="0.002069" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  북쪽 나무 타일이 충돌 경계가 아니라 방 경계선에 있다 (y=14.409)
+  Expected: greater than 15.0f
+  But was:  14.4090004f
+]]></message>
+            <stack-trace><![CDATA[at WallForestDecoratorTests.NorthEdgeTilesAreOffsetOutwardToAlignWithTheSafetyBoundary () [0x0007c] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\WallForestDecoratorTests.cs:128
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1577" name="NorthEdgeTilesCoverTheWallLengthWithoutGapsOrOverlap" fullname="WallForestDecoratorTests.NorthEdgeTilesCoverTheWallLengthWithoutGapsOrOverlap" methodname="NorthEdgeTilesCoverTheWallLengthWithoutGapsOrOverlap" classname="WallForestDecoratorTests" runstate="Runnable" seed="53523623" result="Passed" start-time="2026-08-07 16:26:35Z" end-time="2026-08-07 16:26:35Z" duration="0.000911" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1584" name="NorthEdgeTilesStillCoverTheWallLengthAfterVariationIsApplied" fullname="WallForestDecoratorTests.NorthEdgeTilesStillCoverTheWallLengthAfterVariationIsApplied" methodname="NorthEdgeTilesStillCoverTheWallLengthAfterVariationIsApplied" classname="WallForestDecoratorTests" runstate="Runnable" seed="1643644745" result="Passed" start-time="2026-08-07 16:26:35Z" end-time="2026-08-07 16:26:35Z" duration="0.000813" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1576" name="PlacesACornerSpriteAtEachOfTheFourRoomCorners" fullname="WallForestDecoratorTests.PlacesACornerSpriteAtEachOfTheFourRoomCorners" methodname="PlacesACornerSpriteAtEachOfTheFourRoomCorners" classname="WallForestDecoratorTests" runstate="Runnable" seed="488418393" result="Failed" start-time="2026-08-07 16:26:35Z" end-time="2026-08-07 16:26:35Z" duration="0.004466" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <failure>
+            <message><![CDATA[  Expected: (-25.00, 18.00, 0.00)
+  But was:  (-22.00, 15.00, 0.00)
+]]></message>
+            <stack-trace><![CDATA[at WallForestDecoratorTests.AssertCorner (UnityEngine.Transform forest, System.String name, System.Single x, System.Single y, System.String spriteName) [0x00053] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\WallForestDecoratorTests.cs:47
+at WallForestDecoratorTests.PlacesACornerSpriteAtEachOfTheFourRoomCorners () [0x00047] in C:\Users\myong\NaManMoo\Namanmoo_client\Assets\Tests\Editor\WallForestDecoratorTests.cs:25
+]]></stack-trace>
+          </failure>
+        </test-case>
+        <test-case id="1582" name="SameRoomSeedProducesTheSameForestLayout" fullname="WallForestDecoratorTests.SameRoomSeedProducesTheSameForestLayout" methodname="SameRoomSeedProducesTheSameForestLayout" classname="WallForestDecoratorTests" runstate="Runnable" seed="1931589195" result="Passed" start-time="2026-08-07 16:26:35Z" end-time="2026-08-07 16:26:35Z" duration="0.002213" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

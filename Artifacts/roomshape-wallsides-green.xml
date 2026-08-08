@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="16" result="Passed" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.1847398">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="546" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.184740" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1648" name="NaManMoo.EditorTests.dll" fullname="C:/Users/myong/NaManMoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="546" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.174508" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="12116" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1434" name="RoomShapeTests" fullname="RoomShapeTests" classname="RoomShapeTests" runstate="Runnable" testcasecount="16" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.169050" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1447" name="ARoomWithADoorHasTwoWallSegmentsOnThatSide" fullname="RoomShapeTests.ARoomWithADoorHasTwoWallSegmentsOnThatSide" methodname="ARoomWithADoorHasTwoWallSegmentsOnThatSide" classname="RoomShapeTests" runstate="Runnable" seed="472505071" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.010323" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1446" name="DifferentSeedsGiveDifferentWalls" fullname="RoomShapeTests.DifferentSeedsGiveDifferentWalls" methodname="DifferentSeedsGiveDifferentWalls" classname="RoomShapeTests" runstate="Runnable" seed="386596068" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.000465" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1440" name="DoorOpeningIsTheExpectedWidth" fullname="RoomShapeTests.DoorOpeningIsTheExpectedWidth" methodname="DoorOpeningIsTheExpectedWidth" classname="RoomShapeTests" runstate="Runnable" seed="718355664" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.000967" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1437" name="DoorsExistOnlyWhereRequested" fullname="RoomShapeTests.DoorsExistOnlyWhereRequested" methodname="DoorsExistOnlyWhereRequested" classname="RoomShapeTests" runstate="Runnable" seed="1680342611" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.001399" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1438" name="DoorsSitAtTheCentreOfTheirSide" fullname="RoomShapeTests.DoorsSitAtTheCentreOfTheirSide" methodname="DoorsSitAtTheCentreOfTheirSide" classname="RoomShapeTests" runstate="Runnable" seed="452383561" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.000334" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1435" name="EveryRoomHasTheSameBounds" fullname="RoomShapeTests.EveryRoomHasTheSameBounds" methodname="EveryRoomHasTheSameBounds" classname="RoomShapeTests" runstate="Runnable" seed="1006531290" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.002351" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1444" name="FloorCoversTheWholeRoomIncludingDoorways" fullname="RoomShapeTests.FloorCoversTheWholeRoomIncludingDoorways" methodname="FloorCoversTheWholeRoomIncludingDoorways" classname="RoomShapeTests" runstate="Runnable" seed="617439010" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.000483" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1442" name="NoWallPointBlocksADoorway" fullname="RoomShapeTests.NoWallPointBlocksADoorway" methodname="NoWallPointBlocksADoorway" classname="RoomShapeTests" runstate="Runnable" seed="1008163146" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.109155" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1439" name="OppositeDoorsLineUpBetweenNeighbouringRooms" fullname="RoomShapeTests.OppositeDoorsLineUpBetweenNeighbouringRooms" methodname="OppositeDoorsLineUpBetweenNeighbouringRooms" classname="RoomShapeTests" runstate="Runnable" seed="317467192" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.000363" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1450" name="OppositeMapsEachSideToItsCounterpart" fullname="RoomShapeTests.OppositeMapsEachSideToItsCounterpart" methodname="OppositeMapsEachSideToItsCounterpart" classname="RoomShapeTests" runstate="Runnable" seed="1535515943" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.000455" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1436" name="RoomIsBiggerThanTheCameraView" fullname="RoomShapeTests.RoomIsBiggerThanTheCameraView" methodname="RoomIsBiggerThanTheCameraView" classname="RoomShapeTests" runstate="Runnable" seed="274305113" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.001970" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1445" name="SameSeedGivesTheSameWalls" fullname="RoomShapeTests.SameSeedGivesTheSameWalls" methodname="SameSeedGivesTheSameWalls" classname="RoomShapeTests" runstate="Runnable" seed="939792155" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.000563" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1443" name="WallIsFlatBesideEachDoor" fullname="RoomShapeTests.WallIsFlatBesideEachDoor" methodname="WallIsFlatBesideEachDoor" classname="RoomShapeTests" runstate="Runnable" seed="1715906676" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.001308" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1448" name="WallSidesAlignOneToOneWithWallsWhenNoDoorsExist" fullname="RoomShapeTests.WallSidesAlignOneToOneWithWallsWhenNoDoorsExist" methodname="WallSidesAlignOneToOneWithWallsWhenNoDoorsExist" classname="RoomShapeTests" runstate="Runnable" seed="683245983" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.000724" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1449" name="WallSidesSplitAlongsideTheirWallWhenThatSideHasADoor" fullname="RoomShapeTests.WallSidesSplitAlongsideTheirWallWhenThatSideHasADoor" methodname="WallSidesSplitAlongsideTheirWallWhenThatSideHasADoor" classname="RoomShapeTests" runstate="Runnable" seed="1526946992" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.000124" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1441" name="WallsNeverPokeOutsideTheBounds" fullname="RoomShapeTests.WallsNeverPokeOutsideTheBounds" methodname="WallsNeverPokeOutsideTheBounds" classname="RoomShapeTests" runstate="Runnable" seed="1596237080" result="Passed" start-time="2026-08-07 14:05:41Z" end-time="2026-08-07 14:05:41Z" duration="0.025217" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: C:/Users/myong/AppData/LocalLow/DefaultCompany/NaManMoo\TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
