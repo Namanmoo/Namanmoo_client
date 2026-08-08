@@ -83,6 +83,7 @@ public static class DungeonSceneBuilder
             player.transform,
             normalEnemyDefinitions,
             sultanBossDefinition);
+        CreateStageClearScreen(runner);
         CreateMinimap(runner);
         CreateBgmDirector(bgm, runner);
 
@@ -176,6 +177,13 @@ public static class DungeonSceneBuilder
         runner.ConfigurePlayer(player, dungeonFloor: 1);
         runner.SetEncounter(encounter);
         return runner;
+    }
+
+    private static void CreateStageClearScreen(DungeonRunner runner)
+    {
+        StageClearScreenView view = StageClearScreenUIFactory.Create(null);
+        StageClearScreen screen = view.gameObject.AddComponent<StageClearScreen>();
+        screen.Configure(runner, view);
     }
 
     private static void CreateMinimap(DungeonRunner runner)
