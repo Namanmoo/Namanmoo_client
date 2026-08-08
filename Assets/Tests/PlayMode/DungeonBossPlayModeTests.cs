@@ -125,4 +125,65 @@ public sealed class DungeonBossPlayModeTests
         Assert.That(Object.FindFirstObjectByType<ChaseContactEnemyController>(), Is.Not.Null,
             "일반 방에 크랩이 나오지 않았다");
     }
+
+    [UnityTest]
+    public IEnumerator KillingTheBossFiresBossDefeatedEventExactlyOnce()
+    {
+        (int seed, DungeonRoom boss) = DungeonBossRoomHarness.FindFloorWithBoss();
+        Assert.That(boss, Is.Not.Null, "보스방이 있는 층을 찾지 못했다");
+
+        harness.Runner.Configure(seed, 2, harness.Player.transform);
+        harness.Runner.Begin();
+        yield return null;
+
+        yield return harness.WalkTo(boss.Cell);
+        Assert.That(harness.Runner.CurrentCell, Is.EqualTo(boss.Cell), "보스방까지 가지 못했다");
+
+        int fireCount = 0;
+        harness.Runner.BossDefeated += () => fireCount++;
+
+        harness.KillEverything();
+        yield return null;
+
+        Assert.That(fireCount, Is.EqualTo(1));
+    }
+
+    [UnityTest]
+    public IEnumerator ReenteringAClearedBossRoomDoesNotRefireBossDefeated()
+    {
+        (int seed, DungeonRoom boss) = DungeonBossRoomHarness.FindFloorWithBoss();
+        Assert.That(boss, Is.Not.Null, "보스방이 있는 층을 찾지 못했다");
+
+        harness.Runner.Configure(seed, 2, harness.Player.transform);
+        harness.Runner.Begin();
+        yield return null;
+
+        yield return harness.WalkTo(boss.Cell);
+        harness.KillEverything();
+        yield return null;
+        Assert.That(harness.Runner.IsCleared(boss.Cell), Is.True);
+
+        int fireCount = 0;
+        harness.Runner.BossDefeated += () => fireCount++;
+
+        Doors exitSide = Doors.None;
+        foreach (Doors side in new[] { Doors.North, Doors.South, Doors.East, Doors.West })
+        {
+            if (harness.Runner.Layout.RoomAt(boss.Cell).Doors.HasFlag(side))
+            {
+                exitSide = side;
+                break;
+            }
+        }
+
+        Assert.That(exitSide, Is.Not.EqualTo(Doors.None), "보스방에 나갈 문이 없다");
+
+        harness.Pass(exitSide);
+        yield return null;
+        harness.Pass(RoomShape.Opposite(exitSide));
+        yield return null;
+
+        Assert.That(harness.Runner.CurrentCell, Is.EqualTo(boss.Cell));
+        Assert.That(fireCount, Is.EqualTo(0));
+    }
 }

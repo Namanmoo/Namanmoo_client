@@ -329,6 +329,24 @@ public sealed class DungeonRunnerPlayModeTests
         }
     }
 
+    [UnityTest]
+    public IEnumerator ClearingANonBossRoomDoesNotFireBossDefeated()
+    {
+        var encounter = new TestEncounter(enemyCount: 1);
+        runner.SetEncounter(encounter);
+        runner.Begin();
+        yield return null;
+
+        int fireCount = 0;
+        runner.BossDefeated += () => fireCount++;
+
+        encounter.KillAll();
+        yield return null;
+
+        Assert.That(runner.IsCleared(runner.CurrentCell), Is.True);
+        Assert.That(fireCount, Is.EqualTo(0));
+    }
+
     /// <summary>
     /// 적을 원하는 만큼만 내놓고 마음대로 죽일 수 있는 인카운터. 크랩 스프라이트나
     /// 실제 AI 없이 잠금 규칙만 확인한다.
