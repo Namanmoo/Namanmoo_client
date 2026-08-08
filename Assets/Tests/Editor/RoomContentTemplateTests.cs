@@ -6,7 +6,7 @@ using UnityEngine;
 public sealed class RoomContentTemplateTests
 {
     [Test]
-    public void SpawnMarkerPositions_ReturnsWorldPositionOfEveryMarkerChild()
+    public void SpawnMarkers_ReturnsEveryMarkerChildWithWorldPosition()
     {
         var root = new GameObject("Template");
         RoomContentTemplate template = root.AddComponent<RoomContentTemplate>();
@@ -27,9 +27,15 @@ public sealed class RoomContentTemplateTests
 
         try
         {
-            List<Vector2> positions = template.SpawnMarkerPositions();
+            List<EnemySpawnMarker> markers = template.SpawnMarkers();
 
-            Assert.That(positions, Has.Count.EqualTo(2));
+            Assert.That(markers, Has.Count.EqualTo(2));
+            var positions = new List<Vector2>();
+            foreach (EnemySpawnMarker marker in markers)
+            {
+                positions.Add(marker.transform.position);
+            }
+
             Assert.That(positions, Does.Contain(new Vector2(12f, 3f)));
             Assert.That(positions, Does.Contain(new Vector2(6f, 1f)));
         }
@@ -40,18 +46,66 @@ public sealed class RoomContentTemplateTests
     }
 
     [Test]
-    public void SpawnMarkerPositions_NoMarkersReturnsEmpty()
+    public void SpawnMarkers_NoMarkersReturnsEmpty()
     {
         var root = new GameObject("Template");
         RoomContentTemplate template = root.AddComponent<RoomContentTemplate>();
 
         try
         {
-            Assert.That(template.SpawnMarkerPositions(), Is.Empty);
+            Assert.That(template.SpawnMarkers(), Is.Empty);
         }
         finally
         {
             Object.DestroyImmediate(root);
+        }
+    }
+
+    [Test]
+    public void SpawnMarkers_DefaultFixedEnemyDefinitionIsNull()
+    {
+        var root = new GameObject("Template");
+        RoomContentTemplate template = root.AddComponent<RoomContentTemplate>();
+        var markerA = new GameObject("MarkerA");
+        markerA.transform.SetParent(root.transform, false);
+        markerA.AddComponent<EnemySpawnMarker>();
+
+        try
+        {
+            List<EnemySpawnMarker> markers = template.SpawnMarkers();
+
+            Assert.That(markers, Has.Count.EqualTo(1));
+            Assert.That(markers[0].FixedEnemyDefinition, Is.Null);
+        }
+        finally
+        {
+            Object.DestroyImmediate(root);
+        }
+    }
+
+    [Test]
+    public void SpawnMarkers_ReturnsMarkerWithFixedEnemyDefinitionSet()
+    {
+        var root = new GameObject("Template");
+        RoomContentTemplate template = root.AddComponent<RoomContentTemplate>();
+        EnemyDefinition fixedDefinition = ScriptableObject.CreateInstance<EnemyDefinition>();
+
+        var markerA = new GameObject("MarkerA");
+        markerA.transform.SetParent(root.transform, false);
+        EnemySpawnMarker marker = markerA.AddComponent<EnemySpawnMarker>();
+        marker.Configure(fixedDefinition);
+
+        try
+        {
+            List<EnemySpawnMarker> markers = template.SpawnMarkers();
+
+            Assert.That(markers, Has.Count.EqualTo(1));
+            Assert.That(markers[0].FixedEnemyDefinition, Is.SameAs(fixedDefinition));
+        }
+        finally
+        {
+            Object.DestroyImmediate(root);
+            Object.DestroyImmediate(fixedDefinition);
         }
     }
 }

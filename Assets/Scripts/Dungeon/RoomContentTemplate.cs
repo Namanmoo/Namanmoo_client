@@ -8,7 +8,15 @@ namespace NaManMoo.Dungeon
     /// </summary>
     public sealed class RoomContentTemplate : MonoBehaviour
     {
-        /// <summary>이 인스턴스 밑에 있는 모든 EnemySpawnMarker의 월드 위치.</summary>
+        /// <summary>이 인스턴스 밑에 있는 모든 EnemySpawnMarker.</summary>
+        public List<EnemySpawnMarker> SpawnMarkers()
+        {
+            EnemySpawnMarker[] markers = GetComponentsInChildren<EnemySpawnMarker>();
+            return new List<EnemySpawnMarker>(markers);
+        }
+
+        /// <summary>호환성 메서드 — Task 2에서 DungeonEncounter와 함께 제거됨.</summary>
+        [System.Obsolete("Use SpawnMarkers() instead")]
         public List<Vector2> SpawnMarkerPositions()
         {
             EnemySpawnMarker[] markers = GetComponentsInChildren<EnemySpawnMarker>();
