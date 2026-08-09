@@ -147,14 +147,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 400000}
     m_Modifications:
-    - target: {fileID: 61000, guid: 855aefd35bdb5bda8d3a50a8788d85a5, type: 3}
-      propertyPath: m_Size.x
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 61000, guid: 855aefd35bdb5bda8d3a50a8788d85a5, type: 3}
-      propertyPath: m_Size.y
-      value: 3.5
-      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 855aefd35bdb5bda8d3a50a8788d85a5, type: 3}
       propertyPath: m_Name
       value: Obstacle_Spike
@@ -285,7 +277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 61000, guid: 0d7c1c908a32cf0f974ae8e8d5c36b83, type: 3}
       propertyPath: m_Size.y
-      value: 3.5
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 0d7c1c908a32cf0f974ae8e8d5c36b83, type: 3}
       propertyPath: m_Name
