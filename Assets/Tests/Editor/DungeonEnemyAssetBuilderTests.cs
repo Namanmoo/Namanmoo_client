@@ -18,23 +18,23 @@ public sealed class DungeonEnemyAssetBuilderTests
         EnemyDefinition mushroom = definitions.Single(
             definition => definition.Id == "mushroom");
         Assert.That(mushroom.VisualHeight, Is.EqualTo(4f));
-        Assert.That(mushroom.BodyCollisionRadius, Is.EqualTo(1.4f));
+        Assert.That(mushroom.BodyCollisionRadius, Is.EqualTo(1.8f));
         Assert.That(squirrel.DisplayName, Is.EqualTo("Squirrel"));
         Assert.That(squirrel.BehaviorType,
             Is.EqualTo(EnemyBehaviorType.ApproachAndShoot));
         Assert.That(squirrel.BodySprite, Is.Not.Null);
-        Assert.That(squirrel.BodySprite.name, Is.EqualTo("enemy_squirrel_0"));
+        Assert.That(squirrel.BodySprite.name, Is.EqualTo("squirrel_idle_right0000"));
         Assert.That(squirrel.ProjectileSprite, Is.Not.Null);
         Assert.That(squirrel.MaxHealth, Is.EqualTo(5));
-        Assert.That(squirrel.MoveSpeed, Is.EqualTo(2f));
-        Assert.That(squirrel.AttackDamage, Is.EqualTo(1));
-        Assert.That(squirrel.AttackRange, Is.EqualTo(7f));
+        Assert.That(squirrel.MoveSpeed, Is.EqualTo(4f));
+        Assert.That(squirrel.AttackDamage, Is.EqualTo(2));
+        Assert.That(squirrel.AttackRange, Is.EqualTo(14f));
         Assert.That(squirrel.AttackInterval, Is.EqualTo(1.5f));
-        Assert.That(squirrel.ProjectileSpeed, Is.EqualTo(6f));
+        Assert.That(squirrel.ProjectileSpeed, Is.EqualTo(7f));
         Assert.That(squirrel.ProjectileLifetime, Is.EqualTo(3f));
         Assert.That(squirrel.ProjectileRadius, Is.EqualTo(0.2f));
         Assert.That(squirrel.VisualHeight, Is.EqualTo(4f));
-        Assert.That(squirrel.BodyCollisionRadius, Is.EqualTo(0.7f));
+        Assert.That(squirrel.BodyCollisionRadius, Is.EqualTo(1.8f));
 
         Assert.That(squirrel.ProjectileSprite.name, Is.EqualTo("nuts"));
 
@@ -55,9 +55,9 @@ public sealed class DungeonEnemyAssetBuilderTests
         Assert.That(woodTower.AttackInterval, Is.EqualTo(1.5f));
         Assert.That(woodTower.ProjectileSpeed, Is.EqualTo(8f));
         Assert.That(woodTower.ProjectileLifetime, Is.EqualTo(5f));
-        Assert.That(woodTower.ProjectileRadius, Is.EqualTo(0.5f));
-        Assert.That(woodTower.VisualHeight, Is.EqualTo(3f));
-        Assert.That(woodTower.BodyCollisionRadius, Is.EqualTo(1.55f));
+        Assert.That(woodTower.ProjectileRadius, Is.EqualTo(0.3f));
+        Assert.That(woodTower.VisualHeight, Is.EqualTo(5f));
+        Assert.That(woodTower.BodyCollisionRadius, Is.EqualTo(2.25f));
 
         var bodyImporter = AssetImporter.GetAtPath(
             "Assets/Enemies/Tower/Idle/Right/Frames/tower_idle_right0000.png") as TextureImporter;

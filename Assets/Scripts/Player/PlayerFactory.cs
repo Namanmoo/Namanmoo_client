@@ -8,7 +8,7 @@ using UnityEngine;
 public static class PlayerFactory
 {
     public const float VisualHeight = 4f;
-    public const float ColliderRadius = 1f;
+    public const float ColliderRadius = 1.8f;
 
     private const string AnimatorResourcePath = "Player/PlayerVisual";
 

@@ -11,8 +11,8 @@ public static class BossFactory
     public const int Hitpoints = 100;
 
     private const float VisualHeight = 6f;
-    private const float BodyRadius = 1f;
-    private const float SensorRadius = 1.15f;
+    private const float BodyRadius = 2.7f;
+    private const float SensorRadius = 2.7f;
 
     /// <summary>
     /// 보스를 세우고 체력을 돌려준다. 죽음을 감지하려면 돌려받은
