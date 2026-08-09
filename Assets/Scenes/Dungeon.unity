@@ -1907,7 +1907,12 @@ MonoBehaviour:
   bossSprite: {fileID: 0}
   sultanBossDefinition: {fileID: 11400000, guid: 4516b013ac40b074691613aad65d9c61, type: 2}
   normalRoomTemplates:
+  - {fileID: 11400000, guid: 068a93a01ddb042008630ff27b5263f8, type: 3}
   - {fileID: 11400000, guid: dc4bf47642243a4739b38e1bafc930ad, type: 3}
+  - {fileID: 11400000, guid: cf3428f0ebc3d46e6ac3a846a6c1f8a7, type: 3}
+  - {fileID: 11400000, guid: bd5ff8550b8ee40b9879c69751796ea3, type: 3}
+  - {fileID: 11400000, guid: 755bd0f44c95d48248d4fde7523cc850, type: 3}
+  - {fileID: 11400000, guid: e9a37af1061eb42a3890630ac84d40e9, type: 3}
 --- !u!4 &567430216
 Transform:
   m_ObjectHideFlags: 0
