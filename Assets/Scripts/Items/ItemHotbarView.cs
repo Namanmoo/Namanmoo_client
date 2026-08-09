@@ -62,6 +62,16 @@ public sealed class ItemHotbarView : MonoBehaviour
 
     private void Awake()
     {
+        // 씬에 구워진 6칸 핫바는 플레이 시작 때 왼쪽 아래 한 칸 슬롯으로 교체한다.
+        // 씬 빌더를 다시 돌리면 씬에 손으로 튜닝한 값들이 초기화되므로,
+        // 씬은 그대로 두고 런타임에 UI만 바꿔치운다.
+        if (Application.isPlaying && controller != null)
+        {
+            EquippedWeaponSlotView.Create(transform.parent, controller);
+            Destroy(gameObject);
+            return;
+        }
+
         Connect();
     }
 

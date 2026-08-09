@@ -14,7 +14,7 @@ public class ItemHotbarPlayModeTests
     private GameObject root;
     private GameObject player;
     private ItemHotbarController controller;
-    private ItemHotbarView view;
+    private EquippedWeaponSlotView view;
     private PlayerWeaponController weaponController;
     private Keyboard keyboard;
     private Texture2D backgroundTexture;
@@ -48,7 +48,7 @@ public class ItemHotbarPlayModeTests
 
         controller = player.GetComponent<ItemHotbarController>();
         weaponController = player.GetComponent<PlayerWeaponController>();
-        view = root.GetComponentInChildren<ItemHotbarView>(true);
+        view = root.GetComponentInChildren<EquippedWeaponSlotView>(true);
     }
 
     [UnityTearDown]
@@ -74,53 +74,41 @@ public class ItemHotbarPlayModeTests
     }
 
     [UnityTest]
-    public IEnumerator RuntimeInitialization_LoadsFiveSampleWeaponsAndShowsAxeFirst()
+    public IEnumerator RuntimeInitialization_LoadsFiveSampleWeaponsAndShowsSwordFirst()
     {
         Assert.That(controller, Is.Not.Null);
         Assert.That(controller.Inventory, Is.Not.Null);
         Assert.That(view, Is.Not.Null);
-        Assert.That(SelectionOutline(0).activeSelf, Is.True);
-        Image[] backgrounds = view.GetComponentsInChildren<Image>(true);
-        int backgroundCount = 0;
-        foreach (Image image in backgrounds)
-        {
-            if (image.name == "Background")
-            {
-                backgroundCount++;
-                Assert.That(image.sprite, Is.SameAs(backgroundSprite));
-                Assert.That(image.preserveAspect, Is.True);
-            }
-        }
-
-        Assert.That(backgroundCount, Is.EqualTo(1));
         EventSystem[] eventSystems =
             Object.FindObjectsByType<EventSystem>(FindObjectsInactive.Include);
         Assert.That(eventSystems, Has.Length.EqualTo(1));
         Assert.That(eventSystems[0].GetComponent<InputSystemUIInputModule>(), Is.Not.Null);
 
         PlayerInventory inventory = controller.Inventory;
-        ItemData axe = inventory.Slots[0];
-        Assert.That(axe.Weapon.Type, Is.EqualTo(WeaponType.Axe));
-        Assert.That(inventory.Slots[1].Weapon.Type, Is.EqualTo(WeaponType.Projectile));
-        Assert.That(inventory.Slots[2].Weapon.Type, Is.EqualTo(WeaponType.Spear));
-        Assert.That(inventory.Slots[3].Weapon.Type, Is.EqualTo(WeaponType.Sword));
+        ItemData first = inventory.Slots[0];
+        Assert.That(first.Weapon.Type, Is.EqualTo(WeaponType.Sword));
+        Assert.That(inventory.Slots[1].Weapon.Type, Is.EqualTo(WeaponType.Spear));
+        Assert.That(inventory.Slots[2].Weapon.Type, Is.EqualTo(WeaponType.Axe));
+        Assert.That(inventory.Slots[3].Weapon.Type, Is.EqualTo(WeaponType.Projectile));
         Assert.That(inventory.Slots[4].Weapon.Type, Is.EqualTo(WeaponType.Missile));
         Assert.That(inventory.Slots[5], Is.Null);
         Assert.That(inventory.SelectedSlotIndex, Is.EqualTo(0));
-        Assert.That(inventory.EquippedItem, Is.SameAs(axe));
+        Assert.That(inventory.EquippedItem, Is.SameAs(first));
         Assert.That(GetPrivateField<PlayerInventory>(weaponController, "inventory"), Is.SameAs(inventory));
-        Image icon = Slot(0).Find("Icon").GetComponent<Image>();
+
+        // 화면에는 장착 무기 한 칸만 — 왼쪽 아래 앵커에 장착 아이콘이 보인다
+        RectTransform rect = view.GetComponent<RectTransform>();
+        Assert.That(rect.anchorMin, Is.EqualTo(Vector2.zero));
+        Assert.That(rect.anchorMax, Is.EqualTo(Vector2.zero));
+        Image icon = EquippedIcon();
         Assert.That(icon.enabled, Is.True);
         Assert.That(icon.preserveAspect, Is.True);
-        Assert.That(icon.sprite, Is.SameAs(axe.Icon));
-        Assert.That(
-            view.GetComponent<RectTransform>().sizeDelta,
-            Is.EqualTo(new Vector2(432f, 144.3318f)));
+        Assert.That(icon.sprite, Is.SameAs(first.Icon));
         yield return null;
     }
 
     [UnityTest]
-    public IEnumerator EmptyAndOccupiedSelection_UpdatesEquipmentAndMovesOutline()
+    public IEnumerator EmptyAndOccupiedSelection_UpdatesEquipmentAndSlotIcon()
     {
         ItemData potion = new ItemData("potion", "Potion", ItemKind.Item);
         PlayerInventory inventory = controller.Inventory;
@@ -129,27 +117,27 @@ public class ItemHotbarPlayModeTests
         yield return null;
 
         Assert.That(inventory.EquippedItem, Is.Null);
-        Assert.That(SelectionOutline(5).activeSelf, Is.True);
+        Assert.That(EquippedIcon().enabled, Is.False); // 빈 슬롯 — 아이콘도 빈다
 
         inventory.TryAcquire(potion);
         yield return null;
 
         Assert.That(inventory.EquippedItem, Is.SameAs(potion));
-        Assert.That(SelectionOutline(5).activeSelf, Is.True);
 
         inventory.SelectSlot(0);
         yield return null;
 
         Assert.That(inventory.EquippedItem, Is.SameAs(inventory.Slots[0]));
-        Assert.That(SelectionOutline(0).activeSelf, Is.True);
-        Assert.That(SelectionOutline(5).activeSelf, Is.False);
+        Image icon = EquippedIcon();
+        Assert.That(icon.enabled, Is.True);
+        Assert.That(icon.sprite, Is.SameAs(inventory.Slots[0].Icon));
     }
 
     [UnityTest]
     public IEnumerator ArrowHeld_ProjectileSlotFiresAndReselectionKeepsCooldown()
     {
         SetKeyboardState(Key.RightArrow);
-        controller.Inventory.SelectSlot(1);
+        controller.Inventory.SelectSlot(3); // 샘플 로드아웃의 발사체 무기 칸
 
         weaponController.ProcessInput(keyboard, 0f);
         Assert.That(ProjectileCount(), Is.EqualTo(1));
@@ -158,7 +146,7 @@ public class ItemHotbarPlayModeTests
         weaponController.ProcessInput(keyboard, 0.1f);
         Assert.That(ProjectileCount(), Is.EqualTo(1));
 
-        controller.Inventory.SelectSlot(1);
+        controller.Inventory.SelectSlot(3);
         weaponController.ProcessInput(keyboard, 0.2f);
         Assert.That(ProjectileCount(), Is.EqualTo(1));
 
@@ -169,14 +157,9 @@ public class ItemHotbarPlayModeTests
         yield return null;
     }
 
-    private Transform Slot(int index)
+    private Image EquippedIcon()
     {
-        return view.transform.Find("Slot " + (index + 1));
-    }
-
-    private GameObject SelectionOutline(int index)
-    {
-        return Slot(index).Find("Selection Outline").gameObject;
+        return view.transform.Find("Icon").GetComponent<Image>();
     }
 
     private void SetKeyboardState(params Key[] keys)
