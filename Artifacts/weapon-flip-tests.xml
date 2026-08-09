@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="11" result="Passed" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-09 01:41:33Z" end-time="2026-08-09 01:41:34Z" duration="0.1610084">
+  <test-suite type="TestSuite" id="1000" name="NaManMoo" fullname="NaManMoo" runstate="Runnable" testcasecount="580" result="Passed" start-time="2026-08-09 01:41:33Z" end-time="2026-08-09 01:41:34Z" duration="0.161008" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1688" name="NaManMoo.EditorTests.dll" fullname="/Users/nohgiyoon/Coding/Game/Namanmoo/Namanmoo_client/Library/ScriptAssemblies/NaManMoo.EditorTests.dll" runstate="Runnable" testcasecount="580" result="Passed" start-time="2026-08-09 01:41:34Z" end-time="2026-08-09 01:41:34Z" duration="0.126900" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="64574" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestFixture" id="1424" name="PlayerWeaponVisualTests" fullname="PlayerWeaponVisualTests" classname="PlayerWeaponVisualTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-08-09 01:41:34Z" end-time="2026-08-09 01:41:34Z" duration="0.102568" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1425" name="AngleFor_PointsTheSpriteAlongEachCardinalDirection" fullname="PlayerWeaponVisualTests.AngleFor_PointsTheSpriteAlongEachCardinalDirection" methodname="AngleFor_PointsTheSpriteAlongEachCardinalDirection" classname="PlayerWeaponVisualTests" runstate="Runnable" seed="2104223386" result="Passed" start-time="2026-08-09 01:41:34Z" end-time="2026-08-09 01:41:34Z" duration="0.009790" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1427" name="AngleFor_WithNoDirection_FallsBackToTheDefaultAim" fullname="PlayerWeaponVisualTests.AngleFor_WithNoDirection_FallsBackToTheDefaultAim" methodname="AngleFor_WithNoDirection_FallsBackToTheDefaultAim" classname="PlayerWeaponVisualTests" runstate="Runnable" seed="653767445" result="Passed" start-time="2026-08-09 01:41:34Z" end-time="2026-08-09 01:41:34Z" duration="0.000234" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1426" name="AxisCompensationDegrees_FlipsSignWithTheFacing" fullname="PlayerWeaponVisualTests.AxisCompensationDegrees_FlipsSignWithTheFacing" methodname="AxisCompensationDegrees_FlipsSignWithTheFacing" classname="PlayerWeaponVisualTests" runstate="Runnable" seed="1724690584" result="Passed" start-time="2026-08-09 01:41:34Z" end-time="2026-08-09 01:41:34Z" duration="0.000384" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1434" name="AxisDegrees_MeasuresHowFarTheDrawnAxisLeansFromUp" fullname="PlayerWeaponVisualTests.AxisDegrees_MeasuresHowFarTheDrawnAxisLeansFromUp" methodname="AxisDegrees_MeasuresHowFarTheDrawnAxisLeansFromUp" classname="PlayerWeaponVisualTests" runstate="Runnable" seed="970536750" result="Passed" start-time="2026-08-09 01:41:34Z" end-time="2026-08-09 01:41:34Z" duration="0.000398" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1433" name="PlaySwing_DoesNotMoveTheHand_TheAttackCurvesOwnIt" fullname="PlayerWeaponVisualTests.PlaySwing_DoesNotMoveTheHand_TheAttackCurvesOwnIt" methodname="PlaySwing_DoesNotMoveTheHand_TheAttackCurvesOwnIt" classname="PlayerWeaponVisualTests" runstate="Runnable" seed="1057926151" result="Passed" start-time="2026-08-09 01:41:34Z" end-time="2026-08-09 01:41:34Z" duration="0.008840" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1430" name="Refresh_HidesTheRendererWhenNothingIsEquipped" fullname="PlayerWeaponVisualTests.Refresh_HidesTheRendererWhenNothingIsEquipped" methodname="Refresh_HidesTheRendererWhenNothingIsEquipped" classname="PlayerWeaponVisualTests" runstate="Runnable" seed="328882145" result="Passed" start-time="2026-08-09 01:41:34Z" end-time="2026-08-09 01:41:34Z" duration="0.001615" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1432" name="Refresh_PointsTheBladeUpLeftAtRest" fullname="PlayerWeaponVisualTests.Refresh_PointsTheBladeUpLeftAtRest" methodname="Refresh_PointsTheBladeUpLeftAtRest" classname="PlayerWeaponVisualTests" runstate="Runnable" seed="1590288824" result="Passed" start-time="2026-08-09 01:41:34Z" end-time="2026-08-09 01:41:34Z" duration="0.000920" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1431" name="Refresh_ShowsAForgedWeaponThatHasOnlyAnIcon" fullname="PlayerWeaponVisualTests.Refresh_ShowsAForgedWeaponThatHasOnlyAnIcon" methodname="Refresh_ShowsAForgedWeaponThatHasOnlyAnIcon" classname="PlayerWeaponVisualTests" runstate="Runnable" seed="472191194" result="Passed" start-time="2026-08-09 01:41:34Z" end-time="2026-08-09 01:41:34Z" duration="0.023153" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1429" name="Refresh_ShowsTheEquippedWeaponInTheHand" fullname="PlayerWeaponVisualTests.Refresh_ShowsTheEquippedWeaponInTheHand" methodname="Refresh_ShowsTheEquippedWeaponInTheHand" classname="PlayerWeaponVisualTests" runstate="Runnable" seed="878216101" result="Passed" start-time="2026-08-09 01:41:34Z" end-time="2026-08-09 01:41:34Z" duration="0.013791" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1435" name="Refresh_UndoesTheDrawnAxisSoTheTipStillPointsOutward" fullname="PlayerWeaponVisualTests.Refresh_UndoesTheDrawnAxisSoTheTipStillPointsOutward" methodname="Refresh_UndoesTheDrawnAxisSoTheTipStillPointsOutward" classname="PlayerWeaponVisualTests" runstate="Runnable" seed="56037558" result="Passed" start-time="2026-08-09 01:41:34Z" end-time="2026-08-09 01:41:34Z" duration="0.006564" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+        </test-case>
+        <test-case id="1428" name="SetAim_KeepsTheLastDirectionWhenKeysAreReleased" fullname="PlayerWeaponVisualTests.SetAim_KeepsTheLastDirectionWhenKeysAreReleased" methodname="SetAim_KeepsTheLastDirectionWhenKeysAreReleased" classname="PlayerWeaponVisualTests" runstate="Runnable" seed="1885678683" result="Passed" start-time="2026-08-09 01:41:34Z" end-time="2026-08-09 01:41:34Z" duration="0.001405" asserts="0">
+          <properties>
+            <property name="retryIteration" value="0" />
+            <property name="repeatIteration" value="0" />
+          </properties>
+          <output><![CDATA[Saving results to: /Users/nohgiyoon/Library/Application Support/DefaultCompany/NaManMoo/TestResults.xml
+]]></output>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

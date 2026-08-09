@@ -16,6 +16,20 @@ public sealed class PlayerWeaponVisualTests
         Assert.That(PlayerWeaponVisual.AngleFor(Vector2.down), Is.EqualTo(-180f).Within(0.01f));
     }
 
+    [Test]
+    public void AxisCompensationDegrees_FlipsSignWithTheFacing()
+    {
+        // 오른쪽: 그린 축 기울기를 그대로 되돌린다
+        Assert.That(
+            PlayerWeaponVisual.AxisCompensationDegrees(-90f, facingRight: true),
+            Is.EqualTo(90f).Within(0.01f));
+
+        // 왼쪽: flipX로 그림이 뒤집혀 기울기도 거울상 — 보정 부호가 반대다
+        Assert.That(
+            PlayerWeaponVisual.AxisCompensationDegrees(-90f, facingRight: false),
+            Is.EqualTo(-90f).Within(0.01f));
+    }
+
     /// <summary>방향이 없으면 아래를 본다 — 대기 애니메이션이 Down 기준이다.</summary>
     [Test]
     public void AngleFor_WithNoDirection_FallsBackToTheDefaultAim()

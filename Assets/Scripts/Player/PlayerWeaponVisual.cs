@@ -41,6 +41,7 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
 
     private PlayerInventory inventory;
     private Animator bodyAnimator;
+    private PlayerAnimator bodyFacing;
     private Transform handTransform;
     private SpriteRenderer weaponRenderer;
     private Vector2 aim = DefaultAim;
@@ -199,7 +200,18 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
         float axisOffset = definition != null
             ? definition.SpriteAxisDegrees
             : equipped?.SpriteAxisDegrees ?? 0f;
-        weaponRenderer.transform.localRotation = Quaternion.Euler(0f, 0f, -axisOffset);
+
+        // 왼쪽 클립은 몸도 손 커브도 거울상인데 무기 그림만 원본이면 혼자 튄다.
+        // pivot이 그립이라 flipX로 뒤집어도 그립은 제자리다. 그림을 뒤집으면
+        // 그린 축 기울기도 반대쪽으로 넘어가므로 축 보정 부호를 같이 뒤집는다.
+        if (bodyFacing == null)
+        {
+            bodyFacing = GetComponent<PlayerAnimator>();
+        }
+        bool facingRight = bodyFacing == null || bodyFacing.FacingRight;
+        weaponRenderer.flipX = !facingRight;
+        weaponRenderer.transform.localRotation =
+            Quaternion.Euler(0f, 0f, AxisCompensationDegrees(axisOffset, facingRight));
 
         // 무기 타입에 맞는 몸 모션으로 갈아끼운다. 교체는 상태 머신을 처음부터
         // 다시 시작시키므로 장착이 실제로 바뀌어 컨트롤러가 달라질 때만 건드린다.
@@ -243,7 +255,7 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
         Color ghostColor = theme.Primary;
         ghostColor.a = GhostAlpha;
 
-        SpriteAfterimage.Spawn(
+        SpriteAfterimage ghost = SpriteAfterimage.Spawn(
             weaponRenderer.sprite,
             weaponRenderer.transform.position,
             weaponRenderer.transform.rotation,
@@ -251,6 +263,16 @@ public sealed class PlayerWeaponVisual : MonoBehaviour
             ghostColor,
             GhostLifetime,
             SortingOrder - 1); // 본체 바로 뒤 — 잔상이 무기를 가리면 안 된다
+        ghost.Renderer.flipX = weaponRenderer.flipX;
+    }
+
+    /// <summary>
+    /// 그린 축 기울기를 되돌리는 보정 각도. 그림을 flipX로 뒤집으면 기울기도
+    /// 거울상이 되므로 부호가 반대다. 계산만 하므로 EditMode 테스트로 덮는다.
+    /// </summary>
+    public static float AxisCompensationDegrees(float axisOffsetDegrees, bool facingRight)
+    {
+        return facingRight ? -axisOffsetDegrees : axisOffsetDegrees;
     }
 
     /// <summary>잔상을 남길 타이밍인지 — 계산만 하므로 EditMode 테스트로 덮는다.</summary>
