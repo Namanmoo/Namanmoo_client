@@ -171,8 +171,6 @@ public class PlayerSwordShooterTests : InputTestFixture
     {
         PlayerSwordShooter shooter = CreateShooter();
         PlayerInventory inventory = GetInventory(shooter);
-        ItemHotbarController hotbar = shooter.gameObject.AddComponent<ItemHotbarController>();
-        hotbar.Initialize(inventory);
         SetNumericConfiguration(shooter, shotsPerSecond: 2f);
         Press(keyboard.rightArrowKey);
 
@@ -180,14 +178,12 @@ public class PlayerSwordShooterTests : InputTestFixture
         Assert.That(ProjectileCount(), Is.EqualTo(1));
 
         Assert.That(inventory.TryAcquire(new ItemData("potion", "Potion", ItemKind.Item)), Is.True);
-        Press(keyboard.digit2Key);
-        hotbar.ProcessKeyboard(keyboard);
+        inventory.SelectSlot(1);
         Assert.That(inventory.SelectedSlotIndex, Is.EqualTo(1));
         shooter.ProcessInput(keyboard, 0.1f);
         Assert.That(ProjectileCount(), Is.EqualTo(1));
 
-        Press(keyboard.digit1Key);
-        hotbar.ProcessKeyboard(keyboard);
+        inventory.SelectSlot(0);
         Assert.That(inventory.SelectedSlotIndex, Is.EqualTo(0));
         shooter.ProcessInput(keyboard, 0.2f);
         Assert.That(ProjectileCount(), Is.EqualTo(1));

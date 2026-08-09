@@ -27,57 +27,6 @@ public class ItemHotbarControllerTests : InputTestFixture
         base.TearDown();
     }
 
-    [TestCase(1, 0)]
-    [TestCase(2, 1)]
-    [TestCase(3, 2)]
-    [TestCase(4, 3)]
-    [TestCase(5, 4)]
-    [TestCase(6, 5)]
-    public void SlotIndexForNumber_OneThroughSix_ReturnsZeroBasedSlot(int number, int expectedSlotIndex)
-    {
-        Assert.That(ItemHotbarController.SlotIndexForNumber(number), Is.EqualTo(expectedSlotIndex));
-    }
-
-    [TestCase(0)]
-    [TestCase(7)]
-    [TestCase(-1)]
-    [TestCase(42)]
-    public void SlotIndexForNumber_OutsideOneThroughSix_ReturnsNegativeOne(int number)
-    {
-        Assert.That(ItemHotbarController.SlotIndexForNumber(number), Is.EqualTo(-1));
-    }
-
-    [TestCase(Key.Digit1, 0)]
-    [TestCase(Key.Digit2, 1)]
-    [TestCase(Key.Digit3, 2)]
-    [TestCase(Key.Digit4, 3)]
-    [TestCase(Key.Digit5, 4)]
-    [TestCase(Key.Digit6, 5)]
-    public void ProcessKeyboard_TopRowDigitPressed_SelectsMatchingInventorySlot(Key key, int expectedSlotIndex)
-    {
-        var inventory = new PlayerInventory();
-        controller.Initialize(inventory);
-
-        Press(keyboard[key]);
-        controller.ProcessKeyboard(keyboard);
-
-        Assert.That(inventory.SelectedSlotIndex, Is.EqualTo(expectedSlotIndex));
-    }
-
-    [Test]
-    public void ProcessKeyboard_WithoutKeyboardOrRuntimeInventory_DoesNotThrow()
-    {
-        FieldInfo inventoryField = typeof(ItemHotbarController).GetField(
-            "inventory",
-            BindingFlags.Instance | BindingFlags.NonPublic);
-        Assert.That(inventoryField, Is.Not.Null);
-        inventoryField.SetValue(controller, null);
-
-        Assert.DoesNotThrow(() => controller.ProcessKeyboard(null));
-        Assert.That(controller.Inventory, Is.Not.Null);
-        Assert.That(controller.Inventory.SelectedSlotIndex, Is.EqualTo(0));
-    }
-
     [Test]
     public void Inventory_AfterRuntimeModelIsLost_RecreatesAUsableInventory()
     {

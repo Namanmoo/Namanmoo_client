@@ -91,6 +91,20 @@ public sealed class WeaponProjectile : MonoBehaviour
         renderer.sprite = weapon == null ? null : weapon.WorldSprite;
         renderer.color = weapon == null ? Color.white : weapon.DisplayColor;
         renderer.sortingOrder = 5;
+
+        FaceDirection();
+    }
+
+    /// <summary>
+    /// 그림의 끝(그립→끝 축)이 진행 방향을 향하게 돌린다. 그린 무기는 축 보정
+    /// 각도(SpriteAxisDegrees)만큼 되돌리고, 카탈로그 무기(보정 0)는 위를 향해
+    /// 그려진 그림 기준으로 돈다.
+    /// </summary>
+    private void FaceDirection()
+    {
+        float axis = definition != null ? definition.SpriteAxisDegrees : 0f;
+        transform.rotation = Quaternion.Euler(
+            0f, 0f, PlayerWeaponVisual.AngleFor(direction) - axis);
     }
 
     /// <summary>유도 — 가장 가까운 적을 향해 궤도를 꺾는다.</summary>
@@ -128,6 +142,9 @@ public sealed class WeaponProjectile : MonoBehaviour
         {
             UpdateBoomerang();
         }
+
+        // 유도·부메랑·도탄이 방향을 꺾으므로 끝이 늘 진행 방향을 물고 가게 한다
+        FaceDirection();
 
         transform.position += (Vector3)(direction * definition.ProjectileSpeed * deltaTime);
 

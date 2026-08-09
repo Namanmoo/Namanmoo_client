@@ -11,7 +11,7 @@ public static class MushroomFactory
 
     /// <summary>던전 쪽 DungeonMushroom.asset과 같은 크기여야 두 스테이지가 어긋나지 않는다.</summary>
     private const float VisualHeight = 4f;
-    private const float BodyCollisionRadius = 1.4f;
+    private const float BodyCollisionRadius = 1.8f;
 
     public static EnemyHealth Create(
         Transform parent,

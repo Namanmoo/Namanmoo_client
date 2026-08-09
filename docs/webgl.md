@@ -7,7 +7,7 @@
 
 | 경로 | 역할 |
 | --- | --- |
-| [Assets/Editor/WebGLBuilder.cs](../Assets/Editor/WebGLBuilder.cs) | 빌드 진입점. 메뉴 `Tools → NaManMoo → Build WebGL`, 배치 모드 `WebGLBuilder.BuildFromCommandLine` |
+| [Assets/Editor/WebGLBuilder.cs](../Assets/Editor/WebGLBuilder.cs) | 빌드 진입점. 메뉴 `Tools → NaManMoo → Build WebGL`, 배치 모드 `WebGLBuilder.Build` |
 | [Assets/WebGLTemplates/NaManMoo/index.html](../Assets/WebGLTemplates/NaManMoo/index.html) | 커스텀 로딩 템플릿 (진행률 바, 16:9 레터박스, 전체화면 버튼) |
 | [tools/serve-webgl.py](../tools/serve-webgl.py) | 로컬 정적 서버 — `.wasm` MIME과 Brotli·gzip `Content-Encoding` 보강 |
 | [run-web.sh](../run-web.sh) | 빌드 + 서빙 래퍼 |

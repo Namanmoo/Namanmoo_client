@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public sealed class ItemHotbarController : MonoBehaviour
 {
@@ -29,11 +28,6 @@ public sealed class ItemHotbarController : MonoBehaviour
             EnsureInventory();
             return inventory;
         }
-    }
-
-    public static int SlotIndexForNumber(int number)
-    {
-        return number >= 1 && number <= 6 ? number - 1 : -1;
     }
 
     public void Initialize(PlayerInventory newInventory)
@@ -87,29 +81,6 @@ public sealed class ItemHotbarController : MonoBehaviour
     private void Awake()
     {
         EnsureInventory();
-    }
-
-    private void Update()
-    {
-        ProcessKeyboard(Keyboard.current);
-    }
-
-    public void ProcessKeyboard(Keyboard keyboard)
-    {
-        if (keyboard == null)
-        {
-            return;
-        }
-
-        PlayerInventory currentInventory = Inventory;
-        for (int number = 1; number <= 6; number++)
-        {
-            if (keyboard[(Key)((int)Key.Digit1 + number - 1)].wasPressedThisFrame)
-            {
-                currentInventory.SelectSlot(SlotIndexForNumber(number));
-                return;
-            }
-        }
     }
 
     private void EnsureInventory()
@@ -198,6 +169,8 @@ public sealed class ItemHotbarController : MonoBehaviour
         inventory.EnsureUniqueItemInSlot(
             ForgedWeapon.SlotIndex,
             ForgedWeapon.ToItemData());
+        // 만든 무기는 입장하자마자 손에 들려 있어야 한다 — 숫자키 장착 단계를 없앴다
+        inventory.SelectSlot(ForgedWeapon.SlotIndex);
     }
 
     private void EnsureSampleLoadout()

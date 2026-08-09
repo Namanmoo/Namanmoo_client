@@ -26,6 +26,21 @@ public sealed class PlayerWeaponController : MonoBehaviour
     /// <summary>스윙 한 번이 걸리는 시간의 상한 — 이보다 길면 늘어져 보인다.</summary>
     public const float MaxSwingSeconds = 0.18f;
 
+    /// <summary>스페이스로 스킬을 준비한 상태 — 다음 방향키 입력이 스킬로 나간다.</summary>
+    private bool skillArmed;
+
+    /// <summary>회전 스킬의 사거리 — 화면에 보이는 무기 길이의 배수.</summary>
+    public const float SpinSkillReachMultiplier = 2.5f;
+
+    /// <summary>레이저 스킬의 길이 — 방 하나를 가로지르고 남는 정도.</summary>
+    public const float LaserSkillLength = 30f;
+
+    /// <summary>레이저 스킬의 절반 두께 — 판정과 그림이 같이 쓴다.</summary>
+    public const float LaserSkillHalfWidth = 0.5f;
+
+    /// <summary>레이저가 화면에 남는 시간.</summary>
+    public const float LaserSkillVisualSeconds = 0.12f;
+
     private void Awake()
     {
         // 개발 빌드에서만 — 9/0 키로 궤도·효과를 즉석 교체하는 디버그 도구
@@ -83,6 +98,12 @@ public sealed class PlayerWeaponController : MonoBehaviour
 
         EnsureConfigured(equipped, loadout);
 
+        // 스페이스 = 스킬 준비. 다음 방향키가 일반 공격 대신 스킬로 나간다.
+        if (keyboard != null && keyboard.spaceKey.wasPressedThisFrame)
+        {
+            skillArmed = true;
+        }
+
         Vector2 direction = CalculateCardinalDirection(keyboard);
         if (direction == Vector2.zero || currentTime < nextAttackTime)
         {
@@ -92,8 +113,116 @@ public sealed class PlayerWeaponController : MonoBehaviour
         // 스윙이 이 값을 참조하므로 Attack보다 먼저 불러야 한 박자 밀리지 않는다.
         GetComponent<PlayerAnimator>()?.PlayAttack(direction, weapon.AttackInterval);
 
-        Attack(loadout, direction, currentTime);
+        if (skillArmed)
+        {
+            skillArmed = false;
+            ExecuteSkill(loadout, direction, currentTime);
+        }
+        else
+        {
+            Attack(loadout, direction, currentTime);
+        }
+
         nextAttackTime = currentTime + weapon.AttackInterval;
+    }
+
+    /// <summary>
+    /// 스페이스+방향키 스킬. 근접은 제자리 큰 회전 베기(방향 무관),
+    /// 원거리는 조준 방향으로 길게 뻗는 레이저. 쿨타임은 일반 공격과 공유한다.
+    /// </summary>
+    private void ExecuteSkill(WeaponLoadout loadout, Vector2 direction, float currentTime)
+    {
+        var context = new DeliveryContext(
+            this,
+            gameObject,
+            transform.position,
+            direction,
+            loadout,
+            tuning,
+            runner != null && runner.HasWork ? runner : null);
+
+        if (loadout.Definition.Category == WeaponCategory.Melee)
+        {
+            // 접촉 판정은 손에 든 그림 크기가 곧 범위라 스킬의 확장 사거리를 못 살린다
+            float reach = WeaponAttackGeometry.VisualReach(loadout.Definition)
+                * SpinSkillReachMultiplier;
+            MeleeStrike.Execute(
+                context, reachOverride: reach, arcOverride: 360f, forceInstant: true);
+            AnimateMeleeSwing(loadout, "spin", direction);
+        }
+        else
+        {
+            FireLaser(context);
+        }
+
+        PlayAttackSound(loadout.Definition);
+        runner?.NotifyAttack(transform.position, direction, currentTime);
+    }
+
+    /// <summary>레이저 — 직선 위 모든 적을 한 번에 때리고 빔을 잠깐 그린다.</summary>
+    private void FireLaser(DeliveryContext context)
+    {
+        WeaponDefinition weapon = context.Weapon;
+        Vector2 start = ProjectileSpawner.MuzzleOf(context);
+        Vector2 direction = context.Direction;
+
+        bool hitAny = false;
+        foreach (EnemyHealth enemy in EffectHelpers.EnemiesInRadius(
+            context.Origin, LaserSkillLength, context.Owner))
+        {
+            Vector2 toEnemy = (Vector2)enemy.transform.position - context.Origin;
+            float along = Vector2.Dot(toEnemy, direction);
+            if (along < 0f || along > LaserSkillLength)
+            {
+                continue;
+            }
+
+            float side = Mathf.Abs(toEnemy.x * direction.y - toEnemy.y * direction.x);
+            if (side > LaserSkillHalfWidth + weapon.CollisionRadius)
+            {
+                continue;
+            }
+
+            if (!hitAny)
+            {
+                hitAny = true;
+                // 여럿을 꿰뚫어도 타격음은 한 번 — 겹치면 소리만 커진다
+                SfxPlayer.Instance?.Play(SfxNames.ImpactCandidates(
+                    SfxNames.MaterialNameOf(weapon.Material),
+                    SfxNames.WeightOf(weapon.Damage, weapon.AttackInterval),
+                    enemy.SurfaceMaterial));
+            }
+
+            enemy.TakeDamage(weapon.Damage);
+            EnemyKnockback.Apply(enemy, direction);
+            // 죽음 판정은 피해 적용 후 — on_kill이 여기서 갈린다
+            context.Runner?.NotifyHit(enemy, enemy.transform.position, direction);
+        }
+
+        StartCoroutine(LaserFlash(
+            start, start + direction * LaserSkillLength, weapon.DisplayColor));
+    }
+
+    private System.Collections.IEnumerator LaserFlash(Vector2 from, Vector2 to, Color color)
+    {
+        var beam = new GameObject("Laser Beam");
+        var line = beam.AddComponent<LineRenderer>();
+        var material = new Material(Shader.Find("Sprites/Default"));
+        line.useWorldSpace = true;
+        line.positionCount = 2;
+        line.SetPosition(0, from);
+        line.SetPosition(1, to);
+        line.startWidth = LaserSkillHalfWidth * 2f;
+        line.endWidth = LaserSkillHalfWidth * 2f;
+        line.material = material;
+        line.startColor = color;
+        line.endColor = color;
+        line.sortingOrder = 6;
+
+        yield return new WaitForSeconds(LaserSkillVisualSeconds);
+
+        Destroy(beam);
+        Destroy(material);
     }
 
     /// <summary>무기를 바꿔 들었으면 발동기·발사체 설정을 그 무기 기준으로 다시 만든다.</summary>

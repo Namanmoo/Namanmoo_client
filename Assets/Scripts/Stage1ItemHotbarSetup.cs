@@ -75,7 +75,8 @@ public static class Stage1ItemHotbarSetup
         scaler.referenceResolution = ReferenceResolution;
         scaler.matchWidthOrHeight = 0f;
 
-        ItemHotbarUIFactory.Create(canvasObject.transform, controller, backgroundSprite);
+        // 6칸 핫바 대신 왼쪽 아래 한 칸 — 장착 무기만 보인다
+        EquippedWeaponSlotView.Create(canvasObject.transform, controller);
 
         PlayerWeaponController weaponController =
             player.GetComponent<PlayerWeaponController>();
