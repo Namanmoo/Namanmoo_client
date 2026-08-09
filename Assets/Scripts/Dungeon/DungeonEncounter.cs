@@ -177,6 +177,35 @@ namespace NaManMoo.Dungeon
             };
         }
 
+        /// <summary>
+        /// 이미 클리어한 방에 다시 들어왔을 때 <see cref="Spawn"/> 대신 불린다 — 몬스터는
+        /// 다시 안 만들지만, 템플릿에 같이 있는 장애물 같은 고정 지형은 매번 다시 놓아야
+        /// 방을 나갔다 와도 그대로 남아 있다.
+        /// </summary>
+        public void PlaceRoomContent(Transform roomRoot, DungeonRoom room, int roomSeed)
+        {
+            if (room.Kind != RoomKind.Normal)
+            {
+                return;
+            }
+
+            InstantiateSelectedTemplate(roomRoot, roomSeed);
+        }
+
+        private RoomContentTemplate InstantiateSelectedTemplate(Transform roomRoot, int roomSeed)
+        {
+            RoomContentTemplate template = SelectTemplate(normalRoomTemplates, roomSeed);
+            if (template == null)
+            {
+                return null;
+            }
+
+            // 방 기하와 같은 시드를 쓴다 — 되돌아왔을 때 고른 템플릿도 그대로여야 한다
+            RoomContentTemplate instance = Instantiate(template, roomRoot);
+            instance.transform.localPosition = Vector3.zero;
+            return instance;
+        }
+
         private List<EnemyHealth> SpawnEnemies(
             Transform roomRoot,
             Transform player,
@@ -189,15 +218,11 @@ namespace NaManMoo.Dungeon
                 return null;
             }
 
-            RoomContentTemplate template = SelectTemplate(normalRoomTemplates, roomSeed);
-            if (template == null)
+            RoomContentTemplate instance = InstantiateSelectedTemplate(roomRoot, roomSeed);
+            if (instance == null)
             {
                 return null;
             }
-
-            // 방 기하와 같은 시드를 쓴다 — 되돌아왔을 때 고른 템플릿도 그대로여야 한다
-            RoomContentTemplate instance = Instantiate(template, roomRoot);
-            instance.transform.localPosition = Vector3.zero;
 
             List<EnemySpawnMarker> markers = instance.SpawnMarkers();
 
