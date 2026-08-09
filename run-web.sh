@@ -54,7 +54,7 @@ if [ "$DO_BUILD" -eq 1 ]; then
   "$UNITY" -quit -batchmode -nographics \
     -projectPath "$ROOT" \
     -buildTarget WebGL \
-    -executeMethod WebGLBuilder.BuildFromCommandLine \
+    -executeMethod WebGLBuilder.Build \
     -logFile "$LOG" ${DEVELOPMENT:+$DEVELOPMENT} \
     || { echo "빌드 실패 — $LOG 확인" >&2; exit 1; }
   echo "빌드 완료: $BUILD_DIR"
