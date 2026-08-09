@@ -13,6 +13,9 @@ public static class RuntimeMenuUIFactory
     public static readonly Color ButtonColor = new Color(0.92f, 0.86f, 0.7f, 1f);
     public static readonly Color Ink = new Color(0.12f, 0.1f, 0.09f, 1f);
 
+    /// <summary>WebGL은 OS 폰트를 못 쓴다 — 한글은 이 폰트가 유일하다.</summary>
+    public const string FontResource = "Fonts/Gaegu-Regular";
+
     /// <summary>
     /// 전체 화면 오버레이용 Canvas를 만들고 <typeparamref name="TView"/>를 붙여 돌려준다.
     /// </summary>
@@ -88,7 +91,12 @@ public static class RuntimeMenuUIFactory
             typeof(Text));
         textObject.transform.SetParent(parent, false);
         Text text = textObject.GetComponent<Text>();
-        text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        Font font = Resources.Load<Font>(FontResource);
+        if (font == null)
+        {
+            font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        }
+        text.font = font;
         text.text = content;
         text.fontSize = fontSize;
         text.fontStyle = FontStyle.Bold;

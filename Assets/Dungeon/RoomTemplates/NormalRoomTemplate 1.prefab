@@ -224,6 +224,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fixedEnemyDefinition: {fileID: 11400000, guid: efcd27d40245a1f48ba6ac1b1d773c11, type: 2}
+--- !u!1 &3307657671571438661
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 876796798314075160}
+  - component: {fileID: 8326962090539117447}
+  m_Layer: 0
+  m_Name: EnemySpawnMarker_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &876796798314075160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3307657671571438661}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 400000}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8326962090539117447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3307657671571438661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff84d0e89d2438545a4e63e1a71266da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixedEnemyDefinition: {fileID: 11400000, guid: efcd27d40245a1f48ba6ac1b1d773c11, type: 2}
 --- !u!1 &3379730144529801378
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,51 +398,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5621095707308044680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff84d0e89d2438545a4e63e1a71266da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fixedEnemyDefinition: {fileID: 11400000, guid: efcd27d40245a1f48ba6ac1b1d773c11, type: 2}
---- !u!1 &3307657671571438661
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 876796798314075160}
-  - component: {fileID: 8326962090539117447}
-  m_Layer: 0
-  m_Name: EnemySpawnMarker_3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &876796798314075160
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3307657671571438661}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 400000}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8326962090539117447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3307657671571438661}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff84d0e89d2438545a4e63e1a71266da, type: 3}
@@ -1532,6 +1532,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle_Lake (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 212000, guid: 06eff1eae3e0460d7128174f21ee2f8e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 06eff1eae3e0460d7128174f21ee2f8e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13
@@ -1841,6 +1845,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 06eff1eae3e0460d7128174f21ee2f8e, type: 3}
       propertyPath: m_Name
       value: Obstacle_Lake
+      objectReference: {fileID: 0}
+    - target: {fileID: 212000, guid: 06eff1eae3e0460d7128174f21ee2f8e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 06eff1eae3e0460d7128174f21ee2f8e, type: 3}
       propertyPath: m_LocalPosition.x
