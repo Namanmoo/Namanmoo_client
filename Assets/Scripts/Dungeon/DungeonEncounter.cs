@@ -19,6 +19,7 @@ namespace NaManMoo.Dungeon
         [SerializeField] private EnemyDefinition[] normalEnemyDefinitions;
         [SerializeField] private Sprite bossSprite;
         [SerializeField] private SultanBossDefinition sultanBossDefinition;
+        [SerializeField] private RoomContentTemplate[] normalRoomTemplates;
 
         public void ConfigureSultanBoss(
             EnemyDefinition[] normalEnemies, SultanBossDefinition sultanBoss)
@@ -39,6 +40,11 @@ namespace NaManMoo.Dungeon
             Configure(
                 normalEnemy == null ? new EnemyDefinition[0] : new[] { normalEnemy },
                 boss);
+        }
+
+        public void ConfigureRoomTemplates(RoomContentTemplate[] templates)
+        {
+            normalRoomTemplates = templates;
         }
 
         public static EnemyDefinition[] SelectDefinitions(
@@ -84,6 +90,30 @@ namespace NaManMoo.Dungeon
 
             rng.Shuffle(selected);
             return selected;
+        }
+
+        public static RoomContentTemplate SelectTemplate(
+            RoomContentTemplate[] templates, int seed)
+        {
+            var valid = new List<RoomContentTemplate>();
+            if (templates != null)
+            {
+                foreach (RoomContentTemplate template in templates)
+                {
+                    if (template != null)
+                    {
+                        valid.Add(template);
+                    }
+                }
+            }
+
+            if (valid.Count == 0)
+            {
+                return null;
+            }
+
+            var rng = new DeterministicRandom(seed);
+            return valid[rng.Next(valid.Count)];
         }
 
         public Stage1EncounterGate Spawn(
@@ -147,6 +177,35 @@ namespace NaManMoo.Dungeon
             };
         }
 
+        /// <summary>
+        /// 이미 클리어한 방에 다시 들어왔을 때 <see cref="Spawn"/> 대신 불린다 — 몬스터는
+        /// 다시 안 만들지만, 템플릿에 같이 있는 장애물 같은 고정 지형은 매번 다시 놓아야
+        /// 방을 나갔다 와도 그대로 남아 있다.
+        /// </summary>
+        public void PlaceRoomContent(Transform roomRoot, DungeonRoom room, int roomSeed)
+        {
+            if (room.Kind != RoomKind.Normal)
+            {
+                return;
+            }
+
+            InstantiateSelectedTemplate(roomRoot, roomSeed);
+        }
+
+        private RoomContentTemplate InstantiateSelectedTemplate(Transform roomRoot, int roomSeed)
+        {
+            RoomContentTemplate template = SelectTemplate(normalRoomTemplates, roomSeed);
+            if (template == null)
+            {
+                return null;
+            }
+
+            // 방 기하와 같은 시드를 쓴다 — 되돌아왔을 때 고른 템플릿도 그대로여야 한다
+            RoomContentTemplate instance = Instantiate(template, roomRoot);
+            instance.transform.localPosition = Vector3.zero;
+            return instance;
+        }
+
         private List<EnemyHealth> SpawnEnemies(
             Transform roomRoot,
             Transform player,
@@ -154,28 +213,50 @@ namespace NaManMoo.Dungeon
             DungeonRoom room,
             int roomSeed)
         {
-            int count = RoomSpawnPoints.EnemyCount(room.Kind, room.DistanceFromStart);
-            if (count <= 0)
+            if (room.Kind != RoomKind.Normal)
             {
                 return null;
             }
 
-            // 방 기하와 같은 시드를 쓴다 — 되돌아왔을 때 벽도 배치도 그대로여야 한다
-            List<Vector2> spots = RoomSpawnPoints.Inside(shape, count, roomSeed);
-            EnemyDefinition[] definitions = SelectDefinitions(
+            RoomContentTemplate instance = InstantiateSelectedTemplate(roomRoot, roomSeed);
+            if (instance == null)
+            {
+                return null;
+            }
+
+            List<EnemySpawnMarker> markers = instance.SpawnMarkers();
+
+            int randomCount = 0;
+            foreach (EnemySpawnMarker marker in markers)
+            {
+                if (marker.FixedEnemyDefinition == null)
+                {
+                    randomCount++;
+                }
+            }
+
+            EnemyDefinition[] randomDefinitions = SelectDefinitions(
                 normalEnemyDefinitions,
-                spots.Count,
+                randomCount,
                 roomSeed);
-            if (definitions.Length == 0)
-            {
-                return null;
-            }
 
-            var enemies = new List<EnemyHealth>(spots.Count);
+            var enemies = new List<EnemyHealth>(markers.Count);
             var instancesByDefinition = new Dictionary<string, int>();
-            for (int i = 0; i < spots.Count; i++)
+            int randomIndex = 0;
+            foreach (EnemySpawnMarker marker in markers)
             {
-                EnemyDefinition definition = definitions[i];
+                EnemyDefinition definition = marker.FixedEnemyDefinition;
+                if (definition == null)
+                {
+                    // 랜덤 풀이 모자라면 이 마커는 그냥 비운다 — 억지로 채우지 않는다
+                    if (randomIndex >= randomDefinitions.Length)
+                    {
+                        continue;
+                    }
+
+                    definition = randomDefinitions[randomIndex++];
+                }
+
                 string key = string.IsNullOrEmpty(definition.Id)
                     ? definition.DisplayName
                     : definition.Id;
@@ -191,11 +272,11 @@ namespace NaManMoo.Dungeon
                     new EnemySpawnRequest(
                         roomRoot,
                         player,
-                        spots[i],
+                        marker.transform.position,
                         $"{baseName} {nextCount}")));
             }
 
-            return enemies;
+            return enemies.Count > 0 ? enemies : null;
         }
     }
 }

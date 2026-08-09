@@ -143,8 +143,19 @@ namespace NaManMoo.Dungeon
         /// </summary>
         private void StartEncounter(DungeonRoom room)
         {
-            if (encounter == null || cleared.Contains(room.Cell))
+            if (encounter == null)
             {
+                MarkClearedAndOpen();
+                return;
+            }
+
+            int roomSeed = DungeonNavigation.RoomSeed(seed, floor, room.Cell);
+
+            if (cleared.Contains(room.Cell))
+            {
+                // 몬스터는 다시 안 부르지만, 장애물 같은 고정 지형은 방에 들어갈 때마다
+                // 다시 놓는다 — 안 그러면 방을 나갔다 돌아왔을 때 사라져 있다.
+                encounter.PlaceRoomContent(roomRoot.transform, room, roomSeed);
                 MarkClearedAndOpen();
                 return;
             }
@@ -154,7 +165,7 @@ namespace NaManMoo.Dungeon
                 player,
                 CurrentShape,
                 room,
-                DungeonNavigation.RoomSeed(seed, floor, room.Cell));
+                roomSeed);
 
             if (gate == null || gate.IsOpen)
             {

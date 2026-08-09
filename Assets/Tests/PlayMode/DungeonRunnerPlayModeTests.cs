@@ -403,6 +403,11 @@ public sealed class DungeonRunnerPlayModeTests
                 }
             }
         }
+
+        public void PlaceRoomContent(Transform roomRoot, DungeonRoom room, int roomSeed)
+        {
+            // 문 잠금 타이밍만 확인하는 더블이라 장애물/템플릿 개념이 없다.
+        }
     }
 
     private int CountRoomRoots()

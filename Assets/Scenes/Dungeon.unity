@@ -1906,6 +1906,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: efcd27d40245a1f48ba6ac1b1d773c11, type: 2}
   bossSprite: {fileID: 0}
   sultanBossDefinition: {fileID: 11400000, guid: 4516b013ac40b074691613aad65d9c61, type: 2}
+  normalRoomTemplates:
+  - {fileID: 11400000, guid: dc4bf47642243a4739b38e1bafc930ad, type: 3}
 --- !u!4 &567430216
 Transform:
   m_ObjectHideFlags: 0

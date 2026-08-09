@@ -18,5 +18,11 @@ namespace NaManMoo.Dungeon
             RoomShape shape,
             DungeonRoom room,
             int roomSeed);
+
+        /// <summary>
+        /// 이미 클리어해서 <see cref="Spawn"/>을 다시 안 부르는 방에서, 장애물처럼 몬스터가
+        /// 아닌 고정 지형만 다시 놓는다. 몬스터를 새로 만들지는 않는다.
+        /// </summary>
+        void PlaceRoomContent(Transform roomRoot, DungeonRoom room, int roomSeed);
     }
 }
