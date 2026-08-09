@@ -116,6 +116,12 @@ public sealed class PlayerAnimator : MonoBehaviour
     /// </summary>
     public float LastAttackSeconds { get; private set; }
 
+    /// <summary>
+    /// 지금 트는 클립이 오른쪽 방향인가. 손에 든 무기 그림의 좌우 반전이
+    /// 이 값을 따라야 몸과 무기가 같은 쪽을 본다.
+    /// </summary>
+    public bool FacingRight => facingRight;
+
     private void Update()
     {
         // 공격 중에는 공격 방향이 우선이다. 이동 방향 갱신보다 먼저 빠져나가야

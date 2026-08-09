@@ -247,6 +247,11 @@ public sealed class WeaponContactSweep : MonoBehaviour
         worldShapes.Clear();
         fallbackHalfWidth = 0f;
         float maxDistance = 0f;
+
+        // flipX는 렌더링 전용이라 TransformPoint가 모른다 — 그림이 pivot(그립)
+        // 기준으로 뒤집혀 보이는 만큼 판정 점도 x를 뒤집어야 그림과 판정이 겹친다.
+        float mirror = renderer.flipX ? -1f : 1f;
+
         int shapeCount = sprite.GetPhysicsShapeCount();
         for (int index = 0; index < shapeCount; index++)
         {
@@ -254,7 +259,8 @@ public sealed class WeaponContactSweep : MonoBehaviour
             var worldShape = new List<Vector2>(shapeBuffer.Count);
             foreach (Vector2 localPoint in shapeBuffer)
             {
-                Vector2 worldPoint = weaponTransform.TransformPoint(localPoint);
+                Vector2 worldPoint = weaponTransform.TransformPoint(
+                    new Vector2(localPoint.x * mirror, localPoint.y));
                 worldShape.Add(worldPoint);
                 maxDistance = Mathf.Max(maxDistance, Vector2.Distance(grip, worldPoint));
             }
@@ -267,7 +273,9 @@ public sealed class WeaponContactSweep : MonoBehaviour
             // 외곽선 없는 스프라이트 — 그립→(가장 먼 모서리) 선분으로 근사하고
             // 얇은 쪽 절반 두께를 여유로 벌린다
             Bounds bounds = sprite.bounds;
-            Vector2 tip = weaponTransform.TransformPoint(FarthestCorner(bounds));
+            Vector2 corner = FarthestCorner(bounds);
+            Vector2 tip = weaponTransform.TransformPoint(
+                new Vector2(corner.x * mirror, corner.y));
             fallbackHalfWidth = Mathf.Min(bounds.size.x, bounds.size.y) * 0.5f
                 * Mathf.Abs(weaponTransform.lossyScale.x);
             worldShapes.Add(new List<Vector2> { grip, tip });
