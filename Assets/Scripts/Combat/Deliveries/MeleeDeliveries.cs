@@ -6,9 +6,12 @@ using UnityEngine;
 /// </summary>
 public static class MeleeStrike
 {
-    /// <summary>범위 안 적을 때리고 맞은 수를 돌려준다. 효과는 맞은 적마다 발동한다.</summary>
+    /// <summary>범위 안 적을 때리고 맞은 수를 돌려준다. 효과는 맞은 적마다 발동한다.
+    /// forceInstant면 접촉 판정 대신 즉발 원 판정을 쓴다 — 무기 그림보다 넓게
+    /// 때려야 하는 스킬(회전 공격)이 쓴다.</summary>
     public static int Execute(
-        DeliveryContext context, float reachOverride = -1f, float arcOverride = -1f)
+        DeliveryContext context, float reachOverride = -1f, float arcOverride = -1f,
+        bool forceInstant = false)
     {
         WeaponDefinition weapon = context.Weapon;
         if (weapon == null)
@@ -22,7 +25,7 @@ public static class MeleeStrike
         PlayerWeaponVisual visual = context.Owner != null
             ? context.Owner.GetComponent<PlayerWeaponVisual>()
             : null;
-        if (visual != null && visual.Renderer != null
+        if (!forceInstant && visual != null && visual.Renderer != null
             && visual.Renderer.sprite != null && visual.Renderer.enabled)
         {
             WeaponContactSweep.Begin(context, visual);
