@@ -523,8 +523,17 @@ public sealed class SultanBossController : MonoBehaviour
         yield return new WaitForSeconds(definition.ChargeDuration);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) => TryDamagePlayer(other);
-    private void OnTriggerStay2D(Collider2D other) => TryDamagePlayer(other);
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        TryDamagePlayer(other);
+        StopDashOnWallContact(other);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        TryDamagePlayer(other);
+        StopDashOnWallContact(other);
+    }
 
     private void TryDamagePlayer(Collider2D other)
     {
@@ -535,5 +544,25 @@ public sealed class SultanBossController : MonoBehaviour
 
         PlayerHealth playerHealth = other == null ? null : other.GetComponentInParent<PlayerHealth>();
         playerHealth?.TryTakeDamage(definition.ContactDamage, Time.time, PlayerInvulnerabilityDuration);
+    }
+
+    /// <summary>
+    /// Kinematic Rigidbody는 solid 콜라이더(벽, 바위)에 부딪혀도 물리적으로
+    /// 밀려나지 않아 그냥 뚫고 지나간다. Charge 중에는 이걸 직접 감지해서
+    /// 멈춰야 한다 — 플레이어의 solid 콜라이더는 충돌로 치지 않는다.
+    /// </summary>
+    private void StopDashOnWallContact(Collider2D other)
+    {
+        if (movementState != MovementState.Dash || other == null || other.isTrigger)
+        {
+            return;
+        }
+
+        if (other.GetComponentInParent<PlayerHealth>() != null)
+        {
+            return;
+        }
+
+        movementState = MovementState.Stationary;
     }
 }
