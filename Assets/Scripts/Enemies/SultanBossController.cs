@@ -221,7 +221,10 @@ public sealed class SultanBossController : MonoBehaviour
         body.position = center;
         transform.position = center;
 
-        // 모습 변환
+        // 모습 변환. 좌우 구분이 없는 연출이라 방향은 지금 보는 쪽을 유지한다.
+        GetComponentInChildren<EnemyVisualController>()?.PlayOverride(
+            "Transform", Vector2.zero, definition.PhaseTransitionSeconds);
+
         yield return new WaitForSeconds(definition.PhaseTransitionSeconds);
 
         isPhase2 = true;

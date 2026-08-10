@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 7bad053b940d3b14e94b3aca4ecc195b
+guid: 06e06c8592791824896b491dda4f0a94
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3452003437791708593
-    second: Rock_0
-  - first:
-      213: 709247535313551666
-    second: Rock_1
+      213: 2570020771605477537
+    second: stage1_boss_phase1_to_phase20023_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rock_0
+      name: stage1_boss_phase1_to_phase20023_0
       rect:
         serializedVersion: 2
-        x: 111
-        y: 123
-        width: 818
-        height: 751
+        x: 51
+        y: 75
+        width: 852
+        height: 838
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,30 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1b5800156daf7ef20800000000000000
-      internalID: 3452003437791708593
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rock_1
-      rect:
-        serializedVersion: 2
-        x: 794
-        y: 114
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2318f2820e0c7d900800000000000000
-      internalID: 709247535313551666
+      spriteID: 1a87be4764c8aa320800000000000000
+      internalID: 2570020771605477537
       vertices: []
       indices: 
       edges: []
@@ -160,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Rock_0: 3452003437791708593
-      Rock_1: 709247535313551666
+      stage1_boss_phase1_to_phase20023_0: 2570020771605477537
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
