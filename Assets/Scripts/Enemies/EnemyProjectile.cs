@@ -1,4 +1,5 @@
 using UnityEngine;
+using NaManMoo.Dungeon;
 
 public sealed class EnemyProjectile : MonoBehaviour
 {
@@ -92,7 +93,16 @@ public sealed class EnemyProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        TryDamagePlayer(other, Time.time);
+        if (TryDamagePlayer(other, Time.time))
+        {
+            return;
+        }
+
+        if (other != null && other.GetComponentInParent<BulletBlockingObstacle>() != null)
+        {
+            consumed = true;
+            Destroy(gameObject);
+        }
     }
 
     public bool TryDamagePlayer(Collider2D other, float currentTime)

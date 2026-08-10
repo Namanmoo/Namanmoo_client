@@ -2,6 +2,7 @@ using System.Text.RegularExpressions;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using NaManMoo.Dungeon;
 
 /// <summary>
 /// 발사체의 관통·부메랑 — "한 번 맞으면 끝"이던 발사체가 설정에 따라 살아남는지.
@@ -149,5 +150,21 @@ public sealed class WeaponProjectilePierceTests
         // 돌아오는 길 — 같은 적을 다시 때릴 수 있다 (왕복 2타)
         Assert.That(projectile.TryHit(collider), Is.True);
         Assert.That(enemy.CurrentHealth, Is.EqualTo(80));
+    }
+
+    [Test]
+    public void BulletBlockingObstacleDestroysProjectileEvenWithBounceChargesRemaining()
+    {
+        ExpectEditModeDestroyError();
+        WeaponProjectile projectile = Spawn(new ProjectileTuning { BounceCount = 3 });
+        var obstacleObject = new GameObject("obstacle");
+        Collider2D obstacleCollider = obstacleObject.AddComponent<BoxCollider2D>();
+        obstacleObject.AddComponent<BulletBlockingObstacle>();
+
+        Assert.That(projectile.TryHit(obstacleCollider), Is.True);
+        // 이미 소멸했다 — 다시 맞아도 아무 일도 없다
+        Assert.That(projectile.TryHit(obstacleCollider), Is.False);
+
+        Object.DestroyImmediate(obstacleObject);
     }
 }

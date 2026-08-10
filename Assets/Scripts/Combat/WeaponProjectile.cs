@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using NaManMoo.Dungeon;
 
 /// <summary>
 /// 무기 발사체. 직선이 기본이고, 궤도(유도·부메랑)와 발사체 효과(관통·도탄)를 설정으로 받는다.
@@ -235,6 +236,12 @@ public sealed class WeaponProjectile : MonoBehaviour
         EnemyHealth health = other.GetComponentInParent<EnemyHealth>();
         if (health == null)
         {
+            if (other.GetComponentInParent<BulletBlockingObstacle>() != null)
+            {
+                Expire();
+                return true;
+            }
+
             TryBounce(other);
             return false;
         }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using NaManMoo.Dungeon;
 
 public sealed class BossBullet : MonoBehaviour
 {
@@ -32,6 +33,12 @@ public sealed class BossBullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (TryDamagePlayer(other, Time.time))
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        if (other != null && other.GetComponentInParent<BulletBlockingObstacle>() != null)
         {
             gameObject.SetActive(false);
         }
