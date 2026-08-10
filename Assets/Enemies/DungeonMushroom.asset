@@ -19,11 +19,11 @@ MonoBehaviour:
   behaviorType: 0
   animatorController: {fileID: 9100000, guid: 712fdf3898baa9547880868952614239, type: 2}
   visualHeight: 4
-  bodyCollisionRadius: 1.4
+  bodyCollisionRadius: 0.5
   maxHealth: 10
   moveSpeed: 6
   attackDamage: 2
-  attackRange: 0.75
+  attackRange: 0.65
   attackInterval: 1
   projectileSpeed: 0
   projectileLifetime: 0.01

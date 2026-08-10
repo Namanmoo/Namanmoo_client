@@ -11,13 +11,28 @@ namespace NaManMoo.Dungeon
     {
         private const float BoundaryColliderRadius = 0.08f;
         private const float DoorPathInset = 4f;
+        private const float DoorPathStep = DoorPathInset * 2f;
+        private const float StandaloneDoorPathInset = 9f;
+        private const float StandaloneDoorPathCrossScale = 1.4f;
         private const int GroundOrder = 0;
         private const int DoorPathOrder = 1;
+        private const int DoorJunctionOrder = 2;
+        private const int StandaloneDoorPathOrder = 2;
         private const string GroundResourcePath = "Stage1/Ground/Grass_Base_01";
         private const string HorizontalDoorPathResourcePath =
             "Stage1/Ground/Dirt_Path_Horizontal_01";
         private const string VerticalDoorPathResourcePath =
             "Stage1/Ground/Dirt_Path_Vertical_01";
+        private const string CornerDoorPathResourcePath =
+            "Stage1/Ground/Dirt_Path_Corner_01";
+        private const string TJunctionDoorPathResourcePath =
+            "Stage1/Ground/Dirt_Path_TJunction_01";
+        private const string CrossDoorPathResourcePath =
+            "Stage1/Ground/Dirt_Path_Cross_01";
+        private const string HorizontalStandaloneDoorPathResourcePath =
+            "Stage1/Ground/Dirt_Path_Horizontal_Standalone_01";
+        private const string VerticalStandaloneDoorPathResourcePath =
+            "Stage1/Ground/Dirt_Path_Vertical_Standalone_01";
 
         /// <summary>
         /// 방 하나를 <paramref name="parent"/> 아래에 만들고 연결된 방향의 출구를 돌려준다.
@@ -57,9 +72,12 @@ namespace NaManMoo.Dungeon
 
         private static void CreateDoorPaths(Transform parent, RoomShape shape)
         {
+            bool connectToCenter = shape.DoorOpenings.Count >= 2;
+
             foreach (DoorOpening opening in shape.DoorOpenings)
             {
-                string resourcePath = opening.Side is Doors.North or Doors.South
+                bool isVertical = opening.Side is Doors.North or Doors.South;
+                string resourcePath = isVertical
                     ? VerticalDoorPathResourcePath
                     : HorizontalDoorPathResourcePath;
                 Sprite sprite = Resources.Load<Sprite>(resourcePath);
@@ -75,27 +93,170 @@ namespace NaManMoo.Dungeon
                     $"Door Path {opening.Side}",
                     opening.Center + inward * DoorPathInset,
                     sprite);
+
+                if (!connectToCenter)
+                {
+                    string standaloneResourcePath = isVertical
+                        ? VerticalStandaloneDoorPathResourcePath
+                        : HorizontalStandaloneDoorPathResourcePath;
+                    Sprite standaloneSprite =
+                        Resources.Load<Sprite>(standaloneResourcePath);
+                    if (standaloneSprite == null)
+                    {
+                        throw new InvalidOperationException(
+                            "Missing standalone door path sprite at " +
+                            $"Resources/{standaloneResourcePath}");
+                    }
+
+                    float scaleX = isVertical
+                        ? StandaloneDoorPathCrossScale
+                        : 1f;
+                    float scaleY = isVertical
+                        ? 1f
+                        : StandaloneDoorPathCrossScale;
+
+                    CreateDoorPath(
+                        parent,
+                        $"Door Path {opening.Side} Standalone",
+                        opening.Center + inward * StandaloneDoorPathInset,
+                        standaloneSprite,
+                        sortingOrder: StandaloneDoorPathOrder,
+                        scaleX: scaleX,
+                        scaleY: scaleY);
+                }
+
+                if (connectToCenter)
+                {
+                    float centerDistance = Vector2.Dot(
+                        shape.Bounds.center - opening.Center,
+                        inward);
+                    int extensionIndex = 1;
+
+                    for (float inset = DoorPathInset + DoorPathStep;
+                         inset < centerDistance + DoorPathInset;
+                         inset += DoorPathStep)
+                    {
+                        CreateDoorPath(
+                            parent,
+                            $"Door Path {opening.Side} Extension {extensionIndex}",
+                            opening.Center + inward * inset,
+                            sprite);
+                        extensionIndex++;
+                    }
+                }
+
                 CreateDoorPath(
                     parent,
                     $"Door Path {opening.Side} Outer",
                     opening.Center - inward * DoorPathInset,
                     sprite);
             }
+
+            CreateDoorJunction(parent, shape);
+        }
+
+        private static void CreateDoorJunction(Transform parent, RoomShape shape)
+        {
+            if (shape.DoorOpenings.Count < 2)
+            {
+                return;
+            }
+
+            Doors sides = Doors.None;
+            foreach (DoorOpening opening in shape.DoorOpenings)
+            {
+                sides |= opening.Side;
+            }
+
+            string resourcePath;
+            float rotationDegrees;
+
+            switch (sides)
+            {
+                case Doors.North | Doors.South:
+                    resourcePath = VerticalDoorPathResourcePath;
+                    rotationDegrees = 0f;
+                    break;
+                case Doors.East | Doors.West:
+                    resourcePath = HorizontalDoorPathResourcePath;
+                    rotationDegrees = 0f;
+                    break;
+                case Doors.North | Doors.East:
+                    resourcePath = CornerDoorPathResourcePath;
+                    rotationDegrees = 0f;
+                    break;
+                case Doors.North | Doors.West:
+                    resourcePath = CornerDoorPathResourcePath;
+                    rotationDegrees = 90f;
+                    break;
+                case Doors.South | Doors.West:
+                    resourcePath = CornerDoorPathResourcePath;
+                    rotationDegrees = 180f;
+                    break;
+                case Doors.South | Doors.East:
+                    resourcePath = CornerDoorPathResourcePath;
+                    rotationDegrees = 270f;
+                    break;
+                case Doors.North | Doors.East | Doors.West:
+                    resourcePath = TJunctionDoorPathResourcePath;
+                    rotationDegrees = 0f;
+                    break;
+                case Doors.North | Doors.South | Doors.West:
+                    resourcePath = TJunctionDoorPathResourcePath;
+                    rotationDegrees = 90f;
+                    break;
+                case Doors.South | Doors.East | Doors.West:
+                    resourcePath = TJunctionDoorPathResourcePath;
+                    rotationDegrees = 180f;
+                    break;
+                case Doors.North | Doors.South | Doors.East:
+                    resourcePath = TJunctionDoorPathResourcePath;
+                    rotationDegrees = 270f;
+                    break;
+                case Doors.North | Doors.South | Doors.East | Doors.West:
+                    resourcePath = CrossDoorPathResourcePath;
+                    rotationDegrees = 0f;
+                    break;
+                default:
+                    throw new InvalidOperationException(
+                        $"Unsupported door path junction for sides {sides}");
+            }
+
+            Sprite sprite = Resources.Load<Sprite>(resourcePath);
+            if (sprite == null)
+            {
+                throw new InvalidOperationException(
+                    $"Missing door path junction sprite at Resources/{resourcePath}");
+            }
+
+            CreateDoorPath(
+                parent,
+                "Door Path Junction",
+                shape.Bounds.center,
+                sprite,
+                rotationDegrees,
+                DoorJunctionOrder);
         }
 
         private static void CreateDoorPath(
             Transform parent,
             string name,
             Vector2 position,
-            Sprite sprite)
+            Sprite sprite,
+            float rotationDegrees = 0f,
+            int sortingOrder = DoorPathOrder,
+            float scaleX = 1f,
+            float scaleY = 1f)
         {
             var path = new GameObject(name);
             path.transform.SetParent(parent, false);
             path.transform.localPosition = position;
+            path.transform.localRotation = Quaternion.Euler(0f, 0f, rotationDegrees);
+            path.transform.localScale = new Vector3(scaleX, scaleY, 1f);
 
             SpriteRenderer renderer = path.AddComponent<SpriteRenderer>();
             renderer.sprite = sprite;
-            renderer.sortingOrder = DoorPathOrder;
+            renderer.sortingOrder = sortingOrder;
         }
 
         private static void CreateSafetyBoundary(Transform parent, RoomShape shape)

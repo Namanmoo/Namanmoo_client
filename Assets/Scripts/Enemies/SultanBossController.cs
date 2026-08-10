@@ -78,6 +78,12 @@ public sealed class SultanBossController : MonoBehaviour
     private bool phaseTransitionRequested;
 
     private MovementState movementState = MovementState.Chase;
+    private Coroutine patternLoop;
+    private CinematicLetterbox letterbox;
+
+    // 변신 동안 카메라를 보스에게 넘겼다가 되돌리기 위해 원래 대상을 기억해 둔다.
+    private CameraFollow cameraFollow;
+    private Transform previousCameraTarget;
     private Vector2 dashDirection;
 
     public void Initialize(
@@ -105,7 +111,7 @@ public sealed class SultanBossController : MonoBehaviour
 
         visual.sprite = definition.Phase1Sprite;
         health.HealthChanged += OnHealthChanged;
-        StartCoroutine(PatternLoop());
+        patternLoop = StartCoroutine(PatternLoop());
     }
 
     private void OnDestroy()
@@ -114,6 +120,22 @@ public sealed class SultanBossController : MonoBehaviour
         {
             health.HealthChanged -= OnHealthChanged;
         }
+
+        // 변신 도중에 보스가 사라지면 띠가 남고 카메라도 없어진 보스를 계속 본다.
+        letterbox?.Dispose();
+        RestoreCameraTarget();
+    }
+
+    /// <summary>카메라를 변신 전에 보던 대상(플레이어)으로 되돌린다.</summary>
+    private void RestoreCameraTarget()
+    {
+        if (cameraFollow != null)
+        {
+            cameraFollow.Target = previousCameraTarget;
+        }
+
+        cameraFollow = null;
+        previousCameraTarget = null;
     }
 
     private void FixedUpdate()
@@ -150,8 +172,18 @@ public sealed class SultanBossController : MonoBehaviour
 
         if (current <= maximum * definition.PhaseTwoHealthRatio)
         {
-            // 깃발만 세운다. 진행 중인 패턴을 끊지 않으려고 실제 전환은 패턴 루프가 맡는다.
             phaseTransitionRequested = true;
+
+            // 체력이 닿는 즉시 무적을 걸고 진행 중인 패턴을 끊는다.
+            // 1페이즈 패턴은 대기 후 소환·발사뿐이라 중간에 멈춰도 남는 것이 없다.
+            health.SetInvulnerable(true);
+            if (patternLoop != null)
+            {
+                StopCoroutine(patternLoop);
+                patternLoop = null;
+            }
+
+            StartCoroutine(PhaseTransition());
         }
     }
 
@@ -161,33 +193,47 @@ public sealed class SultanBossController : MonoBehaviour
         {
             movementState = MovementState.Stationary;
             yield return RunNextPattern();
-
-            if (phaseTransitionRequested && !isPhase2)
-            {
-                yield return PhaseTransition();
-            }
-
             movementState = MovementState.Chase;
             yield return new WaitForSeconds(definition.PatternInterval);
         }
     }
 
     /// <summary>
-    /// 2페이즈 변신. 소환수를 싹 정리하고, 연출이 끝날 때까지 무적으로 버틴다.
-    /// 무적을 거는 건 변신 도중에 얻어맞고 죽는 걸 막기 위해서다.
+    /// 2페이즈 변신. 무적 → 방 가운데로 이동 → 모습 변환 → 패턴 재개 순서로 간다.
+    /// 무적은 <see cref="OnHealthChanged"/>에서 이미 걸고 들어온다.
     /// </summary>
     private IEnumerator PhaseTransition()
     {
         movementState = MovementState.Stationary;
-        health.SetInvulnerable(true);
         ClearSummons();
+        letterbox = CinematicLetterbox.Create();
 
+        // 변신 동안만 카메라가 보스를 본다.
+        cameraFollow = Camera.main != null ? Camera.main.GetComponent<CameraFollow>() : null;
+        if (cameraFollow != null)
+        {
+            previousCameraTarget = cameraFollow.Target;
+            cameraFollow.Target = transform;
+        }
+
+        // 가운데로 순간이동. 보간이 켜져 있어 transform까지 같이 옮겨야 잔상이 남지 않는다.
+        Vector2 center = roomBounds.center;
+        body.position = center;
+        transform.position = center;
+
+        // 모습 변환
         yield return new WaitForSeconds(definition.PhaseTransitionSeconds);
 
         isPhase2 = true;
         SwitchToPhase2Visual();
         health.SetInvulnerable(false);
         PhaseTwoStarted?.Invoke();
+
+        RestoreCameraTarget();
+        letterbox?.Dispose();
+        letterbox = null;
+
+        patternLoop = StartCoroutine(PatternLoop());
     }
 
     /// <summary>

@@ -12,11 +12,31 @@ public sealed class Stage1GroundTextureImporter : AssetPostprocessor
     public const string VerticalDirtPathAssetPath =
         "Assets/Resources/Stage1/Ground/Dirt_Path_Vertical_01.png";
 
+    public const string CornerDirtPathAssetPath =
+        "Assets/Resources/Stage1/Ground/Dirt_Path_Corner_01.png";
+
+    public const string TJunctionDirtPathAssetPath =
+        "Assets/Resources/Stage1/Ground/Dirt_Path_TJunction_01.png";
+
+    public const string CrossDirtPathAssetPath =
+        "Assets/Resources/Stage1/Ground/Dirt_Path_Cross_01.png";
+
+    public const string HorizontalStandaloneDirtPathAssetPath =
+        "Assets/Resources/Stage1/Ground/Dirt_Path_Horizontal_Standalone_01.png";
+
+    public const string VerticalStandaloneDirtPathAssetPath =
+        "Assets/Resources/Stage1/Ground/Dirt_Path_Vertical_Standalone_01.png";
+
     private void OnPreprocessTexture()
     {
         bool isGrass = assetPath == GrassAssetPath;
         bool isDirtPath = assetPath == HorizontalDirtPathAssetPath
-            || assetPath == VerticalDirtPathAssetPath;
+            || assetPath == VerticalDirtPathAssetPath
+            || assetPath == CornerDirtPathAssetPath
+            || assetPath == TJunctionDirtPathAssetPath
+            || assetPath == CrossDirtPathAssetPath
+            || assetPath == HorizontalStandaloneDirtPathAssetPath
+            || assetPath == VerticalStandaloneDirtPathAssetPath;
 
         if (!isGrass && !isDirtPath)
         {

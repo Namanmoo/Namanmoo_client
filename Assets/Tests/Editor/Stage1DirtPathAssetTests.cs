@@ -10,8 +10,28 @@ public sealed class Stage1DirtPathAssetTests
     private const string VerticalAssetPath =
         "Assets/Resources/Stage1/Ground/Dirt_Path_Vertical_01.png";
 
+    private const string CornerAssetPath =
+        "Assets/Resources/Stage1/Ground/Dirt_Path_Corner_01.png";
+
+    private const string TJunctionAssetPath =
+        "Assets/Resources/Stage1/Ground/Dirt_Path_TJunction_01.png";
+
+    private const string CrossAssetPath =
+        "Assets/Resources/Stage1/Ground/Dirt_Path_Cross_01.png";
+
+    private const string HorizontalStandaloneAssetPath =
+        "Assets/Resources/Stage1/Ground/Dirt_Path_Horizontal_Standalone_01.png";
+
+    private const string VerticalStandaloneAssetPath =
+        "Assets/Resources/Stage1/Ground/Dirt_Path_Vertical_Standalone_01.png";
+
     [TestCase(HorizontalAssetPath)]
     [TestCase(VerticalAssetPath)]
+    [TestCase(CornerAssetPath)]
+    [TestCase(TJunctionAssetPath)]
+    [TestCase(CrossAssetPath)]
+    [TestCase(HorizontalStandaloneAssetPath)]
+    [TestCase(VerticalStandaloneAssetPath)]
     public void DirtPathTextureUsesTheDoorPathImportContract(string assetPath)
     {
         var importer = AssetImporter.GetAtPath(assetPath) as TextureImporter;

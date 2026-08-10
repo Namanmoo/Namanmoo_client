@@ -6497,10 +6497,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b99d10438244cc4794cf9a64ebf5e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NaManMoo.Runtime::PlayerDash
-  duration: 0.6
-  speedMultiplier: 3
+  duration: 0.1
+  speedMultiplier: 4
   maxCharges: 2
-  rechargeDuration: 5
+  rechargeDuration: 3
   afterimageInterval: 0.08
   afterimageLifetime: 0.25
 --- !u!114 &1934180318

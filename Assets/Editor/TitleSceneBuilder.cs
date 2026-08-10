@@ -40,11 +40,12 @@ public static class TitleSceneBuilder
         TitleScreenController controller =
             controllerObject.GetComponent<TitleScreenController>();
 
+        // Title.png의 "시작하기" 박스 위치에 맞춘 값(1920x1080 기준 x 254~686, y 157~302).
         Button startButton = CreateTransparentButton(
             frame,
             "Game Start Button",
-            new Vector2(0.30f, 0.273f),
-            new Vector2(0.695f, 0.457f));
+            new Vector2(0.132f, 0.145f),
+            new Vector2(0.357f, 0.280f));
         UnityEventTools.AddPersistentListener(startButton.onClick, controller.StartGame);
 
         CreateTransparentButton(
