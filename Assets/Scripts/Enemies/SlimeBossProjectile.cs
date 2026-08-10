@@ -1,4 +1,5 @@
 using UnityEngine;
+using NaManMoo.Dungeon;
 
 public sealed class SlimeBossProjectile : MonoBehaviour
 {
@@ -74,6 +75,12 @@ public sealed class SlimeBossProjectile : MonoBehaviour
     {
         PlayerHealth health = other == null ? null : other.GetComponentInParent<PlayerHealth>();
         if (health != null && health.TryTakeDamage(damage, Time.time, PlayerInvulnerabilityDuration))
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        if (other != null && other.GetComponentInParent<BulletBlockingObstacle>() != null)
         {
             Destroy(gameObject);
         }
