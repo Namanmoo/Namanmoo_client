@@ -14,6 +14,23 @@ public sealed class ForgeClient
 {
     public const string DefaultBaseUrl = "http://127.0.0.1:8790";
 
+    /// <summary>배포된 백엔드(Cloud Run) 주소 — 빌드에서는 항상 이곳을 쓴다.</summary>
+    public const string ProductionBaseUrl =
+        "https://namanmoo-forge-599814887237.asia-northeast3.run.app";
+
+    /// <summary>
+    /// 에디터에서는 인스펙터에 넣어 둔 주소(로컬 서버)를, 빌드에서는 배포 주소를 쓴다.
+    /// 씬에 127.0.0.1이 직렬화되어 있어도 배포 빌드가 로컬을 바라보지 않게 한다.
+    /// </summary>
+    public static string ResolveBaseUrl(string configured)
+    {
+#if UNITY_EDITOR
+        return string.IsNullOrWhiteSpace(configured) ? DefaultBaseUrl : configured;
+#else
+        return ProductionBaseUrl;
+#endif
+    }
+
     /// <summary>이미지 생성이 오래 걸릴 수 있어 넉넉히 잡는다.</summary>
     public const int DefaultTimeoutSeconds = 120;
 

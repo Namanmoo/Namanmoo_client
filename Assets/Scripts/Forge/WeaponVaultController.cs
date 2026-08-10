@@ -60,7 +60,7 @@ public sealed class WeaponVaultController : MonoBehaviour
 
     private void Awake()
     {
-        client = new WeaponVaultClient(backendBaseUrl);
+        client = new WeaponVaultClient(ForgeClient.ResolveBaseUrl(backendBaseUrl));
         HideAllCards();
 
         if (editPanel != null)
