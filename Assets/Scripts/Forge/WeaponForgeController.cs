@@ -241,7 +241,7 @@ public sealed class WeaponForgeController : MonoBehaviour
 
         byte[] png = drawingCanvas.EncodeToPng();
         string note = noteInput != null ? noteInput.text : string.Empty;
-        var client = new ForgeClient(backendBaseUrl);
+        var client = new ForgeClient(ForgeClient.ResolveBaseUrl(backendBaseUrl));
 
         ForgeResponseDto received = null;
         string failure = null;
@@ -397,7 +397,7 @@ public sealed class WeaponForgeController : MonoBehaviour
         // 무기고에 넣어 다음에도 꺼내 쓸 수 있게 한다.
         // 저장이 실패해도 이번 판은 그대로 진행한다 — 무기고 때문에 게임을 막지 않는다.
         SetStatus("무기고에 넣는 중…");
-        var vault = new WeaponVaultClient(backendBaseUrl);
+        var vault = new WeaponVaultClient(ForgeClient.ResolveBaseUrl(backendBaseUrl));
         string failure = null;
 
         // 그립은 캔버스에서 찍은 좌표 그대로 싣는다. 저장 PNG는 전체 그림인데
