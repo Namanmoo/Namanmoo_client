@@ -45,6 +45,7 @@ public sealed class SultanBossFactory : BossFactoryBase
                 .Configure(definition.Phase1Sprite, definition.Phase1AnimatorController);
         }
 
+        boss.AddComponent<EnemyDamageFlash>();
         EnemyHealth health = CreateHealth(boss, definition.MaxHealth, uiParent);
         health.SurfaceMaterial = "flesh";
 
